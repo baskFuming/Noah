@@ -5,20 +5,21 @@
     android:layout_height="match_parent"
     tools:context="com.xxx.mining.ui.main.MainActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/main_1"
         android:layout_width="match_parent"
         android:layout_height="49dp"
+        android:paddingTop="10dp"
         android:layout_alignParentBottom="true"
         android:background="@color/colorMainBack"
-        android:gravity="bottom"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/main_home"
-            android:layout_width="60dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:gravity="center_horizontal|bottom"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="8dp">
 
@@ -41,10 +42,10 @@
 
         <LinearLayout
             android:id="@+id/main_wallet"
-            android:layout_width="60dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:gravity="center_horizontal|bottom"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="8dp">
 
@@ -66,27 +67,52 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/main_app"
-            android:layout_width="60dp"
+            android:id="@+id/main_shop"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="80dp"
-            android:gravity="center_horizontal|bottom"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingBottom="8dp">
 
             <ImageView
-                android:id="@+id/main_app_image"
+                android:id="@+id/main_shop_image"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@mipmap/main_app_default" />
+                android:src="@mipmap/main_shop_default" />
 
             <TextView
-                android:id="@+id/main_app_text"
+                android:id="@+id/main_shop_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="@string/main_app"
+                android:text="@string/main_shop"
+                android:textColor="@color/colorMainBottomDefault"
+                android:textSize="@dimen/main_bottom_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_mining"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/main_mining_image"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@mipmap/main_mining_default" />
+
+            <TextView
+                android:id="@+id/main_mining_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/main_mining"
                 android:textColor="@color/colorMainBottomDefault"
                 android:textSize="@dimen/main_bottom_size" />
 
@@ -118,21 +144,12 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/main_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/main_1" />
-
-    <ImageView
-        android:id="@+id/main_rush_btn"
-        android:layout_width="49dp"
-        android:layout_height="49dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:src="@mipmap/main_rush_btn" />
 
 </RelativeLayout>

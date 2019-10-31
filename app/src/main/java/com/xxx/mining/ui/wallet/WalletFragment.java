@@ -104,7 +104,7 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
                         mExchangerWindow.show();
                     }
                 } else {
-                    Toast.makeText(getContext(), getString(R.string.main_app_not_1), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), getString(R.string.main_app_not_1), Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.item_wallet_deposit:
@@ -115,7 +115,7 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
                     intent2.putExtra("outBalance", bean.getFinancingCnt());
                     startActivity(intent2);
                 } else {
-                    ToastUtil.showToast(getString(R.string.main_app_not_1));
+//                    ToastUtil.showToast(getString(R.string.main_app_not_1));
 //                    Toast.makeText(getContext(), getString(R.string.main_app_not_1), Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -171,6 +171,11 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
                                 mAdapter.notifyDataSetChanged();
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
                     }
 
                     @Override

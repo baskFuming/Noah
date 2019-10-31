@@ -12,7 +12,6 @@ import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.service.InitService;
 import com.xxx.mining.ui.login.LoginActivity;
 
 import java.lang.ref.WeakReference;
@@ -39,16 +38,14 @@ public class SplashActivity extends AppCompatActivity {
                 double height = decorView.getHeight();
                 if (height / width >= 1.8) {
                     decorView.setBackgroundResource(R.mipmap.splash_big);
+                } else {
+                    decorView.setBackgroundResource(R.mipmap.splash_small);
                 }
                 // 利用消息处理器实现延迟跳转到登录窗口
                 mHandler.sendEmptyMessageAtTime(0, ConfigClass.SPLASH_DELAY_TIME);
             }
         });
-
-        //初始化
-        startService(new Intent(this, InitService.class));
     }
-
 
     private static class MyHandler extends Handler {
 
@@ -76,4 +73,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         }
     }
+
 }

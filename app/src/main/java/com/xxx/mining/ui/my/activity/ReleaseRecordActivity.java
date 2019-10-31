@@ -136,6 +136,11 @@ public class ReleaseRecordActivity extends BaseTitleActivity implements SwipeRef
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {
@@ -178,6 +183,11 @@ public class ReleaseRecordActivity extends BaseTitleActivity implements SwipeRef
                                 mTotalOpen.setText(data.getAllDynamicReleaseAsset());
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
                     }
                 });
     }

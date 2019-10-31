@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
 public class PermissionUtil {
@@ -31,5 +32,17 @@ public class PermissionUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 回调方法
+     */
+    public static boolean onRequestPermissionsResult(@NonNull String[] permissions, @NonNull int[] grantResults) {
+        for (int i = 0; i < grantResults.length; i++) {
+            if (grantResults[i] == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 }

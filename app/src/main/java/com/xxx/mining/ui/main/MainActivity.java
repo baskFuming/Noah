@@ -1,7 +1,6 @@
 package com.xxx.mining.ui.main;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -15,17 +14,17 @@ import com.xxx.mining.base.fragment.FragmentManager;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.AppVersionBean;
-import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.IsSettingPayPswBean;
+import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ExitAppUtil;
 import com.xxx.mining.model.utils.PermissionUtil;
 import com.xxx.mining.model.utils.SystemUtil;
-import com.xxx.mining.ui.app.AppFragment;
 import com.xxx.mining.ui.home.HomeFragment;
+import com.xxx.mining.ui.mining.MiningFragment;
 import com.xxx.mining.ui.my.MyFragment;
-import com.xxx.mining.ui.rush.RushFragment;
+import com.xxx.mining.ui.shop.ShopFragment;
 import com.xxx.mining.ui.wallet.WalletFragment;
 
 import butterknife.BindView;
@@ -41,17 +40,19 @@ public class MainActivity extends BaseActivity {
 
     //页面下标
     private static final int HOME_TYPE = R.id.main_home;     //首页
-    private static final int WALLET_TYPE = R.id.main_wallet; //钱包
-    private static final int RUSH_TYPE = R.id.main_rush_btn;     //抢购
-    private static final int APP_TYPE = R.id.main_app;       //应用
+    private static final int WALLET_TYPE = R.id.main_wallet; //资产
+    private static final int SHOP_TYPE = R.id.main_shop; //商城
+    private static final int MINING_TYPE = R.id.main_mining;       //矿机
     private static final int MY_TYPE = R.id.main_my;         //我的
 
     @BindView(R.id.main_home_image)
     ImageView mHomeImage;
     @BindView(R.id.main_wallet_image)
     ImageView mWalletImage;
-    @BindView(R.id.main_app_image)
-    ImageView mAppImage;
+    @BindView(R.id.main_shop_image)
+    ImageView mShopImage;
+    @BindView(R.id.main_mining_image)
+    ImageView mMiningImage;
     @BindView(R.id.main_my_image)
     ImageView mMyImage;
 
@@ -59,13 +60,12 @@ public class MainActivity extends BaseActivity {
     TextView mHomeText;
     @BindView(R.id.main_wallet_text)
     TextView mWalletText;
-    @BindView(R.id.main_app_text)
-    TextView mAppText;
+    @BindView(R.id.main_shop_text)
+    TextView mShopText;
+    @BindView(R.id.main_mining_text)
+    TextView mMiningText;
     @BindView(R.id.main_my_text)
     TextView mMyText;
-
-    @BindView(R.id.main_rush_btn)
-    ImageView mRushBtn;
 
     private int nowType = HOME_TYPE;   //当前选中下标
     private int lastType = HOME_TYPE;   //上一个下标
@@ -90,10 +90,9 @@ public class MainActivity extends BaseActivity {
 
         //加载首页数据
         selectorItem();
-
     }
 
-    @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_rush_btn, R.id.main_app, R.id.main_my})
+    @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_shop, R.id.main_mining, R.id.main_my})
     public void onClick(View v) {
         nowType = v.getId();
         if (nowType != lastType) {
@@ -112,7 +111,7 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.LOGIN_RESULT_CODE) {
-            checkAppVersion();
+//            checkAppVersion();
             checkIsSettingPayPassword();
         }
     }
@@ -147,13 +146,15 @@ public class MainActivity extends BaseActivity {
                 mWalletText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
                 FragmentManager.replaceFragment(this, WalletFragment.class, R.id.main_frame);
                 break;
-            case RUSH_TYPE:
-                FragmentManager.replaceFragment(this, RushFragment.class, R.id.main_frame);
+            case SHOP_TYPE:
+                mShopImage.setImageResource(R.mipmap.main_shop_selection);
+                mShopText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
+                FragmentManager.replaceFragment(this, ShopFragment.class, R.id.main_frame);
                 break;
-            case APP_TYPE:
-                mAppImage.setImageResource(R.mipmap.main_app_selection);
-                mAppText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
-                FragmentManager.replaceFragment(this, AppFragment.class, R.id.main_frame);
+            case MINING_TYPE:
+                mMiningImage.setImageResource(R.mipmap.main_mining_selection);
+                mMiningText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
+                FragmentManager.replaceFragment(this, MiningFragment.class, R.id.main_frame);
                 break;
             case MY_TYPE:
                 mMyImage.setImageResource(R.mipmap.main_my_selection);
@@ -174,11 +175,13 @@ public class MainActivity extends BaseActivity {
                 mWalletImage.setImageResource(R.mipmap.main_wallet_default);
                 mWalletText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
                 break;
-            case RUSH_TYPE:
+            case SHOP_TYPE:
+                mShopImage.setImageResource(R.mipmap.main_shop_default);
+                mShopText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
                 break;
-            case APP_TYPE:
-                mAppImage.setImageResource(R.mipmap.main_app_default);
-                mAppText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
+            case MINING_TYPE:
+                mMiningImage.setImageResource(R.mipmap.main_mining_default);
+                mMiningText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
                 break;
             case MY_TYPE:
                 mMyImage.setImageResource(R.mipmap.main_my_default);
@@ -207,6 +210,11 @@ public class MainActivity extends BaseActivity {
                             }
                         }
                     }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
                 });
     }
 
@@ -228,7 +236,12 @@ public class MainActivity extends BaseActivity {
                         }
 
                         //检查版本号
-                        checkAppVersion();
+//                        checkAppVersion();
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
                     }
                 });
     }

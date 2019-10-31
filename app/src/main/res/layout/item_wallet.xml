@@ -48,6 +48,7 @@
         <TextView
             android:id="@+id/item_wallet_exchange"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
@@ -58,6 +59,7 @@
         <View
             android:id="@+id/item_wallet_exchange_line"
             android:layout_width="1dp"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:background="#282f3a" />
 

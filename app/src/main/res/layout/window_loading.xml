@@ -13,7 +13,7 @@
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
         android:indeterminateBehavior="repeat"
-        android:indeterminateDrawable="@drawable/loading"
+        android:indeterminateDrawable="@drawable/loading_icon"
         android:indeterminateOnly="true" />
 
     <TextView

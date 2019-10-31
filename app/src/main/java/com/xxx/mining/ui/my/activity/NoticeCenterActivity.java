@@ -132,6 +132,11 @@ public class NoticeCenterActivity extends BaseTitleActivity implements SwipeRefr
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {

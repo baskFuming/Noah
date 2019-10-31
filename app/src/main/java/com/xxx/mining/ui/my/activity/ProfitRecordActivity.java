@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
-import com.xxx.mining.ui.rush.activity.RushRecordActivity;
 
 import butterknife.OnClick;
 
@@ -39,12 +38,11 @@ public class ProfitRecordActivity extends BaseTitleActivity {
             case R.id.conversion_profit_rush:
                 startActivity(new Intent(this, ConversionProfitActivity.class));
                 break;
-            case R.id.profit_record_rush:
-                startActivity(new Intent(this, RushRecordActivity.class));
-                break;
+//            case R.id.profit_record_rush:
+//                startActivity(new Intent(this, RushRecordActivity.class));
+//                break;
             case R.id.profit_record_achievement:
                 startActivity(new Intent(this, AchievementRecordActivity.class));
-
                 break;
             case R.id.profit_record_share:
                 startActivity(new Intent(this, ShareRecordActivity.class));

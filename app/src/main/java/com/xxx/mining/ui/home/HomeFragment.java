@@ -149,6 +149,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null) {
@@ -197,7 +202,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        super.onError(errorCode, errorMessage);
                         isLoadBanner = false;
                     }
                 });
@@ -240,7 +244,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        super.onError(errorCode, errorMessage);
                         isLoadFlipper = false;
                     }
 

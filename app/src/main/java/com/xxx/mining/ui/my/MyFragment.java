@@ -15,7 +15,6 @@ import com.xxx.mining.model.http.bean.MyLevelBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
-import com.xxx.mining.model.utils.LinearGradientUtil;
 import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.my.activity.AccountSettingActivity;
 import com.xxx.mining.ui.my.activity.CallMeActivity;
@@ -157,6 +156,11 @@ public class MyFragment extends BaseFragment {
                                 }
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
                     }
                 });
     }

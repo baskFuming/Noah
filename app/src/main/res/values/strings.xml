@@ -26,28 +26,10 @@
 
     <string name="main_home">首页</string>
     <string name="main_wallet">钱包</string>
-    <string name="main_rush">抢购</string>
-    <string name="main_app">应用</string>
+    <string name="main_shop">商城</string>
+    <string name="main_mining">矿机</string>
     <string name="main_my">我的</string>
 
-    <string name="main_app_title">应用</string>
-    <string name="main_app_content">敬请期待</string>
-    <string name="main_app_media">媒体</string>
-    <string name="main_app_game">游戏</string>
-    <string name="main_app_app">应用</string>
-    <string name="main_app_zbg">ZBG</string>
-    <string name="main_app_coin_all">Coin all</string>
-    <string name="main_app_huo_ju">火炬</string>
-    <string name="main_app_my_token">My token</string>
-    <string name="main_app_talk_btc">BitcoinTalk</string>
-    <string name="main_app_news_btc">比特新闻</string>
-    <string name="main_app_eight_btc">巴比特</string>
-    <string name="main_app_eth_browser">ETH浏览器</string>
-    <string name="main_app_btc_browser">BTC浏览器</string>
-    <string name="main_app_to_loan">借贷</string>
-    <string name="main_app_mall">Mall</string>
-    <string name="main_app_not">即将上线</string>
-    <string name="main_app_not_1">敬请期待</string>
     <string name="main_my_title">我的</string>
     <string name="main_my_record">收益记录</string>
     <string name="main_my_notice">公告中心</string>
@@ -58,33 +40,15 @@
     <string name="main_my_name">请登录</string>
     <string name="main_my_invited_icon_text">邀 请 好 友</string>
     <string name="main_my_invited_icon_toast">邀请得CT奖励</string>
+
     <string name="main_home_name">名称</string>
     <string name="main_home_now_price">最新价</string>
     <string name="main_home_range">涨跌幅</string>
     <string name="main_home_node_game">节点竞赛</string>
+
     <string name="main_wallet_title">钱包</string>
     <string name="main_wallet_total_asset">总资产</string>
     <string name="main_wallet_available_asset">可用资产</string>
-    <string name="main_rush_title">抢购</string>
-    <string name="main_rush_record">抢购记录</string>
-    <string name="main_rush_time_h">时</string>
-    <string name="main_rush_time_m">分</string>
-    <string name="main_rush_time_s">秒</string>
-    <string name="main_rush_total_amount">当前限量</string>
-    <string name="main_rush_now_amount">已抢</string>
-    <string name="main_rush_rule">&#160;\n
-        1.抢购CT需要钱包中拥有10倍可用的CT保证金。\n
-        2.抢购时间为每日一次，具体时间以倒计时为准。\n
-        3.抢购会冻结抢购的份额以及保证金12小时，以免出\n
-        现刷单损害其他用户的情况发生。
-    </string>
-    <string name="main_rush_finish">结束</string>
-    <string name="main_rush_open">抢</string>
-    <string name="main_rush_open_down">开抢倒计时</string>
-    <string name="main_rush_close_down">抢购倒计时</string>
-    <string name="main_rush_rate_text">抢购规则</string>
-    <string name="main_rush_success">本次成功抢到</string>
-    <string name="main_rush_error_1">请在开抢之后抢购</string>
 
     <string name="feedback_title">问题反馈</string>
 

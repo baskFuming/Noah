@@ -115,7 +115,6 @@ public class PasswordWindow extends BaseDialog {
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        super.onError(errorCode, errorMessage);
                         ToastUtil.showToast(errorMessage);
                     }
                 });

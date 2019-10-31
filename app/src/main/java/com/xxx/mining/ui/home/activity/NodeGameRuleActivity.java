@@ -108,6 +108,11 @@ public class NodeGameRuleActivity extends BaseTitleActivity {
                             }
                         }
                     }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
                 });
     }
 }

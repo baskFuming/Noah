@@ -112,6 +112,11 @@ public class ConversionProfitActivity extends BaseTitleActivity implements Swipe
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {

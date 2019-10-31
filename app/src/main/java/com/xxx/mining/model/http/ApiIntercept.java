@@ -1,13 +1,12 @@
 package com.xxx.mining.model.http;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.xxx.mining.BuildConfig;
 import com.xxx.mining.ConfigClass;
-import com.xxx.mining.model.log.LogConst;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.log.LogUtil;
 import com.xxx.mining.model.utils.LocalManageUtil;
 
 import org.json.JSONException;
@@ -178,13 +177,13 @@ public class ApiIntercept implements Interceptor {
         //获取到响应数据
         String body = response.peekBody(1024 * 1024).string().replaceAll("\n", "");
 
-        LogUtil.showLog(LogConst.HTTP_TAG,
+        Log.e("网络请求",
                 method + "\n" +  //打印方法
                         "url：" + url + "\n" +   //打印url
                         "header：" + header + "\n" +  //打印所有请求头
                         "params：" + params + "\n" +  //打印请求参数
                         "body：" + body + "\n" +  //打印响应内容
-                        " \n" + " \n" + " \n" //分割
+                        " \n" + " \n" + " \n" //分割)
         );
     }
 }

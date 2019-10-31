@@ -210,6 +210,11 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {
@@ -299,7 +304,6 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        super.onError(errorCode, errorMessage);
                         if (errorCode == ApiCode.PAY_NOT_SETTING) {
                             ToastUtil.showToast(getString(R.string.window_exchange_error_4));
                             startActivity(new Intent(WithdrawalActivity.this, SettingPayPswActivity.class));

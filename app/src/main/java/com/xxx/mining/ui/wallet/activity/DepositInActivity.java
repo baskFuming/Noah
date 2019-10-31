@@ -146,7 +146,6 @@ public class DepositInActivity extends BaseTitleActivity {
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        super.onError(errorCode, errorMessage);
                         ToastUtil.showToast(errorMessage);
                     }
 

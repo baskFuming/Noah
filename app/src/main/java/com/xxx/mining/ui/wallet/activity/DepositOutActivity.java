@@ -172,7 +172,6 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        super.onError(errorCode, errorMessage);
                         if (errorCode == ApiCode.PAY_NOT_SETTING) {
                             ToastUtil.showToast(getString(R.string.deposit_out_error_4));
                             startActivity(new Intent(DepositOutActivity.this, SettingPayPswActivity.class));

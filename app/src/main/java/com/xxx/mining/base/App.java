@@ -7,9 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 
-import com.blankj.utilcode.util.Utils;
 import com.xxx.mining.model.utils.LocalManageUtil;
-import com.xxx.mining.service.InitService;
 
 public class App extends Application {
 
@@ -28,8 +26,6 @@ public class App extends Application {
         super.onCreate();
         application = this;
         context = getApplicationContext();
-        //启动初始化
-        startService(new Intent(this, InitService.class));
     }
 
     public static Context getContext() {

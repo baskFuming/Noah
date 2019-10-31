@@ -16,9 +16,9 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.DepositInfoBean;
 import com.xxx.mining.model.http.bean.DepositProfitBean;
+import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.ui.my.adapter.DepositProfitAdapter;
@@ -190,6 +190,11 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {
@@ -226,6 +231,11 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                                 mTotalProfit.setText(data.getAllFinancingsIncome());
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
                     }
                 });
     }

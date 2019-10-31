@@ -128,6 +128,11 @@ public class DepositProfitActivity extends BaseTitleActivity implements SwipeRef
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {
@@ -164,6 +169,11 @@ public class DepositProfitActivity extends BaseTitleActivity implements SwipeRef
                                 mTotalProfit.setText(data.getAllFinancingsIncome());
                             }
                         }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+
                     }
                 });
     }

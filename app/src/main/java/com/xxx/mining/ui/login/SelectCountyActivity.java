@@ -138,6 +138,11 @@ public class SelectCountyActivity extends BaseActivity implements BaseQuickAdapt
                     }
 
                     @Override
+                    public void onError(int errorCode, String errorMessage) {
+
+                    }
+
+                    @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
                         if (mRefresh != null) {

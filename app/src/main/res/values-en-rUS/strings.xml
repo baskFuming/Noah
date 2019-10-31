@@ -25,29 +25,11 @@
     <string name="save_image_fail">Save to Album Fail</string>
 
     <string name="main_home">Home</string>
-    <string name="main_wallet">Wallet</string>
-    <string name="main_rush">Panic buying</string>
-    <string name="main_app">Application</string>
+    <string name="main_wallet">Asset</string>
+    <string name="main_shop">Shopping</string>
+    <string name="main_mining">Mining</string>
     <string name="main_my">Mine</string>
 
-    <string name="main_app_title">Application</string>
-    <string name="main_app_content">Coming soon</string>
-    <string name="main_app_media">Media</string>
-    <string name="main_app_game">Game</string>
-    <string name="main_app_app">App</string>
-    <string name="main_app_zbg">ZBG</string>
-    <string name="main_app_coin_all">Coin all</string>
-    <string name="main_app_huo_ju">Huo ju</string>
-    <string name="main_app_my_token">My token</string>
-    <string name="main_app_talk_btc">BitcoinTalk</string>
-    <string name="main_app_news_btc">News.btc</string>
-    <string name="main_app_eight_btc">8btc</string>
-    <string name="main_app_eth_browser">Etherscan</string>
-    <string name="main_app_btc_browser">Btc.com</string>
-    <string name="main_app_to_loan">Borrowing</string>
-    <string name="main_app_mall">Mall</string>
-    <string name="main_app_not">Coming online soon</string>
-    <string name="main_app_not_1">Coming soon</string>
     <string name="main_my_title">Mine</string>
     <string name="main_my_record">Revenue record</string>
     <string name="main_my_notice">Notice center</string>
@@ -58,33 +40,15 @@
     <string name="main_my_name">Please login</string>
     <string name="main_my_invited_icon_text">Invite friends</string>
     <string name="main_my_invited_icon_toast">CT Award for Invitation</string>
+
     <string name="main_home_name">Name</string>
     <string name="main_home_now_price">Latest price</string>
     <string name="main_home_node_game">Node race</string>
     <string name="main_home_range">Price limit</string>
+
     <string name="main_wallet_title">Wallet</string>
     <string name="main_wallet_total_asset">Total assets</string>
     <string name="main_wallet_available_asset">Available assets</string>
-    <string name="main_rush_title">Panic buying</string>
-    <string name="main_rush_record">Purchase record</string>
-    <string name="main_rush_time_h">hour</string>
-    <string name="main_rush_time_m">Minute</string>
-    <string name="main_rush_time_s">Second</string>
-    <string name="main_rush_total_amount">Current limited sale</string>
-    <string name="main_rush_now_amount">Already robbed</string>
-    <string name="main_rush_rule">&#160;\n
-        1.Panic buying CT  requires a 10-fold CT margin in your wallet.\n
-        2.Panic buying time is once a day, and the specific time is countdown. \n
-        3.Panic buying freezes buying shares and deposits for up to 12 hours,\n
-        so as to protect other users from being harmed by scalping.
-    </string>
-    <string name="main_rush_finish">End</string>
-    <string name="main_rush_open">抢</string>
-    <string name="main_rush_open_down">Panic buying countdown</string>
-    <string name="main_rush_close_down">Preemptive countdown</string>
-    <string name="main_rush_rate_text">Panic buying rules</string>
-    <string name="main_rush_success">Successfully snatch</string>
-    <string name="main_rush_error_1">Flash sale after the countdown ends</string>
 
     <string name="feedback_title">Problem feedback</string>
 
