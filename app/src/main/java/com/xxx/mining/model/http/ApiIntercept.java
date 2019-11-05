@@ -32,7 +32,7 @@ public class ApiIntercept implements Interceptor {
         //请求头添加
         Request request = headerIntercept(chain);
 
-        //转化为json格式
+        //转化body传参
 //        request = getJSONRequest(request);
 
         //转化baseUrl

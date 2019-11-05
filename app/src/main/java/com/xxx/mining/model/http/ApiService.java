@@ -1,34 +1,27 @@
 package com.xxx.mining.model.http;
 
-import com.xxx.mining.model.http.bean.AchievementRecordBean;
 import com.xxx.mining.model.http.bean.AppVersionBean;
-import com.xxx.mining.model.http.bean.ConversionProfitBean;
-import com.xxx.mining.model.http.bean.DoExceptionBean;
-import com.xxx.mining.model.http.bean.GameBean;
-import com.xxx.mining.model.http.bean.MemberAssetBean;
-import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.DepositInfoBean;
-import com.xxx.mining.model.http.bean.DepositProfitBean;
-import com.xxx.mining.model.http.bean.CountyBean;
 import com.xxx.mining.model.http.bean.DepositRecordBean;
-import com.xxx.mining.model.http.bean.base.BooleanBean;
-import com.xxx.mining.model.http.bean.FlashSaleBean;
-import com.xxx.mining.model.http.bean.HomeBannerBean;
 import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.IsSettingPayPswBean;
 import com.xxx.mining.model.http.bean.LoginBean;
-import com.xxx.mining.model.http.bean.MyLevelBean;
-import com.xxx.mining.model.http.bean.NodeGameBean;
-import com.xxx.mining.model.http.bean.NodeGameRuleBean;
+import com.xxx.mining.model.http.bean.MyMiningBean;
+import com.xxx.mining.model.http.bean.MyNodeBean;
+import com.xxx.mining.model.http.bean.MyOrderBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
-import com.xxx.mining.model.http.bean.RechargeRecordBean;
-import com.xxx.mining.model.http.bean.ReleaseInfoBean;
-import com.xxx.mining.model.http.bean.ReleaseRecordBean;
-import com.xxx.mining.model.http.bean.RushInfoBean;
-import com.xxx.mining.model.http.bean.RushRecordBean;
-import com.xxx.mining.model.http.bean.ShareRecordBean;
+import com.xxx.mining.model.http.bean.RecordDepositBean;
+import com.xxx.mining.model.http.bean.RecordGiftBean;
+import com.xxx.mining.model.http.bean.RecordMiningBean;
+import com.xxx.mining.model.http.bean.RecordRechargeBean;
+import com.xxx.mining.model.http.bean.RecordTeamBean;
+import com.xxx.mining.model.http.bean.RecordWithdrawalBean;
+import com.xxx.mining.model.http.bean.SelectCountyBean;
+import com.xxx.mining.model.http.bean.ShopMiningBean;
 import com.xxx.mining.model.http.bean.WalletBean;
-import com.xxx.mining.model.http.bean.WithdrawalRecordBean;
+import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.BooleanBean;
 
 import java.util.List;
 
@@ -43,10 +36,19 @@ public interface ApiService {
     @POST("/CT/invest/getAllCoinInfo")
     Observable<BaseBean<List<HomeBean>>> getHomeList();
 
-    //获取首页轮播图
+    //获取商品矿机
+    @FormUrlEncoded
+    @POST("/CT/invest/getAllCoinInfo")
+    Observable<BaseBean<List<ShopMiningBean>>> getShopMiningList(
+            @Field("userId") String userId,
+            @Field("page") int pageNo,
+            @Field("row") int pageSize
+    );
+
+    //获取轮播图
     @FormUrlEncoded
     @POST("/uc/ancillary/system/advertise")
-    Observable<BaseBean<List<HomeBannerBean>>> getHomeBannerList(
+    Observable<BaseBean<List<BannerBean>>> getBannerList(
             @Field("sysAdvertiseLocation") String location
     );
 
@@ -55,33 +57,30 @@ public interface ApiService {
     @POST("/CT/invest/getUserAssetInfo")
     Observable<BaseBean<WalletBean>> getWalletList(
             @Field("userId") String userId
-    );
-
-    //获取节点大赛列表
+    );    //获取我的矿机列表
     @FormUrlEncoded
-    @POST("/CT/invest/getBonusesInfo")
-    Observable<BaseBean<NodeGameBean>> getNodeGameList(
-            @Field("userId") String userId
-    );
-
-    //获取节点大赛奖励规则列表
-    @POST("/CT/invest/getBonusesLevel")
-    Observable<BaseBean<List<NodeGameRuleBean>>> getNodeGameRuleList();
-
-    //获取充值记录列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getDepositLogs")
-    Observable<BaseBean<List<RechargeRecordBean>>> getRechargeRecordList(
+    @POST("/CT/invest/getFinancingsIncomeLogs")
+    Observable<BaseBean<List<MyMiningBean>>> getMyMiningList(
             @Field("userId") String userId,
             @Field("unit") String unit,
             @Field("page") int pageNo,
             @Field("row") int pageSize
     );
 
-    //获取提现记录列表
+    //获取我的节点列表
     @FormUrlEncoded
-    @POST("/CT/invest/getWithdrawLogs")
-    Observable<BaseBean<List<WithdrawalRecordBean>>> getWithdrawalRecordList(
+    @POST("/CT/invest/getFinancingsIncomeLogs")
+    Observable<BaseBean<List<MyNodeBean>>> getMyNodeList(
+            @Field("userId") String userId,
+            @Field("unit") String unit,
+            @Field("page") int pageNo,
+            @Field("row") int pageSize
+    );
+
+    //获取我的订单列表
+    @FormUrlEncoded
+    @POST("/CT/invest/getFinancingsIncomeLogs")
+    Observable<BaseBean<List<MyOrderBean>>> getMyOrderList(
             @Field("userId") String userId,
             @Field("unit") String unit,
             @Field("page") int pageNo,
@@ -96,65 +95,22 @@ public interface ApiService {
             @Field("pageSize") int pageSize
     );
 
-    //获取分享业绩列表
+    //获取充值记录列表
     @FormUrlEncoded
-    @POST("/CT/invest/getCommunityInfo")
-    Observable<BaseBean<AchievementRecordBean>> getAchievementRecordList(
-            @Field("userId") String userId
-    );
-
-    //获取分享收益列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getInvestedIncomeLogs")
-    Observable<BaseBean<ShareRecordBean>> getShareRecordList(
+    @POST("/CT/invest/getDepositLogs")
+    Observable<BaseBean<List<RecordRechargeBean>>> getRechargeRecordList(
             @Field("userId") String userId,
             @Field("unit") String unit,
             @Field("page") int pageNo,
             @Field("row") int pageSize
     );
 
-    //获取抢购收益列表
+    //获取提现记录列表
     @FormUrlEncoded
-    @POST("/CT/invest/getRushRecordList")
-    Observable<BaseBean<List<RushRecordBean>>> getRushRecordList(
+    @POST("/CT/invest/getWithdrawLogs")
+    Observable<BaseBean<List<RecordWithdrawalBean>>> getWithdrawalRecordList(
             @Field("userId") String userId,
-            @Field("page") int pageNo,
-            @Field("row") int pageSize
-    );
-
-    //获取释放记录列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getReleaseIncomeList")
-    Observable<BaseBean<List<ReleaseRecordBean>>> getReleaseRecordList(
-            @Field("userId") String userId,
-            @Field("page") int pageNo,
-            @Field("row") int pageSize
-    );
-
-    //获取理财总收益列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getAllFinancingsIncomeLogs")
-    Observable<BaseBean<List<DepositProfitBean>>> getDepositTotalProfitList(
-            @Field("userId") String userId,
-            @Field("page") int pageNo,
-            @Field("row") int pageSize
-    );
-
-    //获取转化收益列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getFlashsaleIncomeLogs")
-    Observable<BaseBean<List<ConversionProfitBean>>> getConversionProfitList(
-            @Field("userId") String userId,
-            @Field("page") int pageNo,
-            @Field("row") int pageSize
-    );
-
-    //获取理财收益列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getFinancingsIncomeLogs")
-    Observable<BaseBean<List<DepositProfitBean>>> getDepositProfitList(
-            @Field("userId") String userId,
-            @Field("unit") String coinId,
+            @Field("unit") String unit,
             @Field("page") int pageNo,
             @Field("row") int pageSize
     );
@@ -179,90 +135,55 @@ public interface ApiService {
             @Field("row") int pageSize
     );
 
-    //获取游戏列表
+    //获取挖矿收益
     @FormUrlEncoded
-    @POST("/CT/invest/game/getGameList")
-    Observable<BaseBean<List<GameBean>>> getGameList(
-            @Field("userId") String userId
-    );
-
-
-    //游戏消耗日志
-    @FormUrlEncoded
-    @POST("/CT/invest/game/getGameRankLogs")
-    Observable<BaseBean<List<GameBean>>> getGameLogList(
+    @POST("/CT/invest/getFlashsaleIncomeLogs")
+    Observable<BaseBean<List<RecordMiningBean>>> getRecordMiningList(
             @Field("userId") String userId,
             @Field("page") int pageNo,
             @Field("row") int pageSize
     );
 
-    //获取用户的可用CT
+    //获取团队收益
     @FormUrlEncoded
-    @POST("/CT/invest/game/getMemberAsset")
-    Observable<BaseBean<MemberAssetBean>> getMemberAsset(
+    @POST("/CT/invest/getCommunityInfo")
+    Observable<BaseBean<List<RecordTeamBean>>> getRecordTeamList(
             @Field("userId") String userId
     );
 
-    //开始游戏
+    //获取分红收益列表
     @FormUrlEncoded
-    @POST("/CT/invest/game/startGame")
-    Observable<BaseBean<BooleanBean>> getStartGame(
+    @POST("/CT/invest/getAllFinancingsIncomeLogs")
+    Observable<BaseBean<List<RecordGiftBean>>> getRecordGiftList(
             @Field("userId") String userId,
-            @Field("gameId") int gameId
-
-            );
-
-    // 更新比赛得分
-    @FormUrlEncoded
-    @POST("CT/invest/game/updateScore")
-    Observable<BaseBean<BooleanBean>> getUpdateScore(
-            @Field("userId") String userId,
-            @Field("gameId") int gameId,
-            @Field("score") String score
-    );
-
-    //获取当周前十排名接口
-    @FormUrlEncoded
-    @POST(" /CT/invest/game/getGameScoreList")
-    Observable<BaseBean<List<GameBean>>> getGameScoreList(
-            @Field("userId") String userId,
-            @Field("gameId") int gameId
-    );
-    //----------------------------------------------------------操作----------------------------------------------------------------------------------------------------------------------------//
-
-
-    //获取抢购信息
-    @POST("/CT/invest/getFlashsaleBaseInfo")
-    Observable<BaseBean<RushInfoBean>> getRushInfo();
-
-    //获取用户等级
-    @FormUrlEncoded
-    @POST("/CT/invest/getUserStar")
-    Observable<BaseBean<MyLevelBean>> getUserStar(
-            @Field("userId") String userId
-    );
-
-    //获取释放记录信息
-    @FormUrlEncoded
-    @POST("/CT/invest/getFlashsaleInfo")
-    Observable<BaseBean<ReleaseInfoBean>> getReleaseRecordInfo(
-            @Field("userId") String userId
-    );
-
-    //获取理财总收益列表
-    @FormUrlEncoded
-    @POST("/CT/invest/getAllFinancingsInfo")
-    Observable<BaseBean<DepositInfoBean>> getDepositTotalProfitInfo(
-            @Field("userId") String userId
+            @Field("page") int pageNo,
+            @Field("row") int pageSize
     );
 
     //获取理财收益列表
+    @FormUrlEncoded
+    @POST("/CT/invest/getFinancingsIncomeLogs")
+    Observable<BaseBean<List<RecordDepositBean>>> getRecordDepositList(
+            @Field("userId") String userId,
+            @Field("unit") String unit,
+            @Field("page") int pageNo,
+            @Field("row") int pageSize
+    );
+
+
+    //----------------------------------------------------------获取信息----------------------------------------------------------------------------------------------------------------------------//
+
+
+    //获取理财收益信息
     @FormUrlEncoded
     @POST("/CT/invest/getFinancingsInfo")
     Observable<BaseBean<DepositInfoBean>> getDepositProfitInfo(
             @Field("userId") String userId,
             @Field("coinId") String coinId
     );
+
+    //----------------------------------------------------------操作----------------------------------------------------------------------------------------------------------------------------//
+
 
     //提现
     @POST("/uc/withdraw/apply/code")
@@ -279,8 +200,6 @@ public interface ApiService {
 
     /**
      * 提现发送验证码
-     *
-     * @return
      */
     @POST(" /uc/mobile/withdraw/code")
     @FormUrlEncoded
@@ -289,19 +208,10 @@ public interface ApiService {
             @Field("country") String country
     );
 
-
-    //抢购
-    @POST("/CT/invest/compass/doFlashsale")
-    @FormUrlEncoded
-    Observable<BaseBean<FlashSaleBean>> flashSale(
-            @Field("userId") String userId,
-            @Field("coinId") String coinId
-    );
-
     //兑换
     @POST("/CT/invest/compass/doExchange")
     @FormUrlEncoded
-    Observable<BaseBean<DoExceptionBean>> exchange(
+    Observable<BaseBean<Object>> exchange(
             @Field("userId") String userId,
             @Field("coinId") String coinId,
             @Field("value") double value
@@ -326,6 +236,16 @@ public interface ApiService {
             @Field("jyPassword") String jyPassword
     );
 
+    //下单
+    @POST("/CT/invest/compass/doExchange")
+    @FormUrlEncoded
+    Observable<BaseBean<Object>> place(
+            @Field("userId") String userId,
+            @Field("password") String password,
+            @Field("code") String code,
+            @Field("shopId") int shopId,
+            @Field("number") double number
+    );
 
     //-------------------------------------------------------登录-------------------------------------------------------------------------------------------------------------------------------//
 
@@ -335,10 +255,7 @@ public interface ApiService {
     @POST("/uc/login")
     Observable<BaseBean<LoginBean>> login(
             @Field("username") String account,
-            @Field("password") String password,
-            @Field("challenge") String a,
-            @Field("validate") String b,
-            @Field("seccode") String c
+            @Field("password") String password
     );
 
     //发送短信验证码
@@ -347,7 +264,6 @@ public interface ApiService {
     Observable<BaseBean<Object>> sendSMSCode(
             @Field("phone") String phone,
             @Field("country") String country
-
     );
 
     //注册
@@ -358,10 +274,7 @@ public interface ApiService {
             @Field("phone") String phone,
             @Field("code") String smsCode,
             @Field("password") String password,
-            @Field("country") String country,
-            @Field("promotion") String promotion,
-            @Field("ticket") String a,
-            @Field("randStr") String b
+            @Field("country") String country
     );
 
     //忘记密码
@@ -418,7 +331,7 @@ public interface ApiService {
 
     //获取城市编码
     @POST("/uc/support/country")
-    Observable<BaseBean<List<CountyBean>>> getCounty();
+    Observable<BaseBean<List<SelectCountyBean>>> getCounty();
 
     //检查app版本
     @POST("/uc/ancillary/system/app/version/0")

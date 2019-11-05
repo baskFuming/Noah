@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000B08"
+
     android:orientation="vertical"
     tools:context=".ui.wallet.activity.DepositActivity">
 
@@ -25,31 +25,25 @@
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
-            <TextView
+            <Button
                 android:id="@+id/deposit_in"
+                style="@style/MainButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_back_btn_small"
-                android:gravity="center"
-                android:text="@string/deposit_in"
-                android:textColor="@color/colorText"
-                android:textSize="18dp" />
+                android:text="@string/deposit_in"/>
 
             <Space
                 android:layout_width="32dp"
                 android:layout_height="match_parent" />
 
-            <TextView
+            <Button
                 android:id="@+id/deposit_out"
+                style="@style/MainButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="44dp"
                 android:layout_weight="1"
-                android:background="@drawable/shape_back_btn_small"
-                android:gravity="center"
-                android:text="@string/deposit_out"
-                android:textColor="@color/colorText"
-                android:textSize="18dp" />
+                android:text="@string/deposit_out" />
 
         </LinearLayout>
 
@@ -78,8 +72,7 @@
                         <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_back_view">
+                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -126,8 +119,7 @@
                         <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/shape_back_view">
+                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:layout_width="wrap_content"

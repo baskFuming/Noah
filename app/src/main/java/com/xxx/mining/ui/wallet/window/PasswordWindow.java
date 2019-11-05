@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
@@ -21,6 +20,7 @@ import com.xxx.mining.model.utils.ToastUtil;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class PasswordWindow extends BaseDialog {
@@ -63,7 +63,7 @@ public class PasswordWindow extends BaseDialog {
         return 0.8;
     }
 
-    @OnClick({R.id.window_password_btn, R.id.window_password_return,R.id.window_send_sms_code})
+    @OnClick({R.id.window_password_btn, R.id.window_password_return, R.id.window_send_sms_code})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.window_password_btn:
@@ -116,6 +116,20 @@ public class PasswordWindow extends BaseDialog {
                     @Override
                     public void onError(int errorCode, String errorMessage) {
                         ToastUtil.showToast(errorMessage);
+                    }
+
+                    @Override
+                    public void onStart(Disposable d) {
+                        super.onStart(d);
+                        if (activity != null)
+                            activity.showLoading();
+                    }
+
+                    @Override
+                    public void onEnd() {
+                        super.onEnd();
+                        if (activity != null)
+                            activity.hideLoading();
                     }
                 });
     }

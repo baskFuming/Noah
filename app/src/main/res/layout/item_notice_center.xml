@@ -5,7 +5,6 @@
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:layout_marginTop="15dp"
-    android:background="@drawable/shape_back_view"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -35,7 +34,7 @@
                 android:layout_marginTop="20dp"
                 android:ellipsize="end"
                 android:lines="1"
-                android:textColor="@color/colorText"
+                android:textColor="#333333"
                 android:textSize="@dimen/text_size" />
 
             <TextView
@@ -44,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:lineSpacingExtra="5dp"
-                android:textColor="@color/colorText"
+                android:textColor="#666666"
                 android:textSize="12dp" />
 
         </LinearLayout>
@@ -67,7 +66,7 @@
         android:layout_marginLeft="9dp"
         android:layout_marginTop="10dp"
         android:lineSpacingExtra="10dp"
-        android:textColor="@color/colorText"
+        android:textColor="#333333"
         android:textSize="12dp" />
 
 </LinearLayout>

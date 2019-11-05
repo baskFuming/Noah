@@ -1,5 +1,7 @@
 package com.xxx.mining.ui.my.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,6 +18,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LanguageActivity extends BaseTitleActivity {
+
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, LanguageActivity.class);
+        activity.startActivity(intent);
+    }
 
     @BindView(R.id.language_simple_zh_check)
     TextView mSimpleZh;

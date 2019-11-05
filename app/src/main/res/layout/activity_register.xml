@@ -3,139 +3,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorMainBack"
     android:orientation="vertical"
     tools:context="com.xxx.mining.ui.login.RegisterActivity">
 
     <ImageButton
         android:id="@+id/register_account_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:background="@color/colorTransparent"
-        android:src="@mipmap/main_return" />
+        android:src="@mipmap/login_return" />
+
+    <ImageView
+        android:layout_width="66dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="22dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/register_title"
-        android:textColor="@color/colorMain"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        android:layout_gravity="center"
+        android:layout_marginTop="7dp"
+        android:src="@mipmap/ic_launcher"
+        android:text="DWTT"
+        android:textColor="#333333"
+        android:textSize="18dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="60dp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
-
-        <EditText
-            android:id="@+id/register_account_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/register_hint_account"
-            android:inputType="phone"
-            android:maxLength="20"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="22dp">
 
         <TextView
             android:id="@+id/register_selector_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
             android:layout_marginRight="5dp"
-            android:drawablePadding="8dp"
-            android:drawableRight="@mipmap/county_arrow"
-            android:gravity="center_vertical"
             android:text="+86"
             android:textColor="@color/colorMain"
             android:textSize="@dimen/text_size" />
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="20dp">
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
+            android:background="#E5E5E5" />
 
         <EditText
-            android:id="@+id/register_password_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/register_account_edit"
+            style="@style/MainEditStyle"
+            android:layout_toRightOf="@+id/register_selector_phone"
             android:background="@null"
-            android:digits="@string/password"
-            android:gravity="center_vertical"
-            android:hint="@string/register_hint_password"
-            android:inputType="textPassword"
-            android:maxLength="20"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
-
-        <CheckBox
-            android:id="@+id/register_password_eye"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="5dp"
-            android:button="@drawable/selector_password" />
+            android:hint="@string/register_hint_account"
+            android:inputType="phone"
+            android:maxLength="20" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginTop="20dp">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
+            android:background="#E5E5E5" />
 
         <EditText
             android:id="@+id/register_sms_code_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/MainEditStyle"
             android:background="@null"
-            android:gravity="center_vertical"
             android:hint="@string/register_hint_sms_code"
             android:inputType="phone"
-            android:maxLength="6"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
+            android:maxLength="6" />
 
         <TextView
             android:id="@+id/register_send_sms_code"
@@ -144,10 +94,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="5dp"
-            android:background="@drawable/shape_send_sms_code"
             android:gravity="center"
             android:text="@string/forget_login_psw_send_sms_code"
-            android:textColor="@color/colorText"
+            android:textColor="#3B76BD"
             android:textSize="12dp" />
 
     </RelativeLayout>
@@ -155,50 +104,71 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_marginTop="20dp">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
+            android:background="#E5E5E5" />
 
         <EditText
-            android:id="@+id/register_invite_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentBottom="true"
+            android:id="@+id/register_password_edit"
+            style="@style/MainEditStyle"
             android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="@string/register_hint_invite"
-            android:maxLength="20"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
+            android:digits="@string/password"
+            android:hint="@string/register_hint_password"
+            android:inputType="phone"
+            android:maxLength="20" />
 
-        <ImageView
+        <CheckBox
+            android:id="@+id/register_password_eye"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:src="@mipmap/register_user" />
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="10dp"
+            android:button="@drawable/selector_password" />
 
     </RelativeLayout>
 
-    <TextView
+    <Button
         android:id="@+id/register_btn"
+        style="@style/LoginButtonStyle"
         android:layout_width="330dp"
         android:layout_height="44dp"
-        android:layout_gravity="center"
         android:layout_marginTop="44dp"
-        android:background="@drawable/shape_back_btn_login"
-        android:gravity="center"
-        android:text="@string/register_btn"
-        android:textColor="@color/colorText"
-        android:textSize="18dp" />
+        android:text="@string/register_btn" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/register_login"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/register_login"
+            android:textColor="#3B76BD"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/register_forger_password"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/register_forger"
+            android:textColor="#3B76BD"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
 
 </LinearLayout>

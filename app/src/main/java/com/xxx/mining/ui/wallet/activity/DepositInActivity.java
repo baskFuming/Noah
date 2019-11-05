@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
@@ -24,7 +22,6 @@ import java.math.RoundingMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -40,7 +37,6 @@ public class DepositInActivity extends BaseTitleActivity {
 
     private double balance;
     private String coinId;
-    private LoadingDialog mLoadingDialog;
 
     @Override
     protected String initTitle() {
@@ -152,19 +148,13 @@ public class DepositInActivity extends BaseTitleActivity {
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(DepositInActivity.this);
-                            mLoadingDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }

@@ -1,11 +1,16 @@
 package com.xxx.mining.ui.home;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -15,23 +20,22 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.fragment.BaseFragment;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.http.bean.HomeBannerBean;
 import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
-import com.xxx.mining.model.http.utils.ApiType;
-import com.xxx.mining.model.utils.BannerUtil;
-import com.xxx.mining.ui.home.activity.NodeGameActivity;
+import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.home.adapter.HomeAdapter;
 import com.xxx.mining.ui.my.activity.NoticeCenterActivity;
-import com.youth.banner.Banner;
-import com.youth.banner.listener.OnBannerListener;
+import com.xxx.mining.ui.shop.ShopActivity;
+import com.xxx.mining.ui.wallet.activity.RechargeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -42,16 +46,15 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    @BindView(R.id.main_home_recycler)
-    RecyclerView mRecycler;
     @BindView(R.id.main_home_refresh)
     SwipeRefreshLayout mRefresh;
-    @BindView(R.id.main_home_app_bar)
-    AppBarLayout mAppBar;
+    @BindView(R.id.main_recycler)
+    RecyclerView mRecycler;
     @BindView(R.id.main_not_data)
     LinearLayout mNotData;
-    @BindView(R.id.main_home_banner)
-    Banner mBanner;
+    @BindView(R.id.main_app_bar)
+    AppBarLayout mAppBar;
+
     @BindView(R.id.main_home_view_flipper)
     ViewFlipper mViewFlipper;
 
@@ -59,7 +62,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private List<HomeBean> mRecyclerList = new ArrayList<>();
     private List<NoticeCenterBean.ContentBean> mNoticeList = new ArrayList<>();
 
-    private boolean isLoadBanner;   //是否加载完毕轮播图
     private boolean isLoadFlipper;   //是否加载文字公告
 
     @Override
@@ -83,18 +85,28 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 }
             }
         });
-        mBanner.stopAutoPlay();
 
         loadData();
-        loadBanner();
         loadNotice();
     }
 
-    @OnClick(R.id.home_node_game)
+    @OnClick({R.id.main_home_shop, R.id.main_home_loan, R.id.main_home_news, R.id.main_home_node, R.id.main_home_other})
     public void OnClick(View view) {
         switch (view.getId()) {
-            case R.id.home_node_game:
-                startActivity(new Intent(getContext(), NodeGameActivity.class));
+            case R.id.main_home_shop:
+                ShopActivity.actionStart(getActivity());
+                break;
+            case R.id.main_home_loan:
+                ToastUtil.showToast("敬请期待");
+                break;
+            case R.id.main_home_news:
+                ToastUtil.showToast("敬请期待");
+                break;
+            case R.id.main_home_node:
+                ToastUtil.showToast("敬请期待");
+                break;
+            case R.id.main_home_other:
+                ToastUtil.showToast("敬请期待");
                 break;
         }
     }
@@ -104,21 +116,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         loadData();
         if (!isLoadFlipper) {
             loadNotice();
-        }
-        if (!isLoadBanner) {
-            loadBanner();
-        }
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (mBanner != null) {
-            if (hidden) {
-                mBanner.stopAutoPlay();
-            } else {
-                mBanner.startAutoPlay();
-            }
         }
     }
 
@@ -150,7 +147,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-
+                        ToastUtil.showToast(errorMessage);
                     }
 
                     @Override
@@ -167,42 +164,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         if (mRefresh != null) {
                             mRefresh.setRefreshing(false);
                         }
-                    }
-                });
-    }
-
-    /**
-     * @Model 获取轮播图
-     */
-    private void loadBanner() {
-        Api.getInstance().getHomeBannerList(ApiType.HOME_LOCATION)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<HomeBannerBean>>(getActivity()) {
-
-                    @Override
-                    public void onSuccess(BaseBean<List<HomeBannerBean>> bean) {
-                        if (bean != null) {
-                            List<HomeBannerBean> list = bean.getData();
-                            if (list != null) {
-                                isLoadBanner = true;
-                                BannerUtil.init(mBanner, list, new OnBannerListener() {
-                                    @Override
-                                    public void OnBannerClick(int position) {
-
-                                    }
-                                });
-                            } else {
-                                isLoadBanner = false;
-                            }
-                        } else {
-                            isLoadBanner = false;
-                        }
-                    }
-
-                    @Override
-                    public void onError(int errorCode, String errorMessage) {
-                        isLoadBanner = false;
                     }
                 });
     }
@@ -273,4 +234,5 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                     }
                 });
     }
+
 }

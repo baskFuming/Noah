@@ -1,5 +1,7 @@
 package com.xxx.mining.ui.my.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +14,14 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
+import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.ui.my.adapter.NoticeCenterAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -30,6 +31,11 @@ import io.reactivex.schedulers.Schedulers;
  * @Author xxx
  */
 public class NoticeCenterActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemClickListener {
+
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, NoticeCenterActivity.class);
+        activity.startActivity(intent);
+    }
 
     @BindView(R.id.main_recycler)
     RecyclerView mRecycler;

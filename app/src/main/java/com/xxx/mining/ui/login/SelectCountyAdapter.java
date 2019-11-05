@@ -6,11 +6,11 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
-import com.xxx.mining.model.http.bean.CountyBean;
+import com.xxx.mining.model.http.bean.SelectCountyBean;
 
 import java.util.List;
 
-public class SelectCountyAdapter extends BaseQuickAdapter<CountyBean, BaseViewHolder> {
+public class SelectCountyAdapter extends BaseQuickAdapter<SelectCountyBean, BaseViewHolder> {
 
     private int position;
 
@@ -22,21 +22,21 @@ public class SelectCountyAdapter extends BaseQuickAdapter<CountyBean, BaseViewHo
         return position;
     }
 
-    SelectCountyAdapter(@Nullable List<CountyBean> data) {
+    SelectCountyAdapter(@Nullable List<SelectCountyBean> data) {
         super(R.layout.item_select_county, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, CountyBean item) {
+    protected void convert(BaseViewHolder helper, SelectCountyBean item) {
         helper.setText(R.id.item_select_county_name, item.getZhName())
                 .setText(R.id.item_select_county_code, item.getAreaCode());
 
         if (helper.getAdapterPosition() == position) {
-            helper.setTextColor(R.id.item_select_county_name, Color.parseColor("#2E5EF4"))
-                    .setTextColor(R.id.item_select_county_code, Color.parseColor("#2E5EF4"));
+            helper.setTextColor(R.id.item_select_county_name, Color.parseColor("#4A79E7"))
+                    .setTextColor(R.id.item_select_county_code, Color.parseColor("#4A79E7"));
         } else {
-            helper.setTextColor(R.id.item_select_county_name, Color.parseColor("#F6F6F6"))
-                    .setTextColor(R.id.item_select_county_code, Color.parseColor("#F6F6F6"));
+            helper.setTextColor(R.id.item_select_county_name, Color.parseColor("#666666"))
+                    .setTextColor(R.id.item_select_county_code, Color.parseColor("#666666"));
         }
     }
 }

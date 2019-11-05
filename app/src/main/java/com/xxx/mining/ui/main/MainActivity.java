@@ -21,15 +21,16 @@ import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ExitAppUtil;
 import com.xxx.mining.model.utils.PermissionUtil;
 import com.xxx.mining.model.utils.SystemUtil;
+import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.home.HomeFragment;
 import com.xxx.mining.ui.mining.MiningFragment;
 import com.xxx.mining.ui.my.MyFragment;
-import com.xxx.mining.ui.shop.ShopFragment;
 import com.xxx.mining.ui.wallet.WalletFragment;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -41,7 +42,6 @@ public class MainActivity extends BaseActivity {
     //页面下标
     private static final int HOME_TYPE = R.id.main_home;     //首页
     private static final int WALLET_TYPE = R.id.main_wallet; //资产
-    private static final int SHOP_TYPE = R.id.main_shop; //商城
     private static final int MINING_TYPE = R.id.main_mining;       //矿机
     private static final int MY_TYPE = R.id.main_my;         //我的
 
@@ -49,8 +49,6 @@ public class MainActivity extends BaseActivity {
     ImageView mHomeImage;
     @BindView(R.id.main_wallet_image)
     ImageView mWalletImage;
-    @BindView(R.id.main_shop_image)
-    ImageView mShopImage;
     @BindView(R.id.main_mining_image)
     ImageView mMiningImage;
     @BindView(R.id.main_my_image)
@@ -60,8 +58,6 @@ public class MainActivity extends BaseActivity {
     TextView mHomeText;
     @BindView(R.id.main_wallet_text)
     TextView mWalletText;
-    @BindView(R.id.main_shop_text)
-    TextView mShopText;
     @BindView(R.id.main_mining_text)
     TextView mMiningText;
     @BindView(R.id.main_my_text)
@@ -92,7 +88,7 @@ public class MainActivity extends BaseActivity {
         selectorItem();
     }
 
-    @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_shop, R.id.main_mining, R.id.main_my})
+    @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})
     public void onClick(View v) {
         nowType = v.getId();
         if (nowType != lastType) {
@@ -138,27 +134,22 @@ public class MainActivity extends BaseActivity {
         switch (nowType) {
             case HOME_TYPE:
                 mHomeImage.setImageResource(R.mipmap.main_home_selection);
-                mHomeText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
+                mHomeText.setTextColor(getResources().getColor(R.color.colorMainTrue));
                 FragmentManager.replaceFragment(this, HomeFragment.class, R.id.main_frame);
                 break;
             case WALLET_TYPE:
                 mWalletImage.setImageResource(R.mipmap.main_wallet_selection);
-                mWalletText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
+                mWalletText.setTextColor(getResources().getColor(R.color.colorMainTrue));
                 FragmentManager.replaceFragment(this, WalletFragment.class, R.id.main_frame);
-                break;
-            case SHOP_TYPE:
-                mShopImage.setImageResource(R.mipmap.main_shop_selection);
-                mShopText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
-                FragmentManager.replaceFragment(this, ShopFragment.class, R.id.main_frame);
                 break;
             case MINING_TYPE:
                 mMiningImage.setImageResource(R.mipmap.main_mining_selection);
-                mMiningText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
+                mMiningText.setTextColor(getResources().getColor(R.color.colorMainTrue));
                 FragmentManager.replaceFragment(this, MiningFragment.class, R.id.main_frame);
                 break;
             case MY_TYPE:
                 mMyImage.setImageResource(R.mipmap.main_my_selection);
-                mMyText.setTextColor(getResources().getColor(R.color.colorMainBottomSelector));
+                mMyText.setTextColor(getResources().getColor(R.color.colorMainTrue));
                 FragmentManager.replaceFragment(this, MyFragment.class, R.id.main_frame);
                 break;
         }
@@ -169,23 +160,19 @@ public class MainActivity extends BaseActivity {
         switch (lastType) {
             case HOME_TYPE:
                 mHomeImage.setImageResource(R.mipmap.main_home_default);
-                mHomeText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
+                mHomeText.setTextColor(getResources().getColor(R.color.colorMainFalse));
                 break;
             case WALLET_TYPE:
                 mWalletImage.setImageResource(R.mipmap.main_wallet_default);
-                mWalletText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
-                break;
-            case SHOP_TYPE:
-                mShopImage.setImageResource(R.mipmap.main_shop_default);
-                mShopText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
+                mWalletText.setTextColor(getResources().getColor(R.color.colorMainFalse));
                 break;
             case MINING_TYPE:
                 mMiningImage.setImageResource(R.mipmap.main_mining_default);
-                mMiningText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
+                mMiningText.setTextColor(getResources().getColor(R.color.colorMainFalse));
                 break;
             case MY_TYPE:
                 mMyImage.setImageResource(R.mipmap.main_my_default);
-                mMyText.setTextColor(getResources().getColor(R.color.colorMainBottomDefault));
+                mMyText.setTextColor(getResources().getColor(R.color.colorMainFalse));
                 break;
         }
     }
@@ -213,7 +200,19 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
+                    }
 
+                    @Override
+                    public void onStart(Disposable d) {
+                        super.onStart(d);
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onEnd() {
+                        super.onEnd();
+                        hideLoading();
                     }
                 });
     }
@@ -241,7 +240,19 @@ public class MainActivity extends BaseActivity {
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
+                    }
 
+                    @Override
+                    public void onStart(Disposable d) {
+                        super.onStart(d);
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onEnd() {
+                        super.onEnd();
+                        hideLoading();
                     }
                 });
     }

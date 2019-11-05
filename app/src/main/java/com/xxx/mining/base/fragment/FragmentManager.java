@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.xxx.mining.base.fragment.BaseFragment;
-
 import java.util.List;
 
 /**

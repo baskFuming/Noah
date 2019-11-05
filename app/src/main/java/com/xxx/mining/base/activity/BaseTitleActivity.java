@@ -2,11 +2,9 @@ package com.xxx.mining.base.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xxx.mining.R;
-import com.xxx.mining.base.App;
 
 /**
  * 需要Title展示的Activity

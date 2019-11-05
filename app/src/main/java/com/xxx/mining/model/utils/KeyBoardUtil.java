@@ -1,13 +1,11 @@
 package com.xxx.mining.model.utils;
 
-import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 

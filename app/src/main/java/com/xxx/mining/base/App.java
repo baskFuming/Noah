@@ -1,10 +1,8 @@
 package com.xxx.mining.base;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 
 import com.xxx.mining.model.utils.LocalManageUtil;

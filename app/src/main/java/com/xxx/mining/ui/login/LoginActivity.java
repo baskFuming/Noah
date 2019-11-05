@@ -6,17 +6,16 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.base.activity.BaseActivity;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.LoginBean;
+import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
@@ -30,20 +29,21 @@ import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+
 /**
  * @Page 登录页面
  * @Author xxx
  */
 public class LoginActivity extends BaseActivity {
 
+    @BindView(R.id.login_selector_phone)
+    TextView mSelectorPhone;
     @BindView(R.id.login_account_edit)
     EditText mAccountEdit;
     @BindView(R.id.login_password_edit)
     EditText mPasswordEdit;
     @BindView(R.id.login_password_eye)
     CheckBox mPasswordEye;
-
-    private LoadingDialog mLoadingDialog;
 
     @Override
     protected int getLayoutId() {
@@ -62,10 +62,16 @@ public class LoginActivity extends BaseActivity {
         mAccountEdit.setText(phone);
     }
 
-    @OnClick({R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn})
+    @OnClick({R.id.login_return, R.id.login_selector_phone, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn})
     public void OnClick(View view) {
         KeyBoardUtil.closeKeyBord(this, mAccountEdit);
         switch (view.getId()) {
+            case R.id.login_return:
+                finish();
+                break;
+            case R.id.login_selector_phone:
+                startActivityForResult(new Intent(this, SelectCountyActivity.class), ConfigClass.REQUEST_CODE);
+                break;
             case R.id.login_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
                 break;
@@ -91,8 +97,9 @@ public class LoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.RESULT_CODE && data != null) {
-            String account = data.getStringExtra("account");
-            mAccountEdit.setText(account);
+//            String phoneName = data.getStringExtra(SelectCountyActivity.RESULT_NAME_KRY);
+            String phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
+            mSelectorPhone.setText(phoneCode);
         }
     }
 
@@ -100,6 +107,7 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         ActivityManager.getInstance().AppExit();
     }
+
 
     /**
      * @Model 登录
@@ -110,14 +118,26 @@ public class LoginActivity extends BaseActivity {
 
         if (account.isEmpty()) {
             ToastUtil.showToast(R.string.login_error_1);
+            showEditError(mAccountEdit);
+            return;
+        }
+        if (!account.matches(ConfigClass.MATCHES_PHONE)) {
+            ToastUtil.showToast(R.string.register_error_4);
+            showEditError(mAccountEdit);
             return;
         }
         if (password.isEmpty()) {
             ToastUtil.showToast(R.string.login_error_2);
+            showEditError(mPasswordEdit);
+            return;
+        }
+        if (!password.matches(ConfigClass.MATCHES_PASSWORD)) {
+            ToastUtil.showToast(R.string.login_error_4);
+            showEditError(mPasswordEdit);
             return;
         }
 
-        Api.getInstance().login(account, password, "null", "null", "null")
+        Api.getInstance().login(account, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<LoginBean>(this) {
@@ -161,19 +181,13 @@ public class LoginActivity extends BaseActivity {
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(LoginActivity.this);
-                            mLoadingDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }

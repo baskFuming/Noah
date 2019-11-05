@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 
-
 import com.xxx.mining.R;
 import com.xxx.mining.base.dialog.BaseDialog;
 

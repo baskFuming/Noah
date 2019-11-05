@@ -1,6 +1,7 @@
 package com.xxx.mining.ui.wallet.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -17,12 +18,14 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
+import com.xxx.mining.model.http.bean.RecordRechargeBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.http.bean.RechargeRecordBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
+import com.xxx.mining.model.utils.StringUtil;
 import com.xxx.mining.model.utils.ZXingUtil;
+import com.xxx.mining.ui.shop.ShopActivity;
 import com.xxx.mining.ui.wallet.adapter.RechargeRecordAdapter;
 
 import java.util.ArrayList;
@@ -40,10 +43,23 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
+    public static void actionStart(Activity activity, String address, String coinId) {
+        Intent intent = new Intent(activity, RechargeActivity.class);
+        intent.putExtra("address", address);
+        intent.putExtra("coinId", coinId);
+        activity.startActivity(intent);
+    }
+
+    public void initBundle(){
+        Intent intent = getIntent();
+        content = intent.getStringExtra("address");
+        coinId = intent.getStringExtra("coinId");
+    }
+
     @BindView(R.id.recharge_image)
     ImageView mImage;
-    @BindView(R.id.recharge_code)
-    TextView mCode;
+    @BindView(R.id.recharge_my_address)
+    TextView mAddress;
     @BindView(R.id.recharge_recycler)
     RecyclerView mRecycler;
     @BindView(R.id.main_not_data)
@@ -55,7 +71,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
     private String content;
     private int page = ConfigClass.PAGE_DEFAULT;
     private RechargeRecordAdapter mAdapter;
-    private List<RechargeRecordBean> mList = new ArrayList<>();
+    private List<RecordRechargeBean> mList = new ArrayList<>();
 
     @Override
     protected String initTitle() {
@@ -70,12 +86,11 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        content = intent.getStringExtra("address");
-        coinId = intent.getStringExtra("coinId");
+        initBundle();
+
         Bitmap bitmap = ZXingUtil.createQRCode(content, (int) getResources().getDimension(R.dimen.zxCode_size));
         mImage.setImageBitmap(bitmap);
-        mCode.setText(content);
+        mAddress.setText(StringUtil.getAddress(content));
 
         mAdapter = new RechargeRecordAdapter(mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -119,10 +134,10 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
         Api.getInstance().getRechargeRecordList(userId, coinId, page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<RechargeRecordBean>>(this) {
+                .subscribe(new ApiCallback<List<RecordRechargeBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<RechargeRecordBean>> bean) {
+                    public void onSuccess(BaseBean<List<RecordRechargeBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -130,7 +145,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
                             return;
                         }
 
-                        List<RechargeRecordBean> list = bean.getData();
+                        List<RecordRechargeBean> list = bean.getData();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);

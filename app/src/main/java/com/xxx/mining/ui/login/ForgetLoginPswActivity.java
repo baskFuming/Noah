@@ -8,11 +8,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
@@ -51,7 +49,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
     @BindView(R.id.forget_login_psw_password_again_eye)
     CheckBox mPasswordAgainEye;
 
-    private LoadingDialog mLoadingDialog;
+    private DownTimeUtil mDownTimeUtil;
 
     @Override
     protected int getLayoutId() {
@@ -60,11 +58,11 @@ public class ForgetLoginPswActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
+        mDownTimeUtil = DownTimeUtil.getInstance();
     }
 
 
-    @OnClick({R.id.forget_login_psw_return,R.id.forget_login_psw_selector_phone, R.id.forget_login_psw_send_sms_code, R.id.forget_login_psw_btn, R.id.forget_login_psw_password_eye, R.id.forget_login_psw_password_again_eye})
+    @OnClick({R.id.forget_login_psw_return, R.id.forget_login_psw_selector_phone, R.id.forget_login_psw_send_sms_code, R.id.forget_login_psw_btn, R.id.forget_login_psw_password_eye, R.id.forget_login_psw_password_again_eye})
     public void OnClick(View view) {
         KeyBoardUtil.closeKeyBord(this, mAccountEdit);
         switch (view.getId()) {
@@ -99,6 +97,14 @@ public class ForgetLoginPswActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        if (mDownTimeUtil != null) {
+            mDownTimeUtil.closeDownTime();
+        }
+        super.onDestroy();
+    }
+
     /**
      * @Model 发送忘记密码短信验证码
      */
@@ -108,7 +114,12 @@ public class ForgetLoginPswActivity extends BaseActivity {
             ToastUtil.showToast(R.string.forget_login_psw_error_1);
             return;
         }
-        Api.getInstance().sendForgetSMSCode(account,"null","null","null")
+        if (!account.matches(ConfigClass.MATCHES_PHONE)) {
+            ToastUtil.showToast(R.string.forget_login_psw_error_4);
+            showEditError(mAccountEdit);
+            return;
+        }
+        Api.getInstance().sendForgetSMSCode(account, "null", "null", "null")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
@@ -116,16 +127,18 @@ public class ForgetLoginPswActivity extends BaseActivity {
                     @Override
                     public void onSuccess(BaseBean<Object> bean) {
                         ToastUtil.showToast(bean.getMessage());
-                        DownTimeUtil.getInstance().openDownTime(ConfigClass.SMS_CODE_DOWN_TIME, new DownTimeUtil.Callback() {
+                        mDownTimeUtil.openDownTime(ConfigClass.SMS_CODE_DOWN_TIME, new DownTimeUtil.Callback() {
                             @SuppressLint("SetTextI18n")
                             @Override
                             public void run(int nowTime) {
-                                mSendSMSCode.setText(nowTime + "s");
+                                if (mSendSMSCode != null)
+                                    mSendSMSCode.setText(nowTime + "s");
                             }
 
                             @Override
                             public void end() {
-                                mSendSMSCode.setText(getString(R.string.forget_login_psw_send_sms_code));
+                                if (mSendSMSCode != null)
+                                    mSendSMSCode.setText(getString(R.string.forget_login_psw_send_sms_code));
                             }
                         });
                     }
@@ -138,19 +151,13 @@ public class ForgetLoginPswActivity extends BaseActivity {
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(ForgetLoginPswActivity.this);
-                            mLoadingDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }
@@ -167,26 +174,37 @@ public class ForgetLoginPswActivity extends BaseActivity {
 
         if (account.isEmpty()) {
             ToastUtil.showToast(R.string.forget_login_psw_error_1);
+            showEditError(mAccountEdit);
+            return;
+        }
+        if (!account.matches(ConfigClass.MATCHES_PHONE)) {
+            ToastUtil.showToast(R.string.forget_login_psw_error_4);
+            showEditError(mSMSCodeEdit);
             return;
         }
         if (smsCode.isEmpty()) {
             ToastUtil.showToast(R.string.forget_login_psw_error_2);
-            return;
-        }
-        if (password.isEmpty()) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_3);
-            return;
-        }
-        if (!password.equals(passwordAgain)) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_7);
+            showEditError(mSMSCodeEdit);
             return;
         }
         if (!smsCode.matches(ConfigClass.MATCHES_SMS_CODE)) {
             ToastUtil.showToast(R.string.forget_login_psw_error_5);
+            showEditError(mPasswordEdit);
+            return;
+        }
+        if (password.isEmpty()) {
+            ToastUtil.showToast(R.string.forget_login_psw_error_3);
+            showEditError(mPasswordEdit);
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_PASSWORD)) {
             ToastUtil.showToast(R.string.forget_login_psw_error_6);
+            showEditError(mPasswordEdit);
+            return;
+        }
+        if (!password.equals(passwordAgain)) {
+            ToastUtil.showToast(R.string.forget_login_psw_error_7);
+            showEditError(mPasswordEdit, mPasswordAgainEdit);
             return;
         }
 
@@ -212,19 +230,13 @@ public class ForgetLoginPswActivity extends BaseActivity {
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(ForgetLoginPswActivity.this);
-                            mLoadingDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }

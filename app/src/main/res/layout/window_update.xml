@@ -15,19 +15,15 @@
         android:textSize="17dp"
         tools:ignore="dpUsage" />
 
-    <TextView
+    <Button
         android:id="@+id/window_update_true"
+        style="@style/MainButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="34dp"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="25dp"
-        android:gravity="center"
-        android:text="@string/update_btn"
-        android:textColor="@color/colorText"
-        android:background="@drawable/shape_back_btn_small_1l"
-        android:textSize="14dp"
-        android:textStyle="bold"/>
+        android:text="@string/update_btn" />
 
 </LinearLayout>

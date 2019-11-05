@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000B08"
     android:orientation="vertical"
-    tools:context=".ui.my.activity.ModifyPayPswActivity">
+    tools:context=".ui.my.activity.psw.ModifyPayPswActivity">
 
     <include layout="@layout/include_title_bar" />
 
@@ -20,21 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
+            android:background="#E5E5E5" />
 
         <EditText
             android:id="@+id/modify_pay_psw_sms_code_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/MainEditStyle"
             android:background="@null"
-            android:gravity="center_vertical"
             android:hint="@string/modify_pay_psw_hint_sms_code"
             android:inputType="phone"
-            android:maxLength="6"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
+            android:maxLength="6" />
 
         <TextView
             android:id="@+id/modify_pay_psw_send_sms_code"
@@ -42,10 +35,9 @@
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/shape_send_sms_code"
             android:gravity="center"
             android:text="@string/modify_pay_psw_send_sms_code"
-            android:textColor="@color/colorText"
+            android:textColor="#3B76BD"
             android:textSize="12dp" />
 
     </RelativeLayout>
@@ -61,22 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
+            android:background="#E5E5E5" />
 
         <EditText
             android:id="@+id/modify_pay_psw_password_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/MainEditStyle"
             android:background="@null"
             android:digits="@string/password"
-            android:gravity="center_vertical"
             android:hint="@string/modify_pay_psw_hint_password"
             android:inputType="textPassword"
-            android:maxLength="20"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
+            android:maxLength="20" />
 
         <CheckBox
             android:id="@+id/modify_pay_psw_password_eye"
@@ -85,6 +71,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="16dp"
+            android:layout_marginRight="10dp"
             android:button="@drawable/selector_password" />
 
     </RelativeLayout>
@@ -100,22 +87,16 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:background="#D3DFEF" />
+            android:background="#E5E5E5" />
 
         <EditText
             android:id="@+id/modify_pay_psw_password_again_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/MainEditStyle"
             android:background="@null"
             android:digits="@string/password"
-            android:gravity="center_vertical"
             android:hint="@string/modify_pay_psw_hint_password_again"
             android:inputType="textPassword"
-            android:maxLength="20"
-            android:paddingLeft="10dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
-            android:textSize="@dimen/text_size" />
+            android:maxLength="20" />
 
         <CheckBox
             android:id="@+id/modify_pay_psw_password_again_eye"
@@ -124,20 +105,17 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginBottom="16dp"
+            android:layout_marginRight="10dp"
             android:button="@drawable/selector_password" />
 
     </RelativeLayout>
 
-    <TextView
+    <Button
         android:id="@+id/modify_pay_psw_btn"
+        style="@style/LoginButtonStyle"
         android:layout_width="330dp"
         android:layout_height="44dp"
-        android:layout_gravity="center"
         android:layout_marginTop="44dp"
-        android:background="@drawable/shape_back_btn_login"
-        android:gravity="center"
-        android:text="@string/modify_pay_psw_btn"
-        android:textColor="@color/colorText"
-        android:textSize="18dp" />
+        android:text="@string/modify_pay_psw_btn" />
 
 </LinearLayout>

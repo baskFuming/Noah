@@ -8,27 +8,21 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xxx.mining.R;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.base.fragment.BaseFragment;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.DoExceptionBean;
 import com.xxx.mining.model.http.bean.WalletBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.utils.ApiType;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.wallet.activity.DepositActivity;
 import com.xxx.mining.ui.wallet.activity.RechargeActivity;
 import com.xxx.mining.ui.wallet.activity.WithdrawalActivity;
 import com.xxx.mining.ui.wallet.adapter.WalletAdapter;
-import com.xxx.mining.ui.wallet.window.WalletExchangeWindow;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -44,7 +38,7 @@ import io.reactivex.schedulers.Schedulers;
  * @Page 钱包布局
  * @Author xxx
  */
-public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemChildClickListener, WalletExchangeWindow.Callback {
+public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.OnItemChildClickListener {
 
     @BindView(R.id.main_wallet_recycler)
     RecyclerView mRecycler;
@@ -52,15 +46,12 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
     LinearLayout mNotData;
     @BindView(R.id.main_wallet_refresh)
     SwipeRefreshLayout mRefresh;
-    @BindView(R.id.main_wallet_total_asset)
+
+    @BindView(R.id.main_wallet_total)
     TextView mTotalAsset;
-    @BindView(R.id.main_wallet_available_asset)
-    TextView mAvailableAsset;
 
     private WalletAdapter mAdapter;
     private List<WalletBean.TmpWalletExtBean> mList = new ArrayList<>();
-    private LoadingDialog mLoadingDialog;
-    private WalletExchangeWindow mExchangerWindow;
 
     @Override
     protected int getLayoutId() {
@@ -74,6 +65,7 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
         mAdapter.setOnItemChildClickListener(this);
+
         loadData(true);
     }
 
@@ -82,41 +74,14 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
         WalletBean.TmpWalletExtBean bean = mList.get(position);
         switch (view.getId()) {
             case R.id.item_wallet_recharge:
-                Intent intent = new Intent(getContext(), RechargeActivity.class);
-                intent.putExtra("coinId", bean.getCoinId());
-                intent.putExtra("address", bean.getAddress());
-                startActivity(intent);
+                RechargeActivity.actionStart(getActivity(), bean.getAddress(), bean.getCoinId());
                 break;
             case R.id.item_wallet_withdrawal:
-                Intent intent1 = new Intent(getContext(), WithdrawalActivity.class);
-                intent1.putExtra("coinId", bean.getCoinId());
-                intent1.putExtra("balance", bean.getBalance());
-                intent1.putExtra("fee", bean.getFee());
-                startActivity(intent1);
-                break;
-            case R.id.item_wallet_exchange:
-                if (mList.get(position).getSupportExchange() == ApiType.OPEN_EXCHANGE_TYPE) {
-                    if (mExchangerWindow == null || !mExchangerWindow.isShowing()) {
-                        mExchangerWindow = WalletExchangeWindow.getInstance(getActivity());
-                        mExchangerWindow.setCallback(this);
-                        mExchangerWindow.setCoinId(bean.getCoinId());
-                        mExchangerWindow.setBalance(bean.getBalance());
-                        mExchangerWindow.show();
-                    }
-                } else {
-//                    Toast.makeText(getContext(), getString(R.string.main_app_not_1), Toast.LENGTH_SHORT).show();
-                }
+                WithdrawalActivity.actionStart(getActivity(), bean.getBalance(), bean.getFee(), bean.getCoinId());
                 break;
             case R.id.item_wallet_deposit:
                 if (mList.get(position).getSupportFinanc() == ApiType.OPEN_FINANC_TYPE) {
-                    Intent intent2 = new Intent(getContext(), DepositActivity.class);
-                    intent2.putExtra("coinId", bean.getCoinId());
-                    intent2.putExtra("inBalance", bean.getBalance());
-                    intent2.putExtra("outBalance", bean.getFinancingCnt());
-                    startActivity(intent2);
-                } else {
-//                    ToastUtil.showToast(getString(R.string.main_app_not_1));
-//                    Toast.makeText(getContext(), getString(R.string.main_app_not_1), Toast.LENGTH_SHORT).show();
+                    DepositActivity.actionStart(getActivity(), bean.getFinancingCnt(), bean.getFinancingCnt(), bean.getCoinId());
                 }
                 break;
         }
@@ -125,11 +90,6 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
     @Override
     public void onRefresh() {
         loadData(true);
-    }
-
-    @Override
-    public void callback(String coinId, double value) {
-        exchanger(coinId, value);
     }
 
     @Override
@@ -156,7 +116,6 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
                             WalletBean data = bean.getData();
                             if (data != null) {
                                 mTotalAsset.setText("$" + new BigDecimal(data.getAllAsset()).setScale(2, RoundingMode.DOWN).toPlainString());
-                                mAvailableAsset.setText("$" + new BigDecimal(data.getAllAvailableAsset()).setScale(2, RoundingMode.DOWN).toPlainString());
                                 List<WalletBean.TmpWalletExtBean> list = data.getTmpWalletExt();
                                 if (list == null || list.size() == 0) {
                                     mNotData.setVisibility(View.VISIBLE);
@@ -191,56 +150,6 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
                         super.onEnd();
                         if (mRefresh != null) {
                             mRefresh.setRefreshing(false);
-                        }
-                    }
-                });
-    }
-
-    /**
-     * @Model 兑换
-     */
-    private void exchanger(String coinId, double value) {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().exchange(userId, coinId, value)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<DoExceptionBean>(getActivity()) {
-
-                    @Override
-                    public void onSuccess(BaseBean<DoExceptionBean> bean) {
-                        if (bean != null) {
-                            ToastUtil.showToast(bean.getMessage());
-                            DoExceptionBean data = bean.getData();
-                            if (data != null && mExchangerWindow != null) {
-                                if (data.isResult()) {
-                                    mExchangerWindow.dismiss();
-                                    mExchangerWindow = null;
-                                    loadData(false);
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(int errorCode, String errorMessage) {
-                        ToastUtil.showToast(errorMessage);
-                    }
-
-                    @Override
-                    public void onStart(Disposable d) {
-                        super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(getContext());
-                            mLoadingDialog.show();
-                        }
-                    }
-
-                    @Override
-                    public void onEnd() {
-                        super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
                         }
                     }
                 });

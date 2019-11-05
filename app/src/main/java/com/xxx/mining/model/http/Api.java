@@ -1,8 +1,8 @@
 package com.xxx.mining.model.http;
 
-import com.xxx.mining.base.App;
-import com.xxx.mining.ConfigClass;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.xxx.mining.ConfigClass;
+import com.xxx.mining.base.App;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;

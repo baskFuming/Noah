@@ -1,30 +1,25 @@
 package com.xxx.mining.ui.my.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.blankj.utilcode.util.ToastUtils;
-import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.AppVersionBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.LocalManageUtil;
 import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.main.UpdateWindow;
 import com.xxx.mining.ui.login.LoginActivity;
+import com.xxx.mining.ui.main.UpdateWindow;
+import com.xxx.mining.ui.my.activity.psw.PasswordSettingActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -35,13 +30,15 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class AccountSettingActivity extends BaseTitleActivity {
 
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, AccountSettingActivity.class);
+        activity.startActivity(intent);
+    }
+
     @BindView(R.id.account_setting_version_code)
     TextView mVersionCode;
-    @BindView(R.id.account_setting_switch_language_code)
-    TextView mLanguageCode;
 
     private String versionName;
-    private LoadingDialog mLoadDialog;
 
     @Override
     protected String initTitle() {
@@ -57,32 +54,16 @@ public class AccountSettingActivity extends BaseTitleActivity {
     protected void initData() {
         versionName = SystemUtil.getVersionName(this);
         mVersionCode.setText(versionName);
-
-        String languageCode = SharedPreferencesUtil.getInstance().getString(SharedConst.CONSTANT_LAUNCHER);
-        switch (languageCode) {
-            case LocalManageUtil.LANGUAGE_CN:
-                mLanguageCode.setText(getString(R.string.language_simple_zh));
-                break;
-            case LocalManageUtil.LANGUAGE_US:
-                mLanguageCode.setText(getString(R.string.language_en));
-                break;
-            default:
-                mLanguageCode.setText(getString(R.string.language_simple_zh));
-                break;
-        }
     }
 
-    @OnClick({R.id.account_setting_set_password, R.id.account_setting_use_help, R.id.account_setting_switch_language, R.id.account_setting_check_version, R.id.account_setting_out_login})
+    @OnClick({R.id.account_setting_set_password, R.id.account_setting_address_manager, R.id.account_setting_check_version, R.id.account_setting_out_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.account_setting_set_password:
                 startActivity(new Intent(AccountSettingActivity.this, PasswordSettingActivity.class));
                 break;
-            case R.id.account_setting_use_help:
-                startActivity(new Intent(AccountSettingActivity.this, UseHelpActivity.class));
-                break;
-            case R.id.account_setting_switch_language:
-                startActivity(new Intent(AccountSettingActivity.this, LanguageActivity.class));
+            case R.id.account_setting_address_manager:
+                startActivity(new Intent(AccountSettingActivity.this, AddressManagerActivity.class));
                 break;
             case R.id.account_setting_check_version:
                 checkAppVersion();
@@ -124,19 +105,13 @@ public class AccountSettingActivity extends BaseTitleActivity {
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadDialog == null) {
-                            mLoadDialog = LoadingDialog.getInstance(AccountSettingActivity.this);
-                            mLoadDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadDialog != null) {
-                            mLoadDialog.dismiss();
-                            mLoadDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }
@@ -168,19 +143,13 @@ public class AccountSettingActivity extends BaseTitleActivity {
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadDialog == null) {
-                            mLoadDialog = LoadingDialog.getInstance(AccountSettingActivity.this);
-                            mLoadDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadDialog != null) {
-                            mLoadDialog.dismiss();
-                            mLoadDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }

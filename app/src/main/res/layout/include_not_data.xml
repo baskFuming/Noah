@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/not_data"
-        android:textColor="@color/colorText"
+        android:textColor="#333333"
         android:textSize="15dp" />
 
 </LinearLayout>

@@ -3,69 +3,25 @@
     android:id="@+id/item_home_back"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_back_item_home">
 
-    <ImageView
-        android:id="@+id/item_home_icon"
-        android:layout_width="44dp"
-        android:layout_height="44dp"
-        android:scaleType="fitXY"
+    <TextView
+        android:id="@+id/item_home_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="17dp" />
+        android:layout_marginLeft="24dp"
+        android:textColor="#EEEEEE"
+        android:textSize="18dp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/item_home_price"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="22dp"
-        android:layout_toRightOf="@id/item_home_icon"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/item_home_name"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorText"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/item_home_simple"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorText"
-            android:textSize="12dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="117dp"
-        android:layout_toRightOf="@id/item_home_icon"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/item_home_usa"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorText"
-            android:textSize="12dp" />
-
-        <TextView
-            android:id="@+id/item_home_cny"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorText"
-            android:textSize="12dp" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/item_home_range"
@@ -73,9 +29,9 @@
         android:layout_height="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="14dp"
         android:gravity="center"
-        android:textColor="@color/colorText"
-        android:textSize="12dp" />
+        android:textColor="#FFFFFF"
+        android:textSize="18dp" />
 
 </RelativeLayout>

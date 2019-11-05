@@ -1,22 +1,14 @@
 package com.xxx.mining.ui.main;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
-import com.google.zxing.ResultPoint;
 import com.gyf.barlibrary.ImmersionBar;
-import com.journeyapps.barcodescanner.BarcodeCallback;
-import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CaptureManager;
 import com.journeyapps.barcodescanner.DecoratedBarcodeView;
 import com.xxx.mining.R;
-
-import java.util.List;
 
 /**
  * @Page 扫一扫页面

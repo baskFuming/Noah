@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000B08"
+
     android:orientation="vertical"
     tools:context="com.xxx.mining.ui.my.activity.LanguageActivity">
 
@@ -13,6 +13,7 @@
         android:id="@+id/language_simple_zh"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
@@ -20,8 +21,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:text="@string/language_simple_zh"
-            android:textColor="@color/colorText"
+            android:textColor="#333333"
             android:textSize="16dp" />
 
         <TextView
@@ -30,8 +32,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:textColor="@color/colorMain"
             android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#22395C93" />
 
     </RelativeLayout>
 
@@ -39,7 +48,7 @@
         android:id="@+id/language_en"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:gravity="center_vertical"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
@@ -47,8 +56,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:text="@string/language_en"
-            android:textColor="@color/colorText"
+            android:textColor="#333333"
             android:textSize="16dp" />
 
         <TextView
@@ -57,8 +67,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:textColor="@color/colorMain"
             android:textSize="20dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="#22395C93" />
 
     </RelativeLayout>
 

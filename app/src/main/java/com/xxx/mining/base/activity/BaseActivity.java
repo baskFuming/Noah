@@ -2,10 +2,11 @@ package com.xxx.mining.base.activity;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.xxx.mining.model.utils.PermissionUtil;
+import com.xxx.mining.base.dialog.LoadingDialog;
+import com.xxx.mining.model.utils.EditTextShakeHelper;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -15,33 +16,35 @@ public abstract class BaseActivity extends BaseLanguageActivity {
     private ImmersionBar mImmersionBar;
     private boolean isShowData;  //用于绑定Activity与网络请求的生命周期是否可以加载数据
     private Unbinder unbinder;
+    private EditTextShakeHelper editTextShakeHelper;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
 
-        unbinder = ButterKnife.bind(this);
-        //可以加载数据
-        isShowData = true;
-
         //添加到AppManager中
         ActivityManager.getInstance().addActivity(this);
 
         //初始化ButterKnife
-        ButterKnife.bind(this);
+        unbinder = ButterKnife.bind(this);
+
+        //可以加载数据
+        isShowData = true;
 
         //沉浸式状态栏
         mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.init();
 
+        //初始化输入框错误抖动
+        editTextShakeHelper = new EditTextShakeHelper(this);
+
         //禁止横屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //      修改状态栏字体颜色
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-//        }
+        //初始化弹框
+        mLoadingDialog = LoadingDialog.getInstance(this);
 
         //初始化数据
         initData();
@@ -58,10 +61,38 @@ public abstract class BaseActivity extends BaseLanguageActivity {
         ActivityManager.getInstance().finishActivity(this);
     }
 
+    public void showLoading() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.show();
+        }
+    }
+
+    public void hideLoading() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+    }
+
+    public void showEditError(View... views) {
+        if (editTextShakeHelper != null) {
+            editTextShakeHelper.shake(views);
+        }
+    }
+
     @Override
     protected void onDestroy() {
         isShowData = false;
-        if (mImmersionBar != null) mImmersionBar.destroy();
+        if (mImmersionBar != null) {
+            mImmersionBar.destroy();
+            mImmersionBar = null;
+        }
+        if (editTextShakeHelper != null) {
+            editTextShakeHelper = null;
+        }
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+            mLoadingDialog = null;
+        }
         if (unbinder != null) {
             unbinder.unbind();
             unbinder = null;

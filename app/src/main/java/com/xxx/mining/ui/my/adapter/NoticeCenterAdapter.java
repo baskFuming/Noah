@@ -6,7 +6,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
-import com.xxx.mining.model.utils.StringUtil;
 
 import java.util.List;
 

@@ -13,17 +13,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.zxing.client.android.Intents;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.WithdrawalRecordBean;
+import com.xxx.mining.model.http.bean.RecordWithdrawalBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.utils.ApiCode;
 import com.xxx.mining.model.sp.SharedConst;
@@ -32,7 +30,7 @@ import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.PermissionUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.main.SweepActivity;
-import com.xxx.mining.ui.my.activity.SettingPayPswActivity;
+import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.wallet.adapter.WithdrawalRecordAdapter;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
 
@@ -50,6 +48,21 @@ import io.reactivex.schedulers.Schedulers;
  * @Author xxx
  */
 public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, PasswordWindow.Callback {
+
+    public static void actionStart(Activity activity, double balance, double fee, String coinId) {
+        Intent intent = new Intent(activity, WithdrawalActivity.class);
+        intent.putExtra("balance", balance);
+        intent.putExtra("fee", fee);
+        intent.putExtra("coinId", coinId);
+        activity.startActivity(intent);
+    }
+
+    public void initBundle() {
+        Intent intent = getIntent();
+        balance = intent.getDoubleExtra("balance", 0.0);
+        fee = intent.getDoubleExtra("fee", 0.0);
+        coinId = getIntent().getStringExtra("coinId");
+    }
 
     @BindView(R.id.main_not_data)
     LinearLayout mNotData;
@@ -73,8 +86,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
     private double fee;
     private int page = ConfigClass.PAGE_DEFAULT;
     private WithdrawalRecordAdapter mAdapter;
-    private List<WithdrawalRecordBean> mList = new ArrayList<>();
-    private LoadingDialog mLoadingDialog;
+    private List<RecordWithdrawalBean> mList = new ArrayList<>();
     private PasswordWindow mPasswordWindow;
     private String code = "中国";    //默认是中国 +86
 
@@ -93,10 +105,8 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        balance = intent.getDoubleExtra("balance", 0.0);
-        fee = intent.getDoubleExtra("fee", 0.0);
-        coinId = getIntent().getStringExtra("coinId");
+        initBundle();
+
         mBalance.setText(String.valueOf(balance));
         mFee.setText(getString(R.string.withdrawal_fee) + fee + coinId);
 
@@ -128,6 +138,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                 break;
         }
     }
+
     @Override
     public void finish() {
         KeyBoardUtil.closeKeyBord(this, mAddress);
@@ -176,10 +187,10 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
         Api.getInstance().getWithdrawalRecordList(userId, coinId, page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<WithdrawalRecordBean>>(this) {
+                .subscribe(new ApiCallback<List<RecordWithdrawalBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<WithdrawalRecordBean>> bean) {
+                    public void onSuccess(BaseBean<List<RecordWithdrawalBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -187,7 +198,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                             return;
                         }
 
-                        List<WithdrawalRecordBean> list = bean.getData();
+                        List<RecordWithdrawalBean> list = bean.getData();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -268,7 +279,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
     }
 
     @Override
-    public void callback(String password,String code) {
+    public void callback(String password, String code) {
         if (password.isEmpty()) {
             ToastUtil.showToast(R.string.withdrawal_error_5);
             return;
@@ -277,14 +288,15 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
             ToastUtil.showToast(R.string.forget_login_psw_error_2);
             return;
         }
-        withdrawal(password,code);
+        withdrawal(password, code);
     }
+
     /**
      * @Model 提现
      */
-    private void withdrawal(String password,String code) {
+    private void withdrawal(String password, String code) {
         String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().withdrawal(userId, coinId, fee, amount, address, password,code)
+        Api.getInstance().withdrawal(userId, coinId, fee, amount, address, password, code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
@@ -315,19 +327,13 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(WithdrawalActivity.this);
-                            mLoadingDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }

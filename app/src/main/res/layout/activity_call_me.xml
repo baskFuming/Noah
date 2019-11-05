@@ -3,92 +3,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000B08"
     android:orientation="vertical"
     tools:context="com.xxx.mining.ui.my.activity.CallMeActivity">
 
     <include layout="@layout/include_title_bar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/shape_back_view"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/call_me_facebook_code"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="25dp"
-            android:background="@color/colorText"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
-            android:layout_marginTop="19dp"
-            android:text="@string/call_my_facebook"
-            android:textColor="@color/colorText"
-            android:textSize="15dp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/call_me_facebook_save"
-            android:layout_width="289dp"
-            android:layout_height="44dp"
-            android:layout_marginBottom="22dp"
-            android:background="@drawable/shape_back_btn_small"
-            android:gravity="center"
-            android:text="@string/call_my_save"
-            android:textColor="@color/colorText"
-            android:textSize="18dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_back_call_me"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/call_me_facebook_code"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@mipmap/facebook_code" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/shape_back_view"
-        android:gravity="center"
-        android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="22dp"
+                    android:layout_marginTop="19dp"
+                    android:text="@string/call_my_facebook"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
 
-        <ImageView
-            android:id="@+id/call_me_we_chat_code"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginTop="25dp"
-            android:background="@color/colorText"
-            android:padding="10dp"
-            android:src="@mipmap/ic_launcher" />
+                <Button
+                    android:id="@+id/call_me_facebook_save"
+                    style="@style/MainButtonStyle"
+                    android:layout_width="289dp"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="22dp"
+                    android:text="@string/call_my_save" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="22dp"
-            android:layout_marginTop="19dp"
-            android:text="@string/call_my_twitter"
-            android:textColor="@color/colorText"
-            android:textSize="15dp" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/call_me_we_chat_save"
-            android:layout_width="289dp"
-            android:layout_height="44dp"
-            android:layout_marginBottom="22dp"
-            android:background="@drawable/shape_back_btn_small"
-            android:gravity="center"
-            android:text="@string/call_my_save"
-            android:textColor="@color/colorText"
-            android:textSize="18dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/shape_back_call_me"
+                android:gravity="center"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/call_me_we_chat_code"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="25dp"
+                    android:src="@mipmap/we_chat_code" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="22dp"
+                    android:layout_marginTop="19dp"
+                    android:text="@string/call_my_twitter"
+                    android:textColor="#333333"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/call_me_we_chat_save"
+                    style="@style/MainButtonStyle"
+                    android:layout_width="289dp"
+                    android:layout_height="44dp"
+                    android:layout_marginBottom="22dp"
+                    android:text="@string/call_my_save" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

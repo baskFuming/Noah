@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_home_back"
+    android:layout_width="match_parent"
+    android:layout_height="116dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_back_item">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="97dp"
+        android:layout_height="82dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:src="@mipmap/item_shop_mining" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/imageView1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_shop_mining_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="静态矿机"
+            android:textColor="#333333"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/item_shop_mining_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="无动态权益,dwtt购买，数量不限"
+            android:textColor="#9FB0BD"
+            android:textSize="11dp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="13dp"
+        android:layout_toRightOf="@id/imageView1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/item_shop_mining_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#FF0000"
+            android:textSize="13dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="6dp"
+            android:layout_toRightOf="@id/item_shop_mining_price"
+            android:text="DWTT"
+            android:textColor="#FF0000"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/item_shop_mining_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/selector_item_shop_btn"
+            android:gravity="center"
+            android:paddingEnd="12dp"
+            android:paddingStart="12dp"
+            android:text="@string/shop_mining_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -3,8 +3,7 @@ package com.xxx.mining.model.utils;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.xxx.mining.model.http.bean.HomeBannerBean;
+import com.xxx.mining.model.http.bean.BannerBean;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public class BannerUtil {
 
-    public static void init(Banner banner, List<HomeBannerBean> list, OnBannerListener onBannerListener) {
+    public static void init(Banner banner, List<BannerBean> list, OnBannerListener onBannerListener) {
         List<String> title = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             title.add("");
@@ -52,7 +51,7 @@ public class BannerUtil {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            GlideUtil.loadFillet(context, ((HomeBannerBean) path).getUrl(), imageView);
+            GlideUtil.loadFillet(context, ((BannerBean) path).getUrl(), imageView);
         }
     }
 }

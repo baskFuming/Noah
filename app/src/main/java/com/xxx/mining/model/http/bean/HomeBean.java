@@ -35,15 +35,7 @@ public class HomeBean {
     }
 
     public String getCoinChineseName() {
-        return coinChineseName  == null ? coinEnglishName : coinChineseName;
-    }
-
-    public String getCoinQuotesName() {
-        return coinQuotesName;
-    }
-
-    public String getCoinPriceRmb() {
-        return "￥" + StringUtil.getUS(coinPriceRmb);
+        return coinSymbol;
     }
 
     public String getCoinPriceUsdt() {

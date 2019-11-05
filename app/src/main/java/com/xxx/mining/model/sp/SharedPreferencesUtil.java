@@ -3,20 +3,22 @@ package com.xxx.mining.model.sp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.blankj.utilcode.util.SPUtils;
+import com.xxx.mining.BuildConfig;
 import com.xxx.mining.base.App;
-import com.xxx.mining.ConfigClass;
+import com.xxx.mining.model.utils.SystemUtil;
 
 public class SharedPreferencesUtil {
 
     private static final Object SYC = new Object();
+
+    private static final String SP_KEY = SystemUtil.getSerialNumber();   //SP加密key
 
     private static SharedPreferencesUtil sharedPreferencesUtils;
 
     private SharedPreferences sharedPreferences;
 
     private SharedPreferencesUtil() {
-        sharedPreferences = App.getContext().getSharedPreferences(ConfigClass.SP_NAME, Context.MODE_PRIVATE);
+        sharedPreferences = App.getContext().getSharedPreferences(BuildConfig.APPLICATION_ID + "_sp", Context.MODE_PRIVATE);
     }
 
     public static SharedPreferencesUtil getInstance() {
@@ -35,7 +37,7 @@ public class SharedPreferencesUtil {
      * 保存
      */
     public void saveEncryptString(String tag, String content) {
-        saveString(tag, SpEncryption.getInstance().encryptString(content, ConfigClass.SP_KEY));
+        saveString(tag, SpEncryption.getInstance().encryptString(content, SP_KEY));
     }
 
     public void saveString(String tag, String content) {
@@ -54,7 +56,7 @@ public class SharedPreferencesUtil {
      * 获取
      */
     public String getDecryptionString(String tag) {
-        return SpEncryption.getInstance().decryptString(getString(tag), ConfigClass.SP_KEY);
+        return SpEncryption.getInstance().decryptString(getString(tag), SP_KEY);
     }
 
     public String getString(String tag) {

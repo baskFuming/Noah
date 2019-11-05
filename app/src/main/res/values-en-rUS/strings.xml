@@ -85,14 +85,6 @@
     <string name="profit_record_achievement">Community performance</string>
     <string name="profit_record_share">Share revenue</string>
     <string name="profit_record_coin">Financial Benefits</string>
-    <string name="release_total_quit">Static eleased</string>
-    <string name="release_total_open">Share Released</string>
-
-    <string name="achievement_record_title">Sharing performance</string>
-    <string name="achievement_record_total">Total performance（CT）</string>
-    <string name="achievement_record_rank">Performance(CT)</string>
-    <string name="achievement_record_total_text">Total number</string>
-    <string name="achievement_record_number">Algebra</string>
 
     <string name="deposit_profit_title">Financial Benefits</string>
     <string name="deposit_profit_asset">Total amount ($)</string>

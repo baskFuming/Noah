@@ -19,15 +19,11 @@ public class WalletAdapter extends BaseQuickAdapter<WalletBean.TmpWalletExtBean,
 
     @Override
     protected void convert(BaseViewHolder helper, WalletBean.TmpWalletExtBean item) {
-        helper.setText(R.id.item_wallet_available, item.getBalanceStr())
-                .setText(R.id.item_wallet_frozen, item.getFrozenBalanceStr())
+        helper.setText(R.id.item_wallet_available, mContext.getString(R.string.item_wallet_available) + item.getBalanceStr())
+                .setText(R.id.item_wallet_frozen, mContext.getString(R.string.item_wallet_frozen) + item.getFrozenBalanceStr())
                 .setText(R.id.item_wallet_name, item.getCoinId())
                 .addOnClickListener(R.id.item_wallet_recharge)
                 .addOnClickListener(R.id.item_wallet_withdrawal)
-                .addOnClickListener(R.id.item_wallet_exchange)
                 .addOnClickListener(R.id.item_wallet_deposit);
-
-        GlideUtil.loadBase(mContext, item.getCoinLogo(), (ImageView) helper.getView(R.id.item_wallet_icon));
-
     }
 }

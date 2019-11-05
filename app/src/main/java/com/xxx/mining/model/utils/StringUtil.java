@@ -15,6 +15,8 @@ import java.util.Date;
  */
 public class StringUtil {
 
+    private static int address;
+
     /**
      * 手机号脱敏
      */
@@ -82,4 +84,12 @@ public class StringUtil {
         return new BigDecimal(String.valueOf(money)).setScale(2, RoundingMode.DOWN).stripTrailingZeros().toPlainString();
     }
 
+    public static String getAddress(String address) {
+        if (address != null && address.trim().length() >= 42) {
+            StringBuilder sb = new StringBuilder(address.trim());
+            sb.replace(10, 32, "***");
+            return sb.toString();
+        }
+        return address;
+    }
 }

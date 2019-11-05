@@ -15,8 +15,10 @@
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 读取相机 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 读取相册 -->
 
-    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />    <!-- 杀死程序权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
+    <!-- 杀死程序权限 -->
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -27,6 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".ui.main.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -66,8 +69,6 @@
         <activity android:name=".ui.login.ForgetLoginPswActivity" />
         <activity android:name=".ui.login.RegisterActivity" />
         <activity android:name=".ui.login.SelectCountyActivity" />
-        <activity android:name=".ui.home.activity.NodeGameActivity" />
-        <activity android:name=".ui.home.activity.NodeGameRuleActivity" />
         <activity
             android:name=".ui.wallet.activity.WithdrawalActivity"
             android:configChanges="screenSize|keyboardHidden|orientation" />
@@ -79,21 +80,30 @@
         <activity android:name=".ui.my.activity.AccountSettingActivity" />
         <activity android:name=".ui.my.activity.FeedBackActivity" />
         <activity android:name=".ui.my.activity.NoticeCenterActivity" />
-        <activity android:name=".ui.my.activity.ProfitRecordActivity" />
-        <activity android:name=".ui.my.activity.DepositProfitActivity" />
-        <activity android:name=".ui.my.activity.ShareRecordActivity" />
-        <activity android:name=".ui.my.activity.AchievementRecordItemActivity" />
-        <activity android:name=".ui.my.activity.PasswordSettingActivity" />
+        <activity android:name=".ui.my.activity.record.RecordAllActivity" />
+        <activity android:name=".ui.my.activity.record.RecordGiftActivity" />
+        <activity android:name=".ui.my.activity.record.RecordDepositActivity" />
+        <activity android:name=".ui.my.activity.MyNodeItemActivity" />
+        <activity android:name=".ui.my.activity.psw.PasswordSettingActivity" />
         <activity android:name=".ui.my.activity.UseHelpActivity" />
-        <activity android:name=".ui.my.activity.ModifyPayPswActivity" />
-        <activity android:name=".ui.my.activity.ModifyLoginPswActivity" />
-        <activity android:name=".ui.my.activity.SettingPayPswActivity" />
-        <activity android:name=".ui.my.activity.ReleaseRecordActivity" />
+        <activity android:name=".ui.my.activity.psw.ModifyPayPswActivity" />
+        <activity android:name=".ui.my.activity.psw.ModifyLoginPswActivity" />
+        <activity android:name=".ui.my.activity.psw.SettingPayPswActivity" />
         <activity android:name=".ui.my.activity.LanguageActivity" />
-        <activity android:name=".ui.my.activity.AchievementRecordActivity" />
+        <activity android:name=".ui.my.activity.record.RecordTeamActivity" />
         <activity android:name=".ui.wallet.activity.DepositRecordActivity" />
         <activity android:name=".ui.my.activity.CallMeActivity" />
-        <activity android:name=".ui.my.activity.ConversionProfitActivity" />
+        <activity android:name=".ui.my.activity.record.RecordMiningActivity" />
+        <activity android:name=".ui.my.activity.AddressManagerActivity" />
+        <activity android:name=".ui.my.activity.MyOrderActivity" />
+        <activity android:name=".ui.my.activity.MyMiningActivity" />
+        <activity android:name=".ui.my.activity.MyNodeActivity" />
+
+        <activity android:name=".ui.shop.ShopActivity" />
+        <activity android:name=".ui.shop.activity.ShopMiningActivity" />
+        <activity android:name=".ui.shop.activity.ShopMiningPlaceActivity" />
+        <activity android:name=".ui.shop.activity.PlaceSuccessActivity" />
+
     </application>
 
 </manifest>

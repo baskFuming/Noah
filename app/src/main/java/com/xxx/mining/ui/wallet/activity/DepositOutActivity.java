@@ -5,11 +5,9 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
-import com.blankj.utilcode.util.ToastUtils;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
@@ -20,7 +18,7 @@ import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.my.activity.SettingPayPswActivity;
+import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
 
 import java.math.BigDecimal;
@@ -44,7 +42,6 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
     private double value;
     private double balance;
     private String coinId;
-    private LoadingDialog mLoadingDialog;
     private PasswordWindow mPasswordWindow;
 
     @Override
@@ -133,6 +130,7 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
             mPasswordWindow.show();
         }
     }
+
     @Override
     public void callback(String password, String code) {
         if (password.isEmpty()) {
@@ -183,19 +181,13 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mLoadingDialog == null) {
-                            mLoadingDialog = LoadingDialog.getInstance(DepositOutActivity.this);
-                            mLoadingDialog.show();
-                        }
+                        showLoading();
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (mLoadingDialog != null) {
-                            mLoadingDialog.dismiss();
-                            mLoadingDialog = null;
-                        }
+                        hideLoading();
                     }
                 });
     }

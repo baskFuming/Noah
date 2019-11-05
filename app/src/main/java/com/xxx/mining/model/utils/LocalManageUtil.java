@@ -6,10 +6,7 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.os.LocaleList;
 import android.util.DisplayMetrics;
-import android.widget.Toast;
 
-import com.xxx.mining.ConfigClass;
-import com.xxx.mining.base.App;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 
