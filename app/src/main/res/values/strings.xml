@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">Compass</string>
     <string name="app_name_test">Compass(内测)</string>
 
@@ -400,4 +400,48 @@
     <string name="recharge_my_address">我的地址</string>
     <string name="withdrawal_address">收款地址</string>
     <string name="withdrawal_amount">转账金额</string>
+    <string name="conversion_profit_title">转化收益</string>
+    <string name="profit_record_conversion">转化收益</string>
+
+    <string name="profit_record_user">用户名</string>
+    <string name="profit_record_level">等级</string>
+
+    <string name="achievement_record_title">分享业绩</string>
+    <string name="achievement_record_total">总业绩（$）</string>
+    <string name="achievement_record_rank">业绩（$）</string>
+    <string name="achievement_record_total_text">总人数</string>
+    <string name="achievement_record_number">代数</string>
+    <string name="splash_skip">跳过</string>
+    <string name="main_title">Noah Wallet</string>
+    <string name="credit_center">信贷中心</string>
+    <string name="credit_center_information">"\u3000\u3000"信贷中心即信用贷款，是指以借款人的信誉发放的贷款，借款人不需要提供担保。\n
+"\u3000\u3000"其特征就是债务人无需提供抵押品或第三方担保仅凭自己的信誉就能取得贷款，并引以借款人信用程度作为还款保证的。\n
+"\u3000\u3000"债权人（诺亚钱包）会根据借款人在钱包的信息，通过评分卡，规则+策略的大数据模型，对借款人的收益情况进行审核分析，最后确认是否进行放款。待动态节点成熟后会择机开放，敬请期待</string>
+    <string name="mill_record">矿机记录</string>
+    <string name="node_number">节点编号</string>
+    <string name="node_up">竟升节点</string>
+    <string name="node_invite">节点邀请码</string>
+    <string name="latitude">纬度</string>
+    <string name="node_count">节点数</string>
+    <string name="results">业绩（xx）</string>
+    <string name="invite_code">邀请码</string>
+    <string name="mining_title">挖矿</string>
+    <string name="moment_mining">正在挖矿…</string>
+    <string name="cumulative_coin">累计产币</string>
+    <string name="today_coin">今日产币</string>
+    <string name="serial_number">编号</string>
+    <string name="start_time">启动时间</string>
+    <string name="calculate_contribution">算力贡献</string>
+    <string name="today_difficult">今日难度</string>
+    <string name="mention_adress">提币地址记录</string>
+    <string name="wallet_adress">钱包地址</string>
+    <string name="note_message">备注信息</string>
+    <string name="modify_text">修改</string>
+    <string name="delete_text">删除</string>
+    <string name="change_adress">修改地址信息</string>
+    <string name="modify_waleet_adress">修改钱包地址</string>
+    <string name="modify_remark_message">修改备注信息</string>
+    <string name="window_adress_edit_hint">请输入修改钱包地址</string>
+    <string name="window_message_edit_hint">请输入修改备注信息</string>
+
 </resources>

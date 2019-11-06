@@ -24,6 +24,8 @@ import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.home.activity.CreditCenterActivity;
+import com.xxx.mining.ui.home.activity.MoreOtherActivity;
 import com.xxx.mining.ui.home.adapter.HomeAdapter;
 import com.xxx.mining.ui.my.activity.NoticeCenterActivity;
 import com.xxx.mining.ui.shop.ShopActivity;
@@ -96,17 +98,19 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
             case R.id.main_home_shop:
                 ShopActivity.actionStart(getActivity());
                 break;
-            case R.id.main_home_loan:
-                ToastUtil.showToast("敬请期待");
+            case R.id.main_home_loan://信贷
+//                ToastUtil.showToast("敬请期待");
+                CreditCenterActivity.actionStart(getActivity());
                 break;
-            case R.id.main_home_news:
+            case R.id.main_home_news://资讯
                 ToastUtil.showToast("敬请期待");
                 break;
             case R.id.main_home_node:
                 ToastUtil.showToast("敬请期待");
                 break;
-            case R.id.main_home_other:
-                ToastUtil.showToast("敬请期待");
+            case R.id.main_home_other://更多
+//                ToastUtil.showToast("敬请期待");
+                MoreOtherActivity.actionStart(getActivity());
                 break;
         }
     }

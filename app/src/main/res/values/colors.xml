@@ -5,14 +5,14 @@
     <color name="colorAccent">#303F9F</color>
     <color name="colorTransparent">#00000000</color>
 
-    <color name="colorMain">#375880</color>
+    <color name="colorMain">#FF375880</color>
     <color name="colorText">#F6F6F6</color>
 
     <color name="colorMainTrue">#3B76BD</color>
     <color name="colorMainFalse">#999999</color>
 
     <color name="colorBtnTrue">#88375880</color>
-    <color name="colorBtnFalse">#375880</color>
+    <color name="colorBtnFalse">#FF375880</color>
 
     <!-- 字体颜色 -->
     <color name="colorTextColorTitle">#FFFFFF</color>

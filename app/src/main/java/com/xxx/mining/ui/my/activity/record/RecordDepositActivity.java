@@ -42,7 +42,7 @@ public class RecordDepositActivity extends BaseTitleActivity implements SwipeRef
 
     @Override
     protected String initTitle() {
-        return getString(R.string.share_record_title);
+        return getString(R.string.record_all_invite);
     }
 
     @Override

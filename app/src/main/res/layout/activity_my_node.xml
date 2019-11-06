@@ -13,37 +13,107 @@
         <include layout="@layout/include_title_bar" />
 
         <TextView
+            android:id="@+id/mill_record"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:gravity="center"
-            android:text="矿机记录"
+            android:text="@string/mill_record"
             android:textColor="#FFFFFF"
             android:textSize="16dp" />
 
     </RelativeLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:paddingLeft="20dp"
+       android:paddingRight="20dp"
+       android:orientation="vertical">
+       <RelativeLayout
+           android:layout_marginTop="24dp"
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
 
-        <TextView
-            android:text="节点编号"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="16dp" />
+           <TextView
+               android:text="@string/node_number"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textColor="#FF333333"
+               android:textStyle="bold"
+               android:textSize="16dp" />
 
-        <TextView
-            android:text="节点编号"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:textSize="16dp" />
-
-
-    </RelativeLayout>
-
+           <TextView
+               android:id="@+id/node_up"
+               android:background="@drawable/selector_login_btn"
+               android:layout_alignParentRight="true"
+               android:text="@string/node_up"
+               android:layout_width="75dp"
+               android:layout_height="21dp"
+               android:paddingLeft="13dp"
+               android:paddingRight="13dp"
+               android:gravity="center"
+               android:textColor="#FFFFFFFF"
+               android:textSize="12dp" />
+       </RelativeLayout>
+       <RelativeLayout
+           android:paddingRight="20dp"
+           android:paddingLeft="20dp"
+           android:background="@drawable/selector_main_btn"
+           android:layout_width="match_parent"
+           android:layout_height="64dp"
+           android:layout_marginTop="13dp">
+           <TextView
+               android:id="@+id/node_number"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="节点编号XXXXXX"
+               android:textColor="#fff6f6f6"
+               android:textSize="14dp"
+               android:layout_centerVertical="true"
+               />
+           <TextView
+               android:id="@+id/node_invite"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/node_invite"
+               android:textColor="#fff6f6f6"
+               android:textSize="14dp"
+               />
+       </RelativeLayout>
+       <RelativeLayout
+           android:layout_marginTop="30dp"
+           android:layout_marginBottom="15dp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/latitude"
+               android:textColor="#ff9fb0bd"
+               android:textSize="14dp"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/node_count"
+               android:layout_centerInParent="true"
+               android:textColor="#ff9fb0bd"
+               android:textSize="14dp"
+               />
+           <TextView
+               android:layout_alignParentRight="true"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/results"
+               android:textColor="#ff9fb0bd"
+               android:textSize="14dp"
+               />
+       </RelativeLayout>
+       <include layout="@layout/include_recycler"/>
+   </LinearLayout>
 </LinearLayout>

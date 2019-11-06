@@ -19,10 +19,13 @@ import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
+import com.xxx.mining.model.utils.LocalManageUtil;
 import com.xxx.mining.model.utils.MD5Util;
 import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.main.MainActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,7 +65,7 @@ public class LoginActivity extends BaseActivity {
         mAccountEdit.setText(phone);
     }
 
-    @OnClick({R.id.login_return, R.id.login_selector_phone, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn})
+    @OnClick({R.id.login_return, R.id.login_selector_phone, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn, R.id.switch_language})
     public void OnClick(View view) {
         KeyBoardUtil.closeKeyBord(this, mAccountEdit);
         switch (view.getId()) {
@@ -83,6 +86,19 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.login_btn:
                 login();
+                break;
+            case R.id.switch_language:    //切换语言
+                String nowLanguage = SharedPreferencesUtil.getInstance().getString(SharedConst.CONSTANT_LAUNCHER);
+                switch (nowLanguage) {
+                    case LocalManageUtil.LANGUAGE_CN:
+                        SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_CN);
+                        EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
+                        break;
+                    case LocalManageUtil.LANGUAGE_US:
+                        SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_US);
+                        EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
+                        break;
+                }
                 break;
         }
     }

@@ -49,14 +49,14 @@
             android:layout_height="match_parent"
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/deposit_in_all"
-            android:background="@drawable/shape_edit_wallet"
+            android:background="@drawable/selector_item_wallet_btn"
             android:gravity="center_vertical"
             android:hint="@string/deposit_in_edit"
             android:inputType="numberDecimal"
             android:maxLength="20"
             android:paddingLeft="16dp"
-            android:textColor="@color/colorText"
-            android:textColorHint="@color/colorText"
+            android:textColor="#FF333333"
+            android:textColorHint="#FFE5E5E5"
             android:textSize="@dimen/text_size" />
 
     </RelativeLayout>
