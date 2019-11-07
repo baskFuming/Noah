@@ -25,7 +25,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.my.activity.MiningActivity"></activity>
+
         <activity
             android:name=".ui.main.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -99,6 +99,8 @@
         <activity android:name=".ui.my.activity.AscendingNodeActivity" />
         <activity android:name=".ui.home.activity.MoreOtherActivity" />
         <activity android:name=".ui.home.activity.CreditCenterActivity" />
+        <activity android:name=".ui.home.activity.ConsultingActivity"/>
+        <activity android:name=".ui.my.activity.MiningActivity" />
     </application>
 
 </manifest>

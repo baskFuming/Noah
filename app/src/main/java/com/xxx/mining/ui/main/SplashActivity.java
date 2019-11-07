@@ -7,7 +7,12 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.GlideBitmapDrawableResource;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
@@ -33,7 +38,8 @@ public class SplashActivity extends BaseActivity {
      */
     private final MyHandler mHandler = new MyHandler(this);
     @BindView(R.id.gif_view)
-    GifImageView gifImageView;
+    ImageView gifImageView;
+
     GifDrawable gifDrawable;
 
     @Override
@@ -43,19 +49,22 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-//        getWindow().getDecorView().setBackgroundResource(R.mipmap.splash_start);
+        //Glide 加载Gif图 加控制加载次数
+        Glide.with(SplashActivity.this)
+                .load(R.mipmap.splash_start)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(new GlideDrawableImageViewTarget(gifImageView,1));
         final View decorView = getWindow().getDecorView();
         decorView.post(new Runnable() {
             @Override
             public void run() {
-                gifDrawable = (GifDrawable) gifImageView.getDrawable();
-                //设置播放次数  次数为1
-                gifDrawable.setLoopCount(1);
-//                double width = decorView.getWidth();
-//                double height = decorView.getHeight();
-//                if (height / width >= 1.8) {
-////                    decorView.setBackgroundResource(R.mipmap.splash_start);
-//                }
+//                gifDrawable = (GifDrawable) gifImageView.getDrawable();
+//                设置播放次数  次数为1
+//                gifDrawable.setLoopCount(1);
+                double width = decorView.getWidth();
+                double height = decorView.getHeight();
+                if (height / width >= 1.8) {
+                    decorView.setBackgroundResource(R.mipmap.splash_start);
+                }
 //                 利用消息处理器实现延迟跳转到登录窗口
                 mHandler.sendEmptyMessageAtTime(0, ConfigClass.SPLASH_DELAY_TIME);
             }

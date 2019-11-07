@@ -443,5 +443,6 @@
     <string name="modify_remark_message">修改备注信息</string>
     <string name="window_adress_edit_hint">请输入修改钱包地址</string>
     <string name="window_message_edit_hint">请输入修改备注信息</string>
+    <string name="open_more">展开更多</string>
 
 </resources>
