@@ -10,7 +10,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.xxx.minine"
-        minSdkVersion 17
+        minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0" //test
@@ -70,5 +70,5 @@ dependencies {
     //工具大全
     implementation 'com.blankj:utilcode:1.22.1'
     //加载GIF图
-    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
+//    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 }

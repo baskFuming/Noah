@@ -24,8 +24,6 @@ import java.lang.ref.WeakReference;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
 
 /**
  * @Page 闪屏页
@@ -40,7 +38,7 @@ public class SplashActivity extends BaseActivity {
     @BindView(R.id.gif_view)
     ImageView gifImageView;
 
-    GifDrawable gifDrawable;
+//    GifDrawable gifDrawable;
 
     @Override
     protected int getLayoutId() {
@@ -49,26 +47,36 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        getWindow().setBackgroundDrawable(null);
         //Glide 加载Gif图 加控制加载次数
         Glide.with(SplashActivity.this)
                 .load(R.mipmap.splash_start)
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).into(new GlideDrawableImageViewTarget(gifImageView,1));
-        final View decorView = getWindow().getDecorView();
-        decorView.post(new Runnable() {
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .into(new GlideDrawableImageViewTarget(gifImageView, 1));
+
+        new Thread(new Runnable() {
             @Override
             public void run() {
+//                利用消息处理器实现延迟跳转到登录窗口
+                mHandler.sendEmptyMessageAtTime(0, ConfigClass.SPLASH_DELAY_TIME);
+            }
+        }).start();
+//        final View decorView = getWindow().getDecorView();
+//        decorView.post(new Runnable() {
+//            @Override
+//            public void run() {
 //                gifDrawable = (GifDrawable) gifImageView.getDrawable();
 //                设置播放次数  次数为1
 //                gifDrawable.setLoopCount(1);
-                double width = decorView.getWidth();
-                double height = decorView.getHeight();
-                if (height / width >= 1.8) {
-                    decorView.setBackgroundResource(R.mipmap.splash_start);
-                }
+//                double width = decorView.getWidth();
+//                double height = decorView.getHeight();
+//                if (height / width >= 1.8) {
+//                    decorView.setBackgroundResource(R.mipmap.splash_start);
+//                }
 //                 利用消息处理器实现延迟跳转到登录窗口
-                mHandler.sendEmptyMessageAtTime(0, ConfigClass.SPLASH_DELAY_TIME);
-            }
-        });
+//                mHandler.sendEmptyMessageAtTime(0, ConfigClass.SPLASH_DELAY_TIME);
+//            }
+//        });
     }
 
     @OnClick({R.id.skip})
@@ -107,4 +115,5 @@ public class SplashActivity extends BaseActivity {
             }
         }
     }
+
 }

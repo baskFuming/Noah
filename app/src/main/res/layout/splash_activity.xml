@@ -11,7 +11,7 @@
         android:id="@+id/gif_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/splash_start" />
+        />
 
     <TextView
         android:id="@+id/skip"

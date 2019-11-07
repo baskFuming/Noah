@@ -1,6 +1,7 @@
 package com.xxx.mining.ui.login;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -30,6 +31,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ForgetLoginPswActivity extends BaseActivity {
 
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, ForgetLoginPswActivity.class);
+        activity.startActivity(intent);
+    }
+
     @BindView(R.id.forget_login_psw_account_edit)
     EditText mAccountEdit;
     @BindView(R.id.forget_login_psw_sms_code_edit)
@@ -50,6 +56,8 @@ public class ForgetLoginPswActivity extends BaseActivity {
     CheckBox mPasswordAgainEye;
 
     private DownTimeUtil mDownTimeUtil;
+    private String area = "86";
+
 
     @Override
     protected int getLayoutId() {
@@ -70,9 +78,9 @@ public class ForgetLoginPswActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.forget_login_psw_selector_phone:
-                Intent intent = new Intent(this, SelectCountyActivity.class);
-                intent.putExtra(SelectCountyActivity.REQUEST_KRY, SelectCountyActivity.FORGET_PAGE_CODE);
-                startActivityForResult(intent, ConfigClass.REQUEST_CODE);
+//                Intent intent = new Intent(this, SelectCountyActivity.class);
+//                intent.putExtra(SelectCountyActivity.REQUEST_KRY, SelectCountyActivity.FORGET_PAGE_CODE);
+//                startActivityForResult(intent, ConfigClass.REQUEST_CODE);
                 break;
             case R.id.forget_login_psw_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
@@ -119,7 +127,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
             showEditError(mAccountEdit);
             return;
         }
-        Api.getInstance().sendForgetSMSCode(account, "null", "null", "null")
+        Api.getInstance().sendSMSCode(account,area)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
@@ -208,7 +216,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
             return;
         }
 
-        Api.getInstance().forgetPsw(account, smsCode, password, "0")
+        Api.getInstance().forgetPsw(account, password, smsCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

@@ -24,6 +24,7 @@ import com.xxx.mining.model.utils.MD5Util;
 import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.main.MainActivity;
+import com.xxx.mining.ui.my.activity.AccountSettingActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,6 +40,12 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class LoginActivity extends BaseActivity {
 
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, LoginActivity.class);
+        activity.startActivity(intent);
+    }
+
+
     @BindView(R.id.login_selector_phone)
     TextView mSelectorPhone;
     @BindView(R.id.login_account_edit)
@@ -47,6 +54,9 @@ public class LoginActivity extends BaseActivity {
     EditText mPasswordEdit;
     @BindView(R.id.login_password_eye)
     CheckBox mPasswordEye;
+
+    private String area = "86";
+
 
     @Override
     protected int getLayoutId() {
@@ -73,7 +83,7 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.login_selector_phone:
-                startActivityForResult(new Intent(this, SelectCountyActivity.class), ConfigClass.REQUEST_CODE);
+//                startActivityForResult(new Intent(this, SelectCountyActivity.class), ConfigClass.REQUEST_CODE);
                 break;
             case R.id.login_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
@@ -114,8 +124,10 @@ public class LoginActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.RESULT_CODE && data != null) {
 //            String phoneName = data.getStringExtra(SelectCountyActivity.RESULT_NAME_KRY);
-            String phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
-            mSelectorPhone.setText(phoneCode);
+//            String phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
+//            mSelectorPhone.setText(phoneCode);
+            String account = data.getStringExtra("account");
+            mAccountEdit.setText(account);
         }
     }
 
@@ -153,7 +165,7 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        Api.getInstance().login(account, password)
+        Api.getInstance().login(account, password, area)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<LoginBean>(this) {
@@ -175,7 +187,6 @@ public class LoginActivity extends BaseActivity {
                                 }
                                 //x-token
                                 util.saveEncryptString(SharedConst.ENCRYPT_VALUE_TOKEN_1, data.getToken());
-
                                 //判断下是否进入过首页
                                 Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getSimpleName());
                                 if (activity != null) {
