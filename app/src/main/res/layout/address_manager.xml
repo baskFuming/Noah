@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BTC"
+        android:textColor="#ff333333"
+        android:textSize="12dp" />
+
+    <LinearLayout
+        android:background="@drawable/shape_back_item"
+        android:layout_width="match_parent"
+        android:layout_height="114dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wallet_adress"
+                android:textColor="#ff333333"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--------"
+                android:textColor="#ff375880"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E1E2E4FF"/>
+
+        <LinearLayout
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="@string/note_message"
+                android:textColor="#ff333333"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--------"
+                android:textColor="#ff375880"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/modify_text"
+                android:textColor="#ffffffff"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="@drawable/selector_login_btn"
+                />
+            <TextView
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:layout_marginLeft="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_text"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="12sp"
+                android:background="@drawable/selector_login_btn"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

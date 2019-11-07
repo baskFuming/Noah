@@ -70,6 +70,7 @@
                         android:orientation="horizontal">
 
                         <RelativeLayout
+                            android:background="@drawable/selector_main_btn"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
@@ -117,6 +118,7 @@
                             android:layout_height="match_parent" />
 
                         <RelativeLayout
+                            android:background="@drawable/selector_main_btn"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
@@ -167,7 +169,7 @@
                         android:drawableLeft="@mipmap/deposit_list_icon"
                         android:drawablePadding="7dp"
                         android:text="@string/deposit_list_title"
-                        android:textColor="@color/colorText"
+                        android:textColor="#FF333333"
                         android:textSize="14sp" />
 
                     <RelativeLayout

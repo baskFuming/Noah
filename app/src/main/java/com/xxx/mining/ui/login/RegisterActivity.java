@@ -14,9 +14,14 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.sp.SharedConst;
+import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.DownTimeUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
+import com.xxx.mining.model.utils.LocalManageUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,6 +52,7 @@ public class RegisterActivity extends BaseTitleActivity {
 
     private String phoneName = "中国";    //默认是中国 +86
     private DownTimeUtil mDownTimeUtil;
+    private String phoneCode = "86";
 
     @Override
     protected String initTitle() {
@@ -63,16 +69,24 @@ public class RegisterActivity extends BaseTitleActivity {
         mDownTimeUtil = DownTimeUtil.getInstance();
     }
 
-    @OnClick({R.id.register_account_return, R.id.register_selector_phone, R.id.register_password_eye, R.id.register_send_sms_code, R.id.register_btn})
+    @OnClick({R.id.register_account_return, R.id.register_selector_phone,
+            R.id.register_password_eye, R.id.register_send_sms_code,
+            R.id.register_btn, R.id.switch_language, R.id.register_login, R.id.register_forger_password})
     public void OnClick(View view) {
         switch (view.getId()) {
+            case R.id.register_login:
+                LoginActivity.actionStart(this);
+                break;
+            case R.id.register_forger_password:
+                ForgetLoginPswActivity.actionStart(this);
+                break;
             case R.id.register_account_return:
                 finish();
                 break;
             case R.id.register_selector_phone:
-                Intent intent = new Intent(this, SelectCountyActivity.class);
-                intent.putExtra(SelectCountyActivity.REQUEST_KRY, SelectCountyActivity.REGISTER_PAGE_CODE);
-                startActivityForResult(intent, ConfigClass.REQUEST_CODE);
+//                Intent intent = new Intent(this, SelectCountyActivity.class);
+//                intent.putExtra(SelectCountyActivity.REQUEST_KRY, SelectCountyActivity.REGISTER_PAGE_CODE);
+//                startActivityForResult(intent, ConfigClass.REQUEST_CODE);
                 break;
             case R.id.register_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
@@ -83,6 +97,19 @@ public class RegisterActivity extends BaseTitleActivity {
             case R.id.register_btn:
                 register();
                 break;
+            case R.id.switch_language:
+                String nowLanguage = SharedPreferencesUtil.getInstance().getString(SharedConst.CONSTANT_LAUNCHER);
+                switch (nowLanguage) {
+                    case LocalManageUtil.LANGUAGE_CN:
+                        SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_CN);
+                        EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
+                        break;
+                    case LocalManageUtil.LANGUAGE_US:
+                        SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_US);
+                        EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
+                        break;
+                }
+                break;
         }
     }
 
@@ -91,7 +118,7 @@ public class RegisterActivity extends BaseTitleActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.RESULT_CODE && data != null) {
             phoneName = data.getStringExtra(SelectCountyActivity.RESULT_NAME_KRY);
-            String phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
+            phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
             mSelectorCounty.setText(phoneCode);
         }
     }
@@ -115,7 +142,7 @@ public class RegisterActivity extends BaseTitleActivity {
             showEditError(mAccountEdit);
             return;
         }
-        Api.getInstance().sendSMSCode(account, phoneName)
+        Api.getInstance().sendSMSCode(account,phoneCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
@@ -124,7 +151,6 @@ public class RegisterActivity extends BaseTitleActivity {
                     public void onSuccess(BaseBean<Object> bean) {
                         ToastUtil.showToast(bean.getMessage());
                         mDownTimeUtil.openDownTime(ConfigClass.SMS_CODE_DOWN_TIME, new DownTimeUtil.Callback() {
-                            @SuppressLint("SetTextI18n")
                             @Override
                             public void run(int nowTime) {
                                 if (mSMSCodeText != null)
@@ -198,11 +224,10 @@ public class RegisterActivity extends BaseTitleActivity {
             return;
         }
 
-        Api.getInstance().register(account, account, smsCode, password, phoneName)
+        Api.getInstance().register(account, password, smsCode, phoneCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
-
                     @Override
                     public void onSuccess(BaseBean<Object> bean) {
                         ToastUtil.showToast(bean.getMessage());

@@ -4,8 +4,8 @@ public class ConfigClass {
     /**
      * 服务器地址
      */
-    public static final String BASE_URL = "https://compasschain.io";   //正式服务器地址
-//    public static final String BASE_URL = "https://torchex.global";   //测试服务器地址
+//    public static final String BASE_URL = "https://compasschain.io";   //正式服务器地址
+    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
 
     /**
      * 正则判断区域
@@ -38,7 +38,7 @@ public class ConfigClass {
     public static final int REQUEST_CODE = 1; //跳转页面的code
     public static final int RESULT_CODE = 100; //关闭页面返回的
     public static final int SMS_CODE_DOWN_TIME = 60; //短信验证码倒计时时间 秒
-    public static final int SPLASH_DELAY_TIME = 2 * 1000;  //闪屏页倒计时
+    public static final int SPLASH_DELAY_TIME = 4 * 1000;  //闪屏页倒计时
     public static final int DOUBLE_AMOUNT_NUMBER = 4; //小数量位数
 
     /**

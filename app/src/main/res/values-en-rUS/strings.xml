@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Compass</string>
     <string name="app_name_test">Compass(Private)</string>
 
@@ -339,5 +339,9 @@
 
     <string name="profit_record_user">User</string>
     <string name="profit_record_level">Level</string>
+    <string name="splash_skip">Skip</string>
+    <string name="main_title" tools:ignore="ExtraTranslation">Noah Wallet</string>
+    <string name="credit_center">Credit center</string>
+
 
 </resources>

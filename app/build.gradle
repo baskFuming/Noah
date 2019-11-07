@@ -69,4 +69,6 @@ dependencies {
     implementation('com.journeyapps:zxing-android-embedded:3.6.0') { transitive = false }
     //工具大全
     implementation 'com.blankj:utilcode:1.22.1'
+    //加载GIF图
+//    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
 }

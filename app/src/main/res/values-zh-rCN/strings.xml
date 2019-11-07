@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Compass</string>
     <string name="app_name_test">Compass(内测)</string>
 
@@ -87,7 +87,6 @@
     <string name="profit_record_coin">理财收益</string>
     <string name="release_total_quit">静态已释放</string>
     <string name="release_total_open">分享已释放</string>
-
 
 
     <string name="achievement_record_title">分享业绩</string>
@@ -349,4 +348,10 @@
 
     <string name="profit_record_user">用户名</string>
     <string name="profit_record_level">等级</string>
+    <string name="splash_skip">跳过</string>
+    <string name="main_title" tools:ignore="DuplicateDefinition">Noah Wallet</string>
+    <string name="credit_center">信贷中心</string>
+    <string name="credit_center_information">"\u3000\u3000"信贷中心即信用贷款，是指以借款人的信誉发放的贷款，借款人不需要提供担保。\n
+"\u3000\u3000"其特征就是债务人无需提供抵押品或第三方担保仅凭自己的信誉就能取得贷款，并引以借款人信用程度作为还款保证的。\n
+"\u3000\u3000"债权人（诺亚钱包）会根据借款人在钱包的信息，通过评分卡，规则+策略的大数据模型，对借款人的收益情况进行审核分析，最后确认是否进行放款。待动态节点成熟后会择机开放，敬请期待</string>
 </resources>

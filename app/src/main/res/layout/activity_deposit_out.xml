@@ -49,6 +49,7 @@
             android:layout_marginRight="15dp"
             android:layout_toLeftOf="@id/deposit_out_all"
             android:hint="@string/deposit_out_edit"
+            android:background="@drawable/selector_item_wallet_btn"
             android:inputType="numberDecimal"
             android:maxLength="20" />
 

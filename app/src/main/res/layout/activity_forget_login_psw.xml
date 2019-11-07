@@ -12,30 +12,32 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@color/colorTransparent"
-        android:src="@mipmap/login_return" />
+        android:src="@mipmap/return_back" />
 
     <ImageView
         android:layout_width="66dp"
         android:layout_height="72dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginBottom="39dp"
         android:src="@mipmap/ic_launcher"
-        android:text="DWTT"
+        android:text="@string/main_title"
         android:textColor="#333333"
         android:textSize="18dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="22dp">
 
         <TextView
@@ -47,7 +49,7 @@
             android:layout_marginRight="5dp"
             android:text="+86"
             android:textColor="@color/colorMain"
-            android:textSize="@dimen/text_size" />
+            android:textSize="14dp" />
 
         <View
             android:layout_width="match_parent"
@@ -95,7 +97,7 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="@string/forget_login_psw_send_sms_code"
-            android:textColor="#3B76BD"
+            android:textColor="@color/colorMain"
             android:textSize="12dp" />
 
     </RelativeLayout>
