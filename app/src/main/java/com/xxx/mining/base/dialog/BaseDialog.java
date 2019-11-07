@@ -12,6 +12,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseDialog extends AlertDialog {
 
+    private View view;
+
     protected BaseDialog(Context context) {
         super(context);
     }
@@ -22,31 +24,32 @@ public abstract class BaseDialog extends AlertDialog {
     public void show() {
         setCancelable(true); // 是否可以按“返回键”消失
         setCanceledOnTouchOutside(false); // 点击框以外的区域
-
-        //渲染布局
-        View view = LayoutInflater.from(getContext()).inflate(getLayoutId(), null);
-        ButterKnife.bind(this, view);
         super.show();   //展示
-        setContentView(view);
+        //渲染布局
+        if (view == null) {
+            view = LayoutInflater.from(getContext()).inflate(getLayoutId(), null);
+            ButterKnife.bind(this, view);
+            setContentView(view);
 
-        //设置大小
-        final Window window = getWindow();
-        if (window != null) {
-            final WindowManager.LayoutParams lp = window.getAttributes();
-            window.setBackgroundDrawableResource(android.R.color.transparent);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            window.getDecorView().post(new Runnable() {
-                @Override
-                public void run() {
-                    double width = setWidth();
-                    if (width != 0) {
-                        lp.width = (int) (window.getDecorView().getWidth() * width);
-                        window.setGravity(Gravity.CLIP_HORIZONTAL);
-                        window.setAttributes(lp);
+            //设置大小
+            final Window window = getWindow();
+            if (window != null) {
+                final WindowManager.LayoutParams lp = window.getAttributes();
+                window.setBackgroundDrawableResource(android.R.color.transparent);
+                window.clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                window.getDecorView().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        double width = setWidth();
+                        if (width != 0) {
+                            lp.width = (int) (window.getDecorView().getWidth() * width);
+                            window.setGravity(Gravity.CLIP_HORIZONTAL);
+                            window.setAttributes(lp);
+                        }
+                        initData();
                     }
-                    initData();
-                }
-            });
+                });
+            }
         }
     }
 
