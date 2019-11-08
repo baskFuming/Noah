@@ -1,24 +1,33 @@
 package com.xxx.mining.ui.wallet.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.Nullable;
+import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
+import com.xxx.mining.model.http.bean.DepositInfoBean;
 import com.xxx.mining.model.http.bean.RecordDepositBean;
 
 import java.util.List;
 
-public class DepositProfitAdapter extends BaseQuickAdapter<RecordDepositBean, BaseViewHolder> {
+public class DepositProfitAdapter extends BaseQuickAdapter<DepositInfoBean, BaseViewHolder> {
 
-    public DepositProfitAdapter(@Nullable List<RecordDepositBean> data) {
+    public DepositProfitAdapter(@Nullable List<DepositInfoBean> data) {
         super(R.layout.item_record_gift, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, RecordDepositBean item) {
-//        helper.setText(R.id.item_deposit_profit_name, item.getUnit())
-//                .setText(R.id.item_deposit_profit_time, item.getTime())
-//                .setText(R.id.item_deposit_profit_amount, item.getAmount());
+    protected void convert(BaseViewHolder helper, DepositInfoBean item) {
+
+        helper.setText(R.id.coin_type, item.getCoinName())
+                .setText(R.id.item_record_gift_amount, "+" + item.getValue() + " " + item.getTocoinName())
+                .setText(R.id.item_record_gift_time, item.getDate());
+        if (item.getCoinName().equals("DWTT")) {
+            helper.setBackgroundColor(R.id.item_record_gift_back, mContext.getResources().getColor(R.color.colorTextColorTitle));
+        } else {
+            helper.setBackgroundColor(R.id.item_record_gift_back, mContext.getResources().getColor(R.color.color_item));
+        }
     }
 }

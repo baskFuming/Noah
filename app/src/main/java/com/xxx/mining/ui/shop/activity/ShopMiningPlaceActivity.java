@@ -1,5 +1,6 @@
 package com.xxx.mining.ui.shop.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.xxx.mining.ui.wallet.window.PasswordWindow;
 import com.youth.banner.Banner;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ShopMiningPlaceActivity extends BaseTitleActivity implements PasswordWindow.Callback {
 
-    public static void actionStart(Activity activity, List<BannerBean> list, int shopId, double price) {
+    public static void actionStart(Activity activity, List<String> list, int shopId, double price) {
         Intent intent = new Intent(activity, ShopMiningPlaceActivity.class);
         intent.putExtra("banner", (Serializable) list);
         intent.putExtra("shopId", shopId);
@@ -39,7 +42,7 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
 
     public void initBundle() {
         Intent intent = getIntent();
-        list = (List<BannerBean>) intent.getSerializableExtra("banner");
+        list = (List<String>) intent.getSerializableExtra("banner");
         shopId = intent.getIntExtra("shopId", 0);
         price = intent.getDoubleExtra("price", 0.0);
     }
@@ -58,7 +61,7 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
     private int number = 1; //购买数量
     private int shopId; //商品Id
     private double price;   //商品价格
-    private List<BannerBean> list;  //轮播图
+    private List<String> list = new ArrayList<>();  //轮播图
 
     @Override
     protected String initTitle() {
@@ -70,20 +73,20 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
         return R.layout.activity_shop_mining_place;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
         initBundle();
-
-        mPrice.setText(String.valueOf(price) + "DWTT");
+        mPrice.setText(new BigDecimal(String.valueOf(String.valueOf(price))).setScale(4, BigDecimal.ROUND_DOWN).toPlainString() + "DWTT");
         mNumber.setText(String.valueOf(number));
-        mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
+        mTotalPrice.setText(new BigDecimal(String.valueOf(String.valueOf(number * price))).setScale(4, BigDecimal.ROUND_DOWN).toPlainString() + "DWTT");
         BannerUtil.init(mBanner, list, null);
-
         //初始化密码输入框
         mPasswordWindow = PasswordWindow.getInstance(this);
         mPasswordWindow.setCallback(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @OnClick({R.id.shop_mining_place_delete, R.id.shop_mining_place_add, R.id.shop_mining_place_btn})
     public void OnClick(View view) {
         switch (view.getId()) {
@@ -92,12 +95,12 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
                     number--;
                 }
                 mNumber.setText(String.valueOf(number));
-                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
+                mTotalPrice.setText(new BigDecimal(String.valueOf(String.valueOf(number * price))).setScale(4, BigDecimal.ROUND_DOWN).toPlainString() + "DWTT");
                 break;
             case R.id.shop_mining_place_add:
                 number++;
                 mNumber.setText(String.valueOf(number));
-                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
+                mTotalPrice.setText(new BigDecimal(String.valueOf(String.valueOf(number * price))).setScale(4, BigDecimal.ROUND_DOWN).toPlainString() + "DWTT");
                 break;
             case R.id.shop_mining_place_btn:
                 if (mPasswordWindow != null) {
@@ -125,8 +128,7 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
      * @Model 下单
      */
     private void place(String password, String code) {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().place(userId, password, code, shopId, number)
+        Api.getInstance().place(shopId, String.valueOf(number), password, code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

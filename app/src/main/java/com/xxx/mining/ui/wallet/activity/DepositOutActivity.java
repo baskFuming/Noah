@@ -59,7 +59,7 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
     protected void initData() {
         Intent intent = getIntent();
         coinId = intent.getStringExtra("coinId");
-        balance = intent.getDoubleExtra("balance", 0);
+        balance = intent.getDoubleExtra("amount", 0);
         mEdit.setHint(getString(R.string.deposit_out_edit) + " " + balance);
 
         //限定
@@ -143,8 +143,7 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
      * @Model 理财转出
      */
     private void depositOut(String password) {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().depositOut(userId, coinId, value, password)
+        Api.getInstance().depositOut(String.valueOf(value), coinId, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<BooleanBean>(this) {

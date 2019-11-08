@@ -23,6 +23,9 @@ import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
+import com.xxx.mining.model.sp.SharedConst;
+import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.home.activity.ConsultingActivity;
 import com.xxx.mining.ui.home.activity.CreditCenterActivity;
@@ -129,15 +132,15 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
      * @Model 获取首页列表
      */
     private void loadData() {
-        Api.getInstance().getHomeList()
+        Api.getInstance().getHomeList(1,ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<HomeBean>>(getActivity()) {
+                .subscribe(new ApiCallback<PageBean<HomeBean>>(getActivity()) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<HomeBean>> bean) {
+                    public void onSuccess(BaseBean<PageBean<HomeBean>> bean) {
                         if (bean != null) {
-                            List<HomeBean> list = bean.getData();
+                            List<HomeBean> list = bean.getData().getList();
                             if (list == null || list.size() == 0) {
                                 mNotData.setVisibility(View.VISIBLE);
                                 mRecycler.setVisibility(View.GONE);
@@ -178,6 +181,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
      * @Model 获取消息中心数据
      */
     private void loadNotice() {
+        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
         Api.getInstance().getNoticeCenterList(1, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -232,7 +236,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                                 if (mNoticeList.size() != 0) {
                                     NoticeCenterBean.ContentBean bean = mNoticeList.get(child);
                                 }
-
                                 //目前版本统一跳转到列表
                                 startActivity(new Intent(getContext(), NoticeCenterActivity.class));
                             }

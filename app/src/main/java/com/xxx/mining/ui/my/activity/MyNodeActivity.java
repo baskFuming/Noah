@@ -20,11 +20,17 @@ import butterknife.OnClick;
  */
 public class MyNodeActivity extends BaseTitleActivity {
 
-    public static void actionStart(Activity activity) {
+    public static void actionStart(Activity activity, boolean flag) {
         Intent intent = new Intent(activity, MyNodeActivity.class);
+        intent.putExtra("flag", flag);
         activity.startActivity(intent);
     }
 
+
+    public void initBundle() {
+        Intent intent = getIntent();
+        flag = intent.getBooleanExtra("flag", true);
+    }
 
     @BindView(R.id.main_recycler)
     RecyclerView mRecycler;
@@ -32,6 +38,7 @@ public class MyNodeActivity extends BaseTitleActivity {
     SwipeRefreshLayout mRefresh;
     @BindView(R.id.main_not_data)
     LinearLayout mNotData;
+    private Boolean flag;
 
     @Override
     protected String initTitle() {
@@ -45,7 +52,7 @@ public class MyNodeActivity extends BaseTitleActivity {
 
     @Override
     protected void initData() {
-
+        initBundle();
     }
 
     @OnClick({R.id.mill_record, R.id.node_up, R.id.node_invite})

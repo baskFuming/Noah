@@ -2,48 +2,52 @@ package com.xxx.mining.model.http.bean;
 
 import com.xxx.mining.model.utils.StringUtil;
 
+import java.util.List;
+
 public class HomeBean {
+    /**
+     * coinId : 10000001
+     * coinFluctuation : +NaN%
+     * coinSymbol : BTC
+     * coinPic : img/btc_default_pic.png
+     * coinPriceRMB : 65589.8
+     * coinPriceUSDT : 9238.00
+     */
 
     private int coinId;
-    private String coinEnglishName;
-    private String coinSymbol;
-    private String coinUrl;
-    private String coinChineseName;
-    private String coinContractAddress;
-    private double coinDecimal;
-    private double coinDecimalUsed;
-    private String coinQuotesName;
-    private String coinLocation;
-    private double coinPriceRmb;
-    private String coinPriceUsdt;
     private String coinFluctuation;
-    private long coinPriceUpdatetime;
-    private long coinFluctuationUpdatetime;
-    private String coinPriceRequestpath;
-    private String coinPriceJsonStructure;
-    private String coinPriceRequestmethod;
-    private String coinPriceRequestbody;
-    private String coinFluctuationJsonStructure;
-    private String coinFluctuationRequestpath;
-    private String coinFluctuationRequestmethod;
-    private int isdisplay;
-    private String coinFluctuationRequestbody;
-    private int coinSort;
+    private String coinSymbol;
+    private String coinPic;
+    private double coinPriceRMB;
+    private String coinPriceUSDT;
 
-    public String getCoinUrl() {
-        return coinUrl;
+    public int getCoinId() {
+        return coinId;
     }
 
-    public String getCoinChineseName() {
-        return coinSymbol;
-    }
-
-    public String getCoinPriceUsdt() {
-        return " $" + StringUtil.getMoney(coinPriceUsdt == null || coinPriceUsdt.equals("") ? 0 : Double.parseDouble(coinPriceUsdt));
-    }
 
     public String getCoinFluctuation() {
         return coinFluctuation;
     }
 
+
+    public String getCoinSymbol() {
+        return coinSymbol;
+    }
+
+
+    public String getCoinPic() {
+        return coinPic;
+    }
+
+
+    public double getCoinPriceRMB() {
+        return coinPriceRMB;
+    }
+
+
+    public String getCoinPriceUSDT() {
+        return " $" + StringUtil.getMoney(coinPriceUSDT == null || coinPriceUSDT.equals("") ? 0 : Double.parseDouble(coinPriceUSDT));
+
+    }
 }

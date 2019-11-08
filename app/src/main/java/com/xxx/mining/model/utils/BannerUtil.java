@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class BannerUtil {
 
-    public static void init(Banner banner, List<BannerBean> list, OnBannerListener onBannerListener) {
+    public static void init(Banner banner, List<String> list, OnBannerListener onBannerListener) {
         List<String> title = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             title.add("");
@@ -47,11 +47,10 @@ public class BannerUtil {
 
     //自定义的加载器
     private static class MyLoader extends ImageLoader {
-
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            GlideUtil.loadFillet(context, ((BannerBean) path).getUrl(), imageView);
+            GlideUtil.loadFillet(context, (String) path,imageView);
         }
     }
 }

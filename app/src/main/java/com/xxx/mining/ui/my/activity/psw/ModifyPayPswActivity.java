@@ -12,6 +12,8 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.sp.SharedConst;
+import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.DownTimeUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
@@ -44,6 +46,7 @@ public class ModifyPayPswActivity extends BaseTitleActivity {
     CheckBox mPasswordAgainEye;
 
     private DownTimeUtil mDownTimeUtil;
+    private String area = "86";
 
     @Override
     protected String initTitle() {
@@ -91,7 +94,7 @@ public class ModifyPayPswActivity extends BaseTitleActivity {
      * @Model 发送修改密码短信验证码
      */
     private void sendSMSCode() {
-        Api.getInstance().sendModifyPaySMSCode()
+        Api.getInstance().sendUpteSMSCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
@@ -169,7 +172,7 @@ public class ModifyPayPswActivity extends BaseTitleActivity {
             return;
         }
 
-        Api.getInstance().modifyPayPsw(smsCode, newPassword)
+        Api.getInstance().modifyPayPsw(newPassword, smsCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

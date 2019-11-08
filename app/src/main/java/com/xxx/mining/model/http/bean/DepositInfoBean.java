@@ -1,21 +1,37 @@
 package com.xxx.mining.model.http.bean;
 
-import com.xxx.mining.model.utils.StringUtil;
+import java.util.List;
 
 public class DepositInfoBean {
+    /**
+     * date : 2019-11-07 20:54:10
+     * coinName : BTC
+     * tocoinName : MSB
+     * value : 100.1
+     */
 
-    private double allFinancingsAsset;
-    private double allFinancingsIncome;
+    private String date;
+    private String coinName;
+    private String tocoinName;
+    private double value;
 
-    public String getAllFinancingsAsset(boolean isTotal) {
-        if (isTotal) {
-            return StringUtil.getUS(allFinancingsAsset);
-        } else {
-            return StringUtil.getMoney(allFinancingsAsset);
-        }
+    public String getDate() {
+        return date;
     }
 
-    public String getAllFinancingsIncome() {
-        return StringUtil.getMoney(allFinancingsIncome);
+
+    public String getCoinName() {
+        return coinName;
     }
+
+
+    public String getTocoinName() {
+        return tocoinName;
+    }
+
+
+    public double getValue() {
+        return value;
+    }
+
 }

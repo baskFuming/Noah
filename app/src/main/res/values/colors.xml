@@ -24,6 +24,7 @@
     <!-- 条目 涨跌 -->
     <color name="colorItemFall">#FF0051</color>
     <color name="colorItemRise">#C0FF46</color>
+    <color name="color_item">#F2FAFD</color>
 
 
 </resources>

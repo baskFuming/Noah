@@ -51,7 +51,7 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
     TextView mTotalAsset;
 
     private WalletAdapter mAdapter;
-    private List<WalletBean.TmpWalletExtBean> mList = new ArrayList<>();
+    private List<WalletBean.ListBean> mList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -65,24 +65,21 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
         mAdapter.setOnItemChildClickListener(this);
-
         loadData(true);
     }
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        WalletBean.TmpWalletExtBean bean = mList.get(position);
+        WalletBean.ListBean bean = mList.get(position);
         switch (view.getId()) {
             case R.id.item_wallet_recharge:
-                RechargeActivity.actionStart(getActivity(), bean.getAddress(), bean.getCoinId());
+                RechargeActivity.actionStart(getActivity(), bean.getAddress(), bean.getCoinName());
                 break;
             case R.id.item_wallet_withdrawal:
-                WithdrawalActivity.actionStart(getActivity(), bean.getBalance(), bean.getFee(), bean.getCoinId());
+                WithdrawalActivity.actionStart(getActivity(), bean.getAmmount(), bean.getAmmountFrozen(), bean.getCoinName());
                 break;
             case R.id.item_wallet_deposit:
-                if (mList.get(position).getSupportFinanc() == ApiType.OPEN_FINANC_TYPE) {
-                    DepositActivity.actionStart(getActivity(), bean.getFinancingCnt(), bean.getFinancingCnt(), bean.getCoinId());
-                }
+                DepositActivity.actionStart(getActivity(), bean.getAmmount(),String.valueOf(bean.getCoinId()));
                 break;
         }
     }
@@ -103,8 +100,7 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
      * @Model 获取钱包列表
      */
     private void loadData(final boolean isRefresh) {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().getWalletList(userId)
+        Api.getInstance().getWalletList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<WalletBean>(getActivity()) {
@@ -115,8 +111,8 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
                         if (bean != null) {
                             WalletBean data = bean.getData();
                             if (data != null) {
-                                mTotalAsset.setText("$" + new BigDecimal(data.getAllAsset()).setScale(2, RoundingMode.DOWN).toPlainString());
-                                List<WalletBean.TmpWalletExtBean> list = data.getTmpWalletExt();
+                                mTotalAsset.setText("$" + new BigDecimal(data.getTotalAsset()).setScale(2, RoundingMode.DOWN).toPlainString());
+                                List<WalletBean.ListBean> list = data.getList();
                                 if (list == null || list.size() == 0) {
                                     mNotData.setVisibility(View.VISIBLE);
                                     mRecycler.setVisibility(View.GONE);

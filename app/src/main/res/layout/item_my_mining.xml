@@ -28,7 +28,7 @@
         android:textSize="12dp" />
 
     <TextView
-        android:id="@+id/item_my_mining_amount"
+        android:id="@+id/my_mining_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

@@ -21,8 +21,8 @@ public class HomeAdapter extends BaseQuickAdapter<HomeBean, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, HomeBean item) {
-        helper.setText(R.id.item_home_name, item.getCoinChineseName())
-                .setText(R.id.item_home_price, item.getCoinPriceUsdt())
+        helper.setText(R.id.item_home_name, item.getCoinSymbol())
+                .setText(R.id.item_home_price, item.getCoinPriceUSDT())
                 .setText(R.id.item_home_range, item.getCoinFluctuation());
 
         if ("+".equals(String.valueOf(item.getCoinFluctuation().charAt(0)))) {

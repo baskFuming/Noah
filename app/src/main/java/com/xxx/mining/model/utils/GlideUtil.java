@@ -13,6 +13,8 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 
+import java.util.List;
+
 /**
  * Glide工具类
  */

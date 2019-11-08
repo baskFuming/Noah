@@ -121,19 +121,19 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="18dp"
                             android:descendantFocusability="blocksDescendants">
 
                             <android.support.v7.widget.RecyclerView
                                 android:id="@+id/recharge_recycler"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:nestedScrollingEnabled="false" />
 
-                        </RelativeLayout>
+                            <include layout="@layout/include_not_data" />
 
-                        <include layout="@layout/include_not_data" />
+                        </RelativeLayout>
 
                     </LinearLayout>
 

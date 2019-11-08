@@ -40,8 +40,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            android:paddingEnd="16dp"
-                            android:paddingStart="16dp">
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -169,8 +169,8 @@
                                 android:id="@+id/main_home_notice"
                                 android:layout_width="match_parent"
                                 android:layout_height="34dp"
-                                android:layout_marginBottom="16dp"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginBottom="16dp"
                                 android:background="@drawable/shape_back_home_notice"
                                 android:gravity="center_vertical"
                                 android:paddingLeft="12dp"
@@ -249,9 +249,9 @@
                         android:id="@+id/main_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
                         android:nestedScrollingEnabled="false" />
 
                     <include layout="@layout/include_not_data" />

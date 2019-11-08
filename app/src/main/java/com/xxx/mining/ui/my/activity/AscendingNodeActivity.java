@@ -40,7 +40,8 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         Intent intent = new Intent(activity, AscendingNodeActivity.class);
         activity.startActivity(intent);
     }
-//    public static void actionStart(Activity activity, List<BannerBean> list, int shopId, double price) {
+
+    //    public static void actionStart(Activity activity, List<BannerBean> list, int shopId, double price) {
 //        Intent intent = new Intent(activity, AscendingNodeActivity.class);
 //        intent.putExtra("banner", (Serializable) list);
 //        intent.putExtra("shopId", shopId);
@@ -53,6 +54,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         shopId = intent.getIntExtra("shopId", 0);
         price = intent.getDoubleExtra("price", 0.0);
     }
+
     private PasswordWindow mPasswordWindow;
 
     @BindView(R.id.shop_mining_place_banner)
@@ -69,6 +71,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
     private int shopId; //商品Id
     private double price;   //商品价格
     private List<BannerBean> list;  //轮播图
+
     @Override
     protected String initTitle() {
         return getString(R.string.node_up);
@@ -99,7 +102,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         place(password, code);
     }
 
-    @OnClick({R.id.shop_mining_place_delete, R.id.shop_mining_place_add, R.id.shop_mining_place_btn,R.id.invite_code})
+    @OnClick({R.id.shop_mining_place_delete, R.id.shop_mining_place_add, R.id.shop_mining_place_btn, R.id.invite_code})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.shop_mining_place_delete:
@@ -120,16 +123,16 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                 }
                 break;
             case R.id.invite_code:
-                KeyBoardUtil.copy(this,"");
+                KeyBoardUtil.copy(this, "");
                 break;
         }
     }
+
     /**
      * @Model 下单
      */
     private void place(String password, String code) {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().place(userId, password, code, shopId, number)
+        Api.getInstance().place(shopId, String.valueOf(number), password, code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

@@ -76,23 +76,13 @@ public class PasswordWindow extends BaseDialog {
                 dismiss();
                 break;
             case R.id.window_send_sms_code:
-//                if (password.isEmpty()) {
-//                    ToastUtil.showToast(R.string.withdrawal_error_5);
-//                    return;
-//                }
-//                if (code.isEmpty()) {
-//                    ToastUtil.showToast(R.string.forget_login_psw_error_2);
-//                    return;
-//                }
                 sendSMSCode();
                 break;
         }
     }
 
     private void sendSMSCode() {
-        String phone = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_PHONE);
-        String phoneName = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_COUNTY_CITY);
-        Api.getInstance().sendWithdrawal(phone, phoneName)
+        Api.getInstance().sendUpteSMSCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(activity) {

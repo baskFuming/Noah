@@ -41,7 +41,7 @@
                         android:id="@+id/main_my_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/main_my_name"
+                        android:text="----"
                         android:textColor="@color/colorText"
                         android:textSize="18dp" />
 
@@ -51,8 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:drawablePadding="6dp"
-                        android:drawableRight="@mipmap/copy"
-                        android:text="@string/main_my_invited_text"
+                        android:text="-----"
                         android:textColor="@color/colorText"
                         android:textSize="@dimen/text_size" />
 

@@ -17,6 +17,7 @@ import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.shop.activity.ShopMiningActivity;
 import com.youth.banner.Banner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -37,6 +38,8 @@ public class ShopActivity extends BaseTitleActivity implements SwipeRefreshLayou
     @BindView(R.id.main_shop_banner)
     Banner mBanner;
     private boolean isSuccessBanner;   //是否加载完成轮播图
+
+    private List<String> mBannerList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -91,18 +94,22 @@ public class ShopActivity extends BaseTitleActivity implements SwipeRefreshLayou
      * @Model 获取轮播图
      */
     private void loadBanner() {
-        Api.getInstance().getBannerList(ApiType.HOME_LOCATION)
+        Api.getInstance().getShopBanner()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<BannerBean>>(this) {
+                .subscribe(new ApiCallback<BannerBean>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<BannerBean>> bean) {
+                    public void onSuccess(BaseBean<BannerBean> bean) {
                         if (bean != null) {
-                            List<BannerBean> list = bean.getData();
-                            if (list != null) {
-                                BannerUtil.init(mBanner, list, null);
+                            BannerBean date = bean.getData();
+                            List<String> list  = date.getBanner();
+                             if (list != null) {
                                 isSuccessBanner = true;
+                                mBannerList.clear();
+                                mBannerList.addAll(list);
+                                BannerUtil.init(mBanner, mBannerList, null);
+
                             } else {
                                 isSuccessBanner = false;
                             }

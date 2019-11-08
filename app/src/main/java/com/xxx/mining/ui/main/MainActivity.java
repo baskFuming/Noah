@@ -230,10 +230,9 @@ public class MainActivity extends BaseActivity {
                         if (bean != null) {
                             IsSettingPayPswBean data = bean.getData();
                             if (data != null) {
-                                SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_PAY_PSW, data.getFundsVerified());
+                                SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_PAY_PSW, true);
                             }
                         }
-
                         //检查版本号
 //                        checkAppVersion();
                     }

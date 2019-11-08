@@ -11,17 +11,17 @@ import com.xxx.mining.model.utils.GlideUtil;
 
 import java.util.List;
 
-public class WalletAdapter extends BaseQuickAdapter<WalletBean.TmpWalletExtBean, BaseViewHolder> {
+public class WalletAdapter extends BaseQuickAdapter<WalletBean.ListBean, BaseViewHolder> {
 
-    public WalletAdapter(@Nullable List<WalletBean.TmpWalletExtBean> data) {
+    public WalletAdapter(@Nullable List<WalletBean.ListBean> data) {
         super(R.layout.item_wallet, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, WalletBean.TmpWalletExtBean item) {
-        helper.setText(R.id.item_wallet_available, mContext.getString(R.string.item_wallet_available) + item.getBalanceStr())
-                .setText(R.id.item_wallet_frozen, mContext.getString(R.string.item_wallet_frozen) + item.getFrozenBalanceStr())
-                .setText(R.id.item_wallet_name, item.getCoinId())
+    protected void convert(BaseViewHolder helper, WalletBean.ListBean item) {
+        helper.setText(R.id.item_wallet_available, mContext.getString(R.string.item_wallet_available) + item.getAmmount())
+                .setText(R.id.item_wallet_frozen, mContext.getString(R.string.item_wallet_frozen) + item.getAmmountFrozen())
+                .setText(R.id.item_wallet_name, item.getCoinName())
                 .addOnClickListener(R.id.item_wallet_recharge)
                 .addOnClickListener(R.id.item_wallet_withdrawal)
                 .addOnClickListener(R.id.item_wallet_deposit);

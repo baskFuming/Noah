@@ -124,7 +124,6 @@ public class AccountSettingActivity extends BaseTitleActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
-
                     @Override
                     public void onSuccess(BaseBean<Object> bean) {
                         if (bean != null) {

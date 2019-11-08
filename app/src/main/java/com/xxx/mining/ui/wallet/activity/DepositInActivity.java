@@ -35,7 +35,7 @@ public class DepositInActivity extends BaseTitleActivity {
     @BindView(R.id.deposit_in_edit)
     EditText mEdit;
 
-    private double balance;
+    private double amount;
     private String coinId;
 
     @Override
@@ -52,8 +52,8 @@ public class DepositInActivity extends BaseTitleActivity {
     protected void initData() {
         Intent intent = getIntent();
         coinId = intent.getStringExtra("coinId");
-        balance = intent.getDoubleExtra("balance", 0);
-        mEdit.setHint(getString(R.string.deposit_in_edit) + " " + balance);
+        amount = intent.getDoubleExtra("amount", 0);
+        mEdit.setHint(getString(R.string.deposit_in_edit) + " " + amount);
 
         //限定
         KeyBoardUtil.setFilters(mEdit, ConfigClass.DOUBLE_AMOUNT_NUMBER);
@@ -69,7 +69,7 @@ public class DepositInActivity extends BaseTitleActivity {
                 startActivity(intent);
                 break;
             case R.id.deposit_in_all:
-                String value = String.valueOf(balance);
+                String value = String.valueOf(amount);
                 mEdit.setText(value);
                 mEdit.setSelection(value.length());
                 break;
@@ -88,7 +88,7 @@ public class DepositInActivity extends BaseTitleActivity {
     public void finish() {
         KeyBoardUtil.closeKeyBord(this, mEdit);
         Intent intent = new Intent(this, DepositActivity.class);
-        intent.putExtra("inBalance", new BigDecimal(balance).setScale(4, RoundingMode.HALF_UP).stripTrailingZeros().doubleValue());
+        intent.putExtra("inBalance", new BigDecimal(amount).setScale(4, RoundingMode.HALF_UP).stripTrailingZeros().doubleValue());
         setResult(ConfigClass.DEPOSIT_IN_RESULT_CODE, intent);
         super.finish();
     }
@@ -109,7 +109,7 @@ public class DepositInActivity extends BaseTitleActivity {
                 ToastUtil.showToast(R.string.deposit_in_error_1);
                 return;
             }
-            if (value > balance) {
+            if (value > amount) {
                 ToastUtil.showToast(R.string.deposit_out_error_3);
                 return;
             }
@@ -117,8 +117,7 @@ public class DepositInActivity extends BaseTitleActivity {
             ToastUtil.showToast(R.string.deposit_in_error_2);
             return;
         }
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().depositIn(userId, coinId, value)
+        Api.getInstance().depositIn(String.valueOf(amount), coinId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<BooleanBean>(this) {
@@ -129,8 +128,8 @@ public class DepositInActivity extends BaseTitleActivity {
                             BooleanBean data = bean.getData();
                             if (data != null) {
                                 if (data.isResult()) {
-                                    balance = new BigDecimal(balance - value).setScale(4, RoundingMode.HALF_UP).stripTrailingZeros().doubleValue();
-                                    mEdit.setHint(getString(R.string.deposit_out_edit) + " " + balance);
+                                    amount = new BigDecimal(amount - value).setScale(4, RoundingMode.HALF_UP).stripTrailingZeros().doubleValue();
+                                    mEdit.setHint(getString(R.string.deposit_out_edit) + " " + amount);
                                     mEdit.setText("");
                                     ToastUtil.showToast(bean.getMessage());
                                     return;

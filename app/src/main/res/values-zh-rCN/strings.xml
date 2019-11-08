@@ -117,8 +117,8 @@
     </string>
     <string name="deposit_in_error_1">数量不能为空</string>
     <string name="deposit_in_error_2">数量输入有误</string>
-    <string name="deposit_total_asset">理财额</string>
-    <string name="deposit_total_profit">收益(CT)</string>
+    <string name="deposit_total_asset">总理财额($)</string>
+    <string name="deposit_total_profit">总收益($)</string>
 
     <string name="deposit_out_title">转出</string>
     <string name="deposit_out_record">转出记录</string>

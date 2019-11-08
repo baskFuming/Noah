@@ -16,6 +16,7 @@ import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.ShopMiningBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.http.utils.ApiType;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
@@ -51,7 +52,8 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
     private int page = ConfigClass.PAGE_DEFAULT;
     private ShopMiningAdapter mAdapter;
     private List<ShopMiningBean> mList = new ArrayList<>();
-    private List<BannerBean> mBannerList = new ArrayList<>();  //轮播图
+    private List<String> mBannerList = new ArrayList<>();  //轮播图
+
 
     @Override
     protected int getLayoutId() {
@@ -77,17 +79,14 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
                 }
             }
         });
-
-        loadList();
         loadBanner();
+        loadList();
     }
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-//        ShopMiningBean bean = mList.get(position);
-        ShopMiningPlaceActivity.actionStart(getActivity(), mBannerList, 1, 100);
+        ShopMiningPlaceActivity.actionStart(getActivity(), mBannerList,mList.get(position).getId(), mList.get(position).getDwttPrice());
     }
-
     @Override
     public void onRefresh() {
         page = ConfigClass.PAGE_DEFAULT;
@@ -108,14 +107,13 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
      * @Model 获取列表
      */
     private void loadList() {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().getShopMiningList(userId, page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getShopMiningList("1", page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<ShopMiningBean>>(getActivity()) {
+                .subscribe(new ApiCallback<PageBean<ShopMiningBean>>(getActivity()) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<ShopMiningBean>> bean) {
+                    public void onSuccess(BaseBean<PageBean<ShopMiningBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -123,7 +121,7 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
                             return;
                         }
 
-                        List<ShopMiningBean> list = bean.getData();
+                        List<ShopMiningBean> list = bean.getData().getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -175,22 +173,23 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
      * @Model 获取轮播图
      */
     private void loadBanner() {
-        Api.getInstance().getBannerList(ApiType.HOME_LOCATION)
+        Api.getInstance().getBannerList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<BannerBean>>(getActivity()) {
+                .subscribe(new ApiCallback<BannerBean>(getActivity()) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<BannerBean>> bean) {
+                    public void onSuccess(BaseBean<BannerBean> bean) {
                         if (bean != null) {
-                            List<BannerBean> list = bean.getData();
+                            BannerBean data = bean.getData();
+                            List<String> list = data.getBanner();
                             if (list == null || list.size() == 0) {
                                 isSuccessBanner = false;
                             } else {
                                 isSuccessBanner = true;
                                 mBannerList.clear();
                                 mBannerList.addAll(list);
-                                BannerUtil.init(mBanner, mBannerList, null);
+                                BannerUtil.init(mBanner,mBannerList,null);
                             }
                         } else {
                             isSuccessBanner = false;

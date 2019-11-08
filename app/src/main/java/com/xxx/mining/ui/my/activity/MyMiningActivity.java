@@ -16,6 +16,7 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.MyMiningBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
@@ -82,22 +83,20 @@ public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdap
     }
 
     private void loadData() {
-        String userId = String.valueOf(SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID));
-        String coinId = "CT";
-        Api.getInstance().getMyMiningList(userId, coinId, page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getMyMiningList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<MyMiningBean>>(this) {
+                .subscribe(new ApiCallback<PageBean<MyMiningBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<MyMiningBean>> bean) {
+                    public void onSuccess(BaseBean<PageBean<MyMiningBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
                             mAdapter.loadMoreEnd(true);
                             return;
                         }
-                        List<MyMiningBean> list = bean.getData();
+                        List<MyMiningBean> list = bean.getData().getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);

@@ -17,11 +17,10 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
+import com.xxx.mining.model.http.bean.DepositBean;
 import com.xxx.mining.model.http.bean.DepositInfoBean;
-import com.xxx.mining.model.http.bean.RecordDepositBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.wallet.adapter.DepositProfitAdapter;
 
@@ -40,22 +39,22 @@ import io.reactivex.schedulers.Schedulers;
  * @Page 理财页
  * @Author xxx
  */
-public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    public static void actionStart(Activity activity, double inBalance, double outBalance, String coinId) {
+    public static void actionStart(Activity activity, int amount,String coinId) {
         Intent intent = new Intent(activity, DepositActivity.class);
-        intent.putExtra("inBalance", inBalance);
-        intent.putExtra("outBalance", outBalance);
         intent.putExtra("coinId", coinId);
+        intent.putExtra("amount",amount);
         activity.startActivity(intent);
     }
 
     public void initBundle() {
         Intent intent = getIntent();
-        coinId = intent.getStringExtra("coinId").toUpperCase();
-        inBalance = intent.getDoubleExtra("inBalance", 0);
-        outBalance = intent.getDoubleExtra("outBalance", 0);
+        coinId = intent.getStringExtra("coinId");
+        inBalance = intent.getDoubleExtra("amount", 0);
+
     }
+
 
     @BindView(R.id.main_recycler)
     RecyclerView mRecycler;
@@ -71,10 +70,9 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
     @BindView(R.id.deposit_profit)
     TextView mTotalProfit;
 
-    private int page = ConfigClass.PAGE_DEFAULT;
+    private int page;
     private DepositProfitAdapter mAdapter;
-    private List<RecordDepositBean> mList = new ArrayList<>();
-
+    private List<DepositInfoBean> mList = new ArrayList<>();
     private String coinId;
     private double inBalance;
     private double outBalance;
@@ -93,14 +91,13 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
     @Override
     protected void initData() {
         initBundle();
-
-        mTotalAssetText.setText(getString(R.string.deposit_total_asset) + "(" + coinId + ")");
-
+//        mTotalAssetText.setText(getString(R.string.deposit_total_asset) + "(" + coinId + ")");
         mAdapter = new DepositProfitAdapter(mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
-        mAdapter.setOnLoadMoreListener(this, mRecycler);
+        loadInfo();
+        loadData();
 
     }
 
@@ -110,11 +107,11 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
         switch (view.getId()) {
             case R.id.deposit_in:
                 intent = new Intent(this, DepositInActivity.class);
-                intent.putExtra("balance", inBalance);
+                intent.putExtra("amount", inBalance);
                 break;
             case R.id.deposit_out:
                 intent = new Intent(this, DepositOutActivity.class);
-                intent.putExtra("balance", outBalance);
+                intent.putExtra("amount", outBalance);
                 break;
         }
         if (intent != null) {
@@ -127,17 +124,12 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
     protected void onResume() {
         super.onResume();
         loadInfo();
+        loadData();
     }
 
     @Override
     public void onRefresh() {
-        page = ConfigClass.PAGE_DEFAULT;
-        loadInfo();
-    }
-
-    @Override
-    public void onLoadMoreRequested() {
-        page++;
+        loadData();
     }
 
     @Override
@@ -159,24 +151,22 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
         }
     }
 
-
     /**
      * @Model 获取理财总收益信息
      */
     private void loadInfo() {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().getDepositProfitInfo(userId, coinId)
+        Api.getInstance().getDepositInfo(coinId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<DepositInfoBean>(this) {
+                .subscribe(new ApiCallback<DepositBean>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<DepositInfoBean> bean) {
+                    public void onSuccess(BaseBean<DepositBean> bean) {
                         if (bean != null) {
-                            DepositInfoBean data = bean.getData();
+                            DepositBean data = bean.getData();
                             if (data != null) {
-                                mTotalAsset.setText(data.getAllFinancingsAsset(false));
-                                mTotalProfit.setText(data.getAllFinancingsIncome());
+                                mTotalAsset.setText(String.valueOf(data.getInvest()));
+                                mTotalProfit.setText(String.valueOf(data.getIncome()));
                             }
                         }
                     }
@@ -185,18 +175,55 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                     public void onError(int errorCode, String errorMessage) {
                         ToastUtil.showToast(errorMessage);
                     }
+                });
+    }
+
+
+    /**
+     * @Model 获取首页列表
+     */
+    private void loadData() {
+        Api.getInstance().getDepositProfitInfo(coinId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiCallback<PageBean<DepositInfoBean>>(this) {
+                    @Override
+                    public void onSuccess(BaseBean<PageBean<DepositInfoBean>> bean) {
+                        if (bean != null) {
+                            List<DepositInfoBean> blist = bean.getData().getList();
+                            if (blist == null || blist.size() == 0) {
+                                mNotData.setVisibility(View.VISIBLE);
+                                mRecycler.setVisibility(View.GONE);
+                                return;
+                            }
+                            mNotData.setVisibility(View.GONE);
+                            mRecycler.setVisibility(View.VISIBLE);
+                            mList.clear();
+                            mList.addAll(blist);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    }
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
+                    }
 
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        showLoading();
+                        if (mRefresh != null) {
+                            mRefresh.setRefreshing(true);
+                        }
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        hideLoading();
+                        if (mRefresh != null) {
+                            mRefresh.setRefreshing(false);
+                        }
                     }
                 });
     }
+
 }

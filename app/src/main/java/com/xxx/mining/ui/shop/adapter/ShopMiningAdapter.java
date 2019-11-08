@@ -1,12 +1,16 @@
 package com.xxx.mining.ui.shop.adapter;
 
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.ShopMiningBean;
+import com.xxx.mining.model.utils.GlideUtil;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ShopMiningAdapter extends BaseQuickAdapter<ShopMiningBean, BaseViewHolder> {
@@ -17,9 +21,11 @@ public class ShopMiningAdapter extends BaseQuickAdapter<ShopMiningBean, BaseView
 
     @Override
     protected void convert(BaseViewHolder helper, ShopMiningBean item) {
-//        helper.setText(R.id.item_shop_mining_name, item.getCoinQuotesName())
-//                .setText(R.id.item_shop_mining_content, item.getCoinChineseName())
-//                .setText(R.id.item_shop_mining_price, item.getCoinFluctuation())
-        helper .addOnClickListener(R.id.item_shop_mining_btn);
+        helper.setText(R.id.item_shop_mining_name, item.getName())
+                .setText(R.id.item_shop_mining_content, String.valueOf(item.getDetails()))
+                .setText(R.id.item_shop_mining_price, new BigDecimal(String.valueOf(item.getDwttPrice())).setScale(4, BigDecimal.ROUND_DOWN).toPlainString())
+                .addOnClickListener(R.id.item_shop_mining_btn);
+        GlideUtil.loadBase(mContext, String.valueOf(item.getImg()), (ImageView) helper.getView(R.id.imageView1));
+
     }
 }

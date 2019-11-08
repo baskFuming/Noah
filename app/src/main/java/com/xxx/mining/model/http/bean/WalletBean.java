@@ -1,86 +1,80 @@
 package com.xxx.mining.model.http.bean;
 
-import com.xxx.mining.model.utils.StringUtil;
-
 import java.util.List;
 
 public class WalletBean {
+    private int totalAsset;
+    private List<ListBean> list;
 
-    private double allAsset;
-    private double allAvailableAsset;
-    private List<TmpWalletExtBean> tmpWalletExt;
-
-    public String getAllAsset() {
-        return StringUtil.getUS(allAsset);
+    public int getTotalAsset() {
+        return totalAsset;
     }
 
-    public String getAllAvailableAsset() {
-        return StringUtil.getUS(allAvailableAsset);
+    public void setTotalAsset(int totalAsset) {
+        this.totalAsset = totalAsset;
     }
 
-    public List<TmpWalletExtBean> getTmpWalletExt() {
-        return tmpWalletExt;
+    public List<ListBean> getList() {
+        return list;
     }
 
-    public static class TmpWalletExtBean {
+    public void setList(List<ListBean> list) {
+        this.list = list;
+    }
 
-        private int id;
+    public static class ListBean {
+        /**
+         * coinId : 10000001
+         * address : 敬请期待
+         * ammountFrozen : 0
+         * coinName : BTC
+         * ammount : 0
+         */
+
+        private int coinId;
         private String address;
-        private double balance;
-        private double frozenBalance;
-        private int isLock;
-        private double toReleased;
-        private int version;
-        private String coinId;
-        private String fullName;
-        private String coinLogo;
-        private double fee;
-        private int supportExchange;
-        private int supportFinanc;
-        private double financingCnt;
+        private int ammountFrozen;
+        private String coinName;
+        private int ammount;
+
+        public int getCoinId() {
+            return coinId;
+        }
+
+        public void setCoinId(int coinId) {
+            this.coinId = coinId;
+        }
 
         public String getAddress() {
             return address;
         }
 
-        public double getBalance() {
-            return Double.parseDouble(StringUtil.getMoney(balance));
+        public void setAddress(String address) {
+            this.address = address;
         }
 
-        public String getBalanceStr() {
-            return StringUtil.getMoney(balance);
+        public int getAmmountFrozen() {
+            return ammountFrozen;
         }
 
-        public double getFrozenBalance() {
-            return Double.parseDouble(StringUtil.getMoney(frozenBalance));
+        public void setAmmountFrozen(int ammountFrozen) {
+            this.ammountFrozen = ammountFrozen;
         }
 
-        public String getFrozenBalanceStr() {
-            return StringUtil.getMoney(frozenBalance);
+        public String getCoinName() {
+            return coinName;
         }
 
-        public String getCoinId() {
-            return coinId == null ? "" : coinId.toUpperCase();
+        public void setCoinName(String coinName) {
+            this.coinName = coinName;
         }
 
-        public String getCoinLogo() {
-            return coinLogo;
+        public int getAmmount() {
+            return ammount;
         }
 
-        public double getFee() {
-            return fee;
-        }
-
-        public int getSupportExchange() {
-            return supportExchange;
-        }
-
-        public int getSupportFinanc() {
-            return supportFinanc;
-        }
-
-        public double getFinancingCnt() {
-            return financingCnt;
+        public void setAmmount(int ammount) {
+            this.ammount = ammount;
         }
     }
 }
