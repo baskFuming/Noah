@@ -4,16 +4,32 @@ import com.xxx.mining.model.utils.StringUtil;
 
 public class RecordWithdrawalBean {
 
-    private int id;
-    private String unit;
-    private int orginIndex;
-    private String tableSymbol;
-    private int transferType;
-    private double amount;
-    private long time;
+    private Integer id;
+
+    private Integer userId;
+
+    private String address;
+
+    private Double amount;
+
+    private String remark;
+
+    private Double fee;
+
+    private Double getAmount;
+
+    private String drawHash;
+
+    private Integer status;
+
+    private Integer coinId;
+
+    private String createTime;
+
+    private String lastUpdateTime;
 
     public String getUnit() {
-        return unit;
+        return "";
     }
 
     public String getAmount() {
@@ -21,7 +37,7 @@ public class RecordWithdrawalBean {
     }
 
     public String getTime() {
-        return StringUtil.getSimpleDataFormatTime("yyyy-MM-dd HH:mm:ss", time);
+        return createTime;
     }
 
 }

@@ -82,7 +82,7 @@ public class PasswordWindow extends BaseDialog {
     }
 
     private void sendSMSCode() {
-        Api.getInstance().sendUpteSMSCode()
+        Api.getInstance().sendUpdateSMSCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(activity) {

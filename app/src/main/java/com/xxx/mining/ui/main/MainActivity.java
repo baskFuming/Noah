@@ -81,8 +81,11 @@ public class MainActivity extends BaseActivity {
         //初始化双击退出
         exitAppUtil = ExitAppUtil.getInstance();
 
-        //首先检查是否还在登陆状态
+        //检测是否设置过支付密码
         checkIsSettingPayPassword();
+
+        //版本更新
+        checkAppVersion();
 
         //加载首页数据
         selectorItem();
@@ -107,7 +110,7 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.LOGIN_RESULT_CODE) {
-//            checkAppVersion();
+            checkAppVersion();
             checkIsSettingPayPassword();
         }
     }
@@ -233,8 +236,6 @@ public class MainActivity extends BaseActivity {
                                 SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_PAY_PSW, true);
                             }
                         }
-                        //检查版本号
-//                        checkAppVersion();
                     }
 
                     @Override

@@ -102,7 +102,7 @@ public class ModifyLoginPswActivity extends BaseTitleActivity {
      * @Model 发送修改密码短信验证码
      */
     private void sendSMSCode() {
-        Api.getInstance().sendUpteSMSCode()
+        Api.getInstance().sendUpdateSMSCode()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

@@ -3,7 +3,6 @@ package com.xxx.mining.model.http;
 import com.xxx.mining.model.http.bean.AppVersionBean;
 import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.DepositBean;
-import com.xxx.mining.model.http.bean.DepositInfoBean;
 import com.xxx.mining.model.http.bean.DepositRecordBean;
 import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.IsSettingPayPswBean;
@@ -113,7 +112,7 @@ public interface ApiService {
 
     //获取提现记录列表
     @FormUrlEncoded
-    @POST("/invest/getWithdrawLogs")
+    @POST("/getChange")
     Observable<BaseBean<List<RecordWithdrawalBean>>> getWithdrawalRecordList(
             @Field("userId") String userId,
             @Field("unit") String unit,
@@ -123,7 +122,7 @@ public interface ApiService {
 
     //获取理财转入记录列表
     @FormUrlEncoded
-    @POST("/invest/getFinancingsLogs")
+    @POST()
     Observable<BaseBean<List<DepositRecordBean>>> getDepositInRecordList(
             @Field("userId") String userId,
             @Field("unit") String coinId,
@@ -133,7 +132,7 @@ public interface ApiService {
 
     //获取理财转出记录列表
     @FormUrlEncoded
-    @POST("/invest/getFinancingsDrawoutLogs")
+    @POST()
     Observable<BaseBean<List<DepositRecordBean>>> getDepositOutRecordList(
             @Field("userId") String userId,
             @Field("unit") String coinId,
@@ -159,33 +158,23 @@ public interface ApiService {
 
     //获取分红收益列表
     @FormUrlEncoded
-    @POST("/invest/getAllFinancingsIncomeLogs")
+    @POST("/getBonusRecord")
     Observable<BaseBean<List<RecordGiftBean>>> getRecordGiftList(
-            @Field("userId") String userId,
-            @Field("page") int pageNo,
-            @Field("row") int pageSize
+            @Field("pageNo") int pageNo,
+            @Field("pageSize") int pageSize
     );
-
-    //获取理财收益列表
-    @FormUrlEncoded
-    @POST("/invest/getFinancingsIncomeLogs")
-    Observable<BaseBean<List<RecordDepositBean>>> getRecordDepositList(
-            @Field("userId") String userId,
-            @Field("unit") String unit,
-            @Field("page") int pageNo,
-            @Field("row") int pageSize
-    );
-
-
-    //----------------------------------------------------------获取信息----------------------------------------------------------------------------------------------------------------------------//
-
 
     //获取理财收益列表
     @FormUrlEncoded
     @POST("/getManageIncome")
-    Observable<BaseBean<PageBean<DepositInfoBean>>> getDepositProfitInfo(
-            @Field("coinId") String coinId
+    Observable<BaseBean<PageBean<RecordDepositBean>>> getRecordDepositList(
+            @Field("coinId") String coinId,
+            @Field("pageNo") int pageNo,
+            @Field("pageSize") int pageSize
     );
+
+
+    //----------------------------------------------------------获取信息----------------------------------------------------------------------------------------------------------------------------//
 
     //获取理财收益
     @FormUrlEncoded
@@ -277,8 +266,7 @@ public interface ApiService {
 
     //发送修改密码验证码
     @POST("/sendUpdatePhoneMassage")
-    Observable<BaseBean<Object>> sendUpteSMSCode();
-
+    Observable<BaseBean<Object>> sendUpdateSMSCode();
 
     //注册
     @FormUrlEncoded
@@ -298,25 +286,6 @@ public interface ApiService {
             @Field("newPassword") String newPassword,
             @Field("code") String smsCode
     );
-
-    //发送忘记密码短信验证码
-    @FormUrlEncoded
-    @POST("/mobile/reset/code")
-    Observable<BaseBean<Object>> sendForgetSMSCode(
-            @Field("account") String phone,
-            @Field("geetest_challenge") String a,
-            @Field("geetest_validate") String b,
-            @Field("geetest_seccode") String c
-    );
-
-    //发送修改登录密码短信验证码
-    @POST("/mobile/update/password/code")
-    Observable<BaseBean<Object>> sendModifyLoginSMSCode();
-
-    //发送修改支付密码短信验证码
-    @POST("/mobile/transaction/code")
-    Observable<BaseBean<Object>> sendModifyPaySMSCode();
-
 
     //修改登录密码
     @FormUrlEncoded
@@ -343,7 +312,7 @@ public interface ApiService {
     );
 
     //获取城市编码
-    @POST("/support/country")
+    @POST()
     Observable<BaseBean<List<SelectCountyBean>>> getCounty();
 
     //检查app版本
@@ -359,7 +328,7 @@ public interface ApiService {
     Observable<BaseBean<IsSettingPayPswBean>> checkIsSettingPayPassword();
 
     //意见反馈
-    @POST("/invest/getUsdtFee")
+    @POST()
     @FormUrlEncoded
     Observable<BaseBean<Object>> submitFeedback(
             @Field("content") String amount,

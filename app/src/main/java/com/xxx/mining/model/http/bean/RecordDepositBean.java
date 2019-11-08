@@ -1,26 +1,32 @@
 package com.xxx.mining.model.http.bean;
 
-import com.xxx.mining.model.utils.StringUtil;
-
 public class RecordDepositBean {
 
-    private int id;
-    private String unit;
-    private int orginIndex;
-    private String tableSymbol;
-    private int transferType;
-    private double amount;
-    private long time;
+    /**
+     * date : 2019-11-07 20:54:10
+     * coinName : BTC
+     * tocoinName : MSB
+     * value : 100.1
+     */
 
-    public String getUnit() {
-        return unit;
+    private String date;
+    private String coinName;
+    private String tocoinName;
+    private double value;
+
+    public String getDate() {
+        return date;
     }
 
-    public String getAmount() {
-        return StringUtil.getMoney(amount);
+    public String getCoinName() {
+        return coinName;
     }
 
-    public String getTime() {
-        return StringUtil.getSimpleDataFormatTime("yyyy-MM-dd HH:mm:ss", time);
+    public String getTocoinName() {
+        return tocoinName;
+    }
+
+    public double getValue() {
+        return value;
     }
 }

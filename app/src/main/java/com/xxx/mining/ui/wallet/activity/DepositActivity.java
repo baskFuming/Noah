@@ -18,7 +18,7 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.DepositBean;
-import com.xxx.mining.model.http.bean.DepositInfoBean;
+import com.xxx.mining.model.http.bean.RecordDepositBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.utils.ToastUtil;
@@ -39,12 +39,12 @@ import io.reactivex.schedulers.Schedulers;
  * @Page 理财页
  * @Author xxx
  */
-public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-    public static void actionStart(Activity activity, int amount,String coinId) {
+    public static void actionStart(Activity activity, int amount, String coinId) {
         Intent intent = new Intent(activity, DepositActivity.class);
         intent.putExtra("coinId", coinId);
-        intent.putExtra("amount",amount);
+        intent.putExtra("amount", amount);
         activity.startActivity(intent);
     }
 
@@ -70,9 +70,9 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
     @BindView(R.id.deposit_profit)
     TextView mTotalProfit;
 
-    private int page;
+    private int page = ConfigClass.PAGE_DEFAULT;
     private DepositProfitAdapter mAdapter;
-    private List<DepositInfoBean> mList = new ArrayList<>();
+    private List<RecordDepositBean> mList = new ArrayList<>();
     private String coinId;
     private double inBalance;
     private double outBalance;
@@ -96,6 +96,8 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
+        mAdapter.setOnLoadMoreListener(this, mRecycler);
+
         loadInfo();
         loadData();
 
@@ -129,6 +131,13 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
 
     @Override
     public void onRefresh() {
+        page = ConfigClass.PAGE_DEFAULT;
+        loadData();
+    }
+
+    @Override
+    public void onLoadMoreRequested() {
+        page++;
         loadData();
     }
 
@@ -183,26 +192,48 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
      * @Model 获取首页列表
      */
     private void loadData() {
-        Api.getInstance().getDepositProfitInfo(coinId)
+        Api.getInstance().getRecordDepositList(coinId, page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<PageBean<DepositInfoBean>>(this) {
+                .subscribe(new ApiCallback<PageBean<RecordDepositBean>>(this) {
                     @Override
-                    public void onSuccess(BaseBean<PageBean<DepositInfoBean>> bean) {
-                        if (bean != null) {
-                            List<DepositInfoBean> blist = bean.getData().getList();
-                            if (blist == null || blist.size() == 0) {
-                                mNotData.setVisibility(View.VISIBLE);
-                                mRecycler.setVisibility(View.GONE);
-                                return;
-                            }
-                            mNotData.setVisibility(View.GONE);
-                            mRecycler.setVisibility(View.VISIBLE);
-                            mList.clear();
-                            mList.addAll(blist);
-                            mAdapter.notifyDataSetChanged();
+                    public void onSuccess(BaseBean<PageBean<RecordDepositBean>> bean) {
+                        if (bean == null) {
+                            mNotData.setVisibility(View.VISIBLE);
+                            mRecycler.setVisibility(View.GONE);
+                            mAdapter.loadMoreEnd(true);
+                            return;
                         }
+                        PageBean<RecordDepositBean> pageBean = bean.getData();
+                        if (pageBean == null) {
+                            mNotData.setVisibility(View.VISIBLE);
+                            mRecycler.setVisibility(View.GONE);
+                            mAdapter.loadMoreEnd(true);
+                            return;
+                        }
+                        List<RecordDepositBean> list = pageBean.getList();
+                        if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
+                            mNotData.setVisibility(View.VISIBLE);
+                            mRecycler.setVisibility(View.GONE);
+                            mAdapter.loadMoreEnd(true);
+                            return;
+                        }
+
+                        mNotData.setVisibility(View.GONE);
+                        mRecycler.setVisibility(View.VISIBLE);
+                        if (page == ConfigClass.PAGE_DEFAULT) {
+                            mList.clear();
+                        }
+
+                        mList.addAll(list);
+                        if (list.size() < ConfigClass.PAGE_SIZE) {
+                            mAdapter.loadMoreEnd(true);
+                        } else {
+                            mAdapter.loadMoreComplete();
+                        }
+                        mAdapter.notifyDataSetChanged();
                     }
+
                     @Override
                     public void onError(int errorCode, String errorMessage) {
                         ToastUtil.showToast(errorMessage);
@@ -225,5 +256,6 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                     }
                 });
     }
+
 
 }

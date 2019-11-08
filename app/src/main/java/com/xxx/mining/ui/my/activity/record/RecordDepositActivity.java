@@ -14,6 +14,7 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.RecordDepositBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
@@ -74,22 +75,27 @@ public class RecordDepositActivity extends BaseTitleActivity implements SwipeRef
     }
 
     private void loadData() {
-        String userId = String.valueOf(SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID));
-        String coinId = "CT";
-        Api.getInstance().getRecordDepositList(userId, coinId, page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getRecordDepositList(null, page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<RecordDepositBean>>(this) {
+                .subscribe(new ApiCallback<PageBean<RecordDepositBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<RecordDepositBean>> bean) {
+                    public void onSuccess(BaseBean<PageBean<RecordDepositBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
                             mAdapter.loadMoreEnd(true);
                             return;
                         }
-                        List<RecordDepositBean> list = bean.getData();
+                        PageBean<RecordDepositBean> pageBean = bean.getData();
+                        if (pageBean == null) {
+                            mNotData.setVisibility(View.VISIBLE);
+                            mRecycler.setVisibility(View.GONE);
+                            mAdapter.loadMoreEnd(true);
+                            return;
+                        }
+                        List<RecordDepositBean> list = pageBean.getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);

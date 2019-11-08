@@ -88,8 +88,7 @@ public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefres
     }
 
     private void loadList() {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().getRecordGiftList(userId, page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getRecordGiftList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<List<RecordGiftBean>>(this) {
