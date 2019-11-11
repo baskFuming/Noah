@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lin_back"
     android:layout_width="match_parent"
     android:layout_height="49dp"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
-
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    >
     <TextView
+        android:layout_centerVertical="true"
         android:id="@+id/item_record_team_time"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:gravity="center"
         android:text="2020-1-1 00:00:00"
         android:textColor="#333333"
         android:textSize="12dp" />
 
     <TextView
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:id="@+id/item_record_team_type"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -26,8 +28,10 @@
         android:textSize="12dp" />
 
     <TextView
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
         android:id="@+id/item_record_team_amount"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
@@ -35,4 +39,4 @@
         android:textColor="#333333"
         android:textSize="12dp" />
 
-</LinearLayout>
+</RelativeLayout>

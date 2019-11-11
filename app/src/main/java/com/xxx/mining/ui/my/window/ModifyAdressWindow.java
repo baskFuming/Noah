@@ -32,13 +32,17 @@ public class ModifyAdressWindow extends BaseDialog {
         return new ModifyAdressWindow(context);
     }
 
+
+    public void getAddress(String password) {
+        this.password = password;
+    }
+
     @BindView(R.id.window_password_edit)
     public EditText mPasswordEdit;
     @BindView(R.id.window_password_send)
     public EditText mPasswordSend;
     private String password;
     private String code;
-
 
     private ModifyAdressWindow(BaseActivity context) {
         super(context);
@@ -47,11 +51,12 @@ public class ModifyAdressWindow extends BaseDialog {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.address_manager;
+        return R.layout.adress_manger_pop;
     }
 
     @Override
     protected void initData() {
+        mPasswordEdit.setText(password);
         setCancelable(true); // 是否可以按“返回键”消失
     }
 
@@ -69,7 +74,6 @@ public class ModifyAdressWindow extends BaseDialog {
                 if (callback != null) callback.callback(password, code);
                 break;
             case R.id.window_password_return:
-                KeyBoardUtil.closeKeyBord(getContext(), mPasswordEdit, mPasswordSend);
                 dismiss();
                 break;
         }

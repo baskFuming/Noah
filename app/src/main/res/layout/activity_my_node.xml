@@ -16,8 +16,8 @@
             android:id="@+id/mill_record"
             android:layout_width="wrap_content"
             android:layout_height="46dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="10dp"
             android:gravity="center"
             android:text="@string/mill_record"
@@ -25,95 +25,263 @@
             android:textSize="16dp" />
 
     </RelativeLayout>
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:paddingLeft="20dp"
-       android:paddingRight="20dp"
-       android:orientation="vertical">
-       <RelativeLayout
-           android:layout_marginTop="24dp"
 
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
-           <TextView
-               android:text="@string/node_number"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:textColor="#FF333333"
-               android:textStyle="bold"
-               android:textSize="16dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp">
 
-           <TextView
-               android:id="@+id/node_up"
-               android:background="@drawable/selector_login_btn"
-               android:layout_alignParentRight="true"
-               android:text="@string/node_up"
-               android:layout_width="75dp"
-               android:layout_height="21dp"
-               android:paddingLeft="13dp"
-               android:paddingRight="13dp"
-               android:gravity="center"
-               android:textColor="#FFFFFFFF"
-               android:textSize="12dp" />
-       </RelativeLayout>
-       <RelativeLayout
-           android:paddingRight="20dp"
-           android:paddingLeft="20dp"
-           android:background="@drawable/selector_main_btn"
-           android:layout_width="match_parent"
-           android:layout_height="64dp"
-           android:layout_marginTop="13dp">
-           <TextView
-               android:id="@+id/node_number"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="节点编号XXXXXX"
-               android:textColor="#fff6f6f6"
-               android:textSize="14dp"
-               android:layout_centerVertical="true"
-               />
-           <TextView
-               android:id="@+id/node_invite"
-               android:layout_alignParentRight="true"
-               android:layout_centerVertical="true"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/node_invite"
-               android:textColor="#fff6f6f6"
-               android:textSize="14dp"
-               />
-       </RelativeLayout>
-       <RelativeLayout
-           android:layout_marginTop="30dp"
-           android:layout_marginBottom="15dp"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content">
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/latitude"
-               android:textColor="#ff9fb0bd"
-               android:textSize="14dp"
-               />
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/node_count"
-               android:layout_centerInParent="true"
-               android:textColor="#ff9fb0bd"
-               android:textSize="14dp"
-               />
-           <TextView
-               android:layout_alignParentRight="true"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/results"
-               android:textColor="#ff9fb0bd"
-               android:textSize="14dp"
-               />
-       </RelativeLayout>
-       <include layout="@layout/include_recycler"/>
-   </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/node_number"
+                android:textColor="#FF333333"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/node_up"
+                android:layout_width="75dp"
+                android:layout_height="21dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/selector_login_btn"
+                android:gravity="center"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:text="@string/node_up"
+                android:textColor="#FFFFFFFF"
+                android:textSize="12dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/selector_main_btn"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/node_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="节点编号XXXXXX"
+                android:textColor="#fff6f6f6"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/node_number_null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="@string/no_node_up"
+                android:textColor="#fff6f6f6"
+                android:textSize="14dp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/node_invite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/node_invite"
+                android:textColor="#fff6f6f6"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/li_visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/latitude"
+                    android:textColor="#ff9fb0bd"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/node_count"
+                    android:textColor="#ff9fb0bd"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/results"
+                    android:textColor="#ff9fb0bd"
+                    android:textSize="14dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_item"
+                android:orientation="vertical"
+                android:padding="15dp">
+
+                <RelativeLayout
+                    android:id="@+id/re_Depth"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_depath"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/te_countDepth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/te_depthAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_Width"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_with"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/te_countWidth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/te_widthAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/re_Amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/my_record"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/te_countNode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/te_nodeAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="--"
+                        android:textColor="#333333"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/main_not_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="259dp"
+                    android:layout_height="183dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/blank" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/not_data"
+                    android:textColor="@color/colorText"
+                    android:textSize="19dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

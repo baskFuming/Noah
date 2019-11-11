@@ -31,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
+public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdapter.RequestLoadMoreListener, BaseQuickAdapter.OnItemChildClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     public static void actionStart(Activity activity) {
         Intent intent = new Intent(activity, MyMiningActivity.class);
@@ -66,6 +66,7 @@ public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdap
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this, mRecycler);
+        mAdapter.setOnItemChildClickListener(this);
 
         loadData();
     }
@@ -87,7 +88,6 @@ public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdap
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<PageBean<MyMiningBean>>(this) {
-
                     @Override
                     public void onSuccess(BaseBean<PageBean<MyMiningBean>> bean) {
                         if (bean == null) {
@@ -143,4 +143,8 @@ public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdap
                 });
     }
 
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        MiningActivity.actionStart(this,mList.get(position).getId());
+    }
 }

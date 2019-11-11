@@ -5,20 +5,22 @@ import java.util.List;
 public class MyMiningBean {
 
     /**
-     * income : 0
-     * millNum : 10000
-     * id : 2
+     * income : 0.0
+     * millNum : yunkangji000011
+     * img : null
+     * id : 11
      */
 
-    private int income;
+    private double income;
     private String millNum;
+    private Object img;
     private int id;
 
-    public int getIncome() {
+    public double getIncome() {
         return income;
     }
 
-    public void setIncome(int income) {
+    public void setIncome(double income) {
         this.income = income;
     }
 
@@ -28,6 +30,14 @@ public class MyMiningBean {
 
     public void setMillNum(String millNum) {
         this.millNum = millNum;
+    }
+
+    public Object getImg() {
+        return img;
+    }
+
+    public void setImg(Object img) {
+        this.img = img;
     }
 
     public int getId() {

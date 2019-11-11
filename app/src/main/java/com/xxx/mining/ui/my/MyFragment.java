@@ -51,6 +51,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     SwipeRefreshLayout mRefresh;
     private String inviteCode;
     private LoadingDialog loadingDialog;
+    private boolean flag;
 
     @Override
     protected int getLayoutId() {
@@ -91,7 +92,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 MyMiningActivity.actionStart(getActivity());
                 break;
             case R.id.main_my_node:
-                MyNodeActivity.actionStart(getActivity(),true);
+                MyNodeActivity.actionStart(getActivity(), flag);
                 break;
             case R.id.main_my_order:
                 MyOrderActivity.actionStart(getActivity());
@@ -112,7 +113,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     }
 
     /**
-     * @Model 获取理财总收益信息
+     * @Model 获取用户信息
      */
     private void loadInfo() {
         Api.getInstance().getUserinfo()
@@ -127,6 +128,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                             if (data != null) {
                                 mName.setText(data.getUserName());
                                 mInvitedText.setText(data.getValue());
+                                flag = bean.getData().isNode();
                             }
                         }
                     }

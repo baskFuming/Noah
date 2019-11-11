@@ -5,19 +5,26 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.BannerBean;
+import com.xxx.mining.model.http.bean.NodePayBean;
+import com.xxx.mining.model.http.bean.PayOrderBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.BannerUtil;
+import com.xxx.mining.model.utils.GlideUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.shop.activity.PlaceSuccessActivity;
 import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
@@ -36,41 +43,49 @@ import io.reactivex.schedulers.Schedulers;
  * 竞升节点
  */
 public class AscendingNodeActivity extends BaseTitleActivity implements PasswordWindow.Callback {
-    public static void actionStart(Activity activity) {
+
+    public static void actionStart(Activity activity, int shopId, int imageUrl, int price, int dwttprice, int usdeprice) {
         Intent intent = new Intent(activity, AscendingNodeActivity.class);
+        intent.putExtra("shopId", shopId);
+        intent.putExtra("imageUrl", imageUrl);
+        intent.putExtra("price", price);
+        intent.putExtra("dwttprice", dwttprice);
+        intent.putExtra("usdeprice", usdeprice);
         activity.startActivity(intent);
     }
 
-    //    public static void actionStart(Activity activity, List<BannerBean> list, int shopId, double price) {
-//        Intent intent = new Intent(activity, AscendingNodeActivity.class);
-//        intent.putExtra("banner", (Serializable) list);
-//        intent.putExtra("shopId", shopId);
-//        intent.putExtra("price", price);
-//        activity.startActivity(intent);
-//    }
     public void initBundle() {
         Intent intent = getIntent();
-        list = (List<BannerBean>) intent.getSerializableExtra("banner");
         shopId = intent.getIntExtra("shopId", 0);
-        price = intent.getDoubleExtra("price", 0.0);
+        imageUrl = intent.getIntExtra("imageUrl", 0);
+        price = intent.getIntExtra("price", 0);
+        dwttprice = intent.getIntExtra("dwttprice", 0);
+        usdeprice = intent.getIntExtra("usdeprice", 0);
+
     }
 
     private PasswordWindow mPasswordWindow;
 
-    @BindView(R.id.shop_mining_place_banner)
-    Banner mBanner;
     @BindView(R.id.shop_mining_place_number)
     TextView mNumber;
     @BindView(R.id.shop_mining_place_price)
     TextView mPrice;
     @BindView(R.id.shop_mining_place_total)
     TextView mTotalPrice;
+    @BindView(R.id.shop_node_image)
+    ImageView imageView;
+    @BindView(R.id.invite_code)
+    EditText edInvite;
 
 
     private int number = 1; //购买数量
     private int shopId; //商品Id
-    private double price;   //商品价格
-    private List<BannerBean> list;  //轮播图
+    private int imageUrl;    //图片
+    private int price;
+    private int dwttprice;
+    private int usdeprice;
+    private String invite;
+    private boolean isHavePayPassword;
 
     @Override
     protected String initTitle() {
@@ -85,12 +100,10 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
     @Override
     protected void initData() {
         initBundle();
-
-//        mPrice.setText(String.valueOf(price) + "DWTT");
-//        mNumber.setText(String.valueOf(number));
-//        mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
-//        BannerUtil.init(mBanner, list, null);
-
+        mPrice.setText(usdeprice + "USDT" + "    " + dwttprice + "DWTT");
+        mNumber.setText(String.valueOf(number));
+        mTotalPrice.setText((number * price) + "USDT");
+        GlideUtil.loadBase(this, String.valueOf(imageUrl), imageView);
         //初始化密码输入框
         mPasswordWindow = PasswordWindow.getInstance(this);
         mPasswordWindow.setCallback(this);
@@ -102,28 +115,35 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         place(password, code);
     }
 
-    @OnClick({R.id.shop_mining_place_delete, R.id.shop_mining_place_add, R.id.shop_mining_place_btn, R.id.invite_code})
+    @OnClick({R.id.shop_mining_place_delete, R.id.shop_mining_place_add, R.id.shop_mining_place_btn})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.shop_mining_place_delete:
-                if (number > 1) {
-                    number--;
-                }
-                mNumber.setText(String.valueOf(number));
-                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
+//                if (number > 1) {
+//                    number--;
+//                }
+//                mNumber.setText(String.valueOf(number));
+//                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
                 break;
             case R.id.shop_mining_place_add:
-                number++;
-                mNumber.setText(String.valueOf(number));
-                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
+//                number++;
+//                mNumber.setText(String.valueOf(number));
+//                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
                 break;
             case R.id.shop_mining_place_btn:
-                if (mPasswordWindow != null) {
-                    mPasswordWindow.show();
+                invite = edInvite.getText().toString();
+                if (invite.isEmpty()) {
+                    ToastUtil.showToast(getString(R.string.enter_invie));
+                } else {
+                    isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
+                    if (!isHavePayPassword) {
+                        SettingPayPswActivity.actionStart(this);
+                    } else {
+                        if (mPasswordWindow != null) {
+                            mPasswordWindow.show();
+                        }
+                    }
                 }
-                break;
-            case R.id.invite_code:
-                KeyBoardUtil.copy(this, "");
                 break;
         }
     }
@@ -132,19 +152,19 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
      * @Model 下单
      */
     private void place(String password, String code) {
-        Api.getInstance().place(shopId, String.valueOf(number), password, code)
+        Api.getInstance().uplace(shopId, invite, password, code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<Object>(this) {
+                .subscribe(new ApiCallback<NodePayBean>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<Object> bean) {
+                    public void onSuccess(BaseBean<NodePayBean> bean) {
                         if (bean != null) {
-                            String orderCode = "1";
-                            double price = 1;
-                            double amount = 1;
-                            String time = "1";
-                            PlaceSuccessActivity.actionStart(AscendingNodeActivity.this, orderCode, price, amount, time);
+                            String orderNumber = bean.getData().getOrderNum();//订单编号
+                            double price = bean.getData().getPrice();//实付金额
+                            double number = bean.getData().getNum();//数量
+                            String creatTime = bean.getData().getCreateTime();//下单时间
+                            PlaceSuccessActivity.actionStart(AscendingNodeActivity.this, orderNumber, price, number, creatTime);
                             ToastUtil.showToast(bean.getMessage());
                         }
                     }

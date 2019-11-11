@@ -11,11 +11,13 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.BannerBean;
+import com.xxx.mining.model.http.bean.PayOrderBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.BannerUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
 import com.youth.banner.Banner;
 
@@ -32,6 +34,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ShopMiningPlaceActivity extends BaseTitleActivity implements PasswordWindow.Callback {
 
+
+    public static void actionStarts(Activity activity) {
+        Intent intent = new Intent(activity, ShopMiningPlaceActivity.class);
+        activity.startActivity(intent);
+    }
     public static void actionStart(Activity activity, List<String> list, int shopId, double price) {
         Intent intent = new Intent(activity, ShopMiningPlaceActivity.class);
         intent.putExtra("banner", (Serializable) list);
@@ -62,6 +69,8 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
     private int shopId; //商品Id
     private double price;   //商品价格
     private List<String> list = new ArrayList<>();  //轮播图
+    private boolean isHavePayPassword;
+
 
     @Override
     protected String initTitle() {
@@ -103,8 +112,13 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
                 mTotalPrice.setText(new BigDecimal(String.valueOf(String.valueOf(number * price))).setScale(4, BigDecimal.ROUND_DOWN).toPlainString() + "DWTT");
                 break;
             case R.id.shop_mining_place_btn:
-                if (mPasswordWindow != null) {
-                    mPasswordWindow.show();
+                isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
+                if (!isHavePayPassword) {
+                    SettingPayPswActivity.actionStart(this);
+                } else {
+                    if (mPasswordWindow != null) {
+                        mPasswordWindow.show();
+                    }
                 }
                 break;
         }
@@ -131,16 +145,16 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
         Api.getInstance().place(shopId, String.valueOf(number), password, code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<Object>(this) {
+                .subscribe(new ApiCallback<PayOrderBean>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<Object> bean) {
+                    public void onSuccess(BaseBean<PayOrderBean> bean) {
                         if (bean != null) {
-                            String orderCode = "1";
-                            double price = 1;
-                            double amount = 1;
-                            String time = "1";
-                            PlaceSuccessActivity.actionStart(ShopMiningPlaceActivity.this, orderCode, price, amount, time);
+                            String orderNumber = bean.getData().getOrderNum();//订单编号
+                            double price = bean.getData().getDwttPrice();//实付金额
+                            double number = bean.getData().getNum();//数量
+                            String creatTime = bean.getData().getCreateTime();//下单时间
+                            PlaceSuccessActivity.actionStart(ShopMiningPlaceActivity.this, orderNumber, price,number, creatTime);
                             ToastUtil.showToast(bean.getMessage());
                         }
                     }

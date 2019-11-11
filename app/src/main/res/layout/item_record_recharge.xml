@@ -15,7 +15,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="24dp"
         android:text="-----"
-        android:textColor="#375880FF"
+        android:textColor="#375880"
         android:textSize="@dimen/text_size" />
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:id="@+id/item_recharge_record_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#363636FF"
+            android:textColor="#363636"
             android:text="-----"
             android:textSize="@dimen/text_size" />
 
@@ -37,7 +37,7 @@
             android:id="@+id/item_recharge_record_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#363636FF"
+            android:textColor="#363636"
             android:text="-----"
             android:layout_marginTop="10dp"
             android:textSize="12dp" />

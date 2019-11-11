@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">Compass</string>
-    <string name="app_name_test">Compass(内测)</string>
+    <string name="app_name">Noah</string>
+    <string name="app_name_test">Noah(内测)</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -25,7 +25,7 @@
     <string name="save_image_fail">保存失败</string>
 
     <string name="main_home">首页</string>
-    <string name="main_wallet">钱包</string>
+    <string name="main_wallet">资产</string>
     <string name="main_shop">商城</string>
     <string name="main_mining">矿机</string>
     <string name="main_my">我的</string>
@@ -381,7 +381,7 @@
     <string name="main_shop_other">更多</string>
     <string name="shop_mining_title">矿机商城</string>
     <string name="shop_mining_toast">矿机列表</string>
-    <string name="shop_mining_btn">立即租用</string>
+    <string name="shop_mining_btn">立即购买</string>
     <string name="shop_mining_place_title">商品购买</string>
     <string name="shop_mining_place_number">数量</string>
     <string name="shop_mining_place_price">单价</string>
@@ -417,7 +417,7 @@
     <string name="credit_center_information">"\u3000\u3000"信贷中心即信用贷款，是指以借款人的信誉发放的贷款，借款人不需要提供担保。\n
 "\u3000\u3000"其特征就是债务人无需提供抵押品或第三方担保仅凭自己的信誉就能取得贷款，并引以借款人信用程度作为还款保证的。\n
 "\u3000\u3000"债权人（诺亚钱包）会根据借款人在钱包的信息，通过评分卡，规则+策略的大数据模型，对借款人的收益情况进行审核分析，最后确认是否进行放款。待动态节点成熟后会择机开放，敬请期待</string>
-    <string name="mill_record">矿机记录</string>
+    <string name="mill_record">挖机记录</string>
     <string name="node_number">节点编号</string>
     <string name="node_up">竟升节点</string>
     <string name="node_invite">节点邀请码</string>
@@ -444,5 +444,20 @@
     <string name="window_adress_edit_hint">请输入修改钱包地址</string>
     <string name="window_message_edit_hint">请输入修改备注信息</string>
     <string name="open_more">展开更多</string>
+    <string name="update_address">修改地址成功</string>
+    <string name="earnings">直推收益</string>
+    <string name="earnings_up">直推线下宽度</string>
+    <string name="enter_invie">请填写邀请码</string>
+    <string name="no_node_up">未竟升节点</string>
+    <string name="my_depath">深度</string>
+    <string name="my_with">宽度</string>
+    <string name="my_record">节点总业绩</string>
+    <string name="enter_money">入金(XX)</string>
+    <string name="day">/365天</string>
+    <string name="item_order_amount">共</string>
+    <string name="item_order_goods">件商品</string>
+    <string name="item_order_combined">合计</string>
+    <string name="run_status">运行状态</string>
+    <string name="modify_success">删除成功</string>
 
 </resources>

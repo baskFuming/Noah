@@ -20,8 +20,8 @@ public class MyMiningAdapter extends BaseQuickAdapter<MyMiningBean, BaseViewHold
     @Override
     protected void convert(BaseViewHolder helper, MyMiningBean item) {
         helper.setText(R.id.item_my_mining_code, String.valueOf(item.getIncome()))
-                .setText(R.id.my_mining_amount, item.getMillNum());
-
-//        GlideUtil.loadBase(mContext, String.valueOf(item.getId()),(ImageView) helper.getView(R.id.imageView1));
+                .setText(R.id.my_mining_amount, item.getMillNum())
+                .addOnClickListener(R.id.item_record_gift_back);
+        GlideUtil.loadBase(mContext, String.valueOf(item.getImg()), (ImageView) helper.getView(R.id.imageView1));
     }
 }

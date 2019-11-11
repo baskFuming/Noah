@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.RecordRechargeBean;
+import com.xxx.mining.model.utils.StringUtil;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class RechargeRecordAdapter extends BaseQuickAdapter<RecordRechargeBean, 
     @Override
     protected void convert(BaseViewHolder helper, RecordRechargeBean item) {
         helper.setText(R.id.item_recharge_record_name, "+" + item.getAmount())
-                .setText(R.id.item_recharge_record_time, item.getFromAddress())
-                .setText(R.id.item_recharge_record_amount, item.getRechargeDate());
+                .setText(R.id.item_recharge_record_time, item.getRechargeDate())
+                .setText(R.id.item_recharge_record_amount, StringUtil.getAddress(item.getFromAddress()));
     }
 }

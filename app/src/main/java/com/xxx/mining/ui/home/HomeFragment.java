@@ -31,6 +31,7 @@ import com.xxx.mining.ui.home.activity.ConsultingActivity;
 import com.xxx.mining.ui.home.activity.CreditCenterActivity;
 import com.xxx.mining.ui.home.activity.MoreOtherActivity;
 import com.xxx.mining.ui.home.adapter.HomeAdapter;
+import com.xxx.mining.ui.my.activity.MyNodeActivity;
 import com.xxx.mining.ui.my.activity.NoticeCenterActivity;
 import com.xxx.mining.ui.shop.ShopActivity;
 import com.xxx.mining.ui.wallet.activity.RechargeActivity;
@@ -111,7 +112,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 ConsultingActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_node:
-                ToastUtil.showToast("敬请期待");
+                MyNodeActivity.actionStartS(getActivity());
                 break;
             case R.id.main_home_other://更多
 //                ToastUtil.showToast("敬请期待");
@@ -132,7 +133,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
      * @Model 获取首页列表
      */
     private void loadData() {
-        Api.getInstance().getHomeList(1,ConfigClass.PAGE_SIZE)
+        Api.getInstance().getHomeList(1, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<PageBean<HomeBean>>(getActivity()) {

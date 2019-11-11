@@ -1,5 +1,6 @@
 package com.xxx.mining.ui.my.activity.record;
 
+import android.annotation.SuppressLint;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
+import com.xxx.mining.model.http.bean.RecordMiningBean;
 import com.xxx.mining.model.http.bean.RecordTeamBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
@@ -20,6 +22,8 @@ import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.adapter.RecordTeamAdapter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +50,7 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
 
     private int page = ConfigClass.PAGE_DEFAULT;
     private RecordTeamAdapter mAdapter;
-    private List<RecordTeamBean> mList = new ArrayList<>();
+    private List<RecordTeamBean.ListBean> mList = new ArrayList<>();
 
     @Override
     protected String initTitle() {
@@ -83,43 +87,41 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
 
 
     /**
-     * @Model 获取分享业绩列表
+     * @Model 获取团队业绩列表
      */
     private void loadData() {
-        Api.getInstance().getRecordTeamList(String.valueOf(SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID)))
+        Api.getInstance().getRecordTeamList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<RecordTeamBean>>(this) {
+                .subscribe(new ApiCallback<RecordTeamBean>(this) {
+                    @SuppressLint("SetTextI18n")
                     @Override
-                    public void onSuccess(BaseBean<List<RecordTeamBean>> bean) {
-                        if (bean == null) {
-                            mNotData.setVisibility(View.VISIBLE);
-                            mRecycler.setVisibility(View.GONE);
-                            mAdapter.loadMoreEnd(true);
-                            return;
-                        }
+                    public void onSuccess(BaseBean<RecordTeamBean> bean) {
+                        if (bean != null) {
+                            RecordTeamBean date = bean.getData();
+                            if (date != null) {
+                                mTotalAsset.setText("$" + new BigDecimal(date.getTotalIncome()).setScale(2, RoundingMode.DOWN).toPlainString());
+                                List<RecordTeamBean.ListBean> list = date.getList();
+                                if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
+                                    mNotData.setVisibility(View.VISIBLE);
+                                    mRecycler.setVisibility(View.GONE);
+                                    mAdapter.loadMoreEnd(true);
+                                    return;
+                                }
 
-                        List<RecordTeamBean> list = bean.getData();
-                        if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
-                            mNotData.setVisibility(View.VISIBLE);
-                            mRecycler.setVisibility(View.GONE);
-                            mAdapter.loadMoreEnd(true);
-                            return;
-                        }
+                                mNotData.setVisibility(View.GONE);
+                                mRecycler.setVisibility(View.VISIBLE);
+                                mList.clear();
+                                mList.addAll(list);
+                                if (list.size() < ConfigClass.PAGE_SIZE) {
+                                    mAdapter.loadMoreEnd(true);
+                                } else {
+                                    mAdapter.loadMoreComplete();
+                                }
+                                mAdapter.notifyDataSetChanged();
 
-                        mNotData.setVisibility(View.GONE);
-                        mRecycler.setVisibility(View.VISIBLE);
-                        if (page == ConfigClass.PAGE_DEFAULT) {
-                            mList.clear();
+                            }
                         }
-
-                        mList.addAll(list);
-                        if (list.size() < ConfigClass.PAGE_SIZE) {
-                            mAdapter.loadMoreEnd(true);
-                        } else {
-                            mAdapter.loadMoreComplete();
-                        }
-                        mAdapter.notifyDataSetChanged();
                     }
 
                     @Override

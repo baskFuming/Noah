@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,8 +63,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -88,8 +88,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,8 +113,9 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?android:attr/selectableItemBackground"
+        android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"

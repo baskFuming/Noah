@@ -3,12 +3,15 @@ package com.xxx.mining.ui.shop.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class PlaceSuccessActivity extends BaseActivity {
 
@@ -37,7 +40,6 @@ public class PlaceSuccessActivity extends BaseActivity {
     TextView mAmount;
     @BindView(R.id.place_success_time)
     TextView mTime;
-
     private String orderCode;
     private double price;
     private double amount;
@@ -51,9 +53,20 @@ public class PlaceSuccessActivity extends BaseActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
+        initBundle();
         mCode.setText(orderCode);
-        mPrice.setText(price + "元");
+        mPrice.setText((price * amount) + "元");
         mAmount.setText(amount + "");
         mTime.setText(time);
+    }
+
+    @OnClick({R.id.main_return})
+    public void OnClick(View view) {
+        switch (view.getId()) {
+            case R.id.main_return:
+                finish();
+                break;
+        }
+
     }
 }

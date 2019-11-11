@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity {
         checkIsSettingPayPassword();
 
         //版本更新
-        checkAppVersion();
+//        checkAppVersion();
 
         //加载首页数据
         selectorItem();
@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.LOGIN_RESULT_CODE) {
-            checkAppVersion();
+//            checkAppVersion();
             checkIsSettingPayPassword();
         }
     }
@@ -233,7 +233,7 @@ public class MainActivity extends BaseActivity {
                         if (bean != null) {
                             IsSettingPayPswBean data = bean.getData();
                             if (data != null) {
-                                SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_PAY_PSW, true);
+                                SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_PAY_PSW, data.isResult());
                             }
                         }
                     }

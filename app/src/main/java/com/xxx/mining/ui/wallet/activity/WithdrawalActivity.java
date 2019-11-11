@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,8 +22,10 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
+import com.xxx.mining.model.http.bean.RecordRechargeBean;
 import com.xxx.mining.model.http.bean.RecordWithdrawalBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.http.utils.ApiCode;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
@@ -49,11 +52,13 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, PasswordWindow.Callback {
 
-    public static void actionStart(Activity activity, double balance, double fee, String coinId) {
+    public static void actionStart(Activity activity, double balance, double fee, String coinId, String coinName, String address) {
         Intent intent = new Intent(activity, WithdrawalActivity.class);
         intent.putExtra("balance", balance);
         intent.putExtra("fee", fee);
         intent.putExtra("coinId", coinId);
+        intent.putExtra("coinName", coinName);
+        intent.putExtra("address", address);
         activity.startActivity(intent);
     }
 
@@ -61,7 +66,9 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
         Intent intent = getIntent();
         balance = intent.getDoubleExtra("balance", 0.0);
         fee = intent.getDoubleExtra("fee", 0.0);
-        coinId = getIntent().getStringExtra("coinId");
+        coinId = intent.getStringExtra("coinId");
+        coinName = intent.getStringExtra("coinName");
+        address = intent.getStringExtra("address");
     }
 
     @BindView(R.id.main_not_data)
@@ -79,21 +86,29 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
     @BindView(R.id.withdrawal_fee)
     TextView mFee;
 
-    private String address;
+    @BindView(R.id.main_home_app_bar)
+    AppBarLayout mAppBar;
+
+    private String maddress;
     private double amount;
     private String coinId;
     private double balance;
     private double fee;
+    private String coinName;
+    private String address;
+    private String remark;
     private int page = ConfigClass.PAGE_DEFAULT;
     private WithdrawalRecordAdapter mAdapter;
     private List<RecordWithdrawalBean> mList = new ArrayList<>();
     private PasswordWindow mPasswordWindow;
     private String code = "中国";    //默认是中国 +86
+    private boolean isHavePayPassword;
+    private String mamount;
 
 
     @Override
     protected String initTitle() {
-        return coinId + getString(R.string.withdrawal_title);
+        return coinName + getString(R.string.withdrawal_title);
     }
 
     @Override
@@ -106,20 +121,28 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
     @Override
     protected void initData() {
         initBundle();
-
-        mBalance.setText(String.valueOf(balance));
-        mFee.setText(getString(R.string.withdrawal_fee) + fee + coinId);
-
+        mBalance.setText(getString(R.string.withdrawal_balance) + balance + coinName);
+        mFee.setText(getString(R.string.withdrawal_fee) + fee + coinName);
         mAdapter = new WithdrawalRecordAdapter(mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this, mRecycler);
-
         //限定
         KeyBoardUtil.setFilters(mAmount, ConfigClass.DOUBLE_AMOUNT_NUMBER);
 
         loadData();
+
+        mAppBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset >= 0) {
+                    mRefresh.setEnabled(true);
+                } else {
+                    mRefresh.setEnabled(false);
+                }
+            }
+        });
     }
 
     @OnClick({R.id.main_return, R.id.withdrawal_btn, R.id.withdrawal_sweep})
@@ -129,7 +152,12 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                 finish();
                 break;
             case R.id.withdrawal_btn:
-                showWithdrawalDialog();
+                isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
+                if (!isHavePayPassword) {
+                    SettingPayPswActivity.actionStart(this);
+                } else {
+                    showWithdrawalDialog();
+                }
                 break;
             case R.id.withdrawal_sweep:
                 if (!PermissionUtil.checkPermission(this, PermissionUtil.READ_PERMISSION, PermissionUtil.WRITE_PERMISSION, PermissionUtil.CAMERA_PERMISSION)) {
@@ -179,18 +207,18 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
         }
     }
 
+
     /**
      * @Model 获取存币记录列表
      */
     private void loadData() {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().getWithdrawalRecordList(userId, coinId, page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getWithdrawalRecordList(Integer.parseInt(coinId), page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<RecordWithdrawalBean>>(this) {
+                .subscribe(new ApiCallback<PageBean<RecordWithdrawalBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<RecordWithdrawalBean>> bean) {
+                    public void onSuccess(BaseBean<PageBean<RecordWithdrawalBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -198,7 +226,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                             return;
                         }
 
-                        List<RecordWithdrawalBean> list = bean.getData();
+                        List<RecordWithdrawalBean> list = bean.getData().getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -210,7 +238,6 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                         if (page == ConfigClass.PAGE_DEFAULT) {
                             mList.clear();
                         }
-
                         mList.addAll(list);
                         if (list.size() < ConfigClass.PAGE_SIZE) {
                             mAdapter.loadMoreEnd(true);
@@ -243,23 +270,24 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                 });
     }
 
+
     /**
      * 提现验证
      */
     private void showWithdrawalDialog() {
-        address = mAddress.getText().toString();
-        String amount = mAmount.getText().toString();
+        maddress = mAddress.getText().toString();
+        mamount = mAmount.getText().toString();
 
-        if (address.isEmpty()) {
+        if (maddress.isEmpty()) {
             ToastUtil.showToast(R.string.withdrawal_error_1);
             return;
         }
-        if (amount.isEmpty()) {
+        if (mamount.isEmpty()) {
             ToastUtil.showToast(R.string.withdrawal_error_2);
             return;
         }
         try {
-            if (Double.parseDouble(amount) + fee > balance) {
+            if (Double.parseDouble(mamount) + fee > balance) {
                 ToastUtil.showToast(R.string.withdrawal_error_3);
                 return;
             }
@@ -269,7 +297,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
             return;
         }
 
-        this.amount = Double.parseDouble(amount);
+        this.amount = Double.parseDouble(mamount);
 
         if (mPasswordWindow == null || !mPasswordWindow.isShowing()) {
             mPasswordWindow = PasswordWindow.getInstance(this);
@@ -295,8 +323,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
      * @Model 提现
      */
     private void withdrawal(String password, String code) {
-        String userId = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_ID);
-        Api.getInstance().withdrawal(userId, coinId, fee, amount, address, password, code)
+        Api.getInstance().withdrawal(Integer.parseInt(coinId), Double.parseDouble(mamount), fee, Integer.parseInt(code), maddress, password, "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
@@ -338,5 +365,9 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
                 });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
 }

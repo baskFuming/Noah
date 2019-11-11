@@ -3,14 +3,15 @@ package com.xxx.mining.model.http.bean;
 import java.util.List;
 
 public class WalletBean {
-    private int totalAsset;
+
+    private double totalAsset;
     private List<ListBean> list;
 
-    public int getTotalAsset() {
+    public double getTotalAsset() {
         return totalAsset;
     }
 
-    public void setTotalAsset(int totalAsset) {
+    public void setTotalAsset(double totalAsset) {
         this.totalAsset = totalAsset;
     }
 
@@ -25,24 +26,34 @@ public class WalletBean {
     public static class ListBean {
         /**
          * coinId : 10000001
+         * amount : 1000000.0
          * address : 敬请期待
-         * ammountFrozen : 0
+         * fee : 0.01
+         * amountFrozen : 0.0
          * coinName : BTC
-         * ammount : 0
          */
 
-        private int coinId;
+        private String coinId;
+        private double amount;
         private String address;
-        private int ammountFrozen;
+        private double fee;
+        private double amountFrozen;
         private String coinName;
-        private int ammount;
 
-        public int getCoinId() {
+        public String getCoinId() {
             return coinId;
         }
 
-        public void setCoinId(int coinId) {
+        public void setCoinId(String coinId) {
             this.coinId = coinId;
+        }
+
+        public double getAmount() {
+            return amount;
+        }
+
+        public void setAmount(double amount) {
+            this.amount = amount;
         }
 
         public String getAddress() {
@@ -53,12 +64,20 @@ public class WalletBean {
             this.address = address;
         }
 
-        public int getAmmountFrozen() {
-            return ammountFrozen;
+        public double getFee() {
+            return fee;
         }
 
-        public void setAmmountFrozen(int ammountFrozen) {
-            this.ammountFrozen = ammountFrozen;
+        public void setFee(double fee) {
+            this.fee = fee;
+        }
+
+        public double getAmountFrozen() {
+            return amountFrozen;
+        }
+
+        public void setAmountFrozen(double amountFrozen) {
+            this.amountFrozen = amountFrozen;
         }
 
         public String getCoinName() {
@@ -67,14 +86,6 @@ public class WalletBean {
 
         public void setCoinName(String coinName) {
             this.coinName = coinName;
-        }
-
-        public int getAmmount() {
-            return ammount;
-        }
-
-        public void setAmmount(int ammount) {
-            this.ammount = ammount;
         }
     }
 }

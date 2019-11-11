@@ -75,7 +75,7 @@ public class RecordDepositActivity extends BaseTitleActivity implements SwipeRef
     }
 
     private void loadData() {
-        Api.getInstance().getRecordDepositList(null, page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getDepositList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<PageBean<RecordDepositBean>>(this) {

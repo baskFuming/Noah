@@ -27,6 +27,7 @@ import com.xxx.mining.ui.wallet.adapter.WalletAdapter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,13 +74,13 @@ public class WalletFragment extends BaseFragment implements SwipeRefreshLayout.O
         WalletBean.ListBean bean = mList.get(position);
         switch (view.getId()) {
             case R.id.item_wallet_recharge:
-                RechargeActivity.actionStart(getActivity(), bean.getAddress(), bean.getCoinName());
+                RechargeActivity.actionStart(getActivity(), bean.getAddress(), bean.getCoinId(),bean.getCoinName());
                 break;
             case R.id.item_wallet_withdrawal:
-                WithdrawalActivity.actionStart(getActivity(), bean.getAmmount(), bean.getAmmountFrozen(), bean.getCoinName());
+                WithdrawalActivity.actionStart(getActivity(), (int) bean.getAmount(), bean.getFee(),bean.getCoinId(),bean.getCoinName(),bean.getAddress());
                 break;
             case R.id.item_wallet_deposit:
-                DepositActivity.actionStart(getActivity(), bean.getAmmount(),String.valueOf(bean.getCoinId()));
+                DepositActivity.actionStart(getActivity(), (int) bean.getAmount(), String.valueOf(bean.getCoinId()));
                 break;
         }
     }

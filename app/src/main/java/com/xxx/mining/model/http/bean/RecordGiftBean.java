@@ -13,7 +13,7 @@ public class RecordGiftBean {
     private long time;
 
     public String getUnit() {
-        return "CT";
+        return "DWTT";
     }
 
     public String getAmount() {

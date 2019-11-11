@@ -16,6 +16,7 @@ import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.DownTimeUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -70,6 +71,7 @@ public class PasswordWindow extends BaseDialog {
                 password = mPasswordEdit.getText().toString();
                 code = mPasswordSend.getText().toString();
                 if (callback != null) callback.callback(password, code);
+                dismiss();
                 break;
             case R.id.window_password_return:
                 KeyBoardUtil.closeKeyBord(getContext(), mPasswordEdit, mPasswordSend);

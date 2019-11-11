@@ -12,12 +12,18 @@ import java.util.List;
 public class RecordDepositAdapter extends BaseQuickAdapter<RecordDepositBean, BaseViewHolder> {
 
     public RecordDepositAdapter(@Nullable List<RecordDepositBean> data) {
-        super(R.layout.item_record_deposit, data);
+        super(R.layout.item_record_gift, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, RecordDepositBean item) {
-        helper.setText(R.id.item_record_deposit_time, item.getTime())
-                .setText(R.id.item_record_deposit_amount, item.getAmount());
+        helper.setText(R.id.coin_type, item.getCoinName())
+                .setText(R.id.item_record_gift_amount, "+" + item.getValue() + " " + item.getTocoinName())
+                .setText(R.id.item_record_gift_time, item.getDate());
+        if (item.getCoinName().equals("DWTT")) {
+            helper.setBackgroundColor(R.id.item_record_gift_back, mContext.getResources().getColor(R.color.colorTextColorTitle));
+        } else {
+            helper.setBackgroundColor(R.id.item_record_gift_back, mContext.getResources().getColor(R.color.color_item));
+        }
     }
 }

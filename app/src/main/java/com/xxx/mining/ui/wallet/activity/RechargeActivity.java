@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,10 +45,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-    public static void actionStart(Activity activity, String address, String coinId) {
+    public static void actionStart(Activity activity, String address, String coinId, String coinName) {
         Intent intent = new Intent(activity, RechargeActivity.class);
         intent.putExtra("address", address);
         intent.putExtra("coinId", coinId);
+        intent.putExtra("coinName", coinName);
         activity.startActivity(intent);
     }
 
@@ -55,6 +57,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
         Intent intent = getIntent();
         content = intent.getStringExtra("address");
         coinId = intent.getStringExtra("coinId");
+        coinName = intent.getStringExtra("coinName");
     }
 
     @BindView(R.id.recharge_image)
@@ -67,16 +70,19 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
     LinearLayout mNotData;
     @BindView(R.id.recharge_refresh)
     SwipeRefreshLayout mRefresh;
+    @BindView(R.id.main_home_app_bar)
+    AppBarLayout mAppBar;
 
     private String coinId;
     private String content;
+    private String coinName;
     private int page = ConfigClass.PAGE_DEFAULT;
     private RechargeRecordAdapter mAdapter;
     private List<RecordRechargeBean> mList = new ArrayList<>();
 
     @Override
     protected String initTitle() {
-        return coinId + getString(R.string.recharge_title);
+        return coinName + getString(R.string.recharge_title);
     }
 
     @Override
@@ -99,6 +105,16 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
         mRefresh.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this, mRecycler);
 
+        mAppBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (verticalOffset >= 0) {
+                    mRefresh.setEnabled(true);
+                } else {
+                    mRefresh.setEnabled(false);
+                }
+            }
+        });
         loadData();
     }
 
@@ -131,7 +147,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
      * @Model 获取存币记录列表
      */
     private void loadData() {
-        Api.getInstance().getRechargeRecordList(page, ConfigClass.PAGE_SIZE, coinId)
+        Api.getInstance().getRechargeRecordList(Integer.parseInt(coinId),page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<PageBean<RecordRechargeBean>>(this) {

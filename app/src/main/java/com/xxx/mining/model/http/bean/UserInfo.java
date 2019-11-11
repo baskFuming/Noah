@@ -1,37 +1,37 @@
 package com.xxx.mining.model.http.bean;
 
 public class UserInfo {
+        /**
+         * node : false
+         * userName : 18310005980
+         * value : 欢迎来到Noah钱包
+         */
 
+        private boolean node;
+        private String userName;
+        private String value;
 
-    /**
-     * userName : 18310005980
-     * value : 欢迎来到Noah钱包
-     */
-    private boolean node;
-    private String userName;
-    private String value;
+        public boolean isNode() {
+            return node;
+        }
 
-    public String getUserName() {
-        return userName;
-    }
+        public void setNode(boolean node) {
+            this.node = node;
+        }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+        public String getUserName() {
+            return userName;
+        }
 
-    public String getValue() {
-        return value;
-    }
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+        public String getValue() {
+            return value;
+        }
 
-    public void setNode(boolean node) {
-        this.node = node;
-    }
-
-    public boolean isNode() {
-        return node;
-    }
+        public void setValue(String value) {
+            this.value = value;
+        }
 }

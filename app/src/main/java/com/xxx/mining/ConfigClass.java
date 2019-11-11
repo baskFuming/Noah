@@ -18,7 +18,7 @@ public class ConfigClass {
      * 网络请求基本参数配置
      */
     public static final String USE_HELP_URL = BASE_URL + "/download/CommonProblems-cn.html?lang=";   //使用帮助地址
-    public static final String INVITE_URL = BASE_URL + "/download/register.html?lang=cn&avatar=";   //邀请好友地址
+    public static final String INVITE_URL = BASE_URL + "/download/register.html";   //邀请好友地址
     public static final String IMAGE_URL = BASE_URL + "/CT/"; //图片地址
     public static final long CACHE_TIME = 2 * 60 * 60; //缓存时间 毫秒
     public static final long CACHE_SIZE = 100 * 1024 * 1024; //缓存大小 Bit

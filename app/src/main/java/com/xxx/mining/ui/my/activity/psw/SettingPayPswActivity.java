@@ -1,5 +1,7 @@
 package com.xxx.mining.ui.my.activity.psw;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,6 +16,10 @@ import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
+
+import java.io.Serializable;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,6 +32,10 @@ import io.reactivex.schedulers.Schedulers;
  * @Author xxx
  */
 public class SettingPayPswActivity extends BaseTitleActivity {
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, SettingPayPswActivity.class);
+        activity.startActivity(intent);
+    }
 
     @BindView(R.id.setting_pay_psw_password_edit)
     EditText mPasswordEdit;
@@ -85,7 +95,7 @@ public class SettingPayPswActivity extends BaseTitleActivity {
             showEditError(mPasswordEdit);
             return;
         }
-        if (!newPassword.matches(ConfigClass.MATCHES_PASSWORD)) {
+        if (!newPassword.matches(ConfigClass.MATCHES_SMS_CODE)) {
             ToastUtil.showToast(R.string.setting_pay_psw_error_3);
             showEditError(mPasswordEdit);
             return;

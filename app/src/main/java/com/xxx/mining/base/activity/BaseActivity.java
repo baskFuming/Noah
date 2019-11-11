@@ -17,7 +17,7 @@ public abstract class BaseActivity extends BaseLanguageActivity {
     private boolean isShowData;  //用于绑定Activity与网络请求的生命周期是否可以加载数据
     private Unbinder unbinder;
     private EditTextShakeHelper editTextShakeHelper;
-    private LoadingDialog mLoadingDialog;
+    public LoadingDialog mLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

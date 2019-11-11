@@ -139,6 +139,7 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
         }
         depositOut(password);
     }
+
     /**
      * @Model 理财转出
      */
@@ -190,7 +191,6 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
                     }
                 });
     }
-
 
 
 }
