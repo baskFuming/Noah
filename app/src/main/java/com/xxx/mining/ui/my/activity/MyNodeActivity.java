@@ -32,13 +32,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class MyNodeActivity extends BaseTitleActivity {
 
-
-    public static void actionStartS(Activity activity) {
-        Intent intent = new Intent(activity, MyNodeActivity.class);
-        activity.startActivity(intent);
-    }
-
-
     public static void actionStart(Activity activity, boolean flag) {
         Intent intent = new Intent(activity, MyNodeActivity.class);
         intent.putExtra("flag", flag);

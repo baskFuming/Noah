@@ -16,6 +16,7 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.AppVersionBean;
 import com.xxx.mining.model.http.bean.IsSettingPayPswBean;
+import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
@@ -77,6 +78,8 @@ public class MainActivity extends BaseActivity {
 
     private ExitAppUtil exitAppUtil;    //双击退出
 
+    private boolean flag;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -98,6 +101,7 @@ public class MainActivity extends BaseActivity {
 
         //加载首页数据
         selectorItem();
+
     }
 
     @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})
@@ -273,4 +277,7 @@ public class MainActivity extends BaseActivity {
                     }
                 });
     }
+
+
+
 }

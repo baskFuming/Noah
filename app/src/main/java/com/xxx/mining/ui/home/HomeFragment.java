@@ -16,6 +16,7 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
+import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.sp.SharedConst;
@@ -58,8 +59,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private HomeAdapter mAdapter;
     private List<HomeBean> mRecyclerList = new ArrayList<>();
     private List<NoticeCenterBean> mNoticeList = new ArrayList<>();
-    private boolean flag = false;
-
+    private boolean flag;
     private boolean isLoadFlipper;   //是否加载文字公告
 
     @Override
@@ -86,6 +86,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         loadData();
         loadNotice();
+        loadInfo();
     }
 
     @OnClick({R.id.main_home_shop, R.id.main_home_loan, R.id.main_home_news, R.id.main_home_node, R.id.main_home_other})
@@ -95,18 +96,15 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 ShopActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_loan://信贷
-//                ToastUtil.showToast("敬请期待");
                 CreditCenterActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_news://资讯
-//                ToastUtil.showToast("敬请期待");
                 NoticeCenterActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_node:
                 MyNodeActivity.actionStart(getActivity(), flag);
                 break;
             case R.id.main_home_other://更多
-//                ToastUtil.showToast("敬请期待");
                 MoreOtherActivity.actionStart(getActivity());
                 break;
         }
@@ -236,4 +234,29 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 });
     }
 
+    /**
+     * @Model 获取用户信息
+     */
+    private void loadInfo() {
+        Api.getInstance().getUserinfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiCallback<UserInfo>(getActivity()) {
+
+                    @Override
+                    public void onSuccess(BaseBean<UserInfo> bean) {
+                        if (bean != null) {
+                            UserInfo data = bean.getData();
+                            if (data != null) {
+                                flag = bean.getData().isNode();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
+                    }
+                });
+    }
 }
