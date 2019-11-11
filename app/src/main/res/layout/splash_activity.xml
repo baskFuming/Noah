@@ -2,27 +2,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--<pl.droidsonroids.gif.GifImageView-->
-    <!--android:id="@+id/gif_view"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:src="@mipmap/splash_start" />-->
+
     <ImageView
         android:id="@+id/gif_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/skip"
         android:layout_width="50dp"
         android:layout_height="24dp"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/skip_background"
         android:gravity="center"
         android:text="@string/splash_skip"
         android:textColor="#ffffffff"
         android:textSize="12sp" />
+
 </RelativeLayout>

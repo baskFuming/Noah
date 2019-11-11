@@ -41,7 +41,7 @@ public class ImageUtil {
         }
 
         //创建出图片文件
-        File file = new File(galleryPath,UUID.randomUUID() + ".jpg");
+        File file = new File(galleryPath, UUID.randomUUID() + ".jpg");
         if (!file.exists()) {
             try {
                 file.createNewFile();

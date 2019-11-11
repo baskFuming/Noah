@@ -14,11 +14,8 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.RecordMiningBean;
 import com.xxx.mining.model.http.bean.RecordTeamBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.adapter.RecordTeamAdapter;
 

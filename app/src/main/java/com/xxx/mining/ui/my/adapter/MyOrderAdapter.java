@@ -2,14 +2,11 @@ package com.xxx.mining.ui.my.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 
-import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.MyOrderBean;
-import com.xxx.mining.model.utils.GlideUtil;
 
 import java.util.List;
 
@@ -34,6 +31,6 @@ public class MyOrderAdapter extends BaseQuickAdapter<MyOrderBean, BaseViewHolder
             helper.setText(R.id.item_order, mContext.getString(R.string.item_order_combined) + item.getMillUSDTPrice() + "USDT" +
                     " " + item.getMillDWTTPrice() + "DWTT");
         }
-        GlideUtil.load(mContext, String.valueOf(item.getImgUrl()), (ImageView) helper.getView(R.id.imageView1));
+//        GlideUtil.load(mContext, String.valueOf(item.getImgUrl()), (ImageView) helper.getView(R.id.imageView1));
     }
 }

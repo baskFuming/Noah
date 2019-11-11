@@ -18,10 +18,7 @@ public class ApiError {
      */
     public static void ServiceCodeErrorFun(int code) {
         switch (code) {
-            case ApiCode.CT_TOKEN_INVALID:
-                startActivity();
-                break;
-            case ApiCode.UC_TOKEN_INVALID:
+            case ApiCode.TOKEN_INVALID:
                 startActivity();
                 break;
         }

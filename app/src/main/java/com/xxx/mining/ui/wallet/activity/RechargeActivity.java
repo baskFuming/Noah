@@ -22,12 +22,10 @@ import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.RecordRechargeBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.StringUtil;
+import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.model.utils.ZXingUtil;
-import com.xxx.mining.ui.shop.ShopActivity;
 import com.xxx.mining.ui.wallet.adapter.RechargeRecordAdapter;
 
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-    public static void actionStart(Activity activity, String address, String coinId, String coinName) {
+    public static void actionStart(Activity activity, String address, int coinId, String coinName) {
         Intent intent = new Intent(activity, RechargeActivity.class);
         intent.putExtra("address", address);
         intent.putExtra("coinId", coinId);
@@ -56,7 +54,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
     public void initBundle() {
         Intent intent = getIntent();
         content = intent.getStringExtra("address");
-        coinId = intent.getStringExtra("coinId");
+        coinId = intent.getIntExtra("coinId", 0);
         coinName = intent.getStringExtra("coinName");
     }
 
@@ -73,7 +71,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
     @BindView(R.id.main_home_app_bar)
     AppBarLayout mAppBar;
 
-    private String coinId;
+    private int coinId;
     private String content;
     private String coinName;
     private int page = ConfigClass.PAGE_DEFAULT;
@@ -147,7 +145,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
      * @Model 获取存币记录列表
      */
     private void loadData() {
-        Api.getInstance().getRechargeRecordList(Integer.parseInt(coinId),page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getRechargeRecordList(coinId, page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<PageBean<RecordRechargeBean>>(this) {
@@ -184,7 +182,7 @@ public class RechargeActivity extends BaseTitleActivity implements SwipeRefreshL
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-
+                        ToastUtil.showToast(errorMessage);
                     }
 
                     @Override

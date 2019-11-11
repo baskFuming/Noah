@@ -25,7 +25,7 @@ public abstract class BaseTitleActivity extends BaseActivity {
                 @Override
                 public void onClick(View v) {
                     //结束页面
-                   finish();
+                    finish();
                 }
             });
         } catch (Exception e) {

@@ -1,16 +1,10 @@
 package com.xxx.mining.ui.home;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -27,22 +21,18 @@ import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.home.activity.ConsultingActivity;
 import com.xxx.mining.ui.home.activity.CreditCenterActivity;
 import com.xxx.mining.ui.home.activity.MoreOtherActivity;
 import com.xxx.mining.ui.home.adapter.HomeAdapter;
 import com.xxx.mining.ui.my.activity.MyNodeActivity;
 import com.xxx.mining.ui.my.activity.NoticeCenterActivity;
 import com.xxx.mining.ui.shop.ShopActivity;
-import com.xxx.mining.ui.wallet.activity.RechargeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -67,7 +57,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private HomeAdapter mAdapter;
     private List<HomeBean> mRecyclerList = new ArrayList<>();
-    private List<NoticeCenterBean.ContentBean> mNoticeList = new ArrayList<>();
+    private List<NoticeCenterBean> mNoticeList = new ArrayList<>();
     private boolean flag = false;
 
     private boolean isLoadFlipper;   //是否加载文字公告
@@ -110,7 +100,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 break;
             case R.id.main_home_news://资讯
 //                ToastUtil.showToast("敬请期待");
-                ConsultingActivity.actionStart(getActivity());
+                NoticeCenterActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_node:
                 MyNodeActivity.actionStart(getActivity(), flag);
@@ -187,18 +177,18 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         Api.getInstance().getNoticeCenterList(1, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<NoticeCenterBean>(getActivity()) {
+                .subscribe(new ApiCallback<PageBean<NoticeCenterBean>>(getActivity()) {
 
                     @Override
-                    public void onSuccess(BaseBean<NoticeCenterBean> bean) {
+                    public void onSuccess(BaseBean<PageBean<NoticeCenterBean>> bean) {
                         if (bean != null) {
-                            NoticeCenterBean data = bean.getData();
+                            PageBean<NoticeCenterBean> data = bean.getData();
                             if (data != null) {
                                 isLoadFlipper = true;
 
-                                List<NoticeCenterBean.ContentBean> list = data.getContent();
+                                List<NoticeCenterBean> list = data.getList();
                                 for (int i = 0; i < list.size(); i++) {
-                                    NoticeCenterBean.ContentBean noticeCenterBean = list.get(i);
+                                    NoticeCenterBean noticeCenterBean = list.get(i);
                                     if (noticeCenterBean != null) {
                                         addView(noticeCenterBean);
                                     }
@@ -220,11 +210,11 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         isLoadFlipper = false;
                     }
 
-                    private void addView(NoticeCenterBean.ContentBean noticeCenterBean) {
+                    private void addView(NoticeCenterBean noticeCenterBean) {
                         View inflate = View.inflate(getContext(), R.layout.weight_view_flipper, null);
                         TextView mContext = inflate.findViewById(R.id.main_home_notice_content);
                         TextView mTime = inflate.findViewById(R.id.main_home_notice_time);
-                        mContext.setText(noticeCenterBean.getTitle());
+                        mContext.setText(noticeCenterBean.getName());
                         mTime.setText(noticeCenterBean.getCreateTime());
                         mViewFlipper.addView(inflate);
                         mNoticeList.add(noticeCenterBean);
@@ -236,10 +226,10 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                             public void onClick(View v) {
                                 int child = mViewFlipper.getDisplayedChild();   //点击的条目下标
                                 if (mNoticeList.size() != 0) {
-                                    NoticeCenterBean.ContentBean bean = mNoticeList.get(child);
+                                    NoticeCenterBean bean = mNoticeList.get(child);
                                 }
                                 //目前版本统一跳转到列表
-                                startActivity(new Intent(getContext(), NoticeCenterActivity.class));
+                                NoticeCenterActivity.actionStart(getActivity());
                             }
                         });
                     }

@@ -9,14 +9,14 @@ import com.xxx.mining.model.http.bean.RecordGiftBean;
 
 import java.util.List;
 
-public class RecordGiftAdapter extends BaseQuickAdapter<RecordGiftBean, BaseViewHolder> {
+public class RecordGiftAdapter extends BaseQuickAdapter<RecordGiftBean.DataBean, BaseViewHolder> {
 
-    public RecordGiftAdapter(@Nullable List<RecordGiftBean> data) {
+    public RecordGiftAdapter(@Nullable List<RecordGiftBean.DataBean> data) {
         super(R.layout.item_record_gift, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, RecordGiftBean item) {
+    protected void convert(BaseViewHolder helper, RecordGiftBean.DataBean item) {
         helper.setText(R.id.item_record_gift_time, item.getTime())
                 .setText(R.id.item_record_gift_amount, item.getAmount());
     }

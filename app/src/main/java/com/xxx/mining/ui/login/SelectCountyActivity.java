@@ -75,7 +75,7 @@ public class SelectCountyActivity extends BaseTitleActivity implements BaseQuick
         loadData();
     }
 
-    @OnClick({ R.id.select_county_save})
+    @OnClick({R.id.select_county_save})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.select_county_save:

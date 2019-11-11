@@ -1,9 +1,5 @@
 package com.xxx.mining.model.http.bean;
 
-import com.xxx.mining.model.utils.StringUtil;
-
-import java.util.List;
-
 public class RecordRechargeBean {
 
     /**
@@ -22,7 +18,7 @@ public class RecordRechargeBean {
     private int userId;
     private int coinId;
     private String rechargeDate;
-    private int amount;
+    private double amount;
     private int blockNum;
     private String fromAddress;
     private String toAddress;
@@ -60,11 +56,11 @@ public class RecordRechargeBean {
         this.rechargeDate = rechargeDate;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 

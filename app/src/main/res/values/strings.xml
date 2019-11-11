@@ -44,7 +44,7 @@
     <string name="main_my_invited">邀请好友</string>
     <string name="main_my_name">请登录</string>
     <string name="main_my_invited_icon_text">邀 请 好 友</string>
-    <string name="main_my_invited_icon_toast">邀请得CT奖励</string>
+    <string name="main_my_invited_icon_toast">邀请得MSB奖励</string>
 
     <string name="main_home_name">名称</string>
     <string name="main_home_now_price">最新价</string>
@@ -96,14 +96,14 @@
     <string name="record_team_asset">总资产</string>
 
     <string name="record_gift_title">分红收益</string>
-    <string name="record_gift_total">总收益（xxx）</string>
+    <string name="record_gift_total">总收益（USDT）</string>
     <string name="record_gift_s">深度总业绩</string>
     <string name="record_gift_k">宽度总业绩</string>
     <string name="record_gift_pair">当前碰对情况</string>
 
     <string name="deposit_profit_title">理财收益</string>
     <string name="deposit_profit_asset">总理财额($)</string>
-    <string name="deposit_profit_profit">总收益(CT)</string>
+    <string name="deposit_profit_profit">总收益(MSB)</string>
 
     <string name="deposit_title">理财</string>
     <string name="deposit_in">转入</string>
@@ -117,9 +117,8 @@
     <string name="deposit_in_btn">确认转入</string>
     <string name="deposit_in_toast_1">理财规则</string>
     <string name="deposit_in_toast_2">&#160;\n
-        1.随存随取，转入当天不计息，第二天计算收益，第三天收益到账。\n
-        2.转入最低等值$100的等值数字货币。\n
-        3.利息会以CT的方式每天返还到钱包账户，并采用币本位的计息方式。
+        1.随存随取，转入当天不计息，第三天计算收益，当天收益到账。\n
+        2.利息会以MSB的方式每天返还到钱包账户，并采用币本位的计息方式。
     </string>
     <string name="deposit_in_error_1">数量不能为空</string>
     <string name="deposit_in_error_2">数量输入有误</string>
@@ -151,49 +150,11 @@
     <string name="invite_friend_my">我的邀请链接</string>
     <string name="invite_friend_copy">复制链接</string>
 
-    <string name="note_game_title">节点竞赛</string>
-    <string name="note_game_number">当周奖金池</string>
-    <string name="note_game_first_name">上周冠军：</string>
-    <string name="note_game_first_number">冠军奖金：</string>
-    <string name="note_game_my_number">我的排名：</string>
-    <string name="note_game_rule">奖励规则</string>
-    <string name="note_game_top">当周前十排行榜</string>
-    <string name="note_game_ct">业绩（$）</string>
-    <string name="note_game_my_not">未上榜</string>
-
-    <string name="node_game_rule_title">奖励规则</string>
-    <string name="node_game_rule_open">展开</string>
-    <string name="node_game_rule_close">收起</string>
-    <string name="node_game_rule_open_text">查看详细规则</string>
-    <string name="node_game_rule_level">奖励等级</string>
-    <string name="node_game_rule_rate">奖励比例</string>
-    <string name="node_game_rule_rank">名次</string>
-    <string name="node_game_rule_level_text">等奖</string>
-    <string name="node_game_rule_content1">
-        根据每周直推新增业绩的排名进行分配
-        \n(第1名-第511名)
-    </string>
-    <string name="node_game_rule_content2">&#160;\n
-        第1名将独得一等奖为奖池总量的10%CT\n
-        第2–3名将均分二等奖为奖池总量的10%CT\n
-        第4–7名将均分三等奖为奖池总量的10%CT\n
-        第8–15名将均分四等奖为奖池总量的10%CT\n
-        第16–31名将均分五等奖为奖池总量的12%CT\n
-        第32–61名将均分六等奖为奖池总量的12%CT\n
-        第62–127名将均分七等奖为奖池总量的12%CT\n
-        第128–255名将均分八等奖为奖池总量的12%CT\n
-        第256–511名将均分九等奖为奖池总量的12%CT\n
-        每周一0:00开始每周日24:00结算奖金池CT总量
-    </string>
-
     <string name="recharge_title">充值</string>
     <string name="recharge_toast_1">扫描二维码向我付款</string>
     <string name="recharge_list">充值记录</string>
     <string name="recharge_code">0x</string>
     <string name="recharge_btn">复制收款地址</string>
-
-    <string name="share_record_title">分享收益</string>
-    <string name="share_record_total">总收益（CT）</string>
 
     <string name="feed_back_edit_hint">感谢您对产品提出的宝贵问题，我们会尽快优化产品，提升用户体验</string>
     <string name="feed_back_btn">提交</string>
@@ -335,20 +296,12 @@
     <string name="window_password_edit_hint">请输入支付密码</string>
     <string name="window_password_btn">确定</string>
     <string name="window_password_edit_title">输入支付密码</string>
-    <string name="window_password_error_1">密码不能为空</string>
     <string name="window_password_edit_send">请输入短信验证码</string>
+    <string name="window_password_error_1">支付密码不能为空</string>
+    <string name="window_password_error_2">支付密码错误</string>
+    <string name="window_password_error_3">短信验证码不能为空</string>
+    <string name="window_password_error_4">短信验证码错误</string>
 
-
-    <string name="window_rush_title">抢购</string>
-    <string name="window_rush_content">
-        您本次有%1$.4f个待抢CT，需要%2$.4f个CT作为保证金。\n
-        您当前的保证金为0，无法参与抢购
-    </string>
-    <string name="window_rush_content1">
-        您本次有%1$.4f个待抢CT，需要%2$.4f个CT作为保证金。\n
-        您当前的保证金为%3$.4f个CT，本次只能抢%4$.4f个CT。
-    </string>
-    <string name="window_rush_btn">确定</string>
 
     <string name="call_my_title">联系我们</string>
     <string name="call_my_save">保存二维码</string>
@@ -423,7 +376,7 @@
     <string name="node_invite">节点邀请码</string>
     <string name="latitude">纬度</string>
     <string name="node_count">节点数</string>
-    <string name="results">业绩（xx）</string>
+    <string name="results">业绩（USDT）</string>
     <string name="invite_code">邀请码</string>
     <string name="mining_title">挖矿</string>
     <string name="moment_mining">正在挖矿…</string>
@@ -444,15 +397,16 @@
     <string name="window_adress_edit_hint">请输入修改钱包地址</string>
     <string name="window_message_edit_hint">请输入修改备注信息</string>
     <string name="open_more">展开更多</string>
+    <string name="close_more">收起</string>
     <string name="update_address">修改地址成功</string>
     <string name="earnings">直推收益</string>
-    <string name="earnings_up">直推线下宽度</string>
+    <string name="earnings_up">社区收益</string>
     <string name="enter_invie">请填写邀请码</string>
     <string name="no_node_up">未竟升节点</string>
     <string name="my_depath">深度</string>
     <string name="my_with">宽度</string>
     <string name="my_record">节点总业绩</string>
-    <string name="enter_money">入金(XX)</string>
+    <string name="enter_money">入金(USDT)</string>
     <string name="day">/365天</string>
     <string name="item_order_amount">共</string>
     <string name="item_order_goods">件商品</string>

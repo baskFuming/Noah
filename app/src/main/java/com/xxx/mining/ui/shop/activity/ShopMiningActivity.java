@@ -19,15 +19,11 @@ import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.ShopMiningBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
-import com.xxx.mining.model.http.utils.ApiType;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.BannerUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.shop.adapter.ShopMiningAdapter;
 import com.youth.banner.Banner;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

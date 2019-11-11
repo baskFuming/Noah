@@ -16,10 +16,6 @@ import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
-
-import java.io.Serializable;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

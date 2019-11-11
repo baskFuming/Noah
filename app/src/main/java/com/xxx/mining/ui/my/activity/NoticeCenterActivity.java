@@ -16,6 +16,7 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.ui.my.adapter.NoticeCenterAdapter;
 
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ public class NoticeCenterActivity extends BaseTitleActivity implements SwipeRefr
 
     private int page = ConfigClass.PAGE_DEFAULT;
     private NoticeCenterAdapter mAdapter;
-    private List<NoticeCenterBean.ContentBean> mList = new ArrayList<>();
+    private List<NoticeCenterBean> mList = new ArrayList<>();
 
     @Override
     protected String initTitle() {
@@ -98,16 +99,16 @@ public class NoticeCenterActivity extends BaseTitleActivity implements SwipeRefr
         Api.getInstance().getNoticeCenterList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<NoticeCenterBean>(this) {
+                .subscribe(new ApiCallback<PageBean<NoticeCenterBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<NoticeCenterBean> bean) {
+                    public void onSuccess(BaseBean<PageBean<NoticeCenterBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mAdapter.loadMoreEnd(true);
                             return;
                         }
-                        NoticeCenterBean data = bean.getData();
+                        PageBean<NoticeCenterBean> data = bean.getData();
                         if (data == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -115,7 +116,7 @@ public class NoticeCenterActivity extends BaseTitleActivity implements SwipeRefr
                             return;
                         }
 
-                        List<NoticeCenterBean.ContentBean> list = data.getContent();
+                        List<NoticeCenterBean> list = data.getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);

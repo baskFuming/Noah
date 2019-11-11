@@ -55,15 +55,13 @@ public class ApiIntercept implements Interceptor {
     private Request headerIntercept(Interceptor.Chain chain) {
         //拦截请求头添加
         SharedPreferencesUtil instance = SharedPreferencesUtil.getInstance();
-        String token1 = instance.getDecryptionString(SharedConst.ENCRYPT_VALUE_TOKEN_1);
-        String token2 = instance.getDecryptionString(SharedConst.ENCRYPT_VALUE_TOKEN_2);
+        String token = instance.getDecryptionString(SharedConst.ENCRYPT_VALUE_TOKEN);
         String language = instance.getString(SharedConst.CONSTANT_LAUNCHER);
         return chain.request()
                 .newBuilder()
                 .addHeader("Accept-Language", language == null || language.equals("") ? LocalManageUtil.LANGUAGE_CN : language)
                 .addHeader("Cache-Control", "public,max-age=" + ConfigClass.CACHE_TIME)
-                .addHeader("x-auth-token", token1)
-                .addHeader("access-auth-token", token2)
+                .addHeader("x-auth-token", token)
                 .build();
     }
 

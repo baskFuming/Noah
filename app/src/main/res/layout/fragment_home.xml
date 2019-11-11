@@ -33,7 +33,7 @@
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="210dp"
+                            android:layout_height="174dp"
                             android:background="@drawable/shape_back_home" />
 
                         <LinearLayout
@@ -169,7 +169,7 @@
                                 android:id="@+id/main_home_notice"
                                 android:layout_width="match_parent"
                                 android:layout_height="34dp"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="60dp"
                                 android:layout_marginBottom="16dp"
                                 android:background="@drawable/shape_back_home_notice"
                                 android:gravity="center_vertical"
@@ -211,7 +211,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/main_home_name"
-                        android:textColor="#333333"
+                        android:textColor="#293F5A"
                         android:textSize="14dp" />
 
                     <TextView
@@ -220,7 +220,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/main_home_now_price"
-                        android:textColor="#333333"
+                        android:textColor="#293F5A"
                         android:textSize="14dp" />
 
                     <TextView
@@ -229,7 +229,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/main_home_range"
-                        android:textColor="#333333"
+                        android:textColor="#293F5A"
                         android:textSize="14dp" />
 
                 </LinearLayout>

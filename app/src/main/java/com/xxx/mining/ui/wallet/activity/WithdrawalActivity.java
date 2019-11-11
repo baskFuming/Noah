@@ -22,9 +22,9 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.RecordRechargeBean;
 import com.xxx.mining.model.http.bean.RecordWithdrawalBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.BooleanBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.http.utils.ApiCode;
 import com.xxx.mining.model.sp.SharedConst;
@@ -36,6 +36,8 @@ import com.xxx.mining.ui.main.SweepActivity;
 import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.wallet.adapter.WithdrawalRecordAdapter;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +54,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener, PasswordWindow.Callback {
 
-    public static void actionStart(Activity activity, double balance, double fee, String coinId, String coinName, String address) {
+    public static void actionStart(Activity activity, double balance, double fee, int coinId, String coinName, String address) {
         Intent intent = new Intent(activity, WithdrawalActivity.class);
         intent.putExtra("balance", balance);
         intent.putExtra("fee", fee);
@@ -66,7 +68,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
         Intent intent = getIntent();
         balance = intent.getDoubleExtra("balance", 0.0);
         fee = intent.getDoubleExtra("fee", 0.0);
-        coinId = intent.getStringExtra("coinId");
+        coinId = intent.getIntExtra("coinId", 0);
         coinName = intent.getStringExtra("coinName");
         address = intent.getStringExtra("address");
     }
@@ -91,7 +93,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
 
     private String maddress;
     private double amount;
-    private String coinId;
+    private int coinId;
     private double balance;
     private double fee;
     private String coinName;
@@ -212,7 +214,7 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
      * @Model 获取存币记录列表
      */
     private void loadData() {
-        Api.getInstance().getWithdrawalRecordList(Integer.parseInt(coinId), page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getWithdrawalRecordList(coinId, page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<PageBean<RecordWithdrawalBean>>(this) {
@@ -308,12 +310,20 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
 
     @Override
     public void callback(String password, String code) {
-        if (password.isEmpty()) {
-            ToastUtil.showToast(R.string.withdrawal_error_5);
+        if (password == null || password.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_1);
             return;
         }
-        if (code.isEmpty()) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_2);
+        if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
+            ToastUtil.showToast(R.string.window_password_error_2);
+            return;
+        }
+        if (code == null || code.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_3);
+            return;
+        }
+        if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
+            ToastUtil.showToast(R.string.window_password_error_4);
             return;
         }
         withdrawal(password, code);
@@ -323,21 +333,29 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
      * @Model 提现
      */
     private void withdrawal(String password, String code) {
-        Api.getInstance().withdrawal(Integer.parseInt(coinId), Double.parseDouble(mamount), fee, Integer.parseInt(code), maddress, password, "")
+        Api.getInstance().withdrawal(coinId, Double.parseDouble(mamount), fee, Integer.parseInt(code), maddress, password, "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<Object>(this) {
+                .subscribe(new ApiCallback<BooleanBean>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<Object> bean) {
+                    public void onSuccess(BaseBean<BooleanBean> bean) {
                         if (bean != null) {
-                            mPasswordWindow.dismiss();
-                            mPasswordWindow = null;
-                            balance -= (amount + fee);
-                            mBalance.setText(String.valueOf(balance));
-                            mAmount.setText("");
-                            loadData();
-                            ToastUtil.showToast(bean.getMessage());
+                            if (bean.getData().isResult()) {
+                                mPasswordWindow.dismiss();
+                                mPasswordWindow = null;
+                                balance -= (amount);
+                                mBalance.setText(String.valueOf(balance));
+                                mAmount.setText("");
+                                mAddress.setText("");
+
+                                loadData();
+                                ToastUtil.showToast(bean.getMessage());
+                                //更新钱包
+                                EventBus.getDefault().post(ConfigClass.EVENT_UPDATE_WALLET);
+                            } else {
+                                ToastUtil.showToast("fail");
+                            }
                         }
                     }
 

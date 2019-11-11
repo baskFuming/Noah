@@ -25,6 +25,7 @@ public class DownTimeUtil {
     }
 
     private Callback callback;
+
     /**
      * 获取实例
      *
@@ -36,6 +37,7 @@ public class DownTimeUtil {
 
     /**
      * 开启倒计时
+     *
      * @param time
      * @param callback
      */

@@ -2,16 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_recharge_record_back"
     android:layout_width="match_parent"
-    android:paddingRight="10dp"
+    android:layout_height="67dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/shape_back_item_small"
     android:paddingLeft="10dp"
-    android:background="@drawable/shape_back_item"
-    android:layout_height="56dp">
+    android:paddingRight="10dp">
 
     <TextView
-        android:id="@+id/item_recharge_record_name"
-        android:layout_alignParentRight="true"
+        android:id="@+id/item_recharge_record_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="24dp"
         android:text="-----"
@@ -26,20 +27,20 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/item_recharge_record_amount"
+            android:id="@+id/item_recharge_record_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#363636"
             android:text="-----"
+            android:textColor="#363636"
             android:textSize="@dimen/text_size" />
 
         <TextView
             android:id="@+id/item_recharge_record_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#363636"
-            android:text="-----"
             android:layout_marginTop="10dp"
+            android:text="-----"
+            android:textColor="#363636"
             android:textSize="12dp" />
 
     </LinearLayout>

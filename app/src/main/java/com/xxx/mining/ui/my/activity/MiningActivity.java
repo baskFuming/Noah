@@ -2,8 +2,6 @@ package com.xxx.mining.ui.my.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,7 +11,6 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.MillDetailBean;
-import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.utils.ToastUtil;
 
@@ -95,10 +92,12 @@ public class MiningActivity extends BaseTitleActivity {
                                 mTodayAmount.setText(String.valueOf(data.getCurrencyToday()));
                                 mNumbrer.setText(String.valueOf(data.getMillNum()));
                                 mTime.setText(data.getCreateTime());
+
                                 mDifcult.setText(String.valueOf(data.getDifficultyToday()));
+                                mTodayPro.setProgress(data.getDifficultyTodayProgress());
+
                                 mDay.setText(data.getMyCalculation() + getString(R.string.day));
-                                mCalculatrPro.setProgress(data.getMyCalculation());
-                                mTodayPro.setProgress((int) data.getDifficultyToday());
+                                mCalculatrPro.setProgress((int) data.getMyCalculation());
                             }
                         }
                     }

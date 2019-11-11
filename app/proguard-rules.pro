@@ -1,8 +1,8 @@
 #实体类
--keep class com.xxx.compass.model.http.bean.** { *; }
+-keep class com.xxx.mining.model.http.bean.** { *; }
 
 #sp
--keep class com.xxx.compass.model.http.sp.** { *; }
+-keep class com.xxx.mining.model.http.sp.** { *; }
 
 # 指定代码的压缩级别
 -optimizationpasses 5

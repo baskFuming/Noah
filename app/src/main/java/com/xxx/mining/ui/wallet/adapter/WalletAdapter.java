@@ -1,13 +1,11 @@
 package com.xxx.mining.ui.wallet.adapter;
 
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.WalletBean;
-import com.xxx.mining.model.utils.GlideUtil;
 
 import java.util.List;
 

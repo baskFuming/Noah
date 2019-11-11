@@ -1,5 +1,6 @@
 package com.xxx.mining.ui.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,6 +39,11 @@ import io.reactivex.schedulers.Schedulers;
  * @Author xxx
  */
 public class MainActivity extends BaseActivity {
+
+    public static void actionStart(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        activity.startActivity(intent);
+    }
 
     //页面下标
     private static final int HOME_TYPE = R.id.main_home;     //首页

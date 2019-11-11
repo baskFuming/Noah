@@ -3,8 +3,6 @@ package com.xxx.mining.ui.my.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,18 +12,13 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.AddressBean;
 import com.xxx.mining.model.http.bean.MyNode;
 import com.xxx.mining.model.http.bean.NodeCommod;
-import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.mining.MiningFragment;
-import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
 
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;

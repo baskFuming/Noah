@@ -4,13 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.xxx.mining.ConfigClass;
@@ -23,8 +20,6 @@ import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.adapter.RecordMiningAdapter;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -15,9 +15,6 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.RecordGiftBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.http.bean.base.PageBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.adapter.RecordGiftAdapter;
 
@@ -53,7 +50,7 @@ public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefres
 
     private int page = ConfigClass.PAGE_DEFAULT;
     private RecordGiftAdapter mAdapter;
-    private List<RecordGiftBean> mList = new ArrayList<>();
+    private List<RecordGiftBean.DataBean> mList = new ArrayList<>();
 
     @Override
     protected String initTitle() {
@@ -92,18 +89,28 @@ public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefres
         Api.getInstance().getRecordGiftList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<PageBean<RecordGiftBean>>(this) {
+                .subscribe(new ApiCallback<RecordGiftBean>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<PageBean<RecordGiftBean>> bean) {
+                    public void onSuccess(BaseBean<RecordGiftBean> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
                             mAdapter.loadMoreEnd(true);
                             return;
                         }
-
-                        List<RecordGiftBean> list = bean.getData().getList();
+                        RecordGiftBean data = bean.getData();
+                        if (data == null) {
+                            mNotData.setVisibility(View.VISIBLE);
+                            mRecycler.setVisibility(View.GONE);
+                            mAdapter.loadMoreEnd(true);
+                            return;
+                        }
+                        mTotal.setText(data.getTotalIncome());
+                        mS.setText(data.getDepthAmount());
+                        mK.setText(data.getWidthAmount());
+                        mPair.setText(data.getTouchNum());
+                        List<RecordGiftBean.DataBean> list = data.getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);

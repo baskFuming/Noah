@@ -12,7 +12,7 @@ import java.util.List;
 public class RecordDepositAdapter extends BaseQuickAdapter<RecordDepositBean, BaseViewHolder> {
 
     public RecordDepositAdapter(@Nullable List<RecordDepositBean> data) {
-        super(R.layout.item_record_gift, data);
+        super(R.layout.item_record_deposit, data);
     }
 
     @Override

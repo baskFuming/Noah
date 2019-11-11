@@ -98,7 +98,6 @@
         <activity android:name=".ui.my.activity.AscendingNodeActivity" />
         <activity android:name=".ui.home.activity.MoreOtherActivity" />
         <activity android:name=".ui.home.activity.CreditCenterActivity" />
-        <activity android:name=".ui.home.activity.ConsultingActivity" />
         <activity android:name=".ui.my.activity.MiningActivity" />
         <activity android:name=".ui.my.activity.RunStatusWebActivity"/>
         <activity android:name=".ui.my.activity.MillRecordActivity" />

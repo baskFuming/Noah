@@ -18,8 +18,8 @@ public class RechargeRecordAdapter extends BaseQuickAdapter<RecordRechargeBean, 
 
     @Override
     protected void convert(BaseViewHolder helper, RecordRechargeBean item) {
-        helper.setText(R.id.item_recharge_record_name, "+" + item.getAmount())
+        helper.setText(R.id.item_recharge_record_amount, "+" + item.getAmount())
                 .setText(R.id.item_recharge_record_time, item.getRechargeDate())
-                .setText(R.id.item_recharge_record_amount, StringUtil.getAddress(item.getFromAddress()));
+                .setText(R.id.item_recharge_record_address, StringUtil.getAddress(item.getFromAddress()));
     }
 }

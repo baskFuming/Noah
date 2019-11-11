@@ -3,7 +3,6 @@ package com.xxx.mining.model.utils;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.xxx.mining.model.http.bean.BannerBean;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -50,7 +49,7 @@ public class BannerUtil {
         @Override
         public void displayImage(Context context, Object path, ImageView imageView) {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            GlideUtil.loadFillet(context, (String) path,imageView);
+            GlideUtil.loadFillet(context, (String) path, imageView);
         }
     }
 }

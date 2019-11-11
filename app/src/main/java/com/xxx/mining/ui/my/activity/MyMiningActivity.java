@@ -17,10 +17,7 @@ import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.MyMiningBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.my.activity.record.RecordAllActivity;
 import com.xxx.mining.ui.my.adapter.MyMiningAdapter;
 
 import java.util.ArrayList;
@@ -145,6 +142,6 @@ public class MyMiningActivity extends BaseTitleActivity implements BaseQuickAdap
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        MiningActivity.actionStart(this,mList.get(position).getId());
+        MiningActivity.actionStart(this, mList.get(position).getId());
     }
 }

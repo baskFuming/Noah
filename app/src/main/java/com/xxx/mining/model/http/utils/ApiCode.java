@@ -12,9 +12,7 @@ public class ApiCode {
     /**
      * 特殊处理
      */
-    public static final int UC_TOKEN_INVALID = 4000; //UC接口Token失效
-
-    public static final int CT_TOKEN_INVALID = -1002; //CT接口Token失效
+    public static final int TOKEN_INVALID = 100001; //UC接口Token失效
 
     public static final int PAY_NOT_SETTING = -1063; //未设置交易密码
 

@@ -1,6 +1,5 @@
 package com.xxx.mining.ui.login;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -143,7 +142,7 @@ public class RegisterActivity extends BaseTitleActivity {
             showEditError(mAccountEdit);
             return;
         }
-        Api.getInstance().sendSMSCode(account,phoneCode)
+        Api.getInstance().sendSMSCode(account, phoneCode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

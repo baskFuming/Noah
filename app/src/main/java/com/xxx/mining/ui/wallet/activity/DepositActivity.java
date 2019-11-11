@@ -41,7 +41,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
-    public static void actionStart(Activity activity, int amount, String coinId) {
+    public static void actionStart(Activity activity, double amount, int coinId) {
         Intent intent = new Intent(activity, DepositActivity.class);
         intent.putExtra("coinId", coinId);
         intent.putExtra("amount", amount);
@@ -50,9 +50,8 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
 
     public void initBundle() {
         Intent intent = getIntent();
-        coinId = intent.getStringExtra("coinId");
+        coinId = intent.getIntExtra("coinId", 0);
         inBalance = intent.getDoubleExtra("amount", 0);
-
     }
 
 
@@ -73,7 +72,7 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
     private int page = ConfigClass.PAGE_DEFAULT;
     private DepositProfitAdapter mAdapter;
     private List<RecordDepositBean> mList = new ArrayList<>();
-    private String coinId;
+    private int coinId;
     private double inBalance;
     private double outBalance;
 
@@ -108,17 +107,11 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
         Intent intent = null;
         switch (view.getId()) {
             case R.id.deposit_in:
-                intent = new Intent(this, DepositInActivity.class);
-                intent.putExtra("amount", inBalance);
+                DepositInActivity.actionStart(this, inBalance, coinId);
                 break;
             case R.id.deposit_out:
-                intent = new Intent(this, DepositOutActivity.class);
-                intent.putExtra("amount", outBalance);
+                DepositOutActivity.actionStart(this, outBalance, coinId);
                 break;
-        }
-        if (intent != null) {
-            intent.putExtra("coinId", coinId);
-            startActivityForResult(intent, ConfigClass.REQUEST_CODE);
         }
     }
 
@@ -174,7 +167,8 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                         if (bean != null) {
                             DepositBean data = bean.getData();
                             if (data != null) {
-                                mTotalAsset.setText(String.valueOf(data.getInvest()));
+                                outBalance = data.getInvest();
+                                mTotalAsset.setText(String.valueOf(outBalance));
                                 mTotalProfit.setText(String.valueOf(data.getIncome()));
                             }
                         }

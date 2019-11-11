@@ -1,6 +1,7 @@
 package com.xxx.mining.ui.wallet.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
@@ -11,15 +12,14 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.http.bean.base.BooleanBean;
 import com.xxx.mining.model.http.utils.ApiCode;
 import com.xxx.mining.model.http.utils.ApiType;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -36,12 +36,25 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DepositOutActivity extends BaseTitleActivity implements PasswordWindow.Callback {
 
+    public static void actionStart(Activity activity, double amount, int coinId) {
+        Intent intent = new Intent(activity, DepositOutActivity.class);
+        intent.putExtra("coinId", coinId);
+        intent.putExtra("amount", amount);
+        activity.startActivity(intent);
+    }
+
+    public void initBundle() {
+        Intent intent = getIntent();
+        coinId = intent.getIntExtra("coinId", 0);
+        balance = intent.getDoubleExtra("amount", 0);
+    }
+
     @BindView(R.id.deposit_out_edit)
     EditText mEdit;
 
     private double value;
     private double balance;
-    private String coinId;
+    private int coinId;
     private PasswordWindow mPasswordWindow;
 
     @Override
@@ -57,9 +70,8 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        coinId = intent.getStringExtra("coinId");
-        balance = intent.getDoubleExtra("amount", 0);
+        initBundle();
+
         mEdit.setHint(getString(R.string.deposit_out_edit) + " " + balance);
 
         //限定
@@ -133,38 +145,43 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
 
     @Override
     public void callback(String password, String code) {
-        if (password.isEmpty()) {
-            ToastUtil.showToast(R.string.deposit_out_error_5);
+        if (password == null || password.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_1);
             return;
         }
-        depositOut(password);
+        if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
+            ToastUtil.showToast(R.string.window_password_error_2);
+            return;
+        }
+        if (code == null || code.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_3);
+            return;
+        }
+        if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
+            ToastUtil.showToast(R.string.window_password_error_4);
+            return;
+        }
+        depositOut(password, code);
     }
 
     /**
      * @Model 理财转出
      */
-    private void depositOut(String password) {
-        Api.getInstance().depositOut(String.valueOf(value), coinId, password)
+    private void depositOut(String password, String code) {
+        Api.getInstance().depositOut(value, coinId, code, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<BooleanBean>(this) {
+                .subscribe(new ApiCallback<Object>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<BooleanBean> bean) {
+                    public void onSuccess(BaseBean<Object> bean) {
                         if (bean != null) {
-                            BooleanBean data = bean.getData();
-                            if (data != null) {
-                                if (data.isResult()) {
-                                    mPasswordWindow.dismiss();
-                                    mPasswordWindow = null;
-                                    balance = new BigDecimal(balance - value).setScale(4, RoundingMode.HALF_UP).stripTrailingZeros().doubleValue();
-                                    mEdit.setHint(getString(R.string.deposit_out_edit) + " " + balance);
-                                    mEdit.setText("");
-                                    ToastUtil.showToast(bean.getMessage());
-                                    return;
-                                }
-                            }
+                            mPasswordWindow.dismiss();
+                            mPasswordWindow = null;
                             ToastUtil.showToast(bean.getMessage());
+                            //更新钱包
+                            EventBus.getDefault().post(ConfigClass.EVENT_UPDATE_WALLET);
+                            finish();
                         }
                     }
 

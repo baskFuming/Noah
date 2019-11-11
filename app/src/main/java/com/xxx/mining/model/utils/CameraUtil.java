@@ -18,7 +18,7 @@ import java.util.UUID;
 /**
  * 相机工具类
  */
-public class CameraUtil{
+public class CameraUtil {
 
     //相册请求码
     private static final int REQUEST_CODE_ALBUM = 0;
@@ -74,7 +74,7 @@ public class CameraUtil{
                 if (resultCode == Activity.RESULT_OK) {
                     //用相机返回的照片去调用剪裁也需要对Uri进行处理
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        Uri contentUri = FileProvider.getUriForFile(activity,activity.getApplication().getPackageName() + ".fileprovider", tempFile);
+                        Uri contentUri = FileProvider.getUriForFile(activity, activity.getApplication().getPackageName() + ".fileprovider", tempFile);
                         cropPhoto(activity, contentUri);//裁剪图片
                     } else {
                         cropPhoto(activity, Uri.fromFile(tempFile));//裁剪图片
@@ -100,7 +100,6 @@ public class CameraUtil{
                 break;
         }
     }
-
 
 
     /**

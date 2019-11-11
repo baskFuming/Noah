@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
-import com.xxx.mining.model.http.bean.MyNode;
 import com.xxx.mining.model.http.bean.WDepathBean;
 import com.xxx.mining.model.utils.StringUtil;
 

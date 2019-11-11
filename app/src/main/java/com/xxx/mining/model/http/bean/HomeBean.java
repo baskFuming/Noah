@@ -2,8 +2,6 @@ package com.xxx.mining.model.http.bean;
 
 import com.xxx.mining.model.utils.StringUtil;
 
-import java.util.List;
-
 public class HomeBean {
     /**
      * coinId : 10000001
@@ -47,7 +45,10 @@ public class HomeBean {
 
 
     public String getCoinPriceUSDT() {
-        return " $" + StringUtil.getMoney(coinPriceUSDT == null || coinPriceUSDT.equals("") ? 0 : Double.parseDouble(coinPriceUSDT));
-
+        try {
+            return "" + StringUtil.getMoney(coinPriceUSDT == null || coinPriceUSDT.equals("") ? 0 : Double.parseDouble(coinPriceUSDT));
+        } catch (Exception e) {
+            return "0.0";
+        }
     }
 }

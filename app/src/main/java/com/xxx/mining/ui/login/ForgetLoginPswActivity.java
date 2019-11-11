@@ -127,7 +127,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
             showEditError(mAccountEdit);
             return;
         }
-        Api.getInstance().sendSMSCode(account,area)
+        Api.getInstance().sendSMSCode(account, area)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {

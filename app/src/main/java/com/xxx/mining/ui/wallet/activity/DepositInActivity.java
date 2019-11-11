@@ -1,5 +1,6 @@
 package com.xxx.mining.ui.wallet.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
@@ -10,12 +11,11 @@ import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.http.bean.base.BooleanBean;
 import com.xxx.mining.model.http.utils.ApiType;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -32,11 +32,24 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DepositInActivity extends BaseTitleActivity {
 
+    public static void actionStart(Activity activity, double amount, int coinId) {
+        Intent intent = new Intent(activity, DepositInActivity.class);
+        intent.putExtra("coinId", coinId);
+        intent.putExtra("amount", amount);
+        activity.startActivity(intent);
+    }
+
+    public void initBundle() {
+        Intent intent = getIntent();
+        coinId = intent.getIntExtra("coinId", 0);
+        amount = intent.getDoubleExtra("amount", 0);
+    }
+
     @BindView(R.id.deposit_in_edit)
     EditText mEdit;
 
     private double amount;
-    private String coinId;
+    private int coinId;
 
     @Override
     protected String initTitle() {
@@ -50,9 +63,8 @@ public class DepositInActivity extends BaseTitleActivity {
 
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        coinId = intent.getStringExtra("coinId");
-        amount = intent.getDoubleExtra("amount", 0);
+        initBundle();
+
         mEdit.setHint(getString(R.string.deposit_in_edit) + " " + amount);
 
         //限定
@@ -117,25 +129,19 @@ public class DepositInActivity extends BaseTitleActivity {
             ToastUtil.showToast(R.string.deposit_in_error_2);
             return;
         }
-        Api.getInstance().depositIn(String.valueOf(amount), coinId)
+        Api.getInstance().depositIn(value, coinId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<BooleanBean>(this) {
+                .subscribe(new ApiCallback<Object>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<BooleanBean> bean) {
+                    public void onSuccess(BaseBean<Object> bean) {
                         if (bean != null) {
-                            BooleanBean data = bean.getData();
-                            if (data != null) {
-                                if (data.isResult()) {
-                                    amount = new BigDecimal(amount - value).setScale(4, RoundingMode.HALF_UP).stripTrailingZeros().doubleValue();
-                                    mEdit.setHint(getString(R.string.deposit_out_edit) + " " + amount);
-                                    mEdit.setText("");
-                                    ToastUtil.showToast(bean.getMessage());
-                                    return;
-                                }
-                            }
                             ToastUtil.showToast(bean.getMessage());
+                            //更新钱包
+                            EventBus.getDefault().post(ConfigClass.EVENT_UPDATE_WALLET);
+
+                            finish();
                         }
                     }
 

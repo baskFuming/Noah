@@ -1,14 +1,11 @@
 package com.xxx.mining.ui.shop.adapter;
 
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.ShopMiningBean;
-import com.xxx.mining.model.utils.GlideUtil;
 
 import java.math.BigDecimal;
 import java.util.List;

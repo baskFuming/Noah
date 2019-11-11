@@ -17,8 +17,6 @@ import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.MyOrderBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.adapter.MyOrderAdapter;
 

@@ -20,11 +20,8 @@ import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.LocalManageUtil;
-import com.xxx.mining.model.utils.MD5Util;
-import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.main.MainActivity;
-import com.xxx.mining.ui.my.activity.AccountSettingActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,7 +42,6 @@ public class LoginActivity extends BaseActivity {
         activity.startActivity(intent);
     }
 
-
     @BindView(R.id.login_selector_phone)
     TextView mSelectorPhone;
     @BindView(R.id.login_account_edit)
@@ -65,11 +61,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        //access-token
-        String accessToken = MD5Util.getMD5(SystemUtil.getSerialNumber() + SystemUtil.getUUID());
-        SharedPreferencesUtil util = SharedPreferencesUtil.getInstance();
-        util.saveEncryptString(SharedConst.ENCRYPT_VALUE_TOKEN_2, accessToken);
-
         //保存记录
         String phone = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_PHONE);
         mAccountEdit.setText(phone);
@@ -186,7 +177,7 @@ public class LoginActivity extends BaseActivity {
                                     util.saveString(SharedConst.VALUE_COUNTY_CITY, country.getZhName());
                                 }
                                 //x-token
-                                util.saveEncryptString(SharedConst.ENCRYPT_VALUE_TOKEN_1, data.getToken());
+                                util.saveEncryptString(SharedConst.ENCRYPT_VALUE_TOKEN, data.getToken());
                                 //判断下是否进入过首页
                                 Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getSimpleName());
                                 if (activity != null) {

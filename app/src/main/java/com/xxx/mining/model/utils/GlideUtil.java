@@ -2,6 +2,8 @@ package com.xxx.mining.model.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.widget.ImageView;
@@ -9,11 +11,13 @@ import android.widget.ImageView;
 import com.bumptech.glide.DrawableTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
-
-import java.util.List;
 
 /**
  * Glide工具类
@@ -31,19 +35,19 @@ public class GlideUtil {
 
     public static void loadBase(Context context, String url, final ImageView imageView) {
         if (context != null) {
-            loadImage(Glide.with(context).load(ConfigClass.IMAGE_URL  + url), imageView);
+            loadImage(Glide.with(context).load(ConfigClass.IMAGE_URL + url), imageView);
         }
     }
 
     public static void loadBaseCircle(Context context, String url, final ImageView imageView) {
         if (context != null) {
-            loadCircleImage(Glide.with(context).load(ConfigClass.IMAGE_URL  + url), context, imageView);
+            loadCircleImage(Glide.with(context).load(ConfigClass.IMAGE_URL + url), context, imageView);
         }
     }
 
     public static void loadBaseFillet(Context context, String url, final ImageView imageView) {
         if (context != null) {
-            loadFilletImage(Glide.with(context).load(ConfigClass.IMAGE_URL  + url), context, imageView);
+            loadFilletImage(Glide.with(context).load(ConfigClass.IMAGE_URL + url), context, imageView);
         }
     }
 

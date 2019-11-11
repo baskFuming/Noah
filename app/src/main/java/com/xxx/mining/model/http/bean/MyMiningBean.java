@@ -1,7 +1,5 @@
 package com.xxx.mining.model.http.bean;
 
-import java.util.List;
-
 public class MyMiningBean {
 
     /**

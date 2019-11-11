@@ -1,56 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    >
-    <RelativeLayout
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/item_record_gift_back"
-        android:background="@drawable/shape_back_item"
-        android:layout_width="match_parent"
-        android:layout_height="50dp">
-        <TextView
-            android:id="@+id/coin_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="----"
-            android:layout_centerVertical="true"
-            android:textColor="#ff333333"
-            android:textSize="12sp"
-            />
-        <LinearLayout
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_centerVertical="true"
-            android:orientation="vertical">
+    android:layout_height="49dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
-            <TextView
-                android:id="@+id/item_record_gift_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:text="+ 0.0"
-                android:textColor="#333333"
-                android:textSize="12dp"
-                />
+    <TextView
+        android:id="@+id/item_record_gift_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="7dp"
+        android:text="2020-1-1 00:00:00"
+        android:textColor="#333333"
+        android:textSize="12dp" />
 
-            <TextView
-                android:layout_marginTop="7dp"
-                android:id="@+id/item_record_gift_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="2020-1-1 00:00:00"
-                android:textColor="#333333"
-                android:textSize="12dp" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/item_record_gift_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:text="+ 0.0"
+        android:textColor="#333333"
+        android:textSize="12dp" />
 
-    </RelativeLayout>
+
 </RelativeLayout>

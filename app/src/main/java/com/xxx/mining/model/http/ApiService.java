@@ -88,7 +88,6 @@ public interface ApiService {
     );
 
 
-
     //获取我的节点列表
     @FormUrlEncoded
     @POST("/invest/getFinancingsIncomeLogs")
@@ -108,11 +107,10 @@ public interface ApiService {
     );
 
     //获取公告中心列表
-    @FormUrlEncoded
-    @POST("/announcement/page")
-    Observable<BaseBean<NoticeCenterBean>> getNoticeCenterList(
-            @Field("pageNo") int pageNo,
-            @Field("pageSize") int pageSize
+    @GET("/messages")
+    Observable<BaseBean<PageBean<NoticeCenterBean>>> getNoticeCenterList(
+            @Query("pageNum") int pageNo,
+            @Query("pageSize") int pageSize
     );
 
 
@@ -171,16 +169,16 @@ public interface ApiService {
 
     //获取分红收益列表
     @GET("/getBonusRecord")
-    Observable<BaseBean<PageBean<RecordGiftBean>>> getRecordGiftList(
-            @Field("pageNum") int pageNum,
-            @Field("pageSize") int pageSize
+    Observable<BaseBean<RecordGiftBean>> getRecordGiftList(
+            @Query("pageNum") int pageNum,
+            @Query("pageSize") int pageSize
     );
 
     //获取理财收益列表
     @FormUrlEncoded
     @POST("/getManageIncome")
     Observable<BaseBean<PageBean<RecordDepositBean>>> getRecordDepositList(
-            @Field("coinId") String coinId,
+            @Field("coinId") int coinId,
             @Field("pageNum") int pageNo,
             @Field("pageSize") int pageSize
     );
@@ -200,7 +198,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/myManage")
     Observable<BaseBean<DepositBean>> getDepositInfo(
-            @Field("coinId") String coinId
+            @Field("coinId") int coinId
     );
 
     //----------------------------------------------------------操作----------------------------------------------------------------------------------------------------------------------------//
@@ -208,7 +206,7 @@ public interface ApiService {
     //提现
     @POST("/doChange")
     @FormUrlEncoded
-    Observable<BaseBean<Object>> withdrawal(
+    Observable<BaseBean<BooleanBean>> withdrawal(
             @Field("coinId") int coinId,
             @Field("amount") double amount,
             @Field("fee") double fee,
@@ -216,16 +214,6 @@ public interface ApiService {
             @Field("address") String address,
             @Field("jyPassword") String jyPassword,
             @Field("remark") String remark
-    );
-
-    /**
-     * 提现发送验证码
-     */
-    @POST("/mobile/withdraw/code")
-    @FormUrlEncoded
-    Observable<BaseBean<Object>> sendWithdrawal(
-            @Field("phone") String phone,
-            @Field("country") String country
     );
 
     //兑换
@@ -240,17 +228,18 @@ public interface ApiService {
     //理财转入
     @POST("/addManageInvest")
     @FormUrlEncoded
-    Observable<BaseBean<BooleanBean>> depositIn(
-            @Field("amount") String amount,
-            @Field("coinId") String coinId
+    Observable<BaseBean<Object>> depositIn(
+            @Field("amount") double amount,
+            @Field("coinId") int coinId
     );
 
     //理财转出
     @POST("/outManageInvest")
     @FormUrlEncoded
-    Observable<BaseBean<BooleanBean>> depositOut(
-            @Field("amount") String amount,
-            @Field("coinId") String coinId,
+    Observable<BaseBean<Object>> depositOut(
+            @Field("amount") double amount,
+            @Field("coinId") int coinId,
+            @Field("code") String code,
             @Field("jyPassword") String jyPassword
     );
 

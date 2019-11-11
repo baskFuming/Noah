@@ -14,7 +14,7 @@
         android:layout_height="35dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="18dp"
-        android:src="@mipmap/ic_launcher" />
+        android:src="@mipmap/item_shop_mining" />
 
     <TextView
         android:id="@+id/item_my_mining_code"

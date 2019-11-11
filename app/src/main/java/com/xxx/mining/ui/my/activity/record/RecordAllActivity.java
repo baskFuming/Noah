@@ -7,7 +7,6 @@ import android.view.View;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.my.activity.InviteFriendActivity;
 
 import butterknife.OnClick;
 

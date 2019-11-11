@@ -80,8 +80,7 @@ public class SharedPreferencesUtil {
      */
     public void cleanAll() {
         sharedPreferences.edit()
-                .remove(SharedConst.ENCRYPT_VALUE_TOKEN_1)
-                .remove(SharedConst.ENCRYPT_VALUE_TOKEN_2)
+                .remove(SharedConst.ENCRYPT_VALUE_TOKEN)
                 .remove(SharedConst.IS_LOGIN)
                 .remove(SharedConst.IS_SETTING_PAY_PSW)
                 .remove(SharedConst.VALUE_COUNTY_CITY)

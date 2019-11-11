@@ -2,14 +2,12 @@ package com.xxx.mining.ui.my.adapter;
 
 import android.annotation.SuppressLint;
 import android.support.annotation.Nullable;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.RecordTeamBean;
 
-import java.net.HttpCookie;
 import java.util.List;
 
 public class RecordTeamAdapter extends BaseQuickAdapter<RecordTeamBean.ListBean, BaseViewHolder> {

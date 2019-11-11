@@ -1,7 +1,6 @@
 package com.xxx.mining.ui.my;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,12 +11,8 @@ import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.base.fragment.BaseFragment;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.DepositBean;
 import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.activity.AccountSettingActivity;
 import com.xxx.mining.ui.my.activity.CallMeActivity;

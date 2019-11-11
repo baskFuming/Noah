@@ -13,6 +13,7 @@ public class ToastUtil {
     private static String oldMsg;
     private static long oneTime = 0;
     private static long twoTime = 0;
+
     public static void showToast(String s) {
         if (s == null || s.equals("")) return;
 

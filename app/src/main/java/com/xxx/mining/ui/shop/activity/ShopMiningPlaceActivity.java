@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.PayOrderBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
@@ -39,6 +39,7 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
         Intent intent = new Intent(activity, ShopMiningPlaceActivity.class);
         activity.startActivity(intent);
     }
+
     public static void actionStart(Activity activity, List<String> list, int shopId, double price) {
         Intent intent = new Intent(activity, ShopMiningPlaceActivity.class);
         intent.putExtra("banner", (Serializable) list);
@@ -126,6 +127,22 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
 
     @Override
     public void callback(String password, String code) {
+        if (password == null || password.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_1);
+            return;
+        }
+        if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
+            ToastUtil.showToast(R.string.window_password_error_2);
+            return;
+        }
+        if (code == null || code.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_3);
+            return;
+        }
+        if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
+            ToastUtil.showToast(R.string.window_password_error_4);
+            return;
+        }
         place(password, code);
     }
 
@@ -154,7 +171,7 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
                             double price = bean.getData().getDwttPrice();//实付金额
                             double number = bean.getData().getNum();//数量
                             String creatTime = bean.getData().getCreateTime();//下单时间
-                            PlaceSuccessActivity.actionStart(ShopMiningPlaceActivity.this, orderNumber, price,number, creatTime);
+                            PlaceSuccessActivity.actionStart(ShopMiningPlaceActivity.this, orderNumber, price, number, creatTime);
                             ToastUtil.showToast(bean.getMessage());
                         }
                     }

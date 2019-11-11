@@ -11,8 +11,7 @@ public class SharedConst {
     /**
      * 保存加密的值
      */
-    public static final String ENCRYPT_VALUE_TOKEN_1 = "x_token_code";   //用户Token
-    public static final String ENCRYPT_VALUE_TOKEN_2 = "access_auth_token";   //用户Token 2号
+    public static final String ENCRYPT_VALUE_TOKEN = "x_token_code";   //用户Token
 
     /**
      * 保存的值

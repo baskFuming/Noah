@@ -11,7 +11,6 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.http.utils.ApiType;
 import com.xxx.mining.model.utils.BannerUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.shop.activity.ShopMiningActivity;
@@ -103,8 +102,8 @@ public class ShopActivity extends BaseTitleActivity implements SwipeRefreshLayou
                     public void onSuccess(BaseBean<BannerBean> bean) {
                         if (bean != null) {
                             BannerBean date = bean.getData();
-                            List<String> list  = date.getBanner();
-                             if (list != null) {
+                            List<String> list = date.getBanner();
+                            if (list != null) {
                                 isSuccessBanner = true;
                                 mBannerList.clear();
                                 mBannerList.addAll(list);

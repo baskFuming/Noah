@@ -14,7 +14,6 @@ import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ZXingUtil;
-import com.xxx.mining.ui.shop.ShopActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;

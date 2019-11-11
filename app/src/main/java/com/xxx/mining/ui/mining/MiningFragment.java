@@ -17,9 +17,6 @@ import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.ShopMiningBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
-import com.xxx.mining.model.http.utils.ApiType;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.BannerUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
@@ -85,8 +82,9 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-        ShopMiningPlaceActivity.actionStart(getActivity(), mBannerList,mList.get(position).getId(), mList.get(position).getDwttPrice());
+        ShopMiningPlaceActivity.actionStart(getActivity(), mBannerList, mList.get(position).getId(), mList.get(position).getDwttPrice());
     }
+
     @Override
     public void onRefresh() {
         page = ConfigClass.PAGE_DEFAULT;
@@ -189,7 +187,7 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
                                 isSuccessBanner = true;
                                 mBannerList.clear();
                                 mBannerList.addAll(list);
-                                BannerUtil.init(mBanner,mBannerList,null);
+                                BannerUtil.init(mBanner, mBannerList, null);
                             }
                         } else {
                             isSuccessBanner = false;

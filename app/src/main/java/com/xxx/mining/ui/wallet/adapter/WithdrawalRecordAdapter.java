@@ -18,8 +18,8 @@ public class WithdrawalRecordAdapter extends BaseQuickAdapter<RecordWithdrawalBe
 
     @Override
     protected void convert(BaseViewHolder helper, RecordWithdrawalBean item) {
-        helper.setText(R.id.item_recharge_record_name, "-" + item.getAmount())
-                .setText(R.id.item_recharge_record_time, item.getCreateTime())
-                .setText(R.id.item_recharge_record_amount, StringUtil.getAddress(item.getAddress()));
+        helper.setText(R.id.item_withdrawal_record_amount, "-" + item.getAmount())
+                .setText(R.id.item_withdrawal_record_time, item.getCreateTime())
+                .setText(R.id.item_withdrawal_record_address, StringUtil.getAddress(item.getAddress()));
     }
 }

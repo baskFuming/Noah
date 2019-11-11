@@ -2,26 +2,13 @@ package com.xxx.mining.ui.my.window;
 
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
 import com.xxx.mining.base.dialog.BaseDialog;
-import com.xxx.mining.model.http.Api;
-import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.sp.SharedConst;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.DownTimeUtil;
-import com.xxx.mining.model.utils.KeyBoardUtil;
-import com.xxx.mining.model.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class ModifyAdressWindow extends BaseDialog {
 

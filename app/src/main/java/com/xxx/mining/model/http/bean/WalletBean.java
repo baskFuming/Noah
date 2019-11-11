@@ -33,18 +33,19 @@ public class WalletBean {
          * coinName : BTC
          */
 
-        private String coinId;
+        private int coinId;
         private double amount;
         private String address;
         private double fee;
         private double amountFrozen;
         private String coinName;
+        private Integer isDisplay;
 
-        public String getCoinId() {
+        public int getCoinId() {
             return coinId;
         }
 
-        public void setCoinId(String coinId) {
+        public void setCoinId(int coinId) {
             this.coinId = coinId;
         }
 
@@ -62,6 +63,10 @@ public class WalletBean {
 
         public void setAddress(String address) {
             this.address = address;
+        }
+
+        public boolean isDisplay() {
+            return isDisplay == 1;
         }
 
         public double getFee() {

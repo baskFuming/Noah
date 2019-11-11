@@ -2,36 +2,24 @@ package com.xxx.mining.ui.my.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
-import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.NodePayBean;
-import com.xxx.mining.model.http.bean.PayOrderBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.BannerUtil;
 import com.xxx.mining.model.utils.GlideUtil;
-import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.shop.activity.PlaceSuccessActivity;
-import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
-import com.youth.banner.Banner;
-
-import java.io.Serializable;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -1,16 +1,11 @@
 package com.xxx.mining.base.dialog;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.xxx.mining.R;
-
-import butterknife.ButterKnife;
 
 
 /**
