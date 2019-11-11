@@ -168,6 +168,7 @@ public class MyNodeActivity extends BaseTitleActivity {
     /**
      * @Model 获取我的节点
      */
+
     private void loadMyNode() {
         Api.getInstance().getmyNode()
                 .subscribeOn(Schedulers.io())

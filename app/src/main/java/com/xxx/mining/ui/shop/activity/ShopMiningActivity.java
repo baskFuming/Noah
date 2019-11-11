@@ -93,8 +93,8 @@ public class ShopMiningActivity extends BaseTitleActivity implements SwipeRefres
 
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-//        ShopMiningBean bean = mList.get(position);
-        ShopMiningPlaceActivity.actionStart(this, mBannerList, 1, 100);
+        ShopMiningBean bean = mList.get(position);
+        ShopMiningPlaceActivity.actionStart(this, mBannerList, bean.getId(), bean.getDwttPrice());
     }
 
     @Override
