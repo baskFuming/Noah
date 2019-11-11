@@ -15,6 +15,7 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.RecordGiftBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
@@ -29,7 +30,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @Page 存币收益页
+ * @Page 分红记录
  * @Author xxx
  */
 public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
@@ -91,10 +92,10 @@ public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefres
         Api.getInstance().getRecordGiftList(page, ConfigClass.PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<List<RecordGiftBean>>(this) {
+                .subscribe(new ApiCallback<PageBean<RecordGiftBean>>(this) {
 
                     @Override
-                    public void onSuccess(BaseBean<List<RecordGiftBean>> bean) {
+                    public void onSuccess(BaseBean<PageBean<RecordGiftBean>> bean) {
                         if (bean == null) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);
@@ -102,7 +103,7 @@ public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefres
                             return;
                         }
 
-                        List<RecordGiftBean> list = bean.getData();
+                        List<RecordGiftBean> list = bean.getData().getList();
                         if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                             mNotData.setVisibility(View.VISIBLE);
                             mRecycler.setVisibility(View.GONE);

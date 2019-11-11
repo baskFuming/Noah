@@ -40,7 +40,7 @@ public class StringUtil {
     /**
      * 获取数字转化汉字
      */
-    public static String getChinese(Activity activity,int key) {
+    public static String getChinese(Activity activity, int key) {
         switch (key) {
             case 1:
                 return activity.getString(R.string.first);
@@ -91,5 +91,14 @@ public class StringUtil {
             return sb.toString();
         }
         return address;
+    }
+
+    public static String getPhone(String phone) {
+        if (phone != null && phone.trim().length() >= 11) {
+            StringBuilder sb = new StringBuilder(phone.trim());
+            sb.replace(3, 9, "***");
+            return sb.toString();
+        }
+        return phone;
     }
 }

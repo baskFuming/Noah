@@ -170,10 +170,9 @@ public interface ApiService {
     );
 
     //获取分红收益列表
-    @FormUrlEncoded
-    @POST("/getBonusRecord")
-    Observable<BaseBean<List<RecordGiftBean>>> getRecordGiftList(
-            @Field("pageNo") int pageNo,
+    @GET("/getBonusRecord")
+    Observable<BaseBean<PageBean<RecordGiftBean>>> getRecordGiftList(
+            @Field("pageNum") int pageNum,
             @Field("pageSize") int pageSize
     );
 
@@ -182,7 +181,7 @@ public interface ApiService {
     @POST("/getManageIncome")
     Observable<BaseBean<PageBean<RecordDepositBean>>> getRecordDepositList(
             @Field("coinId") String coinId,
-            @Field("pageNo") int pageNo,
+            @Field("pageNum") int pageNo,
             @Field("pageSize") int pageSize
     );
 
@@ -190,7 +189,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/getManageIncome")
     Observable<BaseBean<PageBean<RecordDepositBean>>> getDepositList(
-            @Field("pageNo") int pageNo,
+            @Field("pageNum") int pageNo,
             @Field("pageSize") int pageSize
     );
 
