@@ -91,10 +91,13 @@ public class MainActivity extends BaseActivity {
         checkIsSettingPayPassword();
 
         //版本更新
-//        checkAppVersion();
+        checkAppVersion();
 
         //加载首页数据
         selectorItem();
+
+        //初始化路由
+        FragmentManager.replaceFragment(this, HomeFragment.class, R.id.main_frame);
     }
 
     @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})

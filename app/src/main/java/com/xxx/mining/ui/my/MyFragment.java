@@ -44,8 +44,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     TextView mInvitedText;
     @BindView(R.id.main_my_refresh)
     SwipeRefreshLayout mRefresh;
-    private String inviteCode;
-    private LoadingDialog loadingDialog;
+
     private boolean flag;
 
     @Override
@@ -56,10 +55,6 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     @SuppressLint("SetTextI18n")
     @Override
     protected void initData() {
-        loadingDialog = LoadingDialog.getInstance(getActivity());
-//        mName.setText(SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_NAME));
-//        inviteCode = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_INVITE_CODE);
-//        mInvitedText.setText(getString(R.string.main_my_invited_text) + "：" + inviteCode);
         mRefresh.setOnRefreshListener(this);
         loadInfo();
     }
@@ -69,16 +64,13 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
         loadInfo();
     }
 
-    @OnClick({R.id.main_my_invited_text,
+    @OnClick({
             R.id.main_my_invited, R.id.main_my_record, R.id.main_my_mining, R.id.main_my_node, R.id.main_my_order,
             R.id.main_my_notice, R.id.main_my_call_my, R.id.main_my_setting, R.id.main_my_language})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.main_my_invited:
                 InviteFriendActivity.actionStart(getActivity());
-                break;
-            case R.id.main_my_invited_text:
-//                KeyBoardUtil.copy(getContext(), inviteCode);
                 break;
             case R.id.main_my_record:
                 RecordAllActivity.actionStart(getActivity());
@@ -136,18 +128,16 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (loadingDialog != null && mRefresh != null) {
+                        if (mRefresh != null) {
                             mRefresh.setRefreshing(true);
-                            loadingDialog.show();
                         }
                     }
 
                     @Override
                     public void onEnd() {
                         super.onEnd();
-                        if (loadingDialog != null && mRefresh != null) {
+                        if (mRefresh != null) {
                             mRefresh.setRefreshing(false);
-                            loadingDialog.dismiss();
                         }
                     }
                 });

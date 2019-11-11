@@ -199,18 +199,6 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
                         ToastUtil.showToast(errorMessage);
                         isSuccessBanner = false;
                     }
-
-                    @Override
-                    public void onStart(Disposable d) {
-                        super.onStart(d);
-                        showLoading();
-                    }
-
-                    @Override
-                    public void onEnd() {
-                        super.onEnd();
-                        hideLoading();
-                    }
                 });
     }
 
