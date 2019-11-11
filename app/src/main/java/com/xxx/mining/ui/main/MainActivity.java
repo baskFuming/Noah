@@ -28,6 +28,9 @@ import com.xxx.mining.ui.mining.MiningFragment;
 import com.xxx.mining.ui.my.MyFragment;
 import com.xxx.mining.ui.wallet.WalletFragment;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -95,9 +98,6 @@ public class MainActivity extends BaseActivity {
 
         //加载首页数据
         selectorItem();
-
-        //初始化路由
-        FragmentManager.replaceFragment(this, HomeFragment.class, R.id.main_frame);
     }
 
     @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})
@@ -115,12 +115,19 @@ public class MainActivity extends BaseActivity {
         exitAppUtil.onBackPressed();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ConfigClass.LOGIN_RESULT_CODE) {
-//            checkAppVersion();
-            checkIsSettingPayPassword();
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(String eventFlag) {
+        switch (eventFlag) {
+            case ConfigClass.EVENT_LOGIN:
+                //等待页面渲染完毕
+                this.getWindow().getDecorView().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        checkAppVersion();
+                        checkIsSettingPayPassword();
+                    }
+                });
+                break;
         }
     }
 
@@ -188,6 +195,7 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
 
     /**
      * @Model 检查App版本

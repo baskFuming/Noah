@@ -178,10 +178,12 @@ public class LoginActivity extends BaseActivity {
                                 }
                                 //x-token
                                 util.saveEncryptString(SharedConst.ENCRYPT_VALUE_TOKEN, data.getToken());
+
                                 //判断下是否进入过首页
-                                Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getSimpleName());
+                                Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getName());
                                 if (activity != null) {
-                                    setResult(ConfigClass.LOGIN_RESULT_CODE);
+                                    //发送eventBus
+                                    EventBus.getDefault().post(ConfigClass.EVENT_LOGIN);
                                     finish();
                                 } else {
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));

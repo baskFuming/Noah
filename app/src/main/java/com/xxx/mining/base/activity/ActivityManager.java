@@ -1,7 +1,13 @@
 package com.xxx.mining.base.activity;
 
 import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.text.TextUtils;
 
+import com.xxx.mining.ui.main.MainActivity;
+
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -45,15 +51,35 @@ public class ActivityManager {
     }
 
     /**
-     * 获取到指定Activity
+     * 获取栈顶Activity
      */
     public Activity getActivity(String activityName) {
         for (int i = 0; i < activityStack.size(); i++) {
             Activity activity = activityStack.get(i);
             if (activity != null) {
-                if (activity.getClass().getSimpleName().equals(activityName)) {
+                if (activity.getClass().getName().equals(activityName)) {
                     return activity;
                 }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 判断前台Activity
+     */
+    public Activity getForegroundActivity() {
+        Activity activity = getActivity(MainActivity.class.getName());
+        if (activity == null) {
+            return null;
+        }
+
+        android.app.ActivityManager am = (android.app.ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+        if (am != null) {
+            List<android.app.ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+            if (list != null && list.size() > 0) {
+                ComponentName cpn = list.get(0).topActivity;
+                return getActivity(cpn.getClassName());
             }
         }
         return null;

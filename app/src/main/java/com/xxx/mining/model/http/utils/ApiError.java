@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
+import com.xxx.mining.model.utils.ExitAppUtil;
 import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.main.MainActivity;
 
@@ -24,18 +25,16 @@ public class ApiError {
         }
     }
 
-
     /**
      * Token失效跳转页面
      */
     public static void startActivity() {
-        MainActivity activity1 = (MainActivity) ActivityManager.getInstance().getActivity(MainActivity.class.getSimpleName());
-        Activity loginActivity = ActivityManager.getInstance().getActivity(LoginActivity.class.getSimpleName());
-        if (loginActivity == null) {
-            if (activity1 != null) {
-                SharedPreferencesUtil.getInstance().cleanAll();
-                activity1.startActivityForResult(new Intent(activity1, LoginActivity.class), ConfigClass.REQUEST_CODE);
-            }
+        Activity activity = ActivityManager.getInstance().getForegroundActivity();
+        if (activity != null) {
+            SharedPreferencesUtil.getInstance().cleanAll();
+        } else {
+            //退出程序
+            ActivityManager.getInstance().AppExit();
         }
     }
 }
