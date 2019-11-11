@@ -68,6 +68,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private HomeAdapter mAdapter;
     private List<HomeBean> mRecyclerList = new ArrayList<>();
     private List<NoticeCenterBean.ContentBean> mNoticeList = new ArrayList<>();
+    private boolean flag = false;
 
     private boolean isLoadFlipper;   //是否加载文字公告
 
@@ -112,7 +113,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 ConsultingActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_node:
-                MyNodeActivity.actionStartS(getActivity());
+                MyNodeActivity.actionStart(getActivity(), flag);
                 break;
             case R.id.main_home_other://更多
 //                ToastUtil.showToast("敬请期待");

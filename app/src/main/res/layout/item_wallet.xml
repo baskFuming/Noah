@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:text="XXX"
             android:textColor="#333333"
-            android:textSize="18dp"/>
+            android:textSize="15dp"/>
 
         <TextView
             android:id="@+id/item_wallet_available"

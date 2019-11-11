@@ -76,12 +76,20 @@
                 android:id="@+id/item_my_order_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="17dp"
                 android:layout_marginTop="13dp"
                 android:text="共0件商品"
                 android:textColor="#404040"
                 android:textSize="12dp" />
 
+            <TextView
+                android:id="@+id/item_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_marginBottom="17dp"
+                android:text="共0件商品"
+                android:textColor="#404040"
+                android:textSize="12dp" />
         </LinearLayout>
 
     </LinearLayout>

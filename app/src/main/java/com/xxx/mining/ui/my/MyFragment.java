@@ -157,4 +157,10 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                     }
                 });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadInfo();
+    }
 }

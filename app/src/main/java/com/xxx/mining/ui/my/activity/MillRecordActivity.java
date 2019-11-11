@@ -47,9 +47,6 @@ public class MillRecordActivity extends BaseTitleActivity implements SwipeRefres
     @BindView(R.id.main_not_data)
     LinearLayout mNotData;
 
-    @BindView(R.id.record_mining_asset)
-    TextView mTotalAsset;
-
     private int page = ConfigClass.PAGE_DEFAULT;
     private RecordMiningAdapter mAdapter;
     private List<RecordMiningBean.ListBean> mList = new ArrayList<>();
@@ -99,7 +96,6 @@ public class MillRecordActivity extends BaseTitleActivity implements SwipeRefres
                         if (bean != null) {
                             RecordMiningBean date = bean.getData();
                             if (date != null) {
-                                mTotalAsset.setText("$" + new BigDecimal(date.getTotalIncome()).setScale(2, RoundingMode.DOWN).toPlainString());
                                 List<RecordMiningBean.ListBean> list = date.getList();
                                 if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                                     mNotData.setVisibility(View.VISIBLE);

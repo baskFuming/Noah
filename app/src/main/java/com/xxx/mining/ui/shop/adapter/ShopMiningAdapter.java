@@ -25,7 +25,7 @@ public class ShopMiningAdapter extends BaseQuickAdapter<ShopMiningBean, BaseView
                 .setText(R.id.item_shop_mining_content, String.valueOf(item.getDetails()))
                 .setText(R.id.item_shop_mining_price, new BigDecimal(String.valueOf(item.getDwttPrice())).setScale(4, BigDecimal.ROUND_DOWN).toPlainString())
                 .addOnClickListener(R.id.item_shop_mining_btn);
-        GlideUtil.loadBase(mContext, String.valueOf(item.getImg()), (ImageView) helper.getView(R.id.imageView1));
+//        GlideUtil.loadBase(mContext, String.valueOf(item.getImg()), (ImageView) helper.getView(R.id.imageView1));
 
     }
 }

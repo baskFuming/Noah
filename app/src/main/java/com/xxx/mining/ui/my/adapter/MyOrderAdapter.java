@@ -24,12 +24,14 @@ public class MyOrderAdapter extends BaseQuickAdapter<MyOrderBean, BaseViewHolder
     protected void convert(BaseViewHolder helper, MyOrderBean item) {
         helper.setText(R.id.item_my_order_name, item.getMillName())
                 .setText(R.id.item_my_order_time, mContext.getString(R.string.item_order_time) + item.getDate())
-                .setText(R.id.item_my_order_code, mContext.getString(R.string.item_order_code) + item.getOrderNum());
+                .setText(R.id.item_my_order_code, mContext.getString(R.string.item_order_code) + item.getOrderNum())
+                .setText(R.id.item_my_order_details, mContext.getString(R.string.item_order_amount) + item.getMillNum() + mContext.getString(R.string.item_order_goods));
+
         if (item.getType() == 0) {
-            helper.setText(R.id.item_my_order_details, mContext.getString(R.string.item_order_amount) + item.getMillNum() + mContext.getString(R.string.item_order_goods) + mContext.getString(R.string.item_order_combined) + item.getMillPrice() + "DWTT");
+            helper.setText(R.id.item_order, mContext.getString(R.string.item_order_combined) + (item.getMillNum() * item.getMillPrice()) + "DWTT");
         }
         if (item.getType() == 1) {
-            helper.setText(R.id.item_my_order_details, mContext.getString(R.string.item_order_amount) + item.getMillNum() + mContext.getString(R.string.item_order_goods) + mContext.getString(R.string.item_order_combined) + item.getMillUSDTPrice() + "USDT" +
+            helper.setText(R.id.item_order, mContext.getString(R.string.item_order_combined) + item.getMillUSDTPrice() + "USDT" +
                     " " + item.getMillDWTTPrice() + "DWTT");
         }
         GlideUtil.load(mContext, String.valueOf(item.getImgUrl()), (ImageView) helper.getView(R.id.imageView1));

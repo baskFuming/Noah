@@ -413,7 +413,7 @@ public interface ApiService {
 
     //宽度
     @POST("/myWidth")
-    Observable<BaseBean<WDepathBean>> getWidth();
+    Observable<BaseBean<List<WDepathBean>>> getWidth();
 
 
 }

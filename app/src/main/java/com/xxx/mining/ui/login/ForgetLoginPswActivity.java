@@ -67,12 +67,12 @@ public class ForgetLoginPswActivity extends BaseActivity {
     @Override
     protected void initData() {
         mDownTimeUtil = DownTimeUtil.getInstance();
+        KeyBoardUtil.closeKeyBord(this, mAccountEdit);
     }
 
 
     @OnClick({R.id.forget_login_psw_return, R.id.forget_login_psw_selector_phone, R.id.forget_login_psw_send_sms_code, R.id.forget_login_psw_btn, R.id.forget_login_psw_password_eye, R.id.forget_login_psw_password_again_eye})
     public void OnClick(View view) {
-        KeyBoardUtil.closeKeyBord(this, mAccountEdit);
         switch (view.getId()) {
             case R.id.forget_login_psw_return:
                 finish();

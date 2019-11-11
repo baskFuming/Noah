@@ -73,7 +73,7 @@ public class WidthActivity extends BaseTitleActivity implements SwipeRefreshLayo
      * @Model 获取用户信息
      */
     private void loadWidth() {
-        Api.getInstance().getmyDepth()
+        Api.getInstance().getWidth()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<List<WDepathBean>>(this) {

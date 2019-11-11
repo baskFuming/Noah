@@ -23,6 +23,7 @@
             android:id="@+id/switch_language"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:visibility="gone"
             android:layout_alignParentRight="true"
             android:layout_marginTop="20dp"
             android:background="@color/colorTransparent"

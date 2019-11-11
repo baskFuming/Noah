@@ -73,11 +73,11 @@ public class LoginActivity extends BaseActivity {
         //保存记录
         String phone = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_PHONE);
         mAccountEdit.setText(phone);
+        KeyBoardUtil.closeKeyBord(this, mAccountEdit);
     }
 
     @OnClick({R.id.login_return, R.id.login_selector_phone, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn, R.id.switch_language})
     public void OnClick(View view) {
-        KeyBoardUtil.closeKeyBord(this, mAccountEdit);
         switch (view.getId()) {
             case R.id.login_return:
                 finish();
@@ -177,7 +177,7 @@ public class LoginActivity extends BaseActivity {
                                 ToastUtil.showToast(bean.getMessage());
                                 SharedPreferencesUtil util = SharedPreferencesUtil.getInstance();
                                 util.saveString(SharedConst.VALUE_USER_PHONE, account);
-                                util.saveString(SharedConst.VALUE_USER_NAME, data.getUsername());
+//                                util.saveString(SharedConst.VALUE_USER_NAME, data.getUsername());
                                 util.saveString(SharedConst.VALUE_INVITE_CODE, data.getPromotionCode());
                                 util.saveString(SharedConst.VALUE_USER_ID, String.valueOf(data.getId()));
                                 util.saveBoolean(SharedConst.IS_LOGIN, true);

@@ -67,6 +67,7 @@ public class RegisterActivity extends BaseTitleActivity {
     @Override
     protected void initData() {
         mDownTimeUtil = DownTimeUtil.getInstance();
+        KeyBoardUtil.closeKeyBord(this, mPasswordEdit);
     }
 
     @OnClick({R.id.register_account_return, R.id.register_selector_phone,

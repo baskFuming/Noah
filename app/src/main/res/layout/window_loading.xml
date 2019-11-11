@@ -25,5 +25,4 @@
         android:textColor="#f0f0f0"
         android:textSize="15dp"
         tools:ignore="HardcodedText" />
-
 </LinearLayout>
