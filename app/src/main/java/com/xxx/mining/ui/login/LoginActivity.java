@@ -177,7 +177,7 @@ public class LoginActivity extends BaseActivity {
                                     util.saveString(SharedConst.VALUE_COUNTY_CITY, country.getZhName());
                                 }
                                 //x-token
-                                util.saveEncryptString(SharedConst.ENCRYPT_VALUE_TOKEN, data.getToken());
+                                util.saveString(SharedConst.ENCRYPT_VALUE_TOKEN, data.getToken());
 
                                 //判断下是否进入过首页
                                 Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getName());

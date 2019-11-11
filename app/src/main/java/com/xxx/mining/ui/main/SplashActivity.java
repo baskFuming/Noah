@@ -50,6 +50,8 @@ public class SplashActivity extends BaseActivity {
     protected void initData() {
         final View decorView = getWindow().getDecorView();
         decorView.post(new Runnable() {
+
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
             @Override
             public void run() {
                 //获取背景，并将其强转成AnimationDrawable
@@ -57,7 +59,9 @@ public class SplashActivity extends BaseActivity {
                 //判断是否在运行
                 if (!animationDrawable.isRunning()) {
                     //开启帧动画
-                    animationDrawable.start();
+                    if (!SplashActivity.this.isFinishing()) {
+                        animationDrawable.start();
+                    }
                 }
 
                 //是否登录

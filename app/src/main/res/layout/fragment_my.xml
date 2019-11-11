@@ -236,6 +236,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/main_my_language"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"

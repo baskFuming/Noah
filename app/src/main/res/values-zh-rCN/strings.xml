@@ -90,10 +90,10 @@
     <string name="record_all_team_detail">团队详情</string>
 
     <string name="record_mining_title">挖矿收益</string>
-    <string name="record_mining_asset">总资产</string>
+    <string name="record_mining_asset">总收益</string>
 
     <string name="record_team_title">团队收益</string>
-    <string name="record_team_asset">总资产</string>
+    <string name="record_team_asset">总收益</string>
 
     <string name="record_gift_title">分红收益</string>
     <string name="record_gift_total">总收益（USDT）</string>
@@ -397,6 +397,7 @@
     <string name="window_adress_edit_hint">请输入修改钱包地址</string>
     <string name="window_message_edit_hint">请输入修改备注信息</string>
     <string name="open_more">展开更多</string>
+    <string name="close_more">收起</string>
     <string name="update_address">修改地址成功</string>
     <string name="earnings">直推收益</string>
     <string name="earnings_up">社区收益</string>

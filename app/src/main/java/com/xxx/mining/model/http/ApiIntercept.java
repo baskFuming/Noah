@@ -55,7 +55,7 @@ public class ApiIntercept implements Interceptor {
     private Request headerIntercept(Interceptor.Chain chain) {
         //拦截请求头添加
         SharedPreferencesUtil instance = SharedPreferencesUtil.getInstance();
-        String token = instance.getDecryptionString(SharedConst.ENCRYPT_VALUE_TOKEN);
+        String token = instance.getString(SharedConst.ENCRYPT_VALUE_TOKEN);
         String language = instance.getString(SharedConst.CONSTANT_LAUNCHER);
         return chain.request()
                 .newBuilder()
