@@ -37,6 +37,8 @@ public class SplashActivity extends BaseActivity {
 
     //是否登录
     private boolean isLogin;
+    //是否执行了跳转页面
+    private boolean isStartActivity;
 
     @Override
     protected int getLayoutId() {
@@ -72,6 +74,7 @@ public class SplashActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.skip:
+                isStartActivity = true;
                 checkUI();
                 break;
         }
@@ -99,7 +102,7 @@ public class SplashActivity extends BaseActivity {
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
                 SplashActivity activity = mActivity.get();
-                if (activity != null) {
+                if (activity != null && !activity.isStartActivity) {
                     activity.checkUI();
                 }
             }

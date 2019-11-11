@@ -43,9 +43,11 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
+    String baseUrl = "/NoahWallet";
+
     //获取首页列表
     @FormUrlEncoded
-    @POST("/getCoinInfo")
+    @POST(baseUrl + "/getCoinInfo")
     Observable<BaseBean<PageBean<HomeBean>>> getHomeList(
             @Field("pageNum") int pageNum,
             @Field("pageSize") int pageSize
@@ -53,7 +55,7 @@ public interface ApiService {
 
     //获取商品矿机
     @FormUrlEncoded
-    @POST("/getCommodities")
+    @POST(baseUrl + "/getCommodities")
     Observable<BaseBean<PageBean<ShopMiningBean>>> getShopMiningList(
             @Field("classId") String classId,
             @Field("pageNum") int pageNum,
@@ -61,20 +63,20 @@ public interface ApiService {
     );
 
     //矿机banner
-    @POST("/millBanner")
+    @POST(baseUrl + "/millBanner")
     Observable<BaseBean<BannerBean>> getBannerList();
 
     //商城Banner
-    @POST("/storeBanner")
+    @POST(baseUrl + "/storeBanner")
     Observable<BaseBean<BannerBean>> getShopBanner();
 
     //获取钱包列表
-    @POST("/myWallet")
+    @POST(baseUrl + "/myWallet")
     Observable<BaseBean<WalletBean>> getWalletList();
 
     //获取我的矿机列表
     @FormUrlEncoded
-    @POST("/myMills")
+    @POST(baseUrl + "/myMills")
     Observable<BaseBean<PageBean<MyMiningBean>>> getMyMiningList(
             @Field("pageNum") int pageNum,
             @Field("pageSize") int pageSize
@@ -82,7 +84,7 @@ public interface ApiService {
 
     //挖矿
     @FormUrlEncoded
-    @POST("/millDetail")
+    @POST(baseUrl + "/millDetail")
     Observable<BaseBean<MillDetailBean>> getmillDetail(
             @Field("orderId") int orderId
     );
@@ -90,7 +92,7 @@ public interface ApiService {
 
     //获取我的节点列表
     @FormUrlEncoded
-    @POST("/invest/getFinancingsIncomeLogs")
+    @POST(baseUrl + "/invest/getFinancingsIncomeLogs")
     Observable<BaseBean<List<MyNodeBean>>> getMyNodeList(
             @Field("userId") String userId,
             @Field("unit") String unit,
@@ -100,14 +102,14 @@ public interface ApiService {
 
     //获取我的订单列表
     @FormUrlEncoded
-    @POST("/myOrder")
+    @POST(baseUrl + "/myOrder")
     Observable<BaseBean<PageBean<MyOrderBean>>> getMyOrderList(
             @Field("pageNum") int pageNum,
             @Field("pageSize") int pageSize
     );
 
     //获取公告中心列表
-    @GET("/messages")
+    @GET(baseUrl + "/messages")
     Observable<BaseBean<PageBean<NoticeCenterBean>>> getNoticeCenterList(
             @Query("pageNum") int pageNo,
             @Query("pageSize") int pageSize
@@ -116,7 +118,7 @@ public interface ApiService {
 
     //获取充值记录列表
     @FormUrlEncoded
-    @POST("/getRechange")
+    @POST(baseUrl + "/getRechange")
     Observable<BaseBean<PageBean<RecordRechargeBean>>> getRechargeRecordList(
             @Field("coinId") int coinId,
             @Field("pageNum") int pageNum,
@@ -125,7 +127,7 @@ public interface ApiService {
 
     //获取提现记录列表
     @FormUrlEncoded
-    @POST("/getChange")
+    @POST(baseUrl + "/getChange")
     Observable<BaseBean<PageBean<RecordWithdrawalBean>>> getWithdrawalRecordList(
             @Field("coinId") int coinId,
             @Field("pageNum") int pageNum,
@@ -134,7 +136,7 @@ public interface ApiService {
 
     //获取理财转入记录列表
     @FormUrlEncoded
-    @POST()
+    @POST(baseUrl + "")
     Observable<BaseBean<List<DepositRecordBean>>> getDepositInRecordList(
             @Field("userId") String userId,
             @Field("unit") String coinId,
@@ -144,7 +146,7 @@ public interface ApiService {
 
     //获取理财转出记录列表
     @FormUrlEncoded
-    @POST()
+    @POST(baseUrl + "")
     Observable<BaseBean<List<DepositRecordBean>>> getDepositOutRecordList(
             @Field("userId") String userId,
             @Field("unit") String coinId,
@@ -154,21 +156,21 @@ public interface ApiService {
 
     //获取挖矿收益
     @FormUrlEncoded
-    @POST("/millIncomes")
+    @POST(baseUrl + "/millIncomes")
     Observable<BaseBean<RecordMiningBean>> getRecordMiningList(
             @Field("pageNum") int pageNum,
             @Field("pageSize") int pageSize
     );
 
     //获取团队收益
-    @GET("/getTeamIncome")
+    @GET(baseUrl + "/getTeamIncome")
     Observable<BaseBean<RecordTeamBean>> getRecordTeamList(
             @Query("pageNum") int pageNum,
             @Query("pageSize") int pageSize
     );
 
     //获取分红收益列表
-    @GET("/getBonusRecord")
+    @GET(baseUrl + "/getBonusRecord")
     Observable<BaseBean<RecordGiftBean>> getRecordGiftList(
             @Query("pageNum") int pageNum,
             @Query("pageSize") int pageSize
@@ -176,7 +178,7 @@ public interface ApiService {
 
     //获取理财收益列表
     @FormUrlEncoded
-    @POST("/getManageIncome")
+    @POST(baseUrl + "/getManageIncome")
     Observable<BaseBean<PageBean<RecordDepositBean>>> getRecordDepositList(
             @Field("coinId") int coinId,
             @Field("pageNum") int pageNo,
@@ -185,7 +187,7 @@ public interface ApiService {
 
     //获取理财收益
     @FormUrlEncoded
-    @POST("/getManageIncome")
+    @POST(baseUrl + "/getManageIncome")
     Observable<BaseBean<PageBean<RecordDepositBean>>> getDepositList(
             @Field("pageNum") int pageNo,
             @Field("pageSize") int pageSize
@@ -196,7 +198,7 @@ public interface ApiService {
 
     //获取理财收益
     @FormUrlEncoded
-    @POST("/myManage")
+    @POST(baseUrl + "/myManage")
     Observable<BaseBean<DepositBean>> getDepositInfo(
             @Field("coinId") int coinId
     );
@@ -204,7 +206,7 @@ public interface ApiService {
     //----------------------------------------------------------操作----------------------------------------------------------------------------------------------------------------------------//
 
     //提现
-    @POST("/doChange")
+    @POST(baseUrl + "/doChange")
     @FormUrlEncoded
     Observable<BaseBean<BooleanBean>> withdrawal(
             @Field("coinId") int coinId,
@@ -217,7 +219,7 @@ public interface ApiService {
     );
 
     //兑换
-    @POST("/invest/compass/doExchange")
+    @POST(baseUrl + "/invest/compass/doExchange")
     @FormUrlEncoded
     Observable<BaseBean<Object>> exchange(
             @Field("userId") String userId,
@@ -226,7 +228,7 @@ public interface ApiService {
     );
 
     //理财转入
-    @POST("/addManageInvest")
+    @POST(baseUrl + "/addManageInvest")
     @FormUrlEncoded
     Observable<BaseBean<Object>> depositIn(
             @Field("amount") double amount,
@@ -234,7 +236,7 @@ public interface ApiService {
     );
 
     //理财转出
-    @POST("/outManageInvest")
+    @POST(baseUrl + "/outManageInvest")
     @FormUrlEncoded
     Observable<BaseBean<Object>> depositOut(
             @Field("amount") double amount,
@@ -244,7 +246,7 @@ public interface ApiService {
     );
 
     //下单
-    @POST("/addOrder")
+    @POST(baseUrl + "/addOrder")
     @FormUrlEncoded
     Observable<BaseBean<PayOrderBean>> place(
             @Field("commodityId") int commodityId,
@@ -255,7 +257,7 @@ public interface ApiService {
 
     //升级节点
     @FormUrlEncoded
-    @POST("/upNode")
+    @POST(baseUrl + "/upNode")
     Observable<BaseBean<NodePayBean>> uplace(
             @Field("commodityId") int commodityId,
             @Field("invCode") String commodityNum,
@@ -268,7 +270,7 @@ public interface ApiService {
 
     //登录
     @FormUrlEncoded
-    @POST("/login")
+    @POST(baseUrl + "/login")
     Observable<BaseBean<LoginBean>> login(
             @Field("phone") String account,
             @Field("password") String password,
@@ -277,19 +279,19 @@ public interface ApiService {
 
     //发送短信验证码
     @FormUrlEncoded
-    @POST("/sendPhoneMassage")
+    @POST(baseUrl + "/sendPhoneMassage")
     Observable<BaseBean<Object>> sendSMSCode(
             @Field("phone") String phone,
             @Field("area") String area
     );
 
     //发送修改密码验证码
-    @POST("/sendUpdatePhoneMassage")
+    @POST(baseUrl + "/sendUpdatePhoneMassage")
     Observable<BaseBean<Object>> sendUpdateSMSCode();
 
     //注册
     @FormUrlEncoded
-    @POST("/register")
+    @POST(baseUrl + "/register")
     Observable<BaseBean<Object>> register(
             @Field("phone") String phone,
             @Field("password") String password,
@@ -299,7 +301,7 @@ public interface ApiService {
 
     //忘记密码
     @FormUrlEncoded
-    @POST("/forgetPassword")
+    @POST(baseUrl + "/forgetPassword")
     Observable<BaseBean<Object>> forgetPsw(
             @Field("phone") String phone,
             @Field("newPassword") String newPassword,
@@ -308,7 +310,7 @@ public interface ApiService {
 
     //修改登录密码
     @FormUrlEncoded
-    @POST("/updatePassword")
+    @POST(baseUrl + "/updatePassword")
     Observable<BaseBean<Object>> modifyLoginPsw(
             @Field("oldPassword") String password,
             @Field("newPassword") String mode,
@@ -317,7 +319,7 @@ public interface ApiService {
 
     //修改支付密码
     @FormUrlEncoded
-    @POST("/updatePayPassword")
+    @POST(baseUrl + "/updatePayPassword")
     Observable<BaseBean<Object>> modifyPayPsw(
             @Field("payPassword") String password,
             @Field("code") String smsCode
@@ -325,29 +327,29 @@ public interface ApiService {
 
     //设置支付密码
     @FormUrlEncoded
-    @POST("/setPayPassword")
+    @POST(baseUrl + "/setPayPassword")
     Observable<BaseBean<Object>> settingPayPsw(
             @Field("payPassword") String payPassword
     );
 
     //获取城市编码
-    @POST()
+    @POST(baseUrl + "")
     Observable<BaseBean<List<SelectCountyBean>>> getCounty();
 
     //检查app版本
-    @GET("/checkUpdate")
+    @GET(baseUrl + "/checkUpdate")
     Observable<BaseBean<AppVersionBean>> checkAppVersion();
 
     //退出登录
-    @POST("/loginOut")
+    @POST(baseUrl + "/loginOut")
     Observable<BaseBean<Object>> outLogin();
 
     //检查是否设置过支付密码
-    @POST("/selectPayPassword")
+    @POST(baseUrl + "/selectPayPassword")
     Observable<BaseBean<IsSettingPayPswBean>> checkIsSettingPayPassword();
 
     //意见反馈
-    @POST()
+    @POST(baseUrl + "")
     @FormUrlEncoded
     Observable<BaseBean<Object>> submitFeedback(
             @Field("content") String amount,
@@ -355,13 +357,13 @@ public interface ApiService {
     );
 
     //获取用户信息
-    @POST("/getUser")
+    @POST(baseUrl + "/getUser")
     Observable<BaseBean<UserInfo>> getUserinfo();
 
 
     //提笔地址记录
     @FormUrlEncoded
-    @POST("/myAddress")
+    @POST(baseUrl + "/myAddress")
     Observable<BaseBean<PageBean<AddressBean>>> getUserAddress(
             @Field("pageNum") int pageNum,
             @Field("pageSize") int pageSize
@@ -369,7 +371,7 @@ public interface ApiService {
 
     //提币修改地址
     @FormUrlEncoded
-    @POST("/my_addresses/edit")
+    @POST(baseUrl + "/my_addresses/edit")
     Observable<BaseBean<Object>> getupdateAddress(
             @Field("id") int id,
             @Field("address") String address,
@@ -378,14 +380,14 @@ public interface ApiService {
 
     //提币地址删除
     @FormUrlEncoded
-    @POST("/my_addresses/delete")
+    @POST(baseUrl + "/my_addresses/delete")
     Observable<BaseBean<Object>> getdeleteAddress(
             @Field("my_address_id") int id
     );
 
     //获取节点商品
     @FormUrlEncoded
-    @POST("/getNodeCommodities")
+    @POST(baseUrl + "/getNodeCommodities")
     Observable<BaseBean<PageBean<NodeCommod>>> getNodeCommodities(
             @Field("classId") int classId,
             @Field("pageNum") int pageNum,
@@ -393,15 +395,15 @@ public interface ApiService {
     );
 
     //获取我的节点
-    @POST("/myNode")
+    @POST(baseUrl + "/myNode")
     Observable<BaseBean<MyNode>> getmyNode();
 
     //深度
-    @POST("/myDepth")
+    @POST(baseUrl + "/myDepth")
     Observable<BaseBean<List<WDepathBean>>> getmyDepth();
 
     //宽度
-    @POST("/myWidth")
+    @POST(baseUrl + "/myWidth")
     Observable<BaseBean<List<WDepathBean>>> getWidth();
 
 
