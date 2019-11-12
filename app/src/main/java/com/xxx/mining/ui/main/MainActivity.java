@@ -125,8 +125,10 @@ public class MainActivity extends BaseActivity {
         exitAppUtil.onBackPressed();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventBus(String eventFlag) {
+        //首先调用父类
+        super.onEventBus(eventFlag);
+
         switch (eventFlag) {
             case ConfigClass.EVENT_LOGIN:
                 //等待页面渲染完毕
