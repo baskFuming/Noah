@@ -18,7 +18,7 @@ public class RecordDepositAdapter extends BaseQuickAdapter<RecordDepositBean, Ba
     @Override
     protected void convert(BaseViewHolder helper, RecordDepositBean item) {
         helper.setText(R.id.coin_type, item.getCoinName())
-                .setText(R.id.item_record_gift_amount, "+" + item.getValue() + " " + item.getTocoinName())
+                .setText(R.id.item_record_gift_amount, "+" + item.getValue() + " " + item.getTocoinName()+"MSB")
                 .setText(R.id.item_record_gift_time, item.getDate());
         if (item.getCoinName().equals("DWTT")) {
             helper.setBackgroundColor(R.id.item_record_gift_back, mContext.getResources().getColor(R.color.colorTextColorTitle));

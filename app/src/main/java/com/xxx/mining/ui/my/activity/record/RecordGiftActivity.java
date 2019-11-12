@@ -135,7 +135,7 @@ public class RecordGiftActivity extends BaseTitleActivity implements SwipeRefres
 
                     @Override
                     public void onError(int errorCode, String errorMessage) {
-                        ToastUtil.showToast(errorMessage);
+//                        ToastUtil.showToast(errorMessage);
                         mNotData.setVisibility(View.VISIBLE);
                         mRecycler.setVisibility(View.GONE);
                     }

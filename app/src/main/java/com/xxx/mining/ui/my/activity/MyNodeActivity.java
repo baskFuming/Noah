@@ -47,8 +47,6 @@ public class MyNodeActivity extends BaseTitleActivity {
         flag = intent.getBooleanExtra("flag", true);
     }
 
-    @BindView(R.id.main_not_data)
-    LinearLayout mNotData;
 
     @BindView(R.id.node_up)
     TextView mNodeUp;

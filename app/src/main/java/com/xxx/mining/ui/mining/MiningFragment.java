@@ -1,5 +1,6 @@
 package com.xxx.mining.ui.mining;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,16 @@ import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.ShopMiningBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
+import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.utils.BannerUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.shop.activity.ShopMiningPlaceActivity;
 import com.xxx.mining.ui.shop.adapter.ShopMiningAdapter;
 import com.youth.banner.Banner;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +65,7 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
 
     @Override
     protected void initData() {
+        EventBus.getDefault().post(this);
         mAdapter = new ShopMiningAdapter(mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycler.setAdapter(mAdapter);
@@ -80,6 +87,17 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
         loadList();
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(String eventFlag) {
+        switch (eventFlag) {
+            case SharedConst.IS_SETTING_PAY_PSW:
+                loadBanner();
+                loadList();
+                break;
+        }
+    }
+
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         ShopMiningPlaceActivity.actionStart(getActivity(), mBannerList, mList.get(position).getId(), mList.get(position).getDwttPrice());
@@ -99,7 +117,6 @@ public class MiningFragment extends BaseFragment implements SwipeRefreshLayout.O
         page++;
         loadList();
     }
-
 
     /**
      * @Model 获取列表

@@ -414,5 +414,11 @@
     <string name="run_status">运行状态</string>
     <string name="modify_success">删除成功</string>
     <string name="invite_code_text">邀请码</string>
+    <string name="text_note">
+        注：\n\n
+        在竞升节点的时候，建议填写上级节点的邀请码。\n\n
+        如果没有填写，则默认自己为根节点。\n\n
+        竞升节点每个钱包只能操作一次，请慎重填写。
+    </string>
 
 </resources>

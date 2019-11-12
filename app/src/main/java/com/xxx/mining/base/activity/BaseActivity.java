@@ -1,12 +1,19 @@
 package com.xxx.mining.base.activity;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.xxx.mining.ConfigClass;
 import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.model.utils.EditTextShakeHelper;
+import com.xxx.mining.model.utils.LocalManageUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -18,6 +25,13 @@ public abstract class BaseActivity extends BaseLanguageActivity {
     private Unbinder unbinder;
     private EditTextShakeHelper editTextShakeHelper;
     public LoadingDialog mLoadingDialog;
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocalManageUtil.setLocal(base));
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +69,6 @@ public abstract class BaseActivity extends BaseLanguageActivity {
         return isShowData;
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        ActivityManager.getInstance().finishActivity(this);
-    }
 
     public void showLoading() {
         if (mLoadingDialog != null) {
@@ -77,6 +86,8 @@ public abstract class BaseActivity extends BaseLanguageActivity {
         if (editTextShakeHelper != null) {
             editTextShakeHelper.shake(views);
         }
+        ActivityManager.getInstance().finishActivity(this);
+
     }
 
     @Override
@@ -98,6 +109,8 @@ public abstract class BaseActivity extends BaseLanguageActivity {
             unbinder = null;
         }
         super.onDestroy();
+
+
     }
 
     //获取到Layout的ID

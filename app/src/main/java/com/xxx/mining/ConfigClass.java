@@ -4,8 +4,8 @@ public class ConfigClass {
     /**
      * 服务器地址
      */
-//    public static final String BASE_URL = "http://noahglobal.me/";   //正式服务器地址
-    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
+    public static final String BASE_URL = "http://noahglobal.me/";   //正式服务器地址
+//    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
 
     /**
      * 正则判断区域
@@ -33,6 +33,11 @@ public class ConfigClass {
     public static final String EVENT_UPDATE_WALLET = "event_update_wallet";   //更新资产
     public static final String EVENT_LOGIN = "event_login";   //登录成功
     public static final String EVENT_UPDATE_NODE = "event_update_node";   //更新节点
+    public static final String EVENT_UPDATE_SHOP = "event_update_shop";   //商品购买
+
+
+    public static final String APP_NAME = "minine";   //app名称
+    public static final String SP_NAME = APP_NAME + "_sp";   //SP名称
 
     /**
      * UI页面基础参数配置

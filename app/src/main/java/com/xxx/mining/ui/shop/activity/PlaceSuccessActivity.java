@@ -25,7 +25,8 @@ public class PlaceSuccessActivity extends BaseActivity {
         intent.putExtra("usdtPrice", usdtPrice);
         intent.putExtra("amount", amount);
         intent.putExtra("time", time);
-        activity.startActivityForResult(intent, ConfigClass.REQUEST_CODE);
+        activity.startActivity(intent);
+
     }
 
     public void initBundle() {
@@ -69,7 +70,6 @@ public class PlaceSuccessActivity extends BaseActivity {
             mPrice.setText(new BigDecimal(usdtPrice * amount).setScale(4, RoundingMode.DOWN) + "USDT"
                     + "  " + new BigDecimal(dwttPrice * amount).setScale(4, RoundingMode.DOWN) + "DWTT");
         }
-
         mAmount.setText(amount + "");
         mTime.setText(time);
     }

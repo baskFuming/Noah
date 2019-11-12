@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.xxx.mining.BuildConfig;
+import com.xxx.mining.ConfigClass;
 import com.xxx.mining.base.App;
 import com.xxx.mining.model.utils.SystemUtil;
 
@@ -18,7 +19,7 @@ public class SharedPreferencesUtil {
     private SharedPreferences sharedPreferences;
 
     private SharedPreferencesUtil() {
-        sharedPreferences = App.getContext().getSharedPreferences(BuildConfig.APPLICATION_ID + "_sp", Context.MODE_PRIVATE);
+        sharedPreferences = App.getContext().getSharedPreferences(ConfigClass.SP_NAME, Context.MODE_PRIVATE);
     }
 
     public static SharedPreferencesUtil getInstance() {

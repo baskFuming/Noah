@@ -104,24 +104,28 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
 
     @Override
     public void callback(String password, String code) {
+        if (password == null || password.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_1);
+            return;
+        }
+        if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
+            ToastUtil.showToast(R.string.window_password_error_2);
+            return;
+        }
+        if (code == null || code.isEmpty()) {
+            ToastUtil.showToast(R.string.window_password_error_3);
+            return;
+        }
+        if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
+            ToastUtil.showToast(R.string.window_password_error_4);
+            return;
+        }
         place(password, code);
     }
 
-    @OnClick({R.id.shop_mining_place_delete, R.id.shop_mining_place_add, R.id.shop_mining_place_btn})
+    @OnClick({R.id.shop_mining_place_btn})
     public void OnClick(View view) {
         switch (view.getId()) {
-            case R.id.shop_mining_place_delete:
-//                if (number > 1) {
-//                    number--;
-//                }
-//                mNumber.setText(String.valueOf(number));
-//                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
-                break;
-            case R.id.shop_mining_place_add:
-//                number++;
-//                mNumber.setText(String.valueOf(number));
-//                mTotalPrice.setText(String.valueOf(number * price) + "DWTT");
-                break;
             case R.id.shop_mining_place_btn:
                 invite = edInvite.getText().toString();
                 isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
@@ -148,6 +152,8 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                     @Override
                     public void onSuccess(BaseBean<NodePayBean> bean) {
                         if (bean != null) {
+                            mPasswordWindow.dismiss();
+                            mPasswordWindow = null;
                             String orderNumber = bean.getData().getOrderNum();//订单编号
                             double dwttPrice = bean.getData().getDwttPrice();//实付金额
                             double usdtPrice = bean.getData().getUsdtPrice();//实付金额

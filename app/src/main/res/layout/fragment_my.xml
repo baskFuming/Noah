@@ -235,7 +235,6 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/main_my_language"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -243,7 +242,6 @@
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 >
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
