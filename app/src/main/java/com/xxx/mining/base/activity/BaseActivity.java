@@ -26,13 +26,6 @@ public abstract class BaseActivity extends BaseLanguageActivity {
     private EditTextShakeHelper editTextShakeHelper;
     public LoadingDialog mLoadingDialog;
 
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocalManageUtil.setLocal(base));
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
