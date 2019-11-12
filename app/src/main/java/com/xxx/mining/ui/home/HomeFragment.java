@@ -86,7 +86,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         loadData();
         loadNotice();
-        loadInfo();
     }
 
     @OnClick({R.id.main_home_shop, R.id.main_home_loan, R.id.main_home_news, R.id.main_home_node, R.id.main_home_other})
@@ -102,6 +101,7 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 NoticeCenterActivity.actionStart(getActivity());
                 break;
             case R.id.main_home_node:
+                flag  = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_NODE);
                 MyNodeActivity.actionStart(getActivity(), flag);
                 break;
             case R.id.main_home_other://更多
@@ -230,32 +230,6 @@ public class HomeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                                 NoticeCenterActivity.actionStart(getActivity());
                             }
                         });
-                    }
-                });
-    }
-
-    /**
-     * @Model 获取用户信息
-     */
-    private void loadInfo() {
-        Api.getInstance().getUserinfo()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<UserInfo>(getActivity()) {
-
-                    @Override
-                    public void onSuccess(BaseBean<UserInfo> bean) {
-                        if (bean != null) {
-                            UserInfo data = bean.getData();
-                            if (data != null) {
-                                flag = bean.getData().isNode();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(int errorCode, String errorMessage) {
-                        ToastUtil.showToast(errorMessage);
                     }
                 });
     }

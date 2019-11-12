@@ -102,6 +102,9 @@ public class MainActivity extends BaseActivity {
         //加载首页数据
         selectorItem();
 
+        //加载用户信息
+        loadInfo();
+
     }
 
     @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})
@@ -279,5 +282,30 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    /**
+     * @Model 获取用户信息
+     */
+    private void loadInfo() {
+        Api.getInstance().getUserinfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiCallback<UserInfo>(this) {
+
+                    @Override
+                    public void onSuccess(BaseBean<UserInfo> bean) {
+                        if (bean != null) {
+                            UserInfo data = bean.getData();
+                            if (data != null) {
+                                SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_NODE, data.isNode());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
+                    }
+                });
+    }
 
 }

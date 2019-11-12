@@ -101,7 +101,9 @@ public class MillRecordActivity extends BaseTitleActivity implements SwipeRefres
 
                                 mNotData.setVisibility(View.GONE);
                                 mRecycler.setVisibility(View.VISIBLE);
-                                mList.clear();
+                                if (page == ConfigClass.PAGE_DEFAULT) {
+                                    mList.clear();
+                                }
                                 mList.addAll(list);
                                 if (list.size() < ConfigClass.PAGE_SIZE) {
                                     mAdapter.loadMoreEnd(true);
@@ -117,8 +119,6 @@ public class MillRecordActivity extends BaseTitleActivity implements SwipeRefres
                     @Override
                     public void onError(int errorCode, String errorMessage) {
                         ToastUtil.showToast(errorMessage);
-                        mNotData.setVisibility(View.VISIBLE);
-                        mRecycler.setVisibility(View.GONE);
                     }
 
                     @Override

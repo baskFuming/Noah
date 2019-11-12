@@ -32,7 +32,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class AscendingNodeActivity extends BaseTitleActivity implements PasswordWindow.Callback {
 
-    public static void actionStart(Activity activity, int shopId, int imageUrl, int price, int dwttprice, int usdeprice) {
+    public static void actionStart(Activity activity, int shopId, int imageUrl, double price, int dwttprice, int usdeprice) {
         Intent intent = new Intent(activity, AscendingNodeActivity.class);
         intent.putExtra("shopId", shopId);
         intent.putExtra("imageUrl", imageUrl);
@@ -46,7 +46,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         Intent intent = getIntent();
         shopId = intent.getIntExtra("shopId", 0);
         imageUrl = intent.getIntExtra("imageUrl", 0);
-        price = intent.getIntExtra("price", 0);
+        price = intent.getDoubleExtra("price", 0);
         dwttprice = intent.getIntExtra("dwttprice", 0);
         usdeprice = intent.getIntExtra("usdeprice", 0);
 
@@ -69,7 +69,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
     private int number = 1; //购买数量
     private int shopId; //商品Id
     private int imageUrl;    //图片
-    private int price;
+    private double price;
     private int dwttprice;
     private int usdeprice;
     private String invite;

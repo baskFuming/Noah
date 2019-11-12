@@ -4,8 +4,8 @@ public class ConfigClass {
     /**
      * 服务器地址
      */
-    public static final String BASE_URL = "http://noahglobal.me/";   //正式服务器地址
-//    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
+//    public static final String BASE_URL = "http://noahglobal.me/";   //正式服务器地址
+    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
 
     /**
      * 正则判断区域

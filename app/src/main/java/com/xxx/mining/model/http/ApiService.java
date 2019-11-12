@@ -43,7 +43,9 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String baseUrl = "/NoahWallet";
+//    String baseUrl = "/NoahWallet";
+    String baseUrl = " ";
+
 
     //获取首页列表
     @FormUrlEncoded

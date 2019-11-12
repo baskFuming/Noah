@@ -370,7 +370,7 @@
     <string name="credit_center_information">"\u3000\u3000"信贷中心即信用贷款，是指以借款人的信誉发放的贷款，借款人不需要提供担保。\n
 "\u3000\u3000"其特征就是债务人无需提供抵押品或第三方担保仅凭自己的信誉就能取得贷款，并引以借款人信用程度作为还款保证的。\n
 "\u3000\u3000"债权人（诺亚钱包）会根据借款人在钱包的信息，通过评分卡，规则+策略的大数据模型，对借款人的收益情况进行审核分析，最后确认是否进行放款。待动态节点成熟后会择机开放，敬请期待</string>
-    <string name="mill_record">挖机记录</string>
+    <string name="mill_record">挖矿记录</string>
     <string name="node_number">节点编号</string>
     <string name="node_up">竟升节点</string>
     <string name="node_invite">节点邀请码</string>
@@ -413,5 +413,6 @@
     <string name="item_order_combined">合计</string>
     <string name="run_status">运行状态</string>
     <string name="modify_success">删除成功</string>
+    <string name="invite_code_text">邀请码</string>
 
 </resources>

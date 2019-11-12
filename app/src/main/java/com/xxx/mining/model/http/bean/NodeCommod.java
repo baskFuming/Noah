@@ -1,30 +1,32 @@
 package com.xxx.mining.model.http.bean;
 
+import java.util.List;
+
 public class NodeCommod {
 
     /**
-     * usdtPrice : 1260
+     * usdtPrice : 1260.0
      * img : null
-     * price : 1800
+     * price : 1800.0
      * name : 节点矿机
-     * details : null
+     * details : 无动态权益,dwtt购买，数量不限
      * id : 2
-     * dwttPrice : 1890
+     * dwttPrice : 540.6932656234397
      */
 
-    private int usdtPrice;
+    private double usdtPrice;
     private int img;
-    private int price;
+    private double price;
     private String name;
-    private Object details;
+    private String details;
     private int id;
-    private int dwttPrice;
+    private double dwttPrice;
 
-    public int getUsdtPrice() {
+    public double getUsdtPrice() {
         return usdtPrice;
     }
 
-    public void setUsdtPrice(int usdtPrice) {
+    public void setUsdtPrice(double usdtPrice) {
         this.usdtPrice = usdtPrice;
     }
 
@@ -36,11 +38,11 @@ public class NodeCommod {
         this.img = img;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -52,11 +54,11 @@ public class NodeCommod {
         this.name = name;
     }
 
-    public Object getDetails() {
+    public String getDetails() {
         return details;
     }
 
-    public void setDetails(Object details) {
+    public void setDetails(String details) {
         this.details = details;
     }
 
@@ -68,11 +70,11 @@ public class NodeCommod {
         this.id = id;
     }
 
-    public int getDwttPrice() {
+    public double getDwttPrice() {
         return dwttPrice;
     }
 
-    public void setDwttPrice(int dwttPrice) {
+    public void setDwttPrice(double dwttPrice) {
         this.dwttPrice = dwttPrice;
     }
 }

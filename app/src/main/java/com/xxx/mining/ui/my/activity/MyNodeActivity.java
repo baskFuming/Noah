@@ -76,7 +76,7 @@ public class MyNodeActivity extends BaseTitleActivity {
     private Boolean flag;
 
     private int imageUrl;
-    private int price;
+    private double price;
     private int dwttprice;
     private int shopId;
     private int usdeprice;
@@ -104,8 +104,8 @@ public class MyNodeActivity extends BaseTitleActivity {
             mnodeInvite.setVisibility(View.GONE);
         } else {
             mNodeUp.setVisibility(View.GONE);
+            loadMyNode();
         }
-        loadMyNode();
     }
 
     @OnClick({R.id.mill_record, R.id.node_up, R.id.node_invite, R.id.re_Depth, R.id.re_Width})
@@ -143,10 +143,9 @@ public class MyNodeActivity extends BaseTitleActivity {
                             shopId = list.get(0).getId();
                             imageUrl = list.get(0).getImg();
                             price = list.get(0).getPrice();
-                            dwttprice = list.get(0).getDwttPrice();
-                            usdeprice = list.get(0).getUsdtPrice();
+                            dwttprice = (int) list.get(0).getDwttPrice();
+                            usdeprice = (int) list.get(0).getUsdtPrice();
                             AscendingNodeActivity.actionStart(MyNodeActivity.this, shopId, imageUrl, price, dwttprice, usdeprice);
-
                         }
                     }
 

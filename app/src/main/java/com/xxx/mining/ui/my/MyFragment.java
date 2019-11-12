@@ -13,6 +13,8 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
+import com.xxx.mining.model.sp.SharedConst;
+import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.activity.AccountSettingActivity;
 import com.xxx.mining.ui.my.activity.CallMeActivity;
@@ -79,6 +81,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 MyMiningActivity.actionStart(getActivity());
                 break;
             case R.id.main_my_node:
+                flag  = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_NODE);
                 MyNodeActivity.actionStart(getActivity(), flag);
                 break;
             case R.id.main_my_order:
@@ -115,7 +118,6 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                             if (data != null) {
                                 mName.setText(data.getUserName());
                                 mInvitedText.setText(data.getValue());
-                                flag = bean.getData().isNode();
                             }
                         }
                     }
