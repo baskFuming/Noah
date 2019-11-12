@@ -2,11 +2,13 @@ package com.xxx.mining.ui.my.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
@@ -20,6 +22,8 @@ import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.activity.psw.SettingPayPswActivity;
 import com.xxx.mining.ui.shop.activity.PlaceSuccessActivity;
 import com.xxx.mining.ui.wallet.window.PasswordWindow;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -120,16 +124,12 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                 break;
             case R.id.shop_mining_place_btn:
                 invite = edInvite.getText().toString();
-                if (invite.isEmpty()) {
-                    ToastUtil.showToast(getString(R.string.enter_invie));
+                isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
+                if (!isHavePayPassword) {
+                    SettingPayPswActivity.actionStart(this);
                 } else {
-                    isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
-                    if (!isHavePayPassword) {
-                        SettingPayPswActivity.actionStart(this);
-                    } else {
-                        if (mPasswordWindow != null) {
-                            mPasswordWindow.show();
-                        }
+                    if (mPasswordWindow != null) {
+                        mPasswordWindow.show();
                     }
                 }
                 break;
@@ -149,11 +149,16 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                     public void onSuccess(BaseBean<NodePayBean> bean) {
                         if (bean != null) {
                             String orderNumber = bean.getData().getOrderNum();//订单编号
-                            double price = bean.getData().getPrice();//实付金额
+                            double dwttPrice = bean.getData().getDwttPrice();//实付金额
+                            double usdtPrice = bean.getData().getUsdtPrice();//实付金额
                             double number = bean.getData().getNum();//数量
                             String creatTime = bean.getData().getCreateTime();//下单时间
-                            PlaceSuccessActivity.actionStart(AscendingNodeActivity.this, orderNumber, price, number, creatTime);
+                            SharedPreferencesUtil.getInstance().saveBoolean(SharedConst.IS_SETTING_NODE, true);
+                            PlaceSuccessActivity.actionStart(AscendingNodeActivity.this, orderNumber, dwttPrice, usdtPrice, number, creatTime);
                             ToastUtil.showToast(bean.getMessage());
+                            finish();
+                            //发送更新节点的EventBus
+                            EventBus.getDefault().post(ConfigClass.EVENT_UPDATE_NODE);
                         }
                     }
 

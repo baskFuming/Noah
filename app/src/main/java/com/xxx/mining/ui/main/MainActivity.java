@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xxx.mining.BuildConfig;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
@@ -97,14 +98,15 @@ public class MainActivity extends BaseActivity {
         checkIsSettingPayPassword();
 
         //版本更新
-        checkAppVersion();
+        if (!BuildConfig.DEBUG) {
+            checkAppVersion();
+        }
 
         //加载首页数据
         selectorItem();
 
         //加载用户信息
         loadInfo();
-
     }
 
     @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})
@@ -130,8 +132,12 @@ public class MainActivity extends BaseActivity {
                 this.getWindow().getDecorView().post(new Runnable() {
                     @Override
                     public void run() {
-                        checkAppVersion();
+                        if (!BuildConfig.DEBUG) {
+                            checkAppVersion();
+                        }
                         checkIsSettingPayPassword();
+                        //加载用户信息
+                        loadInfo();
                     }
                 });
                 break;

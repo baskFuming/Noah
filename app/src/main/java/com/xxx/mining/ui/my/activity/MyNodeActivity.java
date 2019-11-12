@@ -3,6 +3,7 @@ package com.xxx.mining.ui.my.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,9 @@ import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -104,6 +108,10 @@ public class MyNodeActivity extends BaseTitleActivity {
             mnodeInvite.setVisibility(View.GONE);
         } else {
             mNodeUp.setVisibility(View.GONE);
+            mLin.setVisibility(View.VISIBLE);
+            mnodeNull.setVisibility(View.GONE);
+            mnodeNumber.setVisibility(View.VISIBLE);
+            mnodeInvite.setVisibility(View.VISIBLE);
             loadMyNode();
         }
     }
@@ -125,6 +133,20 @@ public class MyNodeActivity extends BaseTitleActivity {
                 break;
             case R.id.re_Width:
                 WidthActivity.actionStartS(this);
+                break;
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventBus(String eventFlag) {
+        switch (eventFlag) {
+            case ConfigClass.EVENT_UPDATE_NODE:
+                mNodeUp.setVisibility(View.GONE);
+                mLin.setVisibility(View.VISIBLE);
+                mnodeNull.setVisibility(View.GONE);
+                mnodeNumber.setVisibility(View.VISIBLE);
+                mnodeInvite.setVisibility(View.VISIBLE);
+                loadMyNode();
                 break;
         }
     }

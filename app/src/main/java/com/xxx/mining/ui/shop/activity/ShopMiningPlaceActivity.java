@@ -168,10 +168,10 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
                     public void onSuccess(BaseBean<PayOrderBean> bean) {
                         if (bean != null) {
                             String orderNumber = bean.getData().getOrderNum();//订单编号
-                            double price = bean.getData().getDwttPrice();//实付金额
+                            double dwttPrice = bean.getData().getDwttPrice();//实付金额
                             double number = bean.getData().getNum();//数量
                             String creatTime = bean.getData().getCreateTime();//下单时间
-                            PlaceSuccessActivity.actionStart(ShopMiningPlaceActivity.this, orderNumber, price, number, creatTime);
+                            PlaceSuccessActivity.actionStart(ShopMiningPlaceActivity.this, orderNumber, dwttPrice, 0, number, creatTime);
                             ToastUtil.showToast(bean.getMessage());
                         }
                     }
