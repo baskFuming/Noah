@@ -102,7 +102,7 @@
         <LinearLayout
             android:id="@+id/li_visible"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -242,9 +242,9 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="--"
-                        android:visibility="gone"
                         android:textColor="#333333"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/te_nodeAmount"
@@ -259,14 +259,14 @@
                         android:textSize="12dp" />
                 </RelativeLayout>
             </LinearLayout>
-            <TextView
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#333333"
-                android:textSize="13dp"
-                android:text="@string/text_note"
-                />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/text_note"
+            android:textColor="#333333"
+            android:textSize="13dp" />
     </LinearLayout>
 </LinearLayout>

@@ -28,6 +28,7 @@ import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.home.HomeFragment;
 import com.xxx.mining.ui.mining.MiningFragment;
+import com.xxx.mining.ui.mining.MyminiFragment;
 import com.xxx.mining.ui.my.MyFragment;
 import com.xxx.mining.ui.wallet.WalletFragment;
 
@@ -128,7 +129,6 @@ public class MainActivity extends BaseActivity {
     public void onEventBus(String eventFlag) {
         //首先调用父类
         super.onEventBus(eventFlag);
-
         switch (eventFlag) {
             case ConfigClass.EVENT_LOGIN:
                 //等待页面渲染完毕
@@ -180,7 +180,7 @@ public class MainActivity extends BaseActivity {
             case MINING_TYPE:
                 mMiningImage.setImageResource(R.mipmap.main_mining_selection);
                 mMiningText.setTextColor(getResources().getColor(R.color.colorMainTrue));
-                FragmentManager.replaceFragment(this, MiningFragment.class, R.id.main_frame);
+                FragmentManager.replaceFragment(this, MyminiFragment.class, R.id.main_frame);
                 break;
             case MY_TYPE:
                 mMyImage.setImageResource(R.mipmap.main_my_selection);

@@ -1,6 +1,7 @@
 package com.xxx.mining.ui.my;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.my.activity.AccountSettingActivity;
 import com.xxx.mining.ui.my.activity.CallMeActivity;
 import com.xxx.mining.ui.my.activity.InviteFriendActivity;
@@ -68,7 +70,8 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
 
     @OnClick({
             R.id.main_my_invited, R.id.main_my_record, R.id.main_my_mining, R.id.main_my_node, R.id.main_my_order,
-            R.id.main_my_notice, R.id.main_my_call_my, R.id.main_my_setting, R.id.main_my_language})
+            R.id.main_my_notice, R.id.main_my_call_my, R.id.main_my_setting, R.id.main_my_language,
+            R.id.account_setting_out_login})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.main_my_invited:
@@ -81,7 +84,7 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 MyMiningActivity.actionStart(getActivity());
                 break;
             case R.id.main_my_node:
-                flag  = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_NODE);
+                flag = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_NODE);
                 MyNodeActivity.actionStart(getActivity(), flag);
                 break;
             case R.id.main_my_order:
@@ -98,6 +101,9 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
                 break;
             case R.id.main_my_language:
                 LanguageActivity.actionStart(getActivity());
+                break;
+            case R.id.account_setting_out_login:
+                outLogin();
                 break;
         }
     }
@@ -149,5 +155,42 @@ public class MyFragment extends BaseFragment implements SwipeRefreshLayout.OnRef
     public void onResume() {
         super.onResume();
         loadInfo();
+    }
+
+    /**
+     * @Model 退出登录
+     */
+    private void outLogin() {
+        Api.getInstance().outLogin()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiCallback<Object>(getActivity()) {
+                    @Override
+                    public void onSuccess(BaseBean<Object> bean) {
+                        if (bean != null) {
+                            ToastUtil.showToast(bean.getMessage());
+                            SharedPreferencesUtil.getInstance().cleanAll(); //清空所有数据
+                            startActivity(new Intent(getActivity(), LoginActivity.class));
+                            getActivity().finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
+                    }
+
+                    @Override
+                    public void onStart(Disposable d) {
+                        super.onStart(d);
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onEnd() {
+                        super.onEnd();
+                        hideLoading();
+                    }
+                });
     }
 }

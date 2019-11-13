@@ -90,7 +90,7 @@ public class RecordMiningActivity extends BaseTitleActivity implements SwipeRefr
                         if (bean != null) {
                             RecordMiningBean date = bean.getData();
                             if (date != null) {
-                                mTotalAsset.setText(new BigDecimal(date.getTotalIncome()).setScale(2, RoundingMode.DOWN).toPlainString()+" MSB");
+                                mTotalAsset.setText(new BigDecimal(date.getTotalIncome()).setScale(2, RoundingMode.DOWN).toPlainString()+" MOS");
                                 List<RecordMiningBean.ListBean> list = date.getList();
                                 if (list == null || list.size() == 0 && page == ConfigClass.PAGE_DEFAULT) {
                                     mNotData.setVisibility(View.VISIBLE);

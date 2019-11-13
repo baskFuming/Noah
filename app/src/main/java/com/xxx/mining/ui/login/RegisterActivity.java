@@ -3,6 +3,7 @@ package com.xxx.mining.ui.login;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -65,6 +66,7 @@ public class RegisterActivity extends BaseTitleActivity {
 
     @Override
     protected void initData() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mDownTimeUtil = DownTimeUtil.getInstance();
         KeyBoardUtil.closeKeyBord(this, mPasswordEdit);
     }

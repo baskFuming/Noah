@@ -44,7 +44,7 @@
     <string name="main_my_invited">Invite friends</string>
     <string name="main_my_name">Please login</string>
     <string name="main_my_invited_icon_text">Invite friends</string>
-    <string name="main_my_invited_icon_toast">Invite MSB award</string>
+    <string name="main_my_invited_icon_toast">Invite MOS award</string>
 
     <string name="main_home_name">Name</string>
     <string name="main_home_now_price">Latest price</string>
@@ -59,7 +59,7 @@
 
     <string name="notice_center_title">Announcement details</string>
 
-    <string name="aMSBivity_release_title">Release records</string>
+    <string name="aMOSivity_release_title">Release records</string>
 
     <string name="usd_help_title">Help</string>
 
@@ -84,7 +84,7 @@
 
     <string name="record_all_title">Earnings records</string>
     <string name="record_all_mining">Mining earnings</string>
-    <string name="record_all_team">Team benefits</string>
+    <string name="record_all_team">Node benefits</string>
     <string name="record_all_gift">Dividends income</string>
     <string name="record_all_invite">Financing income</string>
     <string name="record_all_team_detail">Team details</string>
@@ -96,14 +96,14 @@
     <string name="record_team_asset">Total assets</string>
 
     <string name="record_gift_title">Dividends income</string>
-    <string name="record_gift_total">Total revenue（xxx）</string>
+    <string name="record_gift_total">Total revenue（USDT）</string>
     <string name="record_gift_s">Total performance in depth</string>
     <string name="record_gift_k">Total performance in width</string>
     <string name="record_gift_pair">Current collision situation</string>
 
     <string name="deposit_profit_title">Financing income</string>
     <string name="deposit_profit_asset">Total financial management($)</string>
-    <string name="deposit_profit_profit">Total revenue(MSB)</string>
+    <string name="deposit_profit_profit">Total revenue(MOS)</string>
 
     <string name="deposit_title">Financial</string>
     <string name="deposit_in">Shift to</string>
@@ -119,7 +119,7 @@
     <string name="deposit_in_toast_2">&#160;\n
         1.With the deposit along with take, carry into the day do not calculate interest, the next day calculate income, the third day income to the account。\n
         2.Transfer to the digital equivalent of the minimum equivalent of $100.\n
-        3.The interest will be returned to the wallet account every day in the form of MSB and will be calculated in currency standard
+        3.The interest will be returned to the wallet account every day in the form of MOS and will be calculated in currency standard
     </string>
     <string name="deposit_in_error_1">The quantity cannot be empty</string>
     <string name="deposit_in_error_2">Quantity input error</string>
@@ -140,7 +140,7 @@
     <string name="deposit_record_in_title">Transfer to record</string>
     <string name="deposit_record_out_title">Roll out record</string>
 
-    <string name="item_wallet_withdrawal">Withdraw deposit</string>
+    <string name="item_wallet_withdrawal">Withdraw</string>
     <string name="item_wallet_recharge">Recharge</string>
     <string name="item_wallet_exchange">Exchange</string>
     <string name="item_wallet_deposit">Financial</string>
@@ -159,7 +159,7 @@
     <string name="recharge_btn">Copy collection address</string>
 
     <string name="share_record_title">Share the benefits</string>
-    <string name="share_record_total">Total revenue（MSB）</string>
+    <string name="share_record_total">Total revenue（MOS）</string>
 
     <string name="feed_back_edit_hint">Thank you for your valuable questions about the product. We will optimize the product and improve the user experience as soon as possible</string>
     <string name="feed_back_btn">Submit</string>
@@ -259,8 +259,8 @@
     <string name="setting_pay_psw_error_2">The password you entered is inconsistent</string>
     <string name="setting_pay_psw_error_3">Incorrect password</string>
 
-    <string name="seleMSB_county_save">Save</string>
-    <string name="seleMSB_county_title">Country and region</string>
+    <string name="seleMOS_county_save">Save</string>
+    <string name="seleMOS_county_title">Country and region</string>
 
     <string name="generation">Generation</string>
 
@@ -307,12 +307,12 @@
 
     <string name="window_rush_title">Rush to purchase</string>
     <string name="window_rush_content">
-        \nYou have %1$.4f MSB to be robbed this time, and you need %2$.4f MSB as the deposit. \ n
+        \nYou have %1$.4f MOS to be robbed this time, and you need %2$.4f MOS as the deposit. \ n
         Your current margin is 0, unable to participate in panic buying
     </string>
     <string name="window_rush_content1">
-        \nYou have %1$.4f MSB to be robbed this time, and you need %2$.4f MSB as the deposit. \ n
-        Your current deposit is %3$.4f MSB, this time you can only grab %4$.4f MSB.
+        \nYou have %1$.4f MOS to be robbed this time, and you need %2$.4f MOS as the deposit. \ n
+        Your current deposit is %3$.4f MOS, this time you can only grab %4$.4f MOS.
     </string>
     <string name="window_rush_btn">Confirm</string>
 
@@ -380,7 +380,8 @@
     <string name="splash_skip">Skip</string>
     <string name="main_title">Noah Wallet</string>
     <string name="credit_center">Credit center</string>
-    <string name="credit_center_information">"\u3000\u3000" Credit center is credit loan namely, it is the loan that points to extend with the credit of borrower, borrower does not need to offer assure.\n
+    <string name="credit_center_information" tools:ignore="StringEscaping">
+        "\u3000\u3000" Credit center is credit loan namely, it is the loan that points to extend with the credit of borrower, borrower does not need to offer assure.\n
       "\u3000\u3000" Its characteristic is the debtor needn't provide collateral or the third party guarantee merely can obtain the loan by own prestige, and draws the borrower's credit degree as the repayment guarantee\n
       "\u3000\u3000" The creditor (Noah wallet) will review and analyze the income of the borrower according to the information of the borrower in the wallet through the score card, the big data model of rule + strategy, and finally confirm whether to make loan. After waiting for the dynamic node mature will choose the opportunity to open, please look forward to</string>
     <string name="mill_record">Mining records</string>
@@ -397,8 +398,8 @@
     <string name="today_coin">Currency today</string>
     <string name="serial_number">Number</string>
     <string name="start_time">Starting time </string>
-    <string name="calculate_contribution">Contribution of calculation</string>
-    <string name="today_difficult">The difficulty of today</string>
+    <string name="calculate_contribution">Contribution</string>
+    <string name="today_difficult">Difficulty</string>
     <string name="mention_adress">Withdrawal address record</string>
     <string name="wallet_adress">Wallet address</string>
     <string name="note_message">Note information</string>
@@ -425,5 +426,16 @@
     <string name="item_order_combined">Summation</string>
     <string name="run_status">Running state</string>
     <string name="modify_success">Delete successful</string>
+    <string name="text_note">
+        Note：\n
+        When competing for promotion, it is suggested to fill in the invitation code of the superior node.\n
+        If you do not fill in, you default to the root node.\n
+        Each wallet can only be operated once, please fill it carefully.
+    </string>
+    b
+    <string name="main_app_eth_browser">ETH browser</string>
+    <string name="main_app_btc_browser">BTC browser</string>
+    <string name="main_app_eos_browser">EOS browser</string>
+
 
 </resources>

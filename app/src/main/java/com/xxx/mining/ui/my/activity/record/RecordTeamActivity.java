@@ -51,7 +51,7 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
 
     @Override
     protected String initTitle() {
-        return getString(R.string.record_team_title);
+        return getString(R.string.record_all_team);
     }
 
     @Override

@@ -21,6 +21,8 @@ public class CallMeActivity extends BaseTitleActivity {
 
     private Bitmap mFacebookBitmap;
     private Bitmap mWeChatBitmap;
+    private Bitmap mBitmap;
+
 
     @Override
     protected String initTitle() {
@@ -36,9 +38,11 @@ public class CallMeActivity extends BaseTitleActivity {
     protected void initData() {
         mFacebookBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.facebook_code);
         mWeChatBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.twitter_code);
+        mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.wechat_code);
+
     }
 
-    @OnClick({R.id.call_me_facebook_save, R.id.call_me_we_chat_save})
+    @OnClick({R.id.call_me_facebook_save, R.id.call_me_we_chat_save,R.id.call_me_wechat_save})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.call_me_facebook_save:
@@ -46,6 +50,9 @@ public class CallMeActivity extends BaseTitleActivity {
                 break;
             case R.id.call_me_we_chat_save:
                 ImageUtil.saveImage(this, mWeChatBitmap);
+                break;
+            case R.id.call_me_wechat_save:
+                ImageUtil.saveImage(this, mBitmap);
                 break;
         }
     }

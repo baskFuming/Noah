@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.xxx.mining.BuildConfig;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
@@ -56,7 +57,7 @@ public class AccountSettingActivity extends BaseTitleActivity {
         mVersionCode.setText(versionName);
     }
 
-    @OnClick({R.id.account_setting_set_password, R.id.account_setting_address_manager, R.id.account_setting_check_version, R.id.account_setting_out_login})
+    @OnClick({R.id.account_setting_set_password, R.id.account_setting_address_manager, R.id.account_setting_check_version})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.account_setting_set_password:
@@ -67,9 +68,6 @@ public class AccountSettingActivity extends BaseTitleActivity {
                 break;
             case R.id.account_setting_check_version:
                 checkAppVersion();
-                break;
-            case R.id.account_setting_out_login:
-                outLogin();
                 break;
         }
     }
@@ -115,42 +113,4 @@ public class AccountSettingActivity extends BaseTitleActivity {
                     }
                 });
     }
-
-    /**
-     * @Model 退出登录
-     */
-    private void outLogin() {
-        Api.getInstance().outLogin()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ApiCallback<Object>(this) {
-                    @Override
-                    public void onSuccess(BaseBean<Object> bean) {
-                        if (bean != null) {
-                            ToastUtil.showToast(bean.getMessage());
-                            SharedPreferencesUtil.getInstance().cleanAll(); //清空所有数据
-                            startActivity(new Intent(AccountSettingActivity.this, LoginActivity.class));
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onError(int errorCode, String errorMessage) {
-                        ToastUtil.showToast(errorMessage);
-                    }
-
-                    @Override
-                    public void onStart(Disposable d) {
-                        super.onStart(d);
-                        showLoading();
-                    }
-
-                    @Override
-                    public void onEnd() {
-                        super.onEnd();
-                        hideLoading();
-                    }
-                });
-    }
-
 }

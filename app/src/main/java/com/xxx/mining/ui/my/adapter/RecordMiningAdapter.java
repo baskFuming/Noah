@@ -22,6 +22,6 @@ public class RecordMiningAdapter extends BaseQuickAdapter<RecordMiningBean.ListB
     protected void convert(BaseViewHolder helper, RecordMiningBean.ListBean item) {
         helper.setText(R.id.item_record_mining_name, item.getMillNum())
                 .setText(R.id.item_record_mining_time, item.getDate())
-                .setText(R.id.item_record_mining_amount, "+" + item.getValue()+"MSB");
+                .setText(R.id.item_record_mining_amount, "+" + item.getValue()+"MOS");
     }
 }

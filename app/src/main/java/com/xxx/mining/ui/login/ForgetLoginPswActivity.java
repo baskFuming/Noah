@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -66,6 +67,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         mDownTimeUtil = DownTimeUtil.getInstance();
         KeyBoardUtil.closeKeyBord(this, mAccountEdit);
     }

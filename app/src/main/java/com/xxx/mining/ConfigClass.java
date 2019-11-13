@@ -4,11 +4,11 @@ public class ConfigClass {
     /**
      * 服务器地址
      */
-//    public static final String BASE_URL = "http://noahglobal.me/";   //正式服务器地址
-//    public static final String BASE_URL_PATH = "/NoahWallet";
+    public static final String BASE_URL = "http://noahglobal.me/";   //正式服务器地址
+    public static final String BASE_URL_PATH = "/NoahWallet";
 
-    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
-    public static final String BASE_URL_PATH = "";
+//    public static final String BASE_URL = "http://192.168.31.95:8080";   //测试服务器地址
+//    public static final String BASE_URL_PATH = "";
 
     /**
      * 正则判断区域
@@ -59,5 +59,11 @@ public class ConfigClass {
     public static final int LOGIN_RESULT_CODE = 102; //关闭页面返回的
     public static final int DEPOSIT_IN_RESULT_CODE = 103; //关闭页面返回的
     public static final int DEPOSIT_OUT_RESULT_CODE = 104; //关闭页面返回的
+
+
+    public static final String APP_ETH_BROWSER = "https://etherscan.io/";   //ETH浏览器
+    public static final String APP_BTC_BROWSER = "https://m.btc.com/";    //比特币浏览器
+    public static final String APP_EOS_BROWSER = "https://eospark.com/";    //比特币浏览器
+
 
 }

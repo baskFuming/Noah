@@ -8,33 +8,89 @@
     tools:context="com.xxx.mining.ui.home.activity.MoreOtherActivity">
 
     <include layout="@layout/include_title_bar" />
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-    <!--<ImageView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:layout_marginBottom="15dp"-->
-    <!--android:background="@mipmap/more"/>-->
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="尽请期待"-->
-    <!--android:textColor="#ff333333"-->
-    <!--android:textSize="12dp"-->
-    <!--/>-->
-    <!--</LinearLayout>-->
-    <RelativeLayout
-        android:id="@+id/relayout_data"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
-        <ImageView
-            android:layout_width="263dp"
-            android:layout_height="183dp"
-            android:layout_centerInParent="true"
-            android:background="@mipmap/blank" />
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/main_app_eth_browser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/app_eth_browser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/main_app_eth_browser"
+                android:textColor="@color/colorTextColorMain"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_app_btc_browser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/app_btc_browser" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/main_app_btc_browser"
+                android:textColor="@color/colorTextColorMain"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_app_eos_browser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/app_eos" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/main_app_eos_browser"
+                android:textColor="@color/colorTextColorMain"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

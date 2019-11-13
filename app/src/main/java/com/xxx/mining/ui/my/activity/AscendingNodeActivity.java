@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -91,6 +92,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
 
     @Override
     protected void initData() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         initBundle();
         mPrice.setText(usdeprice + "USDT" + "    " + dwttprice + "DWTT");
         mNumber.setText(String.valueOf(number));
@@ -129,12 +131,16 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
             case R.id.shop_mining_place_btn:
                 invite = edInvite.getText().toString();
                 isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
-                if (!isHavePayPassword) {
-                    SettingPayPswActivity.actionStart(this);
-                } else {
-                    if (mPasswordWindow != null) {
-                        mPasswordWindow.show();
+                if (!invite.isEmpty()) {
+                    if (!isHavePayPassword) {
+                        SettingPayPswActivity.actionStart(this);
+                    } else {
+                        if (mPasswordWindow != null) {
+                            mPasswordWindow.show();
+                        }
                     }
+                } else {
+                    ToastUtil.showToast(R.string.register_error_7);
                 }
                 break;
         }

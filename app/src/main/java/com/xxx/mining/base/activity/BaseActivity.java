@@ -79,8 +79,11 @@ public abstract class BaseActivity extends BaseLanguageActivity {
         if (editTextShakeHelper != null) {
             editTextShakeHelper.shake(views);
         }
+    }
+    @Override
+    public void finish() {
+        super.finish();
         ActivityManager.getInstance().finishActivity(this);
-
     }
 
     @Override
@@ -102,7 +105,7 @@ public abstract class BaseActivity extends BaseLanguageActivity {
             unbinder = null;
         }
         super.onDestroy();
-
+        ActivityManager.getInstance().finishActivity(this);
 
     }
 
