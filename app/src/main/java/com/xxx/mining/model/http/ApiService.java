@@ -7,6 +7,7 @@ import com.xxx.mining.model.http.bean.BannerBean;
 import com.xxx.mining.model.http.bean.DepositBean;
 import com.xxx.mining.model.http.bean.DepositRecordBean;
 import com.xxx.mining.model.http.bean.HomeBean;
+import com.xxx.mining.model.http.bean.InviteCode;
 import com.xxx.mining.model.http.bean.IsSettingPayPswBean;
 import com.xxx.mining.model.http.bean.LoginBean;
 import com.xxx.mining.model.http.bean.MillDetailBean;
@@ -384,6 +385,16 @@ public interface ApiService {
             @Field("my_address_id") int id
     );
 
+    //创建币种信息
+    @FormUrlEncoded
+    @POST(ConfigClass.BASE_URL_PATH + "/createAddress")
+    Observable<BaseBean<Object>> getaddAddress(
+            @Field("coinName") String coinName,
+            @Field("address") String address,
+            @Field("remarks") String remarks
+
+    );
+
     //获取节点商品
     @FormUrlEncoded
     @POST(ConfigClass.BASE_URL_PATH + "/getNodeCommodities")
@@ -405,5 +416,10 @@ public interface ApiService {
     @POST(ConfigClass.BASE_URL_PATH + "/myWidth")
     Observable<BaseBean<List<WDepathBean>>> getWidth();
 
-
+    //邀请码验证
+    @FormUrlEncoded
+    @POST(ConfigClass.BASE_URL_PATH + "/isNode")
+    Observable<BaseBean<InviteCode>> getInviteCode(
+            @Field("invCode") String invCode
+    );
 }

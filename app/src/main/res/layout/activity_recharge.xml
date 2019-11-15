@@ -97,6 +97,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
                                         android:text="@string/recharge_my_address"
+                                        android:visibility="gone"
                                         android:textColor="#333333"
                                         android:textSize="12dp" />
 
@@ -104,7 +105,7 @@
                                         android:id="@+id/recharge_my_address"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_alignParentRight="true"
+                                        android:layout_centerInParent="true"
                                         android:layout_centerVertical="true"
                                         android:textColor="#375880"
                                         android:textSize="12sp" />

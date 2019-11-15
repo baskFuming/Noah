@@ -87,7 +87,7 @@ public class AccountSettingActivity extends BaseTitleActivity {
                             if (data != null) {
                                 String version = data.getVersion();
                                 if (versionName.equals(version)) {
-                                    ToastUtil.showToast(R.string.check_version_not);
+                                    ToastUtil.showToast(getString(R.string.check_version_not));
                                 } else {
                                     UpdateWindow.getInstance(AccountSettingActivity.this, data.getDownloadUrl());
                                 }

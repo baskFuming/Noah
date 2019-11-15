@@ -124,19 +124,19 @@ public class ShopMiningPlaceActivity extends BaseTitleActivity implements Passwo
     @Override
     public void callback(String password, String code) {
         if (password == null || password.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_1);
+            ToastUtil.showToast(getString(R.string.window_password_error_1));
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
-            ToastUtil.showToast(R.string.window_password_error_2);
+            ToastUtil.showToast(getString(R.string.window_password_error_2));
             return;
         }
         if (code == null || code.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_3);
+            ToastUtil.showToast(getString(R.string.window_password_error_3));
             return;
         }
         if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.window_password_error_4);
+            ToastUtil.showToast(getString(R.string.window_password_error_4));
             return;
         }
         place(password, code);

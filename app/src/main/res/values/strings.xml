@@ -122,8 +122,8 @@
     </string>
     <string name="deposit_in_error_1">数量不能为空</string>
     <string name="deposit_in_error_2">数量输入有误</string>
-    <string name="deposit_total_asset">总理财额($)</string>
-    <string name="deposit_total_profit">总收益($)</string>
+    <string name="deposit_total_asset">总理财额</string>
+    <string name="deposit_total_profit">总收益</string>
 
     <string name="deposit_out_title">转出</string>
     <string name="deposit_out_record">转出记录</string>
@@ -310,7 +310,7 @@
     <string name="main_call_my">联系我们</string>
 
     <string name="current_pro">当前抢购进度：</string>
-    <string name="call_my_twitter">推特</string>
+    <string name="call_my_twitter">Twitter</string>
 
     <string name="record_all_user">用户名</string>
     <string name="record_all_level">等级</string>
@@ -372,11 +372,11 @@
 "\u3000\u3000"债权人（诺亚钱包）会根据借款人在钱包的信息，通过评分卡，规则+策略的大数据模型，对借款人的收益情况进行审核分析，最后确认是否进行放款。待动态节点成熟后会择机开放，敬请期待</string>
     <string name="mill_record">挖矿记录</string>
     <string name="node_number">节点编号</string>
-    <string name="node_up">竟升节点</string>
+    <string name="node_up">竞升节点</string>
     <string name="node_invite">节点邀请码</string>
     <string name="latitude">纬度</string>
     <string name="node_count">节点数</string>
-    <string name="results">业绩（USDT）</string>
+    <string name="results">业绩(USDT)</string>
     <string name="invite_code">邀请码</string>
     <string name="mining_title">挖矿</string>
     <string name="moment_mining">正在挖矿…</string>
@@ -416,12 +416,28 @@
     <string name="invite_code_text">邀请码</string>
     <string name="text_note">
         注：\n
-        在竞升节点的时候，建议填写上级节点的邀请码。\n
-        如果没有填写，则默认自己为根节点。\n
-        竞升节点每个钱包只能操作一次，请慎重填写。
+        1.在竞升节点的时候，必须填写上级节点的邀请码。\n
+        2.如果没有填写，则不能竞升。如果填写错，则不能修改。\n
+        3.竞升节点每个账户只能操作一次，请慎重填写。
     </string>
     <string name="main_app_eth_browser">ETH浏览器</string>
     <string name="main_app_btc_browser">BTC浏览器</string>
     <string name="main_app_eos_browser">EOS浏览器</string>
+
+    <string name="main_cotent_add">添加</string>
+    <string name="add_coin_message">添加币种</string>
+    <string name="add_address_message">添加地址信息</string>
+    <string name="add_remark_message">添加备注信息</string>
+    <string name="enter_remark_message">请输入添加备注信息</string>
+    <string name="enter_address_message">请输入添加钱包地址信息</string>
+    <string name="enter_coin_message">请输入添加币种信息</string>
+    <string name="year_rate">年化利率：</string>
+    <string name="add_success">添加成功</string>
+    <string name="invite_code_fail">邀请码错误</string>
+    <string name="invite_code_success">邀请码校验成功</string>
+
+    <string name="add_coin_error">币种信息不能为空</string>
+    <string name="add_address_error">钱包地址不能为空</string>
+    <string name="add_remark_error">备注信息不能为空</string>
 
 </resources>

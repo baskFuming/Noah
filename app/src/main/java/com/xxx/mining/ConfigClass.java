@@ -59,9 +59,8 @@ public class ConfigClass {
     public static final int LOGIN_RESULT_CODE = 102; //关闭页面返回的
     public static final int DEPOSIT_IN_RESULT_CODE = 103; //关闭页面返回的
     public static final int DEPOSIT_OUT_RESULT_CODE = 104; //关闭页面返回的
-
-
-    public static final String APP_ETH_BROWSER = "https://etherscan.io/";   //ETH浏览器
+    
+    public static final String APP_ETH_BROWSER = "https://ethplorer.io/";   //ETH浏览器
     public static final String APP_BTC_BROWSER = "https://m.btc.com/";    //比特币浏览器
     public static final String APP_EOS_BROWSER = "https://eospark.com/";    //比特币浏览器
 

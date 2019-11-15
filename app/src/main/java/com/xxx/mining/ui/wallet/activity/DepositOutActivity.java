@@ -119,20 +119,20 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
         try {
             String s = mEdit.getText().toString();
             if (s.isEmpty()) {
-                ToastUtil.showToast(R.string.deposit_out_error_1);
+                ToastUtil.showToast(getString(R.string.deposit_out_error_1));
                 return;
             }
             value = Double.parseDouble(s);
             if (value <= 0) {
-                ToastUtil.showToast(R.string.deposit_out_error_1);
+                ToastUtil.showToast(getString(R.string.deposit_out_error_1));
                 return;
             }
             if (value > balance) {
-                ToastUtil.showToast(R.string.deposit_out_error_3);
+                ToastUtil.showToast(getString(R.string.deposit_out_error_3));
                 return;
             }
         } catch (Exception e) {
-            ToastUtil.showToast(R.string.deposit_out_error_2);
+            ToastUtil.showToast(getString(R.string.deposit_out_error_2));
             return;
         }
 
@@ -146,19 +146,19 @@ public class DepositOutActivity extends BaseTitleActivity implements PasswordWin
     @Override
     public void callback(String password, String code) {
         if (password == null || password.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_1);
+            ToastUtil.showToast(getString(R.string.window_password_error_1));
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
-            ToastUtil.showToast(R.string.window_password_error_2);
+            ToastUtil.showToast(getString(R.string.window_password_error_2));
             return;
         }
         if (code == null || code.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_3);
+            ToastUtil.showToast(getString(R.string.window_password_error_3));
             return;
         }
         if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.window_password_error_4);
+            ToastUtil.showToast(getString(R.string.window_password_error_4));
             return;
         }
         depositOut(password, code);

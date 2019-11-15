@@ -87,17 +87,17 @@ public class SettingPayPswActivity extends BaseTitleActivity {
         String newPasswordAgain = mPasswordAgainEdit.getText().toString();
 
         if (newPassword.isEmpty()) {
-            ToastUtil.showToast(R.string.setting_pay_psw_error_1);
+            ToastUtil.showToast(getString(R.string.setting_pay_psw_error_1));
             showEditError(mPasswordEdit);
             return;
         }
         if (!newPassword.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.setting_pay_psw_error_3);
+            ToastUtil.showToast(getString(R.string.setting_pay_psw_error_3));
             showEditError(mPasswordEdit);
             return;
         }
         if (!newPassword.equals(newPasswordAgain)) {
-            ToastUtil.showToast(R.string.setting_pay_psw_error_2);
+            ToastUtil.showToast(getString(R.string.setting_pay_psw_error_2));
             showEditError(mPasswordEdit, mPasswordAgainEdit);
             return;
         }

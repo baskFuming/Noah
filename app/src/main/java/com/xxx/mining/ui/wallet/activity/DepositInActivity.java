@@ -113,20 +113,20 @@ public class DepositInActivity extends BaseTitleActivity {
         try {
             String s = mEdit.getText().toString();
             if (s.isEmpty()) {
-                ToastUtil.showToast(R.string.deposit_in_error_1);
+                ToastUtil.showToast(getString(R.string.deposit_in_error_1));
                 return;
             }
             value = Double.parseDouble(s);
             if (value <= 0) {
-                ToastUtil.showToast(R.string.deposit_in_error_1);
+                ToastUtil.showToast(getString(R.string.deposit_in_error_1));
                 return;
             }
             if (value > amount) {
-                ToastUtil.showToast(R.string.deposit_out_error_3);
+                ToastUtil.showToast(getString(R.string.deposit_out_error_3));
                 return;
             }
         } catch (Exception e) {
-            ToastUtil.showToast(R.string.deposit_in_error_2);
+            ToastUtil.showToast(getString(R.string.deposit_in_error_2));
             return;
         }
         Api.getInstance().depositIn(value, coinId)

@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.xxx.mining.R;
+import com.xxx.mining.base.App;
 import com.xxx.mining.base.activity.ActivityManager;
 
 public class ExitAppUtil {
@@ -48,6 +49,6 @@ public class ExitAppUtil {
         }
         mHandler.setBackCount();
         mHandler.sendEmptyMessageDelayed(1, 1500);
-        ToastUtil.showToast(R.string.second_exit_app);
+        ToastUtil.showToast(App.getApplication().getString(R.string.second_exit_app));
     }
 }

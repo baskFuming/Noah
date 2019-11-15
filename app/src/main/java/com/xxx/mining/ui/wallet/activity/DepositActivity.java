@@ -68,6 +68,8 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
     TextView mTotalAssetText;
     @BindView(R.id.deposit_profit)
     TextView mTotalProfit;
+    @BindView(R.id.te_year)
+    TextView mYear;
 
     private int page = ConfigClass.PAGE_DEFAULT;
     private DepositProfitAdapter mAdapter;
@@ -162,6 +164,7 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<DepositBean>(this) {
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onSuccess(BaseBean<DepositBean> bean) {
                         if (bean != null) {
@@ -170,6 +173,7 @@ public class DepositActivity extends BaseTitleActivity implements SwipeRefreshLa
                                 outBalance = data.getInvest();
                                 mTotalAsset.setText(String.valueOf(outBalance));
                                 mTotalProfit.setText(String.valueOf(data.getIncome()));
+                                mYear.setText(getString(R.string.year_rate) + new BigDecimal(data.getRatio() * 100).setScale(2, RoundingMode.DOWN).toPlainString() + "%");
                             }
                         }
                     }

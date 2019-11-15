@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -40,6 +41,8 @@ public class MyminiFragment extends BaseFragment implements BaseQuickAdapter.Req
     SwipeRefreshLayout mRefresh;
     @BindView(R.id.main_not_data)
     LinearLayout mNotData;
+    @BindView(R.id.main_return)
+    ImageButton imageButton;
 
     private int page = ConfigClass.PAGE_DEFAULT;
     private MyMiningAdapter mAdapter;
@@ -52,6 +55,7 @@ public class MyminiFragment extends BaseFragment implements BaseQuickAdapter.Req
 
     @Override
     protected void initData() {
+        imageButton.setVisibility(View.GONE);
         mTitile.setText(getString(R.string.my_mining_title));
         mAdapter = new MyMiningAdapter(mList);
         mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));

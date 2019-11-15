@@ -140,7 +140,7 @@ public class RegisterActivity extends BaseTitleActivity {
     private void sendSMSCode() {
         String account = mAccountEdit.getText().toString();
         if (account.isEmpty()) {
-            ToastUtil.showToast(R.string.register_error_1);
+            ToastUtil.showToast(getString(R.string.register_error_1));
             showEditError(mAccountEdit);
             return;
         }
@@ -196,32 +196,32 @@ public class RegisterActivity extends BaseTitleActivity {
         final String password = mPasswordEdit.getText().toString();
 
         if (account.isEmpty()) {
-            ToastUtil.showToast(R.string.register_error_1);
+            ToastUtil.showToast(getString(R.string.register_error_1));
             showEditError(mAccountEdit);
             return;
         }
         if (!account.matches(ConfigClass.MATCHES_PHONE)) {
-            ToastUtil.showToast(R.string.login_error_3);
+            ToastUtil.showToast(getString(R.string.login_error_3));
             showEditError(mAccountEdit);
             return;
         }
         if (smsCode.isEmpty()) {
-            ToastUtil.showToast(R.string.register_error_2);
+            ToastUtil.showToast(getString(R.string.register_error_2));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (!smsCode.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.register_error_5);
+            ToastUtil.showToast(getString(R.string.register_error_5));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (password.isEmpty()) {
-            ToastUtil.showToast(R.string.register_error_3);
+            ToastUtil.showToast(getString(R.string.register_error_3));
             showEditError(mPasswordEdit);
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_PASSWORD)) {
-            ToastUtil.showToast(R.string.register_error_6);
+            ToastUtil.showToast(getString(R.string.register_error_6));
             showEditError(mPasswordEdit);
             return;
         }

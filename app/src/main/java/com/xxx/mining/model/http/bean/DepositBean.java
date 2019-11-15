@@ -9,20 +9,19 @@ public class DepositBean {
 
     private double income;
     private double invest;
+    private double ratio;
 
     public double getIncome() {
         return income;
     }
 
-    public void setIncome(double income) {
-        this.income = income;
-    }
 
     public double getInvest() {
         return invest;
     }
 
-    public void setInvest(double invest) {
-        this.invest = invest;
+    public double getRatio() {
+        return ratio;
     }
+
 }

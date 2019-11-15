@@ -153,39 +153,39 @@ public class ModifyLoginPswActivity extends BaseTitleActivity {
         String newPasswordAgain = mNewPasswordAgainEdit.getText().toString();
 
         if (smsCode.isEmpty()) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_1);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_1));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (!smsCode.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_5);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_5));
             showEditError(mSMSCodeEdit);
             return;
         }
 
         if (oldPassword.isEmpty()) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_2);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_2));
             showEditError(mOldPasswordEdit);
             return;
         }
         if (!oldPassword.matches(ConfigClass.MATCHES_PASSWORD)) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_6);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_6));
             showEditError(mOldPasswordEdit);
             return;
         }
 
         if (newPassword.isEmpty()) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_3);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_3));
             showEditError(mNewPasswordEdit);
             return;
         }
         if (!newPassword.matches(ConfigClass.MATCHES_PASSWORD)) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_7);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_7));
             showEditError(mNewPasswordEdit);
             return;
         }
         if (!newPassword.equals(newPasswordAgain)) {
-            ToastUtil.showToast(R.string.modify_login_psw_error_4);
+            ToastUtil.showToast(getString(R.string.modify_login_psw_error_4));
             showEditError(mNewPasswordEdit, mNewPasswordAgainEdit);
             return;
         }

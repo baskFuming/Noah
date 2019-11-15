@@ -69,11 +69,11 @@ public class FeedBackActivity extends BaseTitleActivity {
         String phone = mPhone.getText().toString();
 
         if (content.isEmpty()) {
-            ToastUtil.showToast(R.string.feed_back_error_1);
+            ToastUtil.showToast(getString(R.string.feed_back_error_1));
             return;
         }
         if (phone.isEmpty()) {
-            ToastUtil.showToast(R.string.feed_back_error_2);
+            ToastUtil.showToast(getString(R.string.feed_back_error_2));
             return;
         }
 

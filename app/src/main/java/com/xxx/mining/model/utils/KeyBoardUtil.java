@@ -64,7 +64,7 @@ public class KeyBoardUtil {
             ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
             if (cm != null) {
                 cm.setText(message == null ? "" : message);
-                ToastUtil.showToast(R.string.copy_success);
+                ToastUtil.showToast(context.getString(R.string.copy_success));
             }
         }
     }

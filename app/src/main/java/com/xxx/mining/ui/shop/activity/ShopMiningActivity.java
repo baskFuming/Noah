@@ -59,7 +59,7 @@ public class ShopMiningActivity extends BaseTitleActivity implements SwipeRefres
 
     @Override
     protected String initTitle() {
-        return getString(R.string.shop_mining_title);
+        return getString(R.string.main_shop_mining);
     }
 
     @Override

@@ -281,21 +281,21 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
         mamount = mAmount.getText().toString();
 
         if (maddress.isEmpty()) {
-            ToastUtil.showToast(R.string.withdrawal_error_1);
+            ToastUtil.showToast(getString(R.string.withdrawal_error_1));
             return;
         }
         if (mamount.isEmpty()) {
-            ToastUtil.showToast(R.string.withdrawal_error_2);
+            ToastUtil.showToast(getString(R.string.withdrawal_error_2));
             return;
         }
         try {
             if (Double.parseDouble(mamount) + fee > balance) {
-                ToastUtil.showToast(R.string.withdrawal_error_3);
+                ToastUtil.showToast(getString(R.string.withdrawal_error_3));
                 return;
             }
 
         } catch (Exception e) {
-            ToastUtil.showToast(R.string.withdrawal_error_4);
+            ToastUtil.showToast(getString(R.string.withdrawal_error_4));
             return;
         }
 
@@ -311,19 +311,19 @@ public class WithdrawalActivity extends BaseTitleActivity implements SwipeRefres
     @Override
     public void callback(String password, String code) {
         if (password == null || password.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_1);
+            ToastUtil.showToast(getString(R.string.window_password_error_1));
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
-            ToastUtil.showToast(R.string.window_password_error_2);
+            ToastUtil.showToast(getString(R.string.window_password_error_2));
             return;
         }
         if (code == null || code.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_3);
+            ToastUtil.showToast(getString(R.string.window_password_error_3));
             return;
         }
         if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.window_password_error_4);
+            ToastUtil.showToast(getString(R.string.window_password_error_4));
             return;
         }
         withdrawal(password, code);

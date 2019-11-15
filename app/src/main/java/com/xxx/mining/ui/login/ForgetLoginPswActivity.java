@@ -121,11 +121,11 @@ public class ForgetLoginPswActivity extends BaseActivity {
     private void sendSMSCode() {
         String account = mAccountEdit.getText().toString();
         if (account.isEmpty()) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_1);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_1));
             return;
         }
         if (!account.matches(ConfigClass.MATCHES_PHONE)) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_4);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_4));
             showEditError(mAccountEdit);
             return;
         }
@@ -183,37 +183,37 @@ public class ForgetLoginPswActivity extends BaseActivity {
         String passwordAgain = mPasswordAgainEdit.getText().toString();
 
         if (account.isEmpty()) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_1);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_1));
             showEditError(mAccountEdit);
             return;
         }
         if (!account.matches(ConfigClass.MATCHES_PHONE)) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_4);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_4));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (smsCode.isEmpty()) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_2);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_2));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (!smsCode.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_5);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_5));
             showEditError(mPasswordEdit);
             return;
         }
         if (password.isEmpty()) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_3);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_3));
             showEditError(mPasswordEdit);
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_PASSWORD)) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_6);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_6));
             showEditError(mPasswordEdit);
             return;
         }
         if (!password.equals(passwordAgain)) {
-            ToastUtil.showToast(R.string.forget_login_psw_error_7);
+            ToastUtil.showToast(getString(R.string.forget_login_psw_error_7));
             showEditError(mPasswordEdit, mPasswordAgainEdit);
             return;
         }

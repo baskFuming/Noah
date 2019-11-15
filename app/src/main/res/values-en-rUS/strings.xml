@@ -117,14 +117,13 @@
     <string name="deposit_in_btn">Confirm transfer</string>
     <string name="deposit_in_toast_1">Financial rules </string>
     <string name="deposit_in_toast_2">&#160;\n
-        1.With the deposit along with take, carry into the day do not calculate interest, the next day calculate income, the third day income to the account。\n
-        2.Transfer to the digital equivalent of the minimum equivalent of $100.\n
-        3.The interest will be returned to the wallet account every day in the form of MOS and will be calculated in currency standard
+        1. Deposit and withdraw at any time, no interest is calculated on the day of transfer,the income is calculated on the third day, income received on the same day.
+        2.The interest will be returned to the wallet account every day in the form of MOS and will be calculated in currency standard
     </string>
     <string name="deposit_in_error_1">The quantity cannot be empty</string>
     <string name="deposit_in_error_2">Quantity input error</string>
-    <string name="deposit_total_asset">Total financialm management($)</string>
-    <string name="deposit_total_profit">Total revenue($)</string>
+    <string name="deposit_total_asset">Total financialm management</string>
+    <string name="deposit_total_profit">Total revenue</string>
 
     <string name="deposit_out_title">Roll out</string>
     <string name="deposit_out_record">Roll out record</string>
@@ -210,7 +209,7 @@
     <string name="register_error_7">The invitation code cannot be empty</string>
 
     <string name="forget_login_psw_title">Forgot password</string>
-    <string name="forget_login_psw_send_sms_code">Get verification code</string>
+    <string name="forget_login_psw_send_sms_code">Send code</string>
     <string name="forget_login_psw_hint_account">Please enter your cell phone number</string>
     <string name="forget_login_psw_hint_sms_code">Please enter verification code</string>
     <string name="forget_login_psw_hint_password">Please enter your password</string>
@@ -339,7 +338,7 @@
     <string name="item_order_status">Has been completed</string>
     <string name="main_shop_title">Shopping</string>
     <string name="main_shop_toast">Classification of goods</string>
-    <string name="main_shop_mining">Mining machine</string>
+    <string name="main_shop_mining">Mining</string>
     <string name="main_shop_imported">Imported goods</string>
     <string name="main_shop_hotel">Hotel</string>
     <string name="main_shop_plane">Air ticket</string>
@@ -380,17 +379,24 @@
     <string name="splash_skip">Skip</string>
     <string name="main_title">Noah Wallet</string>
     <string name="credit_center">Credit center</string>
-    <string name="credit_center_information" tools:ignore="StringEscaping">
-        "\u3000\u3000" Credit center is credit loan namely, it is the loan that points to extend with the credit of borrower, borrower does not need to offer assure.\n
-      "\u3000\u3000" Its characteristic is the debtor needn't provide collateral or the third party guarantee merely can obtain the loan by own prestige, and draws the borrower's credit degree as the repayment guarantee\n
-      "\u3000\u3000" The creditor (Noah wallet) will review and analyze the income of the borrower according to the information of the borrower in the wallet through the score card, the big data model of rule + strategy, and finally confirm whether to make loan. After waiting for the dynamic node mature will choose the opportunity to open, please look forward to</string>
+    <string name="credit_center_information">
+    "\u3000\u3000"Credit center is credit loan namely, it is the loan that points to extend with the credit of
+    borrower, borrower does not need to offer assure \n
+    "\u3000\u3000"Its characteristic is the debtor need not provide collateral or the third party guarantee merely
+    can obtain the loan by own prestige, and draws the borrower is credit degree as the repayment
+    guarantee \n
+    "\u3000\u3000"The creditor (Noah wallet) will review and analyze the income of the borrower according to the
+    information of the borrower in the wallet through the score card, the big data model of rule +
+    strategy, and finally confirm whether to make loan. After waiting for the dynamic node mature
+    will choose the opportunity to open, please look forward to
+    </string>
     <string name="mill_record">Mining records</string>
     <string name="node_number">Node number</string>
     <string name="node_up">Ascending node</string>
     <string name="node_invite">Node invitation code</string>
     <string name="latitude">Latitude</string>
-    <string name="node_count">Number of nodes</string>
-    <string name="results">Performance（xx）</string>
+    <string name="node_count">Number</string>
+    <string name="results">Performance(USDT)</string>
     <string name="invite_code">Invite code</string>
     <string name="mining_title">Mining</string>
     <string name="moment_mining">Being mining…</string>
@@ -426,16 +432,29 @@
     <string name="item_order_combined">Summation</string>
     <string name="run_status">Running state</string>
     <string name="modify_success">Delete successful</string>
+    <string name="invite_code_text">Invite code</string>
     <string name="text_note">
         Note：\n
-        When competing for promotion, it is suggested to fill in the invitation code of the superior node.\n
-        If you do not fill in, you default to the root node.\n
-        Each wallet can only be operated once, please fill it carefully.
+        1.When competing for promotion, the invitation code of the superior node must be filled in.\n
+        2.If you do not fill in, you will not be promoted. If you fill in wrong, you cannot change it.\n
+        3.Each account can only be operated once, please fill it carefully.
     </string>
-    b
     <string name="main_app_eth_browser">ETH browser</string>
     <string name="main_app_btc_browser">BTC browser</string>
     <string name="main_app_eos_browser">EOS browser</string>
+    <string name="main_cotent_add">Add</string>
 
-
+    <string name="add_coin_message">Add coin name</string>
+    <string name="add_address_message">Add wallet address</string>
+    <string name="add_remark_message">Add note information</string>
+    <string name="enter_remark_message">Please enter add comment information</string>
+    <string name="enter_address_message">Please enter add wallet address information</string>
+    <string name="enter_coin_message">Please enter the added currency information</string>
+    <string name="year_rate">Annualized interest rate：</string>
+    <string name="add_success">Add Successful</string>
+    <string name="invite_code_fail">Invitation code error</string>
+    <string name="invite_code_success">The invitation code has been verified successfully</string>
+    <string name="add_coin_error">Currency information cannot be empty</string>
+    <string name="add_address_error">Wallet address cannot be empty</string>
+    <string name="add_remark_error">Comment information cannot be empty</string>
 </resources>

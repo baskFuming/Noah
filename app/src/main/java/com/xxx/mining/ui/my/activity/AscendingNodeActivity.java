@@ -14,6 +14,7 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
+import com.xxx.mining.model.http.bean.InviteCode;
 import com.xxx.mining.model.http.bean.NodePayBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.sp.SharedConst;
@@ -107,19 +108,19 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
     @Override
     public void callback(String password, String code) {
         if (password == null || password.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_1);
+            ToastUtil.showToast(getString(R.string.window_password_error_1));
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_JY_PASSWORD)) {
-            ToastUtil.showToast(R.string.window_password_error_2);
+            ToastUtil.showToast(getString(R.string.window_password_error_2));
             return;
         }
         if (code == null || code.isEmpty()) {
-            ToastUtil.showToast(R.string.window_password_error_3);
+            ToastUtil.showToast(getString(R.string.window_password_error_3));
             return;
         }
         if (!code.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.window_password_error_4);
+            ToastUtil.showToast(getString(R.string.window_password_error_4));
             return;
         }
         place(password, code);
@@ -130,17 +131,10 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         switch (view.getId()) {
             case R.id.shop_mining_place_btn:
                 invite = edInvite.getText().toString();
-                isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
                 if (!invite.isEmpty()) {
-                    if (!isHavePayPassword) {
-                        SettingPayPswActivity.actionStart(this);
-                    } else {
-                        if (mPasswordWindow != null) {
-                            mPasswordWindow.show();
-                        }
-                    }
+                    getInvite(invite);
                 } else {
-                    ToastUtil.showToast(R.string.register_error_7);
+                    ToastUtil.showToast(getString(R.string.register_error_7));
                 }
                 break;
         }
@@ -189,6 +183,38 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                     public void onEnd() {
                         super.onEnd();
                         hideLoading();
+                    }
+                });
+    }
+
+    /**
+     * @Model 验证码校验
+     */
+    private void getInvite(String invite) {
+        Api.getInstance().getInviteCode(invite)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ApiCallback<InviteCode>(this) {
+                    @Override
+                    public void onSuccess(BaseBean<InviteCode> bean) {
+                        if (bean.getData().isResult()) {
+                            isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
+                            if (!isHavePayPassword) {
+                                SettingPayPswActivity.actionStart(AscendingNodeActivity.this);
+                            } else {
+                                if (mPasswordWindow != null) {
+                                    mPasswordWindow.show();
+                                }
+                            }
+                            ToastUtil.showToast(getString(R.string.invite_code_success));
+                        } else {
+                            ToastUtil.showToast(getString(R.string.invite_code_fail));
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        ToastUtil.showToast(errorMessage);
                     }
                 });
     }

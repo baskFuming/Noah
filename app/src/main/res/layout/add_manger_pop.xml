@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_window_back"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <ImageButton
+            android:id="@+id/window_password_return"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorTransparent"
+            android:src="@mipmap/window_return" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/add_address_message"
+            android:textColor="@color/colorMain"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_coin_message"
+        android:textColor="#ff999999"
+        android:textSize="14sp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="17dp"
+        />
+    <EditText
+        android:id="@+id/window_password_coin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/shape_edit_window"
+        android:hint="@string/enter_coin_message"
+        android:paddingLeft="15dp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="@dimen/text_size" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_address_message"
+        android:textColor="#ff999999"
+        android:textSize="14sp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="17dp"
+        />
+    <EditText
+        android:id="@+id/window_password_edit"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/shape_edit_window"
+        android:hint="@string/enter_address_message"
+        android:paddingLeft="15dp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="@dimen/text_size" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_remark_message"
+        android:textColor="#ff999999"
+        android:textSize="14sp"
+        android:layout_marginTop="11dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        />
+
+    <EditText
+        android:id="@+id/window_password_send"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/shape_edit_window"
+        android:hint="@string/enter_remark_message"
+        android:paddingLeft="15dp"
+        android:textColor="#333333"
+        android:textColorHint="#999999"
+        android:textSize="@dimen/text_size" />
+
+
+    <Button
+        android:id="@+id/window_password_btn"
+        style="@style/MainButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_margin="25dp"
+        android:text="@string/window_password_btn" />
+
+</LinearLayout>

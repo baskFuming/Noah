@@ -12,6 +12,7 @@ import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.base.activity.BaseActivity;
+import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.LoginBean;
@@ -24,6 +25,8 @@ import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.main.MainActivity;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,7 +55,7 @@ public class LoginActivity extends BaseActivity {
     CheckBox mPasswordEye;
 
     private String area = "86";
-
+    private String language;
 
     @Override
     protected int getLayoutId() {
@@ -67,14 +70,11 @@ public class LoginActivity extends BaseActivity {
         KeyBoardUtil.closeKeyBord(this, mAccountEdit);
     }
 
-    @OnClick({R.id.login_return, R.id.login_selector_phone, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn, R.id.switch_language})
+    @OnClick({R.id.login_return, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn, R.id.switch_language})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.login_return:
                 finish();
-                break;
-            case R.id.login_selector_phone:
-//                startActivityForResult(new Intent(this, SelectCountyActivity.class), ConfigClass.REQUEST_CODE);
                 break;
             case R.id.login_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
@@ -88,17 +88,14 @@ public class LoginActivity extends BaseActivity {
             case R.id.login_btn:
                 login();
                 break;
-            case R.id.switch_language:    //切换语言
+            case R.id.switch_language:
                 String nowLanguage = SharedPreferencesUtil.getInstance().getString(SharedConst.CONSTANT_LAUNCHER);
-                switch (nowLanguage) {
-                    case LocalManageUtil.LANGUAGE_CN:
-                        SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_CN);
-                        EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
-                        break;
-                    case LocalManageUtil.LANGUAGE_US:
-                        SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_US);
-                        EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
-                        break;
+                if (nowLanguage.equals(LocalManageUtil.LANGUAGE_CN)) {
+                    SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_US);
+                    EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
+                } else if (nowLanguage.equals(LocalManageUtil.LANGUAGE_US)) {
+                    SharedPreferencesUtil.getInstance().saveString(SharedConst.CONSTANT_LAUNCHER, LocalManageUtil.LANGUAGE_CN);
+                    EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
                 }
                 break;
         }
@@ -114,9 +111,6 @@ public class LoginActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ConfigClass.RESULT_CODE && data != null) {
-//            String phoneName = data.getStringExtra(SelectCountyActivity.RESULT_NAME_KRY);
-//            String phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
-//            mSelectorPhone.setText(phoneCode);
             String account = data.getStringExtra("account");
             mAccountEdit.setText(account);
         }
@@ -136,22 +130,22 @@ public class LoginActivity extends BaseActivity {
         final String password = mPasswordEdit.getText().toString();
 
         if (account.isEmpty()) {
-            ToastUtil.showToast(R.string.login_error_1);
+            ToastUtil.showToast(getString(R.string.login_error_1));
             showEditError(mAccountEdit);
             return;
         }
         if (!account.matches(ConfigClass.MATCHES_PHONE)) {
-            ToastUtil.showToast(R.string.register_error_4);
+            ToastUtil.showToast(getString(R.string.register_error_4));
             showEditError(mAccountEdit);
             return;
         }
         if (password.isEmpty()) {
-            ToastUtil.showToast(R.string.login_error_2);
+            ToastUtil.showToast(getString(R.string.login_error_2));
             showEditError(mPasswordEdit);
             return;
         }
         if (!password.matches(ConfigClass.MATCHES_PASSWORD)) {
-            ToastUtil.showToast(R.string.login_error_4);
+            ToastUtil.showToast(getString(R.string.login_error_4));
             showEditError(mPasswordEdit);
             return;
         }
@@ -211,5 +205,4 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
     }
-
 }

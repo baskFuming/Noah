@@ -145,27 +145,27 @@ public class ModifyPayPswActivity extends BaseTitleActivity {
         String newPasswordAgain = mPasswordAgainEdit.getText().toString();
 
         if (smsCode.isEmpty()) {
-            ToastUtil.showToast(R.string.modify_pay_psw_error_1);
+            ToastUtil.showToast(getString(R.string.modify_pay_psw_error_1));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (!smsCode.matches(ConfigClass.MATCHES_SMS_CODE)) {
-            ToastUtil.showToast(R.string.modify_pay_psw_error_4);
+            ToastUtil.showToast(getString(R.string.modify_pay_psw_error_4));
             showEditError(mSMSCodeEdit);
             return;
         }
         if (newPassword.isEmpty()) {
-            ToastUtil.showToast(R.string.modify_pay_psw_error_2);
+            ToastUtil.showToast(getString(R.string.modify_pay_psw_error_2));
             showEditError(mPasswordEdit);
             return;
         }
         if (!newPassword.matches(ConfigClass.MATCHES_PASSWORD)) {
-            ToastUtil.showToast(R.string.modify_pay_psw_error_5);
+            ToastUtil.showToast(getString(R.string.modify_pay_psw_error_5));
             showEditError(mPasswordEdit);
             return;
         }
         if (!newPassword.equals(newPasswordAgain)) {
-            ToastUtil.showToast(R.string.modify_pay_psw_error_3);
+            ToastUtil.showToast(getString(R.string.modify_pay_psw_error_3));
             showEditError(mPasswordEdit, mPasswordAgainEdit);
             return;
         }
