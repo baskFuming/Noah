@@ -305,7 +305,8 @@ public interface ApiService {
     Observable<BaseBean<Object>> forgetPsw(
             @Field("phone") String phone,
             @Field("newPassword") String newPassword,
-            @Field("code") String smsCode
+            @Field("code") String smsCode,
+            @Field("area") String area
     );
 
     //修改登录密码

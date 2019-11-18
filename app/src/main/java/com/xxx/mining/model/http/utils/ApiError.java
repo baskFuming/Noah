@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 
 import com.xxx.mining.ConfigClass;
+import com.xxx.mining.R;
+import com.xxx.mining.base.App;
 import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.ExitAppUtil;
+import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.main.MainActivity;
 
@@ -20,7 +23,8 @@ public class ApiError {
     public static void ServiceCodeErrorFun(int code) {
         switch (code) {
             case ApiCode.TOKEN_INVALID:
-                startActivity();
+//                startActivity();
+                tokenError();
                 break;
         }
     }
@@ -36,5 +40,15 @@ public class ApiError {
             //退出程序
             ActivityManager.getInstance().AppExit();
         }
+    }
+
+    /**
+     * Token失效跳转页面
+     */
+    private static void tokenError() {
+        SharedPreferencesUtil.getInstance().cleanAll();
+        Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getName());
+        LoginActivity.actionStart(activity);
+        ToastUtil.showToast(App.getContext().getResources().getString(R.string.token_overdue_str));
     }
 }

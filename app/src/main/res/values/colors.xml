@@ -25,6 +25,9 @@
     <color name="colorItemFall">#FF0051</color>
     <color name="colorItemRise">#C0FF46</color>
     <color name="color_item">#F2FAFD</color>
+    <color name="chongzhi_hong">#ff638b</color>
+
+    <color name="text_color">#333333</color>
 
 
 </resources>

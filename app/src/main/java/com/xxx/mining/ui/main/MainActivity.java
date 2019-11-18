@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.xxx.mining.BuildConfig;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
+import com.xxx.mining.TokenErrException;
 import com.xxx.mining.base.activity.BaseActivity;
 import com.xxx.mining.base.fragment.FragmentManager;
 import com.xxx.mining.model.http.Api;
@@ -27,6 +28,7 @@ import com.xxx.mining.model.utils.PermissionUtil;
 import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.home.HomeFragment;
+import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.mining.MiningFragment;
 import com.xxx.mining.ui.mining.MyminiFragment;
 import com.xxx.mining.ui.my.MyFragment;
@@ -109,6 +111,7 @@ public class MainActivity extends BaseActivity {
 
         //加载用户信息
         loadInfo();
+
     }
 
     @OnClick({R.id.main_home, R.id.main_wallet, R.id.main_mining, R.id.main_my})

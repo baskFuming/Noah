@@ -2,17 +2,18 @@ package com.xxx.mining.model.http.bean;
 
 public class InviteCode {
 
-        /**
-         * result : false
-         */
+    /**
+     * result : false
+     */
 
-        private boolean result;
+    private boolean result;
+    private boolean isOpen;
 
-        public boolean isResult() {
-            return result;
-        }
+    public boolean isResult() {
+        return result;
+    }
 
-        public void setResult(boolean result) {
-            this.result = result;
-        }
+    public boolean isIsOpen() {
+        return isOpen;
+    }
 }

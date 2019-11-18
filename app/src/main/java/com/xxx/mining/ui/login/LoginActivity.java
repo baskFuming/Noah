@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +23,8 @@ import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.LocalManageUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.login.area.AreaCodeModel;
+import com.xxx.mining.ui.login.area.SelectPhoneCode;
 import com.xxx.mining.ui.main.MainActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -64,13 +67,15 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         //保存记录
         String phone = SharedPreferencesUtil.getInstance().getString(SharedConst.VALUE_USER_PHONE);
         mAccountEdit.setText(phone);
         KeyBoardUtil.closeKeyBord(this, mAccountEdit);
     }
 
-    @OnClick({R.id.login_return, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn, R.id.switch_language})
+    @OnClick({R.id.login_return, R.id.login_password_eye, R.id.login_register, R.id.login_forger_password, R.id.login_btn, R.id.switch_language
+            , R.id.login_selector_phone})
     public void OnClick(View view) {
         switch (view.getId()) {
             case R.id.login_return:
@@ -98,6 +103,9 @@ public class LoginActivity extends BaseActivity {
                     EventBus.getDefault().post(ConfigClass.EVENT_LANGUAGE_TAG);
                 }
                 break;
+            case R.id.login_selector_phone:
+                SelectPhoneCode.with(LoginActivity.this).select();
+                break;
         }
     }
 
@@ -110,9 +118,18 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ConfigClass.RESULT_CODE && data != null) {
-            String account = data.getStringExtra("account");
-            mAccountEdit.setText(account);
+        if (resultCode == ConfigClass.RESULT_CODE) {
+            if (data != null) {
+                String account = data.getStringExtra("account");
+                mAccountEdit.setText(account);
+            }
+        }
+        if (resultCode == ChoiceActivity.resultCode) {
+            if (data != null) {
+                AreaCodeModel model = (AreaCodeModel) data.getSerializableExtra(ChoiceActivity.DATAKEY);
+                area = model.getTel();
+                mSelectorPhone.setText("+ " + area);
+            }
         }
     }
 

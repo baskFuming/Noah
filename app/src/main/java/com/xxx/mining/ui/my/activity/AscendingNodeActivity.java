@@ -94,6 +94,7 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
     @Override
     protected void initData() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
         initBundle();
         mPrice.setText(usdeprice + "USDT" + "    " + dwttprice + "DWTT");
         mNumber.setText(String.valueOf(number));
@@ -131,11 +132,11 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
         switch (view.getId()) {
             case R.id.shop_mining_place_btn:
                 invite = edInvite.getText().toString();
-                if (!invite.isEmpty()) {
-                    getInvite(invite);
-                } else {
-                    ToastUtil.showToast(getString(R.string.register_error_7));
-                }
+//                if (!invite.isEmpty()) {
+                getInvite(invite);
+//                } else {
+//                    ToastUtil.showToast(getString(R.string.register_error_7));
+//                }
                 break;
         }
     }
@@ -148,7 +149,6 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<NodePayBean>(this) {
-
                     @Override
                     public void onSuccess(BaseBean<NodePayBean> bean) {
                         if (bean != null) {
@@ -190,15 +190,23 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
     /**
      * @Model 验证码校验
      */
-    private void getInvite(String invite) {
+    private void getInvite(final String invite) {
         Api.getInstance().getInviteCode(invite)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<InviteCode>(this) {
                     @Override
                     public void onSuccess(BaseBean<InviteCode> bean) {
+
+                        if (bean.getData().isIsOpen()) {
+                            if (!invite.isEmpty()) {//不为空
+                            } else {//  null
+                                ToastUtil.showToast(getString(R.string.register_hint_invite));
+                                return;
+                            }
+                        }
+
                         if (bean.getData().isResult()) {
-                            isHavePayPassword = SharedPreferencesUtil.getInstance().getBoolean(SharedConst.IS_SETTING_PAY_PSW);
                             if (!isHavePayPassword) {
                                 SettingPayPswActivity.actionStart(AscendingNodeActivity.this);
                             } else {
@@ -206,7 +214,6 @@ public class AscendingNodeActivity extends BaseTitleActivity implements Password
                                     mPasswordWindow.show();
                                 }
                             }
-                            ToastUtil.showToast(getString(R.string.invite_code_success));
                         } else {
                             ToastUtil.showToast(getString(R.string.invite_code_fail));
                         }

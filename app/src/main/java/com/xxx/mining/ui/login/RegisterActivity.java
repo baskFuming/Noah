@@ -20,6 +20,8 @@ import com.xxx.mining.model.utils.DownTimeUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.LocalManageUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.login.area.AreaCodeModel;
+import com.xxx.mining.ui.login.area.SelectPhoneCode;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -86,9 +88,7 @@ public class RegisterActivity extends BaseTitleActivity {
                 finish();
                 break;
             case R.id.register_selector_phone:
-//                Intent intent = new Intent(this, SelectCountyActivity.class);
-//                intent.putExtra(SelectCountyActivity.REQUEST_KRY, SelectCountyActivity.REGISTER_PAGE_CODE);
-//                startActivityForResult(intent, ConfigClass.REQUEST_CODE);
+                SelectPhoneCode.with(RegisterActivity.this).select();
                 break;
             case R.id.register_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
@@ -118,10 +118,12 @@ public class RegisterActivity extends BaseTitleActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ConfigClass.RESULT_CODE && data != null) {
-            phoneName = data.getStringExtra(SelectCountyActivity.RESULT_NAME_KRY);
-            phoneCode = data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY);
-            mSelectorCounty.setText(phoneCode);
+        if (resultCode == ChoiceActivity.resultCode) {
+            if (data != null) {
+                AreaCodeModel model = (AreaCodeModel) data.getSerializableExtra(ChoiceActivity.DATAKEY);
+                phoneCode = model.getTel();
+                mSelectorCounty.setText("+ " + phoneCode);
+            }
         }
     }
 

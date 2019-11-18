@@ -439,5 +439,15 @@
     <string name="add_coin_error">币种信息不能为空</string>
     <string name="add_address_error">钱包地址不能为空</string>
     <string name="add_remark_error">备注信息不能为空</string>
+    <string name="diquxuanze">地区选择</string>
+    <string name="zhongwen">中文</string>
+    <string name="toubu">头部</string>
+    <string name="diqu">地区</string>
+    <string name="biaohao">标号</string>
+    <string name="token_overdue_str">您的登录已失效，请重新登录!</string>
+
+
+
+
 
 </resources>

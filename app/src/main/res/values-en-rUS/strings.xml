@@ -457,4 +457,16 @@
     <string name="add_coin_error">Currency information cannot be empty</string>
     <string name="add_address_error">Wallet address cannot be empty</string>
     <string name="add_remark_error">Comment information cannot be empty</string>
+    <string name="diquxuanze">Regions</string>
+    <string name="zhongwen">Chinese</string>
+    <string name="toubu">Header</string>
+    <string name="diqu">Region</string>
+    <string name="biaohao">Label</string>
+    <string name="token_overdue_str">Login expired,please login again</string>
+
+
+
+
+
+
 </resources>

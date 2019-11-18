@@ -36,8 +36,7 @@
         </activity>
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask"
-        />
+            android:launchMode="singleTask" />
         <activity
             android:name=".ui.main.SweepActivity"
             android:screenOrientation="fullSensor"
@@ -100,10 +99,11 @@
         <activity android:name=".ui.home.activity.MoreOtherActivity" />
         <activity android:name=".ui.home.activity.CreditCenterActivity" />
         <activity android:name=".ui.my.activity.MiningActivity" />
-        <activity android:name=".ui.my.activity.RunStatusWebActivity"/>
+        <activity android:name=".ui.my.activity.RunStatusWebActivity" />
         <activity android:name=".ui.my.activity.MillRecordActivity" />
         <activity android:name=".ui.my.activity.WidthActivity" />
         <activity android:name=".ui.my.activity.DepathActivity" />
+        <activity android:name=".ui.login.ChoiceActivity"/>
     </application>
 
 </manifest>

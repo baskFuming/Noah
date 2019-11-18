@@ -3,14 +3,12 @@ apply plugin: 'com.android.application'
 android {
     lintOptions {
         checkReleaseBuilds false
-        // Or, if you prefer, you can continue to check for errors in release builds,
-        // but continue the build even when errors are found:
         abortOnError false
     }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.xxx.minine"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.0" //test
@@ -25,6 +23,10 @@ android {
             shrinkResources true  // 移除无用的resource文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
     }
 }
 
@@ -72,4 +74,11 @@ dependencies {
     //加载GIF图
 //    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //粘性头部
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
+    implementation 'com.github.promeg:tinypinyin:2.0.2'
+    implementation 'com.bigkoo:quicksidebar:1.0.3'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
 }

@@ -19,6 +19,8 @@ import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.utils.DownTimeUtil;
 import com.xxx.mining.model.utils.KeyBoardUtil;
 import com.xxx.mining.model.utils.ToastUtil;
+import com.xxx.mining.ui.login.area.AreaCodeModel;
+import com.xxx.mining.ui.login.area.SelectPhoneCode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -80,9 +82,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.forget_login_psw_selector_phone:
-//                Intent intent = new Intent(this, SelectCountyActivity.class);
-//                intent.putExtra(SelectCountyActivity.REQUEST_KRY, SelectCountyActivity.FORGET_PAGE_CODE);
-//                startActivityForResult(intent, ConfigClass.REQUEST_CODE);
+                SelectPhoneCode.with(ForgetLoginPswActivity.this).select();
                 break;
             case R.id.forget_login_psw_password_eye:
                 KeyBoardUtil.setInputTypePassword(mPasswordEye.isChecked(), mPasswordEdit);
@@ -102,8 +102,12 @@ public class ForgetLoginPswActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ConfigClass.RESULT_CODE && data != null) {
-            mSelectorCounty.setText(data.getStringExtra(SelectCountyActivity.RESULT_CODE_KRY));
+        if (resultCode == ChoiceActivity.resultCode) {
+            if (data != null) {
+                AreaCodeModel model = (AreaCodeModel) data.getSerializableExtra(ChoiceActivity.DATAKEY);
+                area = model.getTel();
+                mSelectorCounty.setText("+ " + area);
+            }
         }
     }
 
@@ -218,7 +222,7 @@ public class ForgetLoginPswActivity extends BaseActivity {
             return;
         }
 
-        Api.getInstance().forgetPsw(account, password, smsCode)
+        Api.getInstance().forgetPsw(account, password, smsCode,area)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<Object>(this) {
