@@ -1,10 +1,5 @@
 package com.xxx.mining.ui.my.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.view.View;
@@ -19,8 +14,6 @@ import com.xxx.mining.R;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
 import com.xxx.mining.model.utils.URLImageParser;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 public class NoticeCenterAdapter extends BaseQuickAdapter<NoticeCenterBean, BaseViewHolder> {

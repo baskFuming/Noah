@@ -15,7 +15,6 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.RecordGiftBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.my.adapter.RecordGiftAdapter;
 
 import java.util.ArrayList;

@@ -16,7 +16,6 @@ import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.HomeBean;
 import com.xxx.mining.model.http.bean.NoticeCenterBean;
-import com.xxx.mining.model.http.bean.UserInfo;
 import com.xxx.mining.model.http.bean.base.BaseBean;
 import com.xxx.mining.model.http.bean.base.PageBean;
 import com.xxx.mining.model.sp.SharedConst;

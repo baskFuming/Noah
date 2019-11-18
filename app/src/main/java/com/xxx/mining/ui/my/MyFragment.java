@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xxx.mining.R;
-import com.xxx.mining.base.dialog.LoadingDialog;
 import com.xxx.mining.base.fragment.BaseFragment;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;

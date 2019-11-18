@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
 

@@ -3,7 +3,6 @@ package com.xxx.mining.model.sp;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.xxx.mining.BuildConfig;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.base.App;
 import com.xxx.mining.model.utils.SystemUtil;

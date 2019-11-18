@@ -13,7 +13,6 @@ import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.base.activity.BaseActivity;
-import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.LoginBean;
@@ -28,8 +27,6 @@ import com.xxx.mining.ui.login.area.SelectPhoneCode;
 import com.xxx.mining.ui.main.MainActivity;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;

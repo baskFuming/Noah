@@ -3,7 +3,6 @@ package com.xxx.mining.base.activity;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
-import android.text.TextUtils;
 
 import com.xxx.mining.ui.main.MainActivity;
 

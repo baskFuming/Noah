@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.xxx.mining.BuildConfig;
 import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseTitleActivity;
 import com.xxx.mining.model.http.Api;
 import com.xxx.mining.model.http.ApiCallback;
 import com.xxx.mining.model.http.bean.AppVersionBean;
 import com.xxx.mining.model.http.bean.base.BaseBean;
-import com.xxx.mining.model.sp.SharedPreferencesUtil;
 import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
-import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.main.UpdateWindow;
 import com.xxx.mining.ui.my.activity.psw.PasswordSettingActivity;
 

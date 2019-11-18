@@ -1,10 +1,8 @@
 package com.xxx.mining.ui.main;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +10,6 @@ import android.widget.TextView;
 import com.xxx.mining.BuildConfig;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
-import com.xxx.mining.TokenErrException;
 import com.xxx.mining.base.activity.BaseActivity;
 import com.xxx.mining.base.fragment.FragmentManager;
 import com.xxx.mining.model.http.Api;
@@ -28,14 +25,9 @@ import com.xxx.mining.model.utils.PermissionUtil;
 import com.xxx.mining.model.utils.SystemUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.home.HomeFragment;
-import com.xxx.mining.ui.login.LoginActivity;
-import com.xxx.mining.ui.mining.MiningFragment;
 import com.xxx.mining.ui.mining.MyminiFragment;
 import com.xxx.mining.ui.my.MyFragment;
 import com.xxx.mining.ui.wallet.WalletFragment;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;

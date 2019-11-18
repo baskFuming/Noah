@@ -13,7 +13,6 @@ import com.xxx.mining.R;
 import com.xxx.mining.base.activity.BaseActivity;
 import com.xxx.mining.model.sp.SharedConst;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.GlideUtil;
 import com.xxx.mining.ui.login.LoginActivity;
 
 import java.lang.ref.WeakReference;

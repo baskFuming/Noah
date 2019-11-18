@@ -1,14 +1,11 @@
 package com.xxx.mining.model.http.utils;
 
 import android.app.Activity;
-import android.content.Intent;
 
-import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
 import com.xxx.mining.base.App;
 import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.model.sp.SharedPreferencesUtil;
-import com.xxx.mining.model.utils.ExitAppUtil;
 import com.xxx.mining.model.utils.ToastUtil;
 import com.xxx.mining.ui.login.LoginActivity;
 import com.xxx.mining.ui.main.MainActivity;
