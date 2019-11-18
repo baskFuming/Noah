@@ -181,7 +181,7 @@
     <string name="withdrawal_error_6">Please set the fund password</string>
 
     <string name="login_title">Welcome toCompass</string>
-    <string name="login_forget">Forget</string>
+    <string name="login_forget">Forget password</string>
     <string name="login_register">New user registration</string>
     <string name="login_hint_account">Please enter your cell phone number</string>
     <string name="login_hint_password">Please enter your password</string>
@@ -197,7 +197,7 @@
     <string name="register_hint_sms_code">Please enter verification code</string>
     <string name="register_hint_password">Please enter 8-20 digit and letter combination password</string>
     <string name="register_hint_invite">Please enter the invitation code</string>
-    <string name="register_btn">Registered</string>
+    <string name="register_btn">Register</string>
     <string name="register_login">Login immediately</string>
     <string name="register_forger">Forgot password</string>
     <string name="register_error_1">The cell phone number cannot be empty</string>
