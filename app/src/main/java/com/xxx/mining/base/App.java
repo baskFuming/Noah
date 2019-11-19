@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Configuration;
 
+import com.xxx.mining.model.utils.ExitAppUtil;
 import com.xxx.mining.model.utils.LocalManageUtil;
 
 public class App extends Application {

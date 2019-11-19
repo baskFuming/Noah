@@ -2,6 +2,7 @@ package com.xxx.mining.model.utils;
 
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.xxx.mining.R;
 import com.xxx.mining.base.App;
@@ -49,6 +50,6 @@ public class ExitAppUtil {
         }
         mHandler.setBackCount();
         mHandler.sendEmptyMessageDelayed(1, 1500);
-        ToastUtil.showToast(App.getApplication().getString(R.string.second_exit_app));
+        ToastUtil.showToast(App.getApplication().getResources().getString(R.string.second_exit_app));
     }
 }

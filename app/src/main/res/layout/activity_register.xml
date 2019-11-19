@@ -137,7 +137,8 @@
             android:digits="@string/password"
             android:hint="@string/register_hint_password"
             android:inputType="phone"
-            android:maxLength="20" />
+            android:maxLength="20"
+            android:singleLine="true"/>
 
         <CheckBox
             android:id="@+id/register_password_eye"

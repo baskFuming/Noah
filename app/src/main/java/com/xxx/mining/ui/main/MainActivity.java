@@ -3,13 +3,16 @@ package com.xxx.mining.ui.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xxx.mining.BuildConfig;
 import com.xxx.mining.ConfigClass;
 import com.xxx.mining.R;
+import com.xxx.mining.base.activity.ActivityManager;
 import com.xxx.mining.base.activity.BaseActivity;
 import com.xxx.mining.base.fragment.FragmentManager;
 import com.xxx.mining.model.http.Api;
@@ -77,6 +80,9 @@ public class MainActivity extends BaseActivity {
 
     private boolean flag;
 
+    //按两次返回到桌面
+    private long exitTime = 0;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -116,9 +122,26 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        exitAppUtil.onBackPressed();
+//    }
+
+
     @Override
-    public void onBackPressed() {
-        exitAppUtil.onBackPressed();
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK
+                && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                Toast.makeText(this, R.string.second_exit_app,
+                        Toast.LENGTH_SHORT).show();
+                exitTime = System.currentTimeMillis();
+            } else {
+                ActivityManager.getInstance().AppExit();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public void onEventBus(String eventFlag) {

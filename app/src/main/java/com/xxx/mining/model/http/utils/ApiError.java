@@ -1,6 +1,7 @@
 package com.xxx.mining.model.http.utils;
 
 import android.app.Activity;
+import android.widget.Toast;
 
 import com.xxx.mining.R;
 import com.xxx.mining.base.App;
@@ -46,6 +47,6 @@ public class ApiError {
         SharedPreferencesUtil.getInstance().cleanAll();
         Activity activity = ActivityManager.getInstance().getActivity(MainActivity.class.getName());
         LoginActivity.actionStart(activity);
-        ToastUtil.showToast(App.getContext().getResources().getString(R.string.token_overdue_str));
+        ToastUtil.showToast(R.string.token_overdue_str);
     }
 }
