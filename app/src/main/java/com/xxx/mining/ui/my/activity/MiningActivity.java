@@ -92,7 +92,6 @@ public class MiningActivity extends BaseTitleActivity {
                                 mTodayAmount.setText(String.valueOf(data.getCurrencyToday()));
                                 mNumbrer.setText(String.valueOf(data.getMillNum()));
                                 mTime.setText(data.getCreateTime());
-
                                 mDifcult.setText(String.valueOf(data.getDifficultyToday()));
                                 mTodayPro.setProgress(data.getDifficultyTodayProgress());
 

@@ -87,7 +87,7 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
      * @Model 获取团队业绩列表
      */
     private void loadData() {
-        Api.getInstance().getRecordTeamList(page, ConfigClass.PAGE_SIZE)
+        Api.getInstance().getRecordTeamList(page, ConfigClass.PAGE_SIZE_MAX)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<RecordTeamBean>(this) {
