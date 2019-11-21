@@ -65,6 +65,7 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
         mRecycler.setLayoutManager(new LinearLayoutManager(this));
         mRecycler.setAdapter(mAdapter);
         mRefresh.setOnRefreshListener(this);
+        mRefresh.setRefreshing(true);
         mAdapter.setOnLoadMoreListener(this, mRecycler);
 
         loadData();
@@ -87,7 +88,7 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
      * @Model 获取团队业绩列表
      */
     private void loadData() {
-        Api.getInstance().getRecordTeamList(page, ConfigClass.PAGE_SIZE_MAX)
+        Api.getInstance().getRecordTeamList(1, ConfigClass.PAGE_SIZE_MAX)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new ApiCallback<RecordTeamBean>(this) {
@@ -110,7 +111,7 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
                                 mRecycler.setVisibility(View.VISIBLE);
                                 mList.clear();
                                 mList.addAll(list);
-                                if (list.size() < ConfigClass.PAGE_SIZE) {
+                                if (list.size() < ConfigClass.PAGE_SIZE_MAX) {
                                     mAdapter.loadMoreEnd(true);
                                 } else {
                                     mAdapter.loadMoreComplete();
@@ -124,12 +125,14 @@ public class RecordTeamActivity extends BaseTitleActivity implements SwipeRefres
                     @Override
                     public void onError(int errorCode, String errorMessage) {
                         ToastUtil.showToast(errorMessage);
+                        mNotData.setVisibility(View.VISIBLE);
+                        mRecycler.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onStart(Disposable d) {
                         super.onStart(d);
-                        if (mRefresh != null) {
+                        if (mRefresh != null && page == ConfigClass.PAGE_DEFAULT) {
                             mRefresh.setRefreshing(true);
                         }
                     }
